@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activity.AddExerciseActivity">
+
+    <include
+        layout="@layout/app_bar_main"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="@dimen/mg_layout"
+        android:background="@color/colorCream"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/mg_layout"
+        android:paddingRight="@dimen/mg_layout">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/func_add_exercise_height"
+            android:baselineAligned="false">
+
+            <LinearLayout
+                android:id="@+id/llTimer"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginRight="@dimen/mg_func_add_exercise"
+                android:layout_weight="1"
+                android:gravity="center">
+
+                <ImageView
+                    android:layout_width="@dimen/img_func_add_exercise"
+                    android:layout_height="@dimen/img_func_add_exercise"
+                    android:src="@drawable/timer" />
+
+                <TextView
+                    android:id="@+id/tvTime"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/mg_func_add_exercise"
+                    android:layout_weight="1"
+                    android:text="12:17 PM"
+                    android:textSize="13sp" />
+
+                <ImageView
+                    android:layout_width="@dimen/arrow_down_func_add_exercise"
+                    android:layout_height="@dimen/arrow_down_func_add_exercise"
+                    android:src="@drawable/arrow_down" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/mg_func_add_exercise"
+                android:layout_marginRight="@dimen/mg_func_add_exercise"
+                android:layout_weight="1"
+                android:alpha="0.5"
+                android:gravity="center">
+
+                <ImageView
+                    android:layout_width="@dimen/img_func_add_exercise"
+                    android:layout_height="@dimen/img_func_add_exercise"
+                    android:src="@drawable/ic_repeat_arrow_locked" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/mg_func_add_exercise"
+                    android:layout_weight="1"
+                    android:text="@string/repeat"
+                    android:textSize="13sp" />
+
+                <ImageView
+                    android:layout_width="@dimen/arrow_down_func_add_exercise"
+                    android:layout_height="@dimen/arrow_down_func_add_exercise"
+                    android:src="@drawable/arrow_down" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/llReminder"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/mg_func_add_exercise"
+                android:layout_weight="1"
+                android:gravity="center">
+
+                <ImageView
+                    android:layout_width="@dimen/img_func_add_exercise"
+                    android:layout_height="@dimen/img_func_add_exercise"
+                    android:src="@drawable/reminder" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/mg_func_add_exercise"
+                    android:layout_weight="1"
+                    android:text="@string/reminder"
+                    android:textSize="13sp" />
+
+                <ImageView
+                    android:layout_width="@dimen/arrow_down_func_add_exercise"
+                    android:layout_height="@dimen/arrow_down_func_add_exercise"
+                    android:src="@drawable/arrow_down" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/edtExerciseName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:inputType="text"
+                android:hint="@string/enter_type_exercise"
+                android:maxLines="1" />
+
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:id="@+id/edtDuration"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:inputType="numberSigned"
+                        android:text="@string/_60" />
+
+                    <EditText
+                        android:inputType="numberSigned"
+                        android:id="@+id/edtCalories"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/mg_calories_add_exercise"
+                        android:minWidth="@dimen/edt_calories_add_exercise" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/duration_minutes" />
+
+                    <TextView
+                        android:id="@+id/textView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/mg_calories_add_exercise"
+                        android:text="@string/calories" />
+                </TableRow>
+
+            </TableLayout>
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true">
+
+                <Button
+                    android:id="@+id/btnCancel"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="@dimen/mg_layout"
+                    android:layout_weight="1"
+                    android:background="@color/colorCream"
+                    android:gravity="center"
+                    android:text="@string/cancel"
+                    android:textAllCaps="true"
+                    android:textStyle="bold" />
+
+                <Button
+                    android:id="@+id/btnSave"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/mg_layout"
+                    android:layout_weight="1"
+                    android:background="@drawable/border_button"
+                    android:gravity="center"
+                    android:padding="@dimen/pd_btn_save"
+                    android:text="@string/save"
+                    android:textAllCaps="true"
+                    android:textColor="@color/colorWhite"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

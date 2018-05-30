@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="spinner_dialog_remender">
+        <item>before event</item>
+        <item>after event</item>
+    </string-array>
+</resources>

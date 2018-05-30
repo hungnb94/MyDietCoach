@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/ic_home_drawer"
+            android:title="@string/home" />
+        <item
+            android:id="@+id/nav_diary"
+            android:icon="@drawable/ic_diary_drawer"
+            android:title="@string/diary" />
+        <item
+            android:id="@+id/nav_log_weight"
+            android:icon="@drawable/ic_weight_tracker_drawer"
+            android:title="@string/log_your_weight" />
+        <item
+            android:id="@+id/nav_reminder"
+            android:icon="@drawable/ic_reminders_drawer"
+            android:title="@string/reminder" />
+        <item
+            android:id="@+id/nav_photos"
+            android:icon="@drawable/ic_photos_drawer"
+            android:title="@string/photos" />
+        <item
+            android:id="@+id/nav_tips"
+            android:icon="@drawable/ic_tips_drawer"
+            android:title="@string/tips" />
+        <item
+            android:id="@+id/nav_challenges"
+            android:icon="@drawable/ic_challenges_drawer"
+            android:title="@string/challenges" />
+        <item
+            android:id="@+id/nav_rewards"
+            android:icon="@drawable/ic_rewards_drawer"
+            android:title="@string/rewards" />
+        <item
+            android:id="@+id/nav_settings"
+            android:icon="@drawable/ic_settings_drawer"
+            android:title="@string/settings" />
+        <item
+            android:id="@+id/nav_contact"
+            android:icon="@drawable/ic_contact_drawer"
+            android:title="@string/contact_faq" />
+    </group>
+
+    <!--<item android:title="Communicate">-->
+        <!--<menu>-->
+            <!--<item-->
+                <!--android:id="@+id/nav_share"-->
+                <!--android:icon="@drawable/ic_menu_share"-->
+                <!--android:title="Share" />-->
+            <!--<item-->
+                <!--android:id="@+id/nav_send"-->
+                <!--android:icon="@drawable/ic_menu_send"-->
+                <!--android:title="Send" />-->
+        <!--</menu>-->
+    <!--</item>-->
+
+</menu>

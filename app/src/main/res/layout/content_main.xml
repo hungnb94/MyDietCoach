@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".activity.MainActivity">
+
+    <include
+        layout="@layout/app_bar_main"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorAccent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="30dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/line_lv_1"
+            android:layout_marginLeft="@dimen/mg_line_main"
+            android:layout_marginRight="@dimen/mg_line_main"
+            android:background="@color/colorWhite" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:paddingBottom="@dimen/mg_vertical_content_main"
+        android:paddingTop="@dimen/mg_vertical_content_main">
+
+        <ImageView
+            android:id="@+id/ivFatPerson"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:src="@drawable/fat_man_avatar_default" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/calories"
+                android:textSize="@dimen/txt_num_calo_main"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/cals_left_today"
+                android:textSize="@dimen/txt_calories_main" />
+
+            <ImageView
+                android:layout_width="@dimen/ic_weight_main"
+                android:layout_height="@dimen/ic_weight_main"
+                android:src="@drawable/ic_weight" />
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/ivSlimPerson"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:src="@drawable/slim_man_avatar_default" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/line_lv_1"
+        android:background="#f1d51f" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/bottom_main_act_height">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:paddingBottom="@dimen/mg_btm_main_act"
+            android:paddingTop="@dimen/mg_btm_main_act">
+
+            <LinearLayout
+                android:id="@+id/llDiary"
+                android:layout_width="@dimen/item_btm_main_width"
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="@dimen/ic_btm_main"
+                    android:layout_height="@dimen/ic_btm_main"
+                    android:src="@drawable/ic_diary" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/diary"
+                    android:textSize="@dimen/txt_btm_main_act" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="@dimen/line_lv_1"
+                android:layout_height="match_parent"
+                android:background="@color/colorGrey" />
+
+            <LinearLayout
+                android:id="@+id/llReminder"
+                android:layout_width="@dimen/item_btm_main_width"
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="@dimen/ic_btm_main"
+                    android:layout_height="@dimen/ic_btm_main"
+                    android:src="@drawable/ic_reminders" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/reminder"
+                    android:textSize="@dimen/txt_btm_main_act" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="@dimen/line_lv_1"
+                android:layout_height="match_parent"
+                android:background="@color/colorGrey" />
+
+            <LinearLayout
+                android:id="@+id/llChallenges"
+                android:layout_width="@dimen/item_btm_main_width"
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="@dimen/ic_btm_main"
+                    android:layout_height="@dimen/ic_btm_main"
+                    android:src="@drawable/ic_challenges" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/challenges"
+                    android:textSize="@dimen/txt_btm_main_act" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="@dimen/line_lv_1"
+                android:layout_height="match_parent"
+                android:background="@color/colorGrey" />
+
+            <LinearLayout
+                android:id="@+id/llRewards"
+                android:layout_width="@dimen/item_btm_main_width"
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="@dimen/ic_btm_main"
+                    android:layout_height="@dimen/ic_btm_main"
+                    android:src="@drawable/ic_rewards" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/rewards"
+                    android:textSize="@dimen/txt_btm_main_act" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="@dimen/line_lv_1"
+                android:layout_height="match_parent"
+                android:background="@color/colorGrey" />
+
+            <LinearLayout
+                android:id="@+id/llPhotos"
+                android:layout_width="@dimen/item_btm_main_width"
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="@dimen/ic_btm_main"
+                    android:layout_height="@dimen/ic_btm_main"
+                    android:src="@drawable/ic_photo" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/photos"
+                    android:textSize="@dimen/txt_btm_main_act" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="@dimen/line_lv_1"
+                android:layout_height="match_parent"
+                android:background="@color/colorGrey" />
+
+            <LinearLayout
+                android:id="@+id/llTips"
+                android:layout_width="@dimen/item_btm_main_width"
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="@dimen/ic_btm_main"
+                    android:layout_height="@dimen/ic_btm_main"
+                    android:src="@drawable/ic_tips" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/tips"
+                    android:textSize="@dimen/txt_btm_main_act" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>
