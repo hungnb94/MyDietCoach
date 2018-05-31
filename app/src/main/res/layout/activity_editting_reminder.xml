@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorCream"
+    android:orientation="vertical"
+    tools:context=".activity.EdittingReminderActivity">
+
+    <include
+        layout="@layout/app_bar_main"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="@dimen/mg_layout">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/row_profile_height"
+            android:gravity="center_vertical"
+            android:text="@string/reminder_text"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/editText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/colorAccent"
+            android:inputType="text"
+            android:textSize="@dimen/txt_normal" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/row_profile_height"
+            android:gravity="center_vertical"
+            android:text="@string/start_date" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/row_profile_height"
+            android:gravity="center_vertical">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/mg_layout"
+                android:layout_weight="2">
+
+                <TextView
+                    android:id="@+id/tvDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="15/03/18"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="@dimen/txt_normal" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <TextView
+                    android:id="@+id/tvTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="10:30 AM"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="@dimen/txt_normal" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="@dimen/line_lv_1"
+                android:layout_marginRight="@dimen/mg_layout"
+                android:layout_weight="2"
+                android:background="@color/colorGrey" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="@dimen/line_lv_1"
+                android:layout_weight="1"
+                android:background="@color/colorGrey" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/row_profile_height"
+            android:gravity="center_vertical"
+            android:text="@string/repeat" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/row_profile_height"
+            android:gravity="center_vertical">
+
+            <Spinner
+                android:id="@+id/spinner"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/mg_layout"
+                android:layout_weight="2" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true">
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
+
+                <Button
+                    android:id="@+id/button"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/border_button"
+                    android:text="@string/save" />
+            </LinearLayout>
+        </RelativeLayout>
+    </LinearLayout>
+
+</LinearLayout>

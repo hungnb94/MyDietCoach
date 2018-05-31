@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
     <item
-        android:id="@+id/action_add_reminder"
-        android:title="@string/add_reminder"
-        android:icon="@drawable/icon_edit"
+        android:id="@+id/action_delete"
+        android:icon="@drawable/ic_delete_l_style"
+        android:title="@string/delete"
         app:showAsAction="ifRoom" />
 </menu>

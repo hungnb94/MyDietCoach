@@ -46,7 +46,8 @@
             android:name=".notification.NotificationIntentService"
             android:exported="false" />
 
-        <activity android:name=".activity.TermConditionActivity"></activity>
+        <activity android:name=".activity.TermConditionActivity" />
+        <activity android:name=".activity.EdittingReminderActivity"></activity>
     </application>
 
 </manifest>

@@ -114,4 +114,20 @@
     <string name="enter_your_weight">Please enter your weight</string>
     <string name="bigger_than_zero">Your weight must bigger than zero</string>
     <string name="must_accept_terms_conditions">You must accept Terms and Conditions</string>
+    <string name="my_reminders">My Reminders</string>
+    <string name="predefine_reminders">Predefine Reminders</string>
+    <string name="add_reminder">Add reminder</string>
+    <string name="reminder_text">Reminder\'s Text</string>
+    <string name="start_date">Start date</string>
+    <string name="edit_reminder">Edit Reminder</string>
+    <string name="delete">Delete</string>
+    <string name="at">at</string>
+    <string name="input_reminder_text">Please enter reminder\'s text</string>
+    <string name="every_hour">Every Hour</string>
+    <string name="every_two_hours">Every Two Hours</string>
+    <string name="every_three_hours">Every Three Hours</string>
+    <string name="every_four_hours">Every Four Hours</string>
+    <string name="every_day">Every Day</string>
+    <string name="every_week">Every Week</string>
+    <string name="reminder_was_deleted">Reminder was deleted</string>
 </resources>

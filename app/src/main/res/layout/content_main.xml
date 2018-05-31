@@ -108,7 +108,7 @@
         android:layout_height="@dimen/line_lv_1"
         android:background="#f1d51f" />
 
-    <ScrollView
+    <HorizontalScrollView
         android:layout_width="match_parent"
         android:layout_height="@dimen/bottom_main_act_height">
 
@@ -258,5 +258,5 @@
                     android:textSize="@dimen/txt_btm_main_act" />
             </LinearLayout>
         </LinearLayout>
-    </ScrollView>
+    </HorizontalScrollView>
 </LinearLayout>

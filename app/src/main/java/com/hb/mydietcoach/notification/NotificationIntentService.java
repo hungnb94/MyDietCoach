@@ -25,6 +25,7 @@ public class NotificationIntentService extends IntentService {
     protected void onHandleIntent(Intent intent) {
         Bundle bundle = intent.getExtras();
         String strContent = bundle.getString(Constants.NOTIFICATION_CONTENT_TEXT);
+        //Set repeat
         Notification.Builder builder = new Notification.Builder(this);
         builder.setContentTitle(getString(R.string.app_name));
         builder.setContentText(strContent);

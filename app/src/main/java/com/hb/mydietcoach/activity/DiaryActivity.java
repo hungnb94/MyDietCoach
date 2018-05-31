@@ -40,6 +40,7 @@ import com.hb.mydietcoach.model.Exercise;
 import com.hb.mydietcoach.model.Food;
 import com.hb.mydietcoach.model.FoodAssets;
 import com.hb.mydietcoach.model.IItemDiary;
+import com.hb.mydietcoach.notification.NotificationManager;
 import com.hb.mydietcoach.preference.PreferenceManager;
 import com.hb.mydietcoach.utils.Constants;
 import com.tomergoldst.tooltips.ToolTip;
@@ -291,6 +292,15 @@ public class DiaryActivity extends AppCompatActivity
         listView.setOnMenuItemClickListener(new SwipeMenuListView.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(int position, SwipeMenu menu, int index) {
+                Object object = listItems.get(position);
+                if (object instanceof Exercise) {
+                    Exercise exercise = (Exercise) object;
+                    if (exercise.isReminder()) {
+                        NotificationManager manager = new NotificationManager(DiaryActivity.this);
+                        manager.cancelAlarm(exercise.getId());
+                    }
+                }
+
                 database.deleteItem(listItems.get(position));
                 listItems.remove(position);
                 adapter.notifyDataSetChanged();
@@ -342,14 +352,14 @@ public class DiaryActivity extends AppCompatActivity
         resetAddingFoodLayout();
         fab.startAnimation(rotationAnimation);
         new Handler().postDelayed(fabRunable, Constants.ANIMATION_LENGTH);
-        if (isFirstTimeAddMeal){
+        if (isFirstTimeAddMeal) {
             //Show guideline
             ToolTip.Builder builder = new ToolTip.Builder(this, listView, rootLayout,
                     getString(R.string.swipe_to_delete), ToolTip.GRAVITY_CENTER);
             builder.setBackgroundColor(ContextCompat.getColor(this, R.color.colorGuideline));
             toolTipsManager.show(builder.build());
             pre.putBoolean(PreferenceManager.IS_FIRST_TIME_ADD_MEAL, false);
-            isFirstTimeAddMeal=false;
+            isFirstTimeAddMeal = false;
         }
     }
 
@@ -472,6 +482,7 @@ public class DiaryActivity extends AppCompatActivity
 
         if (id == R.id.nav_home) {
             Intent intent = new Intent(this, MainActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
             finish();
         } else if (id == R.id.nav_diary) {

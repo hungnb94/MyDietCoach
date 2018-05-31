@@ -1,8 +1,5 @@
 package com.hb.mydietcoach.activity;
 
-import android.app.AlarmManager;
-import android.app.PendingIntent;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -19,7 +16,7 @@ import com.hb.mydietcoach.R;
 import com.hb.mydietcoach.database.MyDatabase;
 import com.hb.mydietcoach.dialog.SettingReminderDialog;
 import com.hb.mydietcoach.model.Exercise;
-import com.hb.mydietcoach.notification.NotificationReceiver;
+import com.hb.mydietcoach.notification.NotificationManager;
 import com.hb.mydietcoach.utils.Constants;
 import com.wdullaer.materialdatetimepicker.time.TimePickerDialog;
 
@@ -123,7 +120,7 @@ public class AddExerciseActivity extends AppCompatActivity
             bundle.putSerializable(Constants.DATA_SERIALIZABLE, exercise);
             intent.putExtras(bundle);
             setResult(RESULT_OK, intent);
-            setAlarmNotification();
+            setAlarmNotification(exercise);
             finish();
         } catch (Exception ex) {
             Log.e(TAG, "Exception " + ex.toString());
@@ -134,22 +131,15 @@ public class AddExerciseActivity extends AppCompatActivity
     /**
      * Set notification
      */
-    private void setAlarmNotification() {
+    private void setAlarmNotification(Exercise exercise) {
         if (!isReminder) return;
-        Intent notifyIntent = new Intent(this, NotificationReceiver.class);
-        Bundle bundle = new Bundle();
-        bundle.putString(Constants.NOTIFICATION_CONTENT_TEXT, edtName.getText().toString());
-        notifyIntent.putExtras(bundle);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast
-                (this, Constants.RC_EXERCISE_NOTIFICATION, notifyIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-
         Calendar alertTime = Calendar.getInstance();
         alertTime.set(Calendar.HOUR_OF_DAY, timer.get(Calendar.HOUR_OF_DAY));
         alertTime.set(Calendar.MINUTE, timer.get(Calendar.MINUTE));
         alertTime.add(Calendar.MINUTE, minutesFromEvent);
 
-        alarmManager.set(AlarmManager.RTC_WAKEUP, alertTime.getTimeInMillis(), pendingIntent);
+        NotificationManager manager = new NotificationManager(this);
+        manager.setAlarm((int) exercise.getId(), exercise.getName(), alertTime.getTimeInMillis());
     }
 
     TimePickerDialog.OnTimeSetListener timeSetListener = new TimePickerDialog.OnTimeSetListener() {

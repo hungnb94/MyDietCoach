@@ -7,6 +7,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.baoyz.swipemenulistview.SwipeMenu;
 import com.baoyz.swipemenulistview.SwipeMenuCreator;
@@ -15,7 +16,6 @@ import com.baoyz.swipemenulistview.SwipeMenuListView;
 import com.hb.mydietcoach.R;
 import com.hb.mydietcoach.adapter.DiaryActivityAdapter;
 import com.hb.mydietcoach.database.MyDatabase;
-import com.hb.mydietcoach.dialog.MyAlertDialog;
 import com.hb.mydietcoach.model.IItemDiary;
 import com.hb.mydietcoach.preference.PreferenceManager;
 import com.hb.mydietcoach.utils.Constants;
@@ -112,10 +112,10 @@ public class EdittingMealHistoryActivity extends AppCompatActivity {
         listView.setOnMenuItemClickListener(new SwipeMenuListView.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(int position, SwipeMenu menu, int index) {
-                MyAlertDialog dialog = new MyAlertDialog(EdittingMealHistoryActivity.this,
-                        getString(R.string.item_was_deleted));
-                dialog.show();
-
+                Toast.makeText(EdittingMealHistoryActivity.this,
+                        getString(R.string.item_was_deleted),
+                        Toast.LENGTH_SHORT)
+                        .show();
                 database.deleteItem(listItems.get(position));
                 listItems.remove(position);
                 adapter.notifyDataSetChanged();

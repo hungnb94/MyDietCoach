@@ -4,4 +4,13 @@
         <item>before event</item>
         <item>after event</item>
     </string-array>
+    <string-array name="spinner_editting_reminder">
+        <item>None</item>
+        <item>Every Hour</item>
+        <item>Every Two Hours</item>
+        <item>Every Three Hours</item>
+        <item>Every Four Hours</item>
+        <item>Every Day</item>
+        <item>Every Week</item>
+    </string-array>
 </resources>

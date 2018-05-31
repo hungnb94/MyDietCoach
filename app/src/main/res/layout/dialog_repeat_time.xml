@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/dialog_width"
+    android:padding="@dimen/mg_layout"
+    android:layout_height="match_parent">
+
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RadioButton
+            android:id="@+id/rbtNone"
+            android:checked="true"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/none" />
+
+        <RadioButton
+            android:id="@+id/rbtOneHour"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/every_hour" />
+
+        <RadioButton
+            android:id="@+id/rbtTwoHour"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/every_two_hours" />
+
+        <RadioButton
+            android:id="@+id/rbtThreeHour"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/every_three_hours" />
+
+        <RadioButton
+            android:id="@+id/rbtFourHour"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/every_four_hours" />
+
+        <RadioButton
+            android:id="@+id/rbtDaily"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/every_day" />
+
+        <RadioButton
+            android:id="@+id/rbtWeeky"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/every_week" />
+    </RadioGroup>
+
+</LinearLayout>
