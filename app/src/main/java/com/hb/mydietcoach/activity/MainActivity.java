@@ -97,7 +97,7 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_tips) {
 
         } else if (id == R.id.nav_challenges) {
-
+            openChallengesActivity();
         } else if (id == R.id.nav_rewards) {
 
         } else if (id == R.id.nav_settings) {
@@ -110,23 +110,39 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
+    //Click diary layout
     @OnClick(R.id.llDiary)
     void clickDiary(View view) {
         openDiaryActivity();
     }
 
+    //Open DiaryActivity
     private void openDiaryActivity() {
         Intent intent = new Intent(this, DiaryActivity.class);
         startActivity(intent);
     }
 
+    //Click reminder layout
     @OnClick(R.id.llReminder)
     void clickReminder(View view) {
         openReminderActivity();
     }
 
+    //Open ReminderActivity
     private void openReminderActivity() {
         Intent intent = new Intent(this, ReminderActivity.class);
+        startActivity(intent);
+    }
+
+    //Click challenges layout
+    @OnClick(R.id.llChallenges)
+    void clickChallenges(View view){
+        openChallengesActivity();
+    }
+
+    //Open ChallengesActivity
+    private void openChallengesActivity(){
+        Intent intent = new Intent(this, ChallengesActivity.class);
         startActivity(intent);
     }
 }

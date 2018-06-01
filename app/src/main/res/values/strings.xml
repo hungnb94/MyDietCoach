@@ -130,4 +130,13 @@
     <string name="every_day">Every Day</string>
     <string name="every_week">Every Week</string>
     <string name="reminder_was_deleted">Reminder was deleted</string>
+    <string name="title_activity_challenges">ChallengesActivity</string>
+    <string name="take_up_healty">Take up healthy lifestyle challenges</string>
+    <string name="your_chance_to_make_a_change">- This is your chance to make a change!!!</string>
+    <string name="cut_the_ribbon_to_start">Cut the ribbon to start</string>
+    <string name="track_challenges">Track Challenges</string>
+    <string name="drink_more_water">Drink more water</string>
+    <string name="earn_x_hh_points">Earn 0 HH points, 8 glasses left</string>
+    <string name="stop_tracking_awhile">To stop tracking for a while press the \"Stop\" button</string>
+    <string name="stop">Stop</string>
 </resources>

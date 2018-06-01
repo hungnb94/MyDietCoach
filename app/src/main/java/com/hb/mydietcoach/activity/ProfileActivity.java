@@ -86,7 +86,9 @@ public class ProfileActivity extends AppCompatActivity
         } else if (id == R.id.nav_tips) {
 
         } else if (id == R.id.nav_challenges) {
-
+            Intent intent = new Intent(this, ChallengesActivity.class);
+            startActivity(intent);
+            finish();
         } else if (id == R.id.nav_rewards) {
 
         } else if (id == R.id.nav_settings) {

@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
@@ -65,12 +66,13 @@ public class EdittingMealHistoryActivity extends AppCompatActivity {
         if (isFirstTimeDeleteMeal && listItems.size() > 0) {
             Log.e(TAG, "Show tool tips");
             //Show guideline
-            ToolTip.Builder builder = new ToolTip.Builder(this, listView, relativeLayout,
-                    getString(R.string.swipe_to_delete), ToolTip.GRAVITY_CENTER);
+            View item = listView.getChildAt(0);
+            ToolTip.Builder builder = new ToolTip.Builder(this, item, relativeLayout,
+                    getString(R.string.swipe_to_delete), ToolTip.POSITION_BELOW);
             builder.setBackgroundColor(ContextCompat.getColor(this, R.color.colorGuideline));
             toolTipsManager.show(builder.build());
             pre.putBoolean(PreferenceManager.IS_FIRST_TIME_DELETE_MEAL, false);
-            isFirstTimeDeleteMeal=false;
+            isFirstTimeDeleteMeal = false;
         }
     }
 

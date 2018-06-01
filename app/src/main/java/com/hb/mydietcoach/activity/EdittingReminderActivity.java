@@ -110,6 +110,9 @@ public class EdittingReminderActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * Init spinner
+     */
     private void initSpinner() {
         arr = getResources().getStringArray(R.array.spinner_editting_reminder);
         adapter = new ArrayAdapter<>(
@@ -118,6 +121,7 @@ public class EdittingReminderActivity extends AppCompatActivity {
         spinner.setOnItemSelectedListener(itemSelectedListener);
     }
 
+    //Listener handle event click an item on spinner
     AdapterView.OnItemSelectedListener itemSelectedListener = new AdapterView.OnItemSelectedListener() {
         @Override
         public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -143,7 +147,7 @@ public class EdittingReminderActivity extends AppCompatActivity {
         }
     };
 
-
+    //Listener handle event change date
     DatePickerDialog.OnDateSetListener dateSetListener = new DatePickerDialog.OnDateSetListener() {
         @Override
         public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
@@ -153,6 +157,7 @@ public class EdittingReminderActivity extends AppCompatActivity {
         }
     };
 
+    //Listener for change hour
     TimePickerDialog.OnTimeSetListener timeSetListener = new TimePickerDialog.OnTimeSetListener() {
         @Override
         public void onTimeSet(TimePickerDialog view, int hourOfDay, int minute, int second) {
@@ -163,12 +168,22 @@ public class EdittingReminderActivity extends AppCompatActivity {
         }
     };
 
+    /**
+     * Click on tvDate
+     * Show DatePickerDialog
+     * @param view
+     */
     @OnClick(R.id.tvDate)
     void setDate(View view) {
         DatePickerDialog dialog = DatePickerDialog.newInstance(dateSetListener, reminder.getStartDate());
         dialog.show(getFragmentManager(), null);
     }
 
+    /**
+     * Click on tvTime
+     * Show TimePickerDialog
+     * @param view
+     */
     @OnClick(R.id.tvTime)
     void setTime(View view) {
         Calendar calendar = reminder.getStartDate();
@@ -179,6 +194,10 @@ public class EdittingReminderActivity extends AppCompatActivity {
         dialog.show(getFragmentManager(), null);
     }
 
+    /**
+     * Click save button
+     * Save to database and finish activity
+     */
     @OnClick(R.id.button)
     void clickSave(View view) {
         String strContent = editText.getText().toString();
@@ -203,6 +222,9 @@ public class EdittingReminderActivity extends AppCompatActivity {
         finish();
     }
 
+    /**
+     * Setting new notification
+     */
     private void setNotification() {
         NotificationManager manager = new NotificationManager(this);
         manager.setRepeatAlarm((int) reminder.getId(),
@@ -211,6 +233,10 @@ public class EdittingReminderActivity extends AppCompatActivity {
                 reminder.getRepeatMilisecond());
     }
 
+    /**
+     * Set selected position for spinner
+     * @param repeatMilisecond: Repeat time in miliseconds
+     */
     private void setSpinnerSelection(long repeatMilisecond) {
         if (repeatMilisecond <= 0) {
             spinner.setSelection(0);

@@ -73,11 +73,16 @@ public class SettingReminderDialog extends Dialog {
         }
     }
 
+    //Click cancel
     @OnClick(R.id.tvCancel)
     void clickCancel(View view) {
         dismiss();
     }
 
+    /**
+     * Click done button
+     * @param view
+     */
     @OnClick(R.id.tvDone)
     void clickDone(View view) {
         String strMinutes = editText.getText().toString();

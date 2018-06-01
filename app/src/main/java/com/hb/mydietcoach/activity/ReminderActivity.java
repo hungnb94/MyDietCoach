@@ -73,6 +73,7 @@ public class ReminderActivity extends AppCompatActivity
         initMyReminderListView();
     }
 
+    //Init list view with my reminders data
     private void initMyReminderListView() {
         listMyReminders = findViewById(R.id.listMyReminder);
 
@@ -116,6 +117,7 @@ public class ReminderActivity extends AppCompatActivity
         });
     }
 
+    //Listener for event click on item from list view
     AdapterView.OnItemClickListener myRemindersListener = new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -186,7 +188,9 @@ public class ReminderActivity extends AppCompatActivity
         } else if (id == R.id.nav_tips) {
 
         } else if (id == R.id.nav_challenges) {
-
+            Intent intent = new Intent(this, ChallengesActivity.class);
+            startActivity(intent);
+            finish();
         } else if (id == R.id.nav_rewards) {
 
         } else if (id == R.id.nav_settings) {

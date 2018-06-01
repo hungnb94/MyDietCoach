@@ -17,4 +17,6 @@ public class Constants {
     public static final int RESULT_DELETE_REMINDER = 94;
     public static final String IS_REPEAT_NOTIFICATION = "repeate_nofification";
     public static final String NOTIFICATION_REPEATE_TIME_INTERVAL = "interval_time";
+    public static final int DEFAULT_NUMBER_GLASSES = 8;
+    public static final int COLUMN_GLASSES_COUNT = 4;
 }

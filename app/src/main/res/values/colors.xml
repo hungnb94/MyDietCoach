@@ -13,4 +13,5 @@
     <color name="colorGreySpinner">#F5F3DE</color>
     <color name="colorGuideline">#FF9800</color>
     <color name="colorBlue">#c60004f1</color>
+    <color name="colorGreyBlur">#31312B</color>
 </resources>

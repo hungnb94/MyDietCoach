@@ -109,6 +109,9 @@ public class DiaryActivity extends AppCompatActivity
         initView();
     }
 
+    /**
+     * Init all params needed
+     */
     private void initParams() {
         currentDate = Calendar.getInstance();
         todayDate = Calendar.getInstance();
@@ -220,6 +223,7 @@ public class DiaryActivity extends AppCompatActivity
     //State focus on auto text view in first time
     boolean isFocusAutoTextView = false;
 
+    //Event focus on AutoCompleteTextView
     @OnFocusChange(R.id.autoFoodName)
     void focusAutoTextView(View view, boolean focus) {
         if (!isFocusAutoTextView && focus) {
@@ -229,6 +233,7 @@ public class DiaryActivity extends AppCompatActivity
         }
     }
 
+    //Event change text on AutoCompleteTextView
     @OnTextChanged(R.id.autoFoodName)
     void changeTextAutoTextView(CharSequence charSequence) {
         if (llDetailInput.getVisibility() != View.VISIBLE)
@@ -244,6 +249,10 @@ public class DiaryActivity extends AppCompatActivity
         searchingAdapter.notifyDataSetChanged();
     }
 
+    /**
+     * Click add event to show AddingExerciseActivity
+     * @param view
+     */
     @OnClick(R.id.llExercise)
     void addExercise(View view) {
         Intent intent = new Intent(this, AddExerciseActivity.class);
@@ -261,7 +270,7 @@ public class DiaryActivity extends AppCompatActivity
     }
 
     /**
-     * Init swipe listItems view
+     * Init SwipeListView
      */
     private void initSwipeListView() {
         listView = findViewById(R.id.listView);
@@ -318,6 +327,11 @@ public class DiaryActivity extends AppCompatActivity
         });
     }
 
+    /**
+     * Click add food button
+     * To show/hidden adding food layout
+     * @param view
+     */
     @OnClick(R.id.fab)
     void addFood(View view) {
         if (getSupportActionBar().isShowing()) {
@@ -327,10 +341,16 @@ public class DiaryActivity extends AppCompatActivity
         } else {
             resetAddingFoodLayout();
         }
+        //start animation for beautiful UI
         fab.startAnimation(rotationAnimation);
         new Handler().postDelayed(fabRunable, Constants.ANIMATION_LENGTH);
     }
 
+    /**
+     * Click add new meal
+     * Save to database and update UI
+     * @param view
+     */
     @OnClick(R.id.ivAddMeal)
     void addMeal(View view) {
         String foodName = autoFoodName.getText().toString();
@@ -354,8 +374,9 @@ public class DiaryActivity extends AppCompatActivity
         new Handler().postDelayed(fabRunable, Constants.ANIMATION_LENGTH);
         if (isFirstTimeAddMeal) {
             //Show guideline
-            ToolTip.Builder builder = new ToolTip.Builder(this, listView, rootLayout,
-                    getString(R.string.swipe_to_delete), ToolTip.GRAVITY_CENTER);
+            View item = listView.getChildAt(0);
+            ToolTip.Builder builder = new ToolTip.Builder(this, item, rootLayout,
+                    getString(R.string.swipe_to_delete), ToolTip.POSITION_BELOW);
             builder.setBackgroundColor(ContextCompat.getColor(this, R.color.colorGuideline));
             toolTipsManager.show(builder.build());
             pre.putBoolean(PreferenceManager.IS_FIRST_TIME_ADD_MEAL, false);
@@ -376,6 +397,7 @@ public class DiaryActivity extends AppCompatActivity
         edtCalories.setText("");
     }
 
+    //Click previous date
     @OnClick(R.id.ivPrevious)
     void previousDate(View view) {
         Log.d(TAG, "Click previous date");
@@ -388,6 +410,7 @@ public class DiaryActivity extends AppCompatActivity
         adapter.notifyDataSetChanged();
     }
 
+    //Click next date
     @OnClick(R.id.ivNext)
     void nextDate(View view) {
         Log.d(TAG, "Click next date");
@@ -400,6 +423,11 @@ public class DiaryActivity extends AppCompatActivity
         adapter.notifyDataSetChanged();
     }
 
+    /**
+     * Click show more information about daily target
+     * Show/hidden full information
+     * @param view
+     */
     @OnClick(R.id.ivMoreDiary)
     void showMore(View view) {
         //Block when add meal layout is visible
@@ -414,6 +442,7 @@ public class DiaryActivity extends AppCompatActivity
         }
     }
 
+    //Runnable handle click add food button (for beautiful UI) - not nessesary
     Runnable fabRunable = new Runnable() {
         @Override
         public void run() {
@@ -469,6 +498,9 @@ public class DiaryActivity extends AppCompatActivity
         finish();
     }
 
+    /**
+     * Open EdittingMealHistoryActivity
+     */
     private void editMealHistory() {
         Intent intent = new Intent(this, EdittingMealHistoryActivity.class);
         startActivityForResult(intent, RC_EDIT_MEAL_HISTORY);
@@ -500,7 +532,9 @@ public class DiaryActivity extends AppCompatActivity
         } else if (id == R.id.nav_tips) {
 
         } else if (id == R.id.nav_challenges) {
-
+            Intent intent = new Intent(this, ChallengesActivity.class);
+            startActivity(intent);
+            finish();
         } else if (id == R.id.nav_rewards) {
 
         } else if (id == R.id.nav_settings) {

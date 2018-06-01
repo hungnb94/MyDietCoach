@@ -37,6 +37,7 @@ public class SplashActivity extends AppCompatActivity {
                 finish();
             }
         };
+
         Handler handler = new Handler();
         handler.postDelayed(runnable, Constants.SPLASH_LENGTH);
     }

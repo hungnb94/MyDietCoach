@@ -85,12 +85,14 @@ public class AddExerciseActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
+    //Click cancel button
     @OnClick(R.id.btnCancel)
     void cancel(View view) {
         setResult(RESULT_CANCELED);
         finish();
     }
 
+    //Click save button
     @OnClick(R.id.btnSave)
     void saveExercise(View view) {
         try {
@@ -142,6 +144,7 @@ public class AddExerciseActivity extends AppCompatActivity
         manager.setAlarm((int) exercise.getId(), exercise.getName(), alertTime.getTimeInMillis());
     }
 
+    //Listener for change hour
     TimePickerDialog.OnTimeSetListener timeSetListener = new TimePickerDialog.OnTimeSetListener() {
         @Override
         public void onTimeSet(TimePickerDialog view, int hourOfDay, int minute, int second) {
@@ -152,6 +155,7 @@ public class AddExerciseActivity extends AppCompatActivity
         }
     };
 
+    //Show time picker dialog
     @OnClick(R.id.llTimer)
     void changeTime(View view) {
         TimePickerDialog tpd = TimePickerDialog.newInstance(timeSetListener,
@@ -160,6 +164,7 @@ public class AddExerciseActivity extends AppCompatActivity
         tpd.show(getFragmentManager(), "set hour");
     }
 
+    //Show reminder setting dialog
     @OnClick(R.id.llReminder)
     void clickReminder(View view) {
         SettingReminderDialog dialog = new SettingReminderDialog(this);
@@ -167,6 +172,11 @@ public class AddExerciseActivity extends AppCompatActivity
         dialog.show();
     }
 
+    /**
+     * Change reminder setting
+     * @param isReminder
+     * @param minutesFromEvent: minute from exercise event
+     */
     @Override
     public void changeReminder(boolean isReminder, int minutesFromEvent) {
         this.isReminder = isReminder;

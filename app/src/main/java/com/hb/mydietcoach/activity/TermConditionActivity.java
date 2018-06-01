@@ -59,11 +59,13 @@ public class TermConditionActivity extends AppCompatActivity {
         checkBox = findViewById(R.id.checkbox);
     }
 
+    //Click cancel
     @OnClick(R.id.btnCancel)
     void clickCancel(View view){
         finish();
     }
 
+    //Click agree with terms and conditions
     @OnClick(R.id.btnAgree)
     void clickAgree(View view){
         try {
