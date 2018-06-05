@@ -1,4 +1,4 @@
-package com.hb.mydietcoach.activity;
+package com.hb.mydietcoach.activity.reminder;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -174,7 +174,7 @@ public class EdittingReminderActivity extends AppCompatActivity {
      * @param view
      */
     @OnClick(R.id.tvDate)
-    void setDate(View view) {
+    public void setDate(View view) {
         DatePickerDialog dialog = DatePickerDialog.newInstance(dateSetListener, reminder.getStartDate());
         dialog.show(getFragmentManager(), null);
     }
@@ -185,7 +185,7 @@ public class EdittingReminderActivity extends AppCompatActivity {
      * @param view
      */
     @OnClick(R.id.tvTime)
-    void setTime(View view) {
+    public void setTime(View view) {
         Calendar calendar = reminder.getStartDate();
         TimePickerDialog dialog = TimePickerDialog.newInstance(timeSetListener,
                 calendar.get(Calendar.HOUR_OF_DAY),
@@ -199,7 +199,7 @@ public class EdittingReminderActivity extends AppCompatActivity {
      * Save to database and finish activity
      */
     @OnClick(R.id.button)
-    void clickSave(View view) {
+    public void clickSave(View view) {
         String strContent = editText.getText().toString();
         if (TextUtils.isEmpty(strContent)) {
             Toast.makeText(this, R.string.input_reminder_text, Toast.LENGTH_SHORT).show();

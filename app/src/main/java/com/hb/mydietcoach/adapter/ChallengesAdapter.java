@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.hb.mydietcoach.R;
+import com.hb.mydietcoach.utils.Constants;
 
 public class ChallengesAdapter extends RecyclerView.Adapter<ChallengesAdapter.MyViewHolder> {
 
@@ -17,15 +18,17 @@ public class ChallengesAdapter extends RecyclerView.Adapter<ChallengesAdapter.My
 
     private final int DRINK_WATER_LENGTH = 150;
 
+    private ItemEventListener listener;
     //    private Context context;
-    private int numGlasses;
-    private int currentPosition = 0;
+    private int numTotalItems;
+    private int numCurrentPosition = 0;
 
     private LayoutInflater inflater;
+    private int itemType = Constants.CHALLENGE_TYPE_DRINK_WATER;
 
     public ChallengesAdapter(Context context, int numGlasses) {
 //        this.context = context;
-        this.numGlasses = numGlasses;
+        this.numTotalItems = numGlasses;
 
         inflater = LayoutInflater.from(context);
     }
@@ -34,23 +37,27 @@ public class ChallengesAdapter extends RecyclerView.Adapter<ChallengesAdapter.My
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = inflater.inflate(R.layout.item_glass_water, parent, false);
-
         return new MyViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull final MyViewHolder holder, final int position) {
-        if (position == currentPosition) {
+        if (position == numCurrentPosition) {
             holder.ivGlass.setImageResource(R.drawable.challenge_water_full);
             holder.ivArrow.setVisibility(View.VISIBLE);
+        } else if (position < numCurrentPosition) {
+            holder.ivGlass.setImageResource(R.drawable.challenges_water_empty);
+            holder.ivSign.setVisibility(View.VISIBLE);
+            holder.ivArrow.setVisibility(View.INVISIBLE);
         }
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (position == currentPosition) {
-                    currentPosition++;
-                    changeBackgroundLikeDrinkWater(holder.ivGlass, holder.ivArrow, 0);
+                if (position == numCurrentPosition) {
+                    if (listener != null) listener.startClick();
+                    numCurrentPosition++;
+                    changeBackgroundLikeDrinkWater(holder.ivGlass, 0);
                 }
             }
         });
@@ -58,21 +65,39 @@ public class ChallengesAdapter extends RecyclerView.Adapter<ChallengesAdapter.My
 
     @Override
     public int getItemCount() {
-        return numGlasses;
+        return numTotalItems;
     }
 
-    public void setItemsSize(int size) {
-        this.numGlasses = size;
+    public void backToPreviousItem() {
+        numCurrentPosition--;
+        notifyDataSetChanged();
+    }
+
+    public int getCurentPosition() {
+        return numCurrentPosition;
+    }
+
+    public void setNumCurrentPosition(int numGlassesLeft) {
+        numCurrentPosition = numGlassesLeft;
+    }
+
+    public int getType() {
+        return this.itemType;
+    }
+
+    public void updateTotalItems(int newValue) {
+        this.numTotalItems = newValue;
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
-        ImageView ivGlass, ivArrow;
+        ImageView ivGlass, ivArrow, ivSign;
 
         public MyViewHolder(final View itemView) {
             super(itemView);
             ivGlass = itemView.findViewById(R.id.ivGlassWater);
             ivArrow = itemView.findViewById(R.id.ivArrow);
+            ivSign = itemView.findViewById(R.id.ivSign);
         }
     }
 
@@ -80,18 +105,20 @@ public class ChallengesAdapter extends RecyclerView.Adapter<ChallengesAdapter.My
             R.drawable.challenge_water_b3, R.drawable.challenge_water_b4,
             R.drawable.challenge_water_b5, R.drawable.challenge_water_b6,
             R.drawable.challenge_water_b7, R.drawable.challenge_water_b8,
-            R.drawable.challenge_water_b9, R.drawable.challenges_water_empty,
-            R.drawable.challenges_water_dark};
+            R.drawable.challenge_water_b9, R.drawable.challenges_water_empty};
 
-    private void changeBackgroundLikeDrinkWater(final ImageView ivGlass, final ImageView ivArrow, final int pos) {
+    private void changeBackgroundLikeDrinkWater(final ImageView ivGlass, final int pos) {
         final Handler handler = new Handler();
         Runnable runnable = new Runnable() {
             public void run() {
                 ivGlass.setImageResource(imageArray[pos]);
                 if (pos < imageArray.length - 1) {
-                    changeBackgroundLikeDrinkWater(ivGlass, ivArrow, pos + 1);
+                    changeBackgroundLikeDrinkWater(ivGlass, pos + 1);
                 } else {
-                    ivArrow.setVisibility(View.INVISIBLE);
+                    if (listener != null) {
+                        listener.itemViewDone();
+                        if (isAllItemDone()) listener.allItemDone();
+                    }
                     notifyDataSetChanged();
                 }
             }
@@ -99,4 +126,19 @@ public class ChallengesAdapter extends RecyclerView.Adapter<ChallengesAdapter.My
         handler.postDelayed(runnable, DRINK_WATER_LENGTH);
     }
 
+    public void setOnItemEventListener(ItemEventListener itemEventListener) {
+        this.listener = itemEventListener;
+    }
+
+    public boolean isAllItemDone() {
+        return numTotalItems == numCurrentPosition;
+    }
+
+    public interface ItemEventListener {
+        void startClick();
+
+        void itemViewDone();
+
+        void allItemDone();
+    }
 }

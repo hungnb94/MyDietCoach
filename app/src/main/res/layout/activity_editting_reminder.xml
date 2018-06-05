@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@color/colorCream"
     android:orientation="vertical"
-    tools:context=".activity.EdittingReminderActivity">
+    tools:context=".activity.reminder.EdittingReminderActivity">
 
     <include
         layout="@layout/app_bar_main"

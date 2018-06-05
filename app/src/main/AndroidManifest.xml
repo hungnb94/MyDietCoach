@@ -2,15 +2,14 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.hb.mydietcoach">
 
-
     <application
+        android:name=".App"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
         <activity
             android:name=".activity.SplashActivity"
             android:screenOrientation="portrait">
@@ -20,30 +19,24 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".activity.MainActivity"
             android:label="@string/title_activity_main"
             android:theme="@style/AppTheme.NoActionBar" />
-
         <activity
-            android:name=".activity.DiaryActivity"
+            android:name=".activity.diary.DiaryActivity"
             android:label="@string/title_activity_diary"
             android:theme="@style/AppTheme" />
-
         <activity
-            android:name=".activity.ReminderActivity"
+            android:name=".activity.reminder.ReminderActivity"
             android:label="@string/title_activity_reminder"
             android:theme="@style/AppTheme" />
-
-        <activity android:name=".activity.AddExerciseActivity" />
-
+        <activity android:name=".activity.diary.AddExerciseActivity" />
         <activity
             android:name=".activity.ProfileActivity"
             android:label="@string/title_activity_profile"
             android:theme="@style/AppTheme" />
-
-        <activity android:name=".activity.EdittingMealHistoryActivity" />
+        <activity android:name=".activity.diary.EdittingMealHistoryActivity" />
 
         <receiver
             android:name=".notification.NotificationReceiver"
@@ -55,13 +48,14 @@
             android:exported="false" />
 
         <activity android:name=".activity.TermConditionActivity" />
-
-        <activity android:name=".activity.EdittingReminderActivity" />
-
+        <activity android:name=".activity.reminder.EdittingReminderActivity" />
         <activity
-            android:name=".activity.ChallengesActivity"
+            android:name=".activity.challenge.ChallengesActivity"
             android:label="@string/title_activity_challenges"
             android:theme="@style/AppTheme" />
+        <activity android:name=".activity.challenge.EdittingChallengeActivity" />
+        <activity android:name=".activity.challenge.AddingChallengeActivity" />
+        <activity android:name=".activity.challenge.NewChallengeActivity"></activity>
     </application>
 
 </manifest>

@@ -136,7 +136,26 @@
     <string name="cut_the_ribbon_to_start">Cut the ribbon to start</string>
     <string name="track_challenges">Track Challenges</string>
     <string name="drink_more_water">Drink more water</string>
-    <string name="earn_x_hh_points">Earn 0 HH points, 8 glasses left</string>
+    <string name="earn_x_hh_points">Earned 0 HH points, 8 glasses left</string>
     <string name="stop_tracking_awhile">To stop tracking for a while press the \"Stop\" button</string>
     <string name="stop">Stop</string>
+    <string name="undo">Undo</string>
+    <string name="earned">Earned</string>
+    <string name="glasses_left">glasses left.</string>
+    <string name="hh_points">HH points,</string>
+    <string name="edit_challenges">Edit challenges</string>
+    <string name="share">Share</string>
+    <string name="my_challenges">My Challenges</string>
+    <string name="daily_target">Daily target</string>
+    <string name="sit_ups">sit-ups</string>
+    <string name="_do">Do</string>
+    <string name="sets">sets</string>
+    <string name="add_challenge">Add challenge</string>
+    <string name="glasses">glasses</string>
+    <string name="add">Add</string>
+    <string name="challenge">Challenge</string>
+    <string name="guide_tap_challenge_icon">Swipe or tap the colorful icon to mark as done (every time you do it)</string>
+    <string name="gym_challenge_title">Go to the gym or exercise class</string>
+    <string name="push_up_challenge_title">Do 20 push-ups</string>
+    <string name="new_challenge">New challenge</string>
 </resources>

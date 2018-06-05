@@ -1,4 +1,4 @@
-package com.hb.mydietcoach.activity;
+package com.hb.mydietcoach.activity.diary;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -33,6 +33,10 @@ import com.baoyz.swipemenulistview.SwipeMenuItem;
 import com.baoyz.swipemenulistview.SwipeMenuListView;
 import com.google.gson.Gson;
 import com.hb.mydietcoach.R;
+import com.hb.mydietcoach.activity.challenge.ChallengesActivity;
+import com.hb.mydietcoach.activity.MainActivity;
+import com.hb.mydietcoach.activity.ProfileActivity;
+import com.hb.mydietcoach.activity.reminder.ReminderActivity;
 import com.hb.mydietcoach.adapter.DiaryActivityAdapter;
 import com.hb.mydietcoach.adapter.SearchingFoodAdapter;
 import com.hb.mydietcoach.database.MyDatabase;
@@ -67,7 +71,6 @@ public class DiaryActivity extends AppCompatActivity
     private static final int RC_EDIT_MEAL_HISTORY = 11;
 
     private DrawerLayout drawer;
-    private NavigationView navigationView;
 
     //List view
     private SwipeMenuListView listView;
@@ -134,7 +137,7 @@ public class DiaryActivity extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        navigationView = (NavigationView) findViewById(R.id.nav_view);
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.setCheckedItem(R.id.nav_diary);
 
@@ -225,7 +228,7 @@ public class DiaryActivity extends AppCompatActivity
 
     //Event focus on AutoCompleteTextView
     @OnFocusChange(R.id.autoFoodName)
-    void focusAutoTextView(View view, boolean focus) {
+    public void focusAutoTextView(View view, boolean focus) {
         if (!isFocusAutoTextView && focus) {
             isFocusAutoTextView = true;
             llDetailInput.setVisibility(View.VISIBLE);
@@ -235,7 +238,7 @@ public class DiaryActivity extends AppCompatActivity
 
     //Event change text on AutoCompleteTextView
     @OnTextChanged(R.id.autoFoodName)
-    void changeTextAutoTextView(CharSequence charSequence) {
+    public void changeTextAutoTextView(CharSequence charSequence) {
         if (llDetailInput.getVisibility() != View.VISIBLE)
             llDetailInput.setVisibility(View.VISIBLE);
 
@@ -254,7 +257,7 @@ public class DiaryActivity extends AppCompatActivity
      * @param view
      */
     @OnClick(R.id.llExercise)
-    void addExercise(View view) {
+    public void addExercise(View view) {
         Intent intent = new Intent(this, AddExerciseActivity.class);
         startActivityForResult(intent, RC_ADD_EXERCISE);
     }
@@ -333,7 +336,7 @@ public class DiaryActivity extends AppCompatActivity
      * @param view
      */
     @OnClick(R.id.fab)
-    void addFood(View view) {
+    public void addFood(View view) {
         if (getSupportActionBar().isShowing()) {
             getSupportActionBar().hide();
             llAddMeal.setVisibility(View.VISIBLE);
@@ -352,7 +355,7 @@ public class DiaryActivity extends AppCompatActivity
      * @param view
      */
     @OnClick(R.id.ivAddMeal)
-    void addMeal(View view) {
+    public void addMeal(View view) {
         String foodName = autoFoodName.getText().toString();
         String amount = edtAmount.getText().toString();
         String calories = edtCalories.getText().toString();
@@ -399,7 +402,7 @@ public class DiaryActivity extends AppCompatActivity
 
     //Click previous date
     @OnClick(R.id.ivPrevious)
-    void previousDate(View view) {
+    public void previousDate(View view) {
         Log.d(TAG, "Click previous date");
         currentDate.add(Calendar.DATE, -1);
         setCurrentDate();
@@ -412,7 +415,7 @@ public class DiaryActivity extends AppCompatActivity
 
     //Click next date
     @OnClick(R.id.ivNext)
-    void nextDate(View view) {
+    public void nextDate(View view) {
         Log.d(TAG, "Click next date");
         currentDate.add(Calendar.DATE, 1);
         setCurrentDate();
@@ -429,7 +432,7 @@ public class DiaryActivity extends AppCompatActivity
      * @param view
      */
     @OnClick(R.id.ivMoreDiary)
-    void showMore(View view) {
+    public void showMore(View view) {
         //Block when add meal layout is visible
         if (llAddMeal.getVisibility() == View.VISIBLE) return;
 

@@ -1,4 +1,4 @@
-package com.hb.mydietcoach.activity;
+package com.hb.mydietcoach.activity.reminder;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -18,6 +18,9 @@ import com.baoyz.swipemenulistview.SwipeMenuCreator;
 import com.baoyz.swipemenulistview.SwipeMenuItem;
 import com.baoyz.swipemenulistview.SwipeMenuListView;
 import com.hb.mydietcoach.R;
+import com.hb.mydietcoach.activity.MainActivity;
+import com.hb.mydietcoach.activity.challenge.ChallengesActivity;
+import com.hb.mydietcoach.activity.diary.DiaryActivity;
 import com.hb.mydietcoach.adapter.MyReminderAdapter;
 import com.hb.mydietcoach.database.MyDatabase;
 import com.hb.mydietcoach.model.Reminder;

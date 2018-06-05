@@ -19,4 +19,9 @@ public class Constants {
     public static final String NOTIFICATION_REPEATE_TIME_INTERVAL = "interval_time";
     public static final int DEFAULT_NUMBER_GLASSES = 8;
     public static final int COLUMN_GLASSES_COUNT = 4;
+    public static final int STARS_FOR_DRINK_WATER = 3;
+
+    public static final int CHALLENGE_TYPE_DRINK_WATER = 0;
+    public static final int CHALLENGE_TYPE_PUSH_UP = 1;
+    public static final int CHALLENGE_TYPE_GYM = 2;
 }

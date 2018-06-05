@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/pd_item">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="@dimen/ic_adding_challenge"
+        android:layout_height="@dimen/ic_adding_challenge"
+        android:src="@drawable/challenges_gym1" />
+
+    <TextView
+        android:id="@+id/tvTitleChallenge"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/mg_layout"
+        android:text="@string/gym_challenge_title"
+        android:textSize="@dimen/txt_normal" />
+
+</LinearLayout>

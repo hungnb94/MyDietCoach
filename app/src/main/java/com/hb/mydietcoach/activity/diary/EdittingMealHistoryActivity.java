@@ -1,4 +1,4 @@
-package com.hb.mydietcoach.activity;
+package com.hb.mydietcoach.activity.diary;
 
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;

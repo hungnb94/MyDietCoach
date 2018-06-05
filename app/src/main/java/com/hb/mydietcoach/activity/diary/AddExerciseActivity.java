@@ -1,4 +1,4 @@
-package com.hb.mydietcoach.activity;
+package com.hb.mydietcoach.activity.diary;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -87,14 +87,14 @@ public class AddExerciseActivity extends AppCompatActivity
 
     //Click cancel button
     @OnClick(R.id.btnCancel)
-    void cancel(View view) {
+    public void cancel(View view) {
         setResult(RESULT_CANCELED);
         finish();
     }
 
     //Click save button
     @OnClick(R.id.btnSave)
-    void saveExercise(View view) {
+    public void saveExercise(View view) {
         try {
             String name = edtName.getText().toString();
             String strDuration = edtDuration.getText().toString();
@@ -157,7 +157,7 @@ public class AddExerciseActivity extends AppCompatActivity
 
     //Show time picker dialog
     @OnClick(R.id.llTimer)
-    void changeTime(View view) {
+    public void changeTime(View view) {
         TimePickerDialog tpd = TimePickerDialog.newInstance(timeSetListener,
                 timer.get(Calendar.HOUR_OF_DAY), timer.get(Calendar.MINUTE), false);
         tpd.setVersion(TimePickerDialog.Version.VERSION_2);
@@ -166,7 +166,7 @@ public class AddExerciseActivity extends AppCompatActivity
 
     //Show reminder setting dialog
     @OnClick(R.id.llReminder)
-    void clickReminder(View view) {
+    public void clickReminder(View view) {
         SettingReminderDialog dialog = new SettingReminderDialog(this);
         dialog.init(isReminder, minutesFromEvent);
         dialog.show();

@@ -1,22 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/rootLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".activity.ChallengesActivity">
+    tools:context=".activity.challenge.ChallengesActivity">
 
-    <include
-        layout="@layout/app_bar_main"
+    <LinearLayout
+        android:id="@+id/llToolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content">
+
+        <include
+            layout="@layout/app_bar_main"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_below="@id/llToolbar"
         android:background="@color/colorCream">
 
         <LinearLayout
@@ -32,13 +39,35 @@
                 android:orientation="vertical"
                 android:padding="@dimen/mg_layout">
 
-                <TextView
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/drink_more_water"
-                    android:textColor="@color/colorBlack"
-                    android:textSize="@dimen/txt_normal"
-                    android:textStyle="bold" />
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:id="@+id/tvTitleChallenge"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/drink_more_water"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="@dimen/txt_normal"
+                        android:textStyle="bold" />
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_weight="1" />
+
+                    <Button
+                        android:id="@+id/btnUndo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/btn_undo_h"
+                        android:background="@drawable/border_button"
+                        android:text="@string/undo"
+                        android:textColor="@color/colorWhite"
+                        android:visibility="invisible" />
+
+                </LinearLayout>
 
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/recyclerView"
@@ -46,12 +75,27 @@
                     android:layout_height="match_parent"
                     android:layout_marginTop="@dimen/mg_layout" />
 
-                <TextView
+                <LinearLayout
+                    android:id="@+id/llPoint"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/mg_layout"
-                    android:text="@string/earn_x_hh_points"
-                    android:textColor="@color/colorBlack" />
+                    android:gravity="center_vertical">
+
+                    <ImageView
+                        android:layout_width="@dimen/ic_star_point"
+                        android:layout_height="@dimen/ic_star_point"
+                        android:src="@drawable/star_points" />
+
+                    <TextView
+                        android:id="@+id/tvPoint"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/mg_earn_point"
+                        android:text="@string/earn_x_hh_points"
+                        android:textColor="@color/colorBlack" />
+
+                </LinearLayout>
             </LinearLayout>
 
             <RelativeLayout
@@ -73,8 +117,9 @@
                             android:id="@+id/ivArrowOption"
                             android:layout_width="@dimen/arrow_up_guide_option"
                             android:layout_height="@dimen/arrow_up_guide_option"
+                            android:layout_marginBottom="@dimen/mg_arrow_up_guide_line"
                             android:layout_marginRight="@dimen/mg_layout"
-                            android:background="@color/colorGrey"
+                            android:background="@drawable/border_arrow_up"
                             android:padding="@dimen/pd_arrow_up_guide_option"
                             android:src="@drawable/arrow_head_up_md" />
 
@@ -196,4 +241,4 @@
         </FrameLayout>
     </FrameLayout>
 
-</LinearLayout>
+</RelativeLayout>

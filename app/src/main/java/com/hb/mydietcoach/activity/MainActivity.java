@@ -13,6 +13,9 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.hb.mydietcoach.R;
+import com.hb.mydietcoach.activity.challenge.ChallengesActivity;
+import com.hb.mydietcoach.activity.diary.DiaryActivity;
+import com.hb.mydietcoach.activity.reminder.ReminderActivity;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;

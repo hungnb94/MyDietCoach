@@ -62,5 +62,14 @@
     <dimen name="ic_glass_water_height">70dp</dimen>
     <dimen name="snackbar_height">60dp</dimen>
     <dimen name="arrow_up_guide_option">40dp</dimen>
-    <dimen name="pd_arrow_up_guide_option">5dp</dimen>
+    <dimen name="pd_arrow_up_guide_option">10dp</dimen>
+    <dimen name="mg_arrow_up_guide_line">-10dp</dimen>
+    <dimen name="ic_sign_item_challenge_height">25dp</dimen>
+    <dimen name="ic_sign_item_challenge_width">30dp</dimen>
+    <dimen name="btn_undo_h">35dp</dimen>
+    <dimen name="mg_earn_point">5dp</dimen>
+    <dimen name="ic_star_point">18dp</dimen>
+    <dimen name="spinner_adding_challenge_w">180dp</dimen>
+    <dimen name="pd_item">5dp</dimen>
+    <dimen name="ic_adding_challenge">60dp</dimen>
 </resources>

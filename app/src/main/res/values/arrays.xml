@@ -4,6 +4,7 @@
         <item>before event</item>
         <item>after event</item>
     </string-array>
+
     <string-array name="spinner_editting_reminder">
         <item>None</item>
         <item>Every Hour</item>
@@ -12,5 +13,25 @@
         <item>Every Four Hours</item>
         <item>Every Day</item>
         <item>Every Week</item>
+    </string-array>
+
+    <string-array name="spinner_editting_challenge">
+        <item>One</item>
+        <item>Two</item>
+        <item>Three</item>
+        <item>Four</item>
+        <item>Five</item>
+        <item>Six</item>
+        <item>Seven</item>
+        <item>Eight</item>
+        <item>Nine</item>
+        <item>Ten</item>
+    </string-array>
+
+    <string-array name="spinner_adding_challenge">
+        <item>Exercises</item>
+        <item>Eating Habits</item>
+        <item>Self Control</item>
+        <item>My</item>
     </string-array>
 </resources>

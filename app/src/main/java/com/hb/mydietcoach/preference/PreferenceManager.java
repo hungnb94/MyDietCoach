@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 public class PreferenceManager {
+
     SharedPreferences pref;
     SharedPreferences.Editor editor;
     Context context;
@@ -22,7 +23,13 @@ public class PreferenceManager {
     public static final String USER_WEIGHT = "weight";
     public static final String IS_GENDER_FEMALE = "gender";
 
-    public static final String NUMBLE_GLASSES = "number_glasses";
+    public static final String CHALLENGE_TYPE = "challenge_type";
+    public static final String NUMBLE_TOTAL_GLASSES = "number_glasses";
+    public static final String NUMBLE_GLASSES_DRINKED = "glasses_drinked";
+    public static final String TITLE_CHALLENGE = "title_challenge";
+    public static final String LAST_DRINKED_DATE = "last_drinked_date";
+
+    public static final String IS_FIRST_TIME_TOOLTIP_CHALLENGE = "tooltip_challenge";
 
     public PreferenceManager(Context context) {
         this.context = context;
@@ -58,6 +65,24 @@ public class PreferenceManager {
 
     public boolean putInt(String key, int defaultValue) {
         editor.putInt(key, defaultValue);
+        return editor.commit();
+    }
+
+    public long getLong(String key, long defaultValue){
+        return pref.getLong(key, defaultValue);
+    }
+
+    public boolean putLong(String key, long value){
+        editor.putLong(key, value);
+        return editor.commit();
+    }
+
+    public String getString(String key, String defaultValue) {
+        return pref.getString(key, defaultValue);
+    }
+
+    public boolean putString(String key, String value){
+        editor.putString(key, value);
         return editor.commit();
     }
 }
