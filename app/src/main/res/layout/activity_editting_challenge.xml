@@ -146,19 +146,15 @@
     </LinearLayout>
 
     <RelativeLayout
+        android:gravity="bottom|end"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="@dimen/mg_layout">
 
         <Button
+            style="@style/ButtonBottom"
             android:id="@+id/btnSave"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentEnd="true"
-            android:background="@drawable/border_button"
-            android:text="@string/save"
-            android:textColor="@color/colorWhite" />
+            android:text="@string/save" />
 
     </RelativeLayout>
 

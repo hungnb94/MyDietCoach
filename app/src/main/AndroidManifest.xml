@@ -2,6 +2,15 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.hb.mydietcoach">
 
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <uses-permission-sdk-23 android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission-sdk-23 android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <uses-feature android:name="android.hardware.camera" />
+
     <application
         android:name=".App"
         android:allowBackup="true"
@@ -55,7 +64,14 @@
             android:theme="@style/AppTheme" />
         <activity android:name=".activity.challenge.EdittingChallengeActivity" />
         <activity android:name=".activity.challenge.AddingChallengeActivity" />
-        <activity android:name=".activity.challenge.NewChallengeActivity"></activity>
+        <activity android:name=".activity.challenge.NewChallengeActivity" />
+        <activity android:name=".activity.photo.PhotosActivity" />
+        <activity android:name=".activity.tip.TipsActivity" />
+        <activity android:name=".activity.tip.TipDetailActivity" />
+        <activity android:name=".activity.tip.AddingTipActivity" />
+        <activity android:name=".activity.WeightLoggingActivity" />
+        <activity android:name=".activity.SettingsActivity" />
+        <activity android:name=".activity.ContactFAQActivity"></activity>
     </application>
 
 </manifest>

@@ -2,12 +2,12 @@ package com.hb.mydietcoach.model;
 
 public class RunChallenge extends Challenge {
     double length;
-    int unit;
+    double unit;
 
     public RunChallenge() {
     }
 
-    public RunChallenge(int imageId, String title, int stars, int type, double length, int unit) {
+    public RunChallenge(int imageId, String title, int stars, double length, double unit, int type) {
         super(imageId, title, stars, type);
         this.length = length;
         this.unit = unit;
@@ -21,7 +21,7 @@ public class RunChallenge extends Challenge {
         this.length = length;
     }
 
-    public int getUnit() {
+    public double getUnit() {
         return unit;
     }
 

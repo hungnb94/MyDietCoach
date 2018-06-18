@@ -30,7 +30,9 @@ import android.widget.TextView;
 import com.hb.mydietcoach.R;
 import com.hb.mydietcoach.activity.MainActivity;
 import com.hb.mydietcoach.activity.diary.DiaryActivity;
+import com.hb.mydietcoach.activity.photo.PhotosActivity;
 import com.hb.mydietcoach.activity.reminder.ReminderActivity;
+import com.hb.mydietcoach.activity.tip.TipsActivity;
 import com.hb.mydietcoach.adapter.ChallengesAdapter;
 import com.hb.mydietcoach.custom_view.DrawingView;
 import com.hb.mydietcoach.preference.PreferenceManager;
@@ -166,12 +168,12 @@ public class ChallengesActivity extends AppCompatActivity
         llPoint = findViewById(R.id.llPoint);
         tvTitleChallenge = findViewById(R.id.tvTitleChallenge);
         tvTitleChallenge.setText(strTitleChallenge);
-        updatePoint();
 
         //Funcion for challenge drink water
         recyclerView = findViewById(R.id.recyclerView);
-
         initRecyclerView();
+
+        updatePoint();
     }
 
     private void initRecyclerView() {
@@ -381,9 +383,13 @@ public class ChallengesActivity extends AppCompatActivity
             startActivity(intent);
             finish();
         } else if (id == R.id.nav_photos) {
-
+            Intent intent = new Intent(this, PhotosActivity.class);
+            startActivity(intent);
+            finish();
         } else if (id == R.id.nav_tips) {
-
+            Intent intent = new Intent(this, TipsActivity.class);
+            startActivity(intent);
+            finish();
         } else if (id == R.id.nav_challenges) {
             Intent intent = new Intent(this, ChallengesActivity.class);
             startActivity(intent);

@@ -65,6 +65,7 @@ public class EdittingChallengeActivity extends AppCompatActivity implements Adap
 
         Bundle bundle = getIntent().getExtras();
         itemType = bundle.getInt(ChallengesActivity.ITEM_TYPE, Constants.CHALLENGE_TYPE_DRINK_WATER);
+        challenge.setType(itemType);
         numAmount = bundle.getInt(ChallengesActivity.ITEM_AMOUNT, 8);
         strChallengeTitle = bundle.getString(ChallengesActivity.ITEM_TITLE, getString(R.string.drink_more_water));
 
@@ -117,6 +118,7 @@ public class EdittingChallengeActivity extends AppCompatActivity implements Adap
     void clickSave(View view) {
         Intent intent = new Intent();
         Bundle bundle = new Bundle();
+        if (challenge==null) challenge = new Challenge();
         bundle.putInt(ChallengesActivity.ITEM_TYPE, challenge.getType());
         bundle.putInt(ChallengesActivity.ITEM_AMOUNT, spinner.getSelectedItemPosition() + 1);
         bundle.putString(ChallengesActivity.ITEM_TITLE, tvTitle.getText().toString());

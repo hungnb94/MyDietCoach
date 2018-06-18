@@ -21,6 +21,8 @@ import com.hb.mydietcoach.R;
 import com.hb.mydietcoach.activity.MainActivity;
 import com.hb.mydietcoach.activity.challenge.ChallengesActivity;
 import com.hb.mydietcoach.activity.diary.DiaryActivity;
+import com.hb.mydietcoach.activity.photo.PhotosActivity;
+import com.hb.mydietcoach.activity.tip.TipsActivity;
 import com.hb.mydietcoach.adapter.MyReminderAdapter;
 import com.hb.mydietcoach.database.MyDatabase;
 import com.hb.mydietcoach.model.Reminder;
@@ -187,9 +189,13 @@ public class ReminderActivity extends AppCompatActivity
             startActivity(intent);
             finish();
         } else if (id == R.id.nav_photos) {
-
+            Intent intent = new Intent(this, PhotosActivity.class);
+            startActivity(intent);
+            finish();
         } else if (id == R.id.nav_tips) {
-
+            Intent intent = new Intent(this, TipsActivity.class);
+            startActivity(intent);
+            finish();
         } else if (id == R.id.nav_challenges) {
             Intent intent = new Intent(this, ChallengesActivity.class);
             startActivity(intent);

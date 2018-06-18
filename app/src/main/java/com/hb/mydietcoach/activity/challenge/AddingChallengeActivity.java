@@ -11,21 +11,25 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.Animation;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
 import com.hb.mydietcoach.R;
 import com.hb.mydietcoach.adapter.AddingChallengeAdapter;
+import com.hb.mydietcoach.database.MyDatabase;
+import com.hb.mydietcoach.model.AnimationChallenge;
 import com.hb.mydietcoach.model.Challenge;
+import com.hb.mydietcoach.model.NormalChallenge;
+import com.hb.mydietcoach.model.RunChallenge;
+import com.hb.mydietcoach.model.SelfControlChallenge;
 import com.hb.mydietcoach.utils.Constants;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.ButterKnife;
-import io.realm.Realm;
-import io.realm.RealmResults;
 
 public class AddingChallengeActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     private String arr[];
@@ -35,7 +39,9 @@ public class AddingChallengeActivity extends AppCompatActivity implements Adapte
     private RecyclerView recyclerView;
     private AddingChallengeAdapter challengeAdapter;
     private List<Challenge> listExercise, listEatHabit, listSelfControl, listMyChallenge;
-    Realm realm;
+    MyDatabase database;
+
+    Animation animation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,10 +52,8 @@ public class AddingChallengeActivity extends AppCompatActivity implements Adapte
         listExercise = generateExerciseChallenges();
         listEatHabit = generateEatHabitChallenges();
         listSelfControl = generateSelfControlChallenges();
-        realm = Realm.getDefaultInstance();
-        RealmResults<Challenge> realmResults = realm.where(Challenge.class).findAll();
-        listMyChallenge = new ArrayList<>();
-        listMyChallenge.addAll(realmResults);
+        database = new MyDatabase(this);
+        listMyChallenge = database.getAllMyChallenge();
 
         initView();
     }
@@ -97,34 +101,49 @@ public class AddingChallengeActivity extends AppCompatActivity implements Adapte
 
     public List<Challenge> generateExerciseChallenges() {
         List<Challenge> list = new ArrayList<>();
-        list.add(new Challenge(R.drawable.challenges_pushups01_sh,
-                getString(R.string.push_up_challenge_title),
+        list.add(new NormalChallenge(R.drawable.challenges_gym1,
+                getString(R.string.push_up_challenge_title), Constants.STARS_FOR_GYM_EXERCISE,
+                2,
                 Constants.CHALLENGE_TYPE_PUSH_UP));
-        list.add(new Challenge(R.drawable.challenges_gym1,
-                getString(R.string.gym_challenge_title),
+        list.add(new RunChallenge(R.drawable.challenges_walk1_sh,
+                getString(R.string.walk_2_miles),
+                Constants.STARS_FOR_WALK_A_MILE,
+                2,
+                0.01,
                 Constants.CHALLENGE_TYPE_GYM));
         return list;
     }
 
     public List<Challenge> generateEatHabitChallenges() {
         List<Challenge> list = new ArrayList<>();
-        list.add(new Challenge(R.drawable.challenge_water_full,
+        list.add(new NormalChallenge(R.drawable.challenge_water_full,
                 getString(R.string.drink_more_water),
+                Constants.STARS_FOR_DRINK_WATER,
+                8,
                 Constants.CHALLENGE_TYPE_DRINK_WATER));
-        list.add(new Challenge(R.drawable.challenges_gym1,
-                getString(R.string.gym_challenge_title),
-                Constants.CHALLENGE_TYPE_GYM));
+        list.add(new AnimationChallenge(R.drawable.challenges_table_plate,
+                getString(R.string.fill_my_plate),
+                Constants.STARS_FOR_FILL_MY_PLATE,
+                5,
+                animation,
+                Constants.CHALLENGE_TYPE_FILL_MY_PLATE));
         return list;
     }
 
     public List<Challenge> generateSelfControlChallenges() {
         List<Challenge> list = new ArrayList<>();
-        list.add(new Challenge(R.drawable.challenges_pushups01_sh,
-                getString(R.string.push_up_challenge_title),
-                Constants.CHALLENGE_TYPE_PUSH_UP));
-        list.add(new Challenge(R.drawable.challenges_gym1,
-                getString(R.string.gym_challenge_title),
-                Constants.CHALLENGE_TYPE_GYM));
+        list.add(new SelfControlChallenge(R.drawable.junk_food_avoid,
+                getString(R.string.avoid_junk_food),
+                Constants.STARS_FOR_AVOID_JUNK_FOOD,
+                Constants.CHALLENGE_TYPE_AVOID_JUNK_FOOD));
+        list.add(new SelfControlChallenge(R.drawable.sugray_drink,
+                getString(R.string.avoid_sugary_drinks),
+                Constants.STARS_FOR_AVOID_SURGARY_DRINKS,
+                Constants.CHALLENGE_TYPE_AVOID_SUGARY_DRINK));
+        list.add(new SelfControlChallenge(R.drawable.snack,
+                getString(R.string.avoid_snacking),
+                Constants.STARS_FOR_AVOID_SNACKING,
+                Constants.CHALLENGE_TYPE_AVOID_SNACKING));
         return list;
     }
 

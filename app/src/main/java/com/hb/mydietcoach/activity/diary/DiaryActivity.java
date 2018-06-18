@@ -36,7 +36,9 @@ import com.hb.mydietcoach.R;
 import com.hb.mydietcoach.activity.challenge.ChallengesActivity;
 import com.hb.mydietcoach.activity.MainActivity;
 import com.hb.mydietcoach.activity.ProfileActivity;
+import com.hb.mydietcoach.activity.photo.PhotosActivity;
 import com.hb.mydietcoach.activity.reminder.ReminderActivity;
+import com.hb.mydietcoach.activity.tip.TipsActivity;
 import com.hb.mydietcoach.adapter.DiaryActivityAdapter;
 import com.hb.mydietcoach.adapter.SearchingFoodAdapter;
 import com.hb.mydietcoach.database.MyDatabase;
@@ -531,9 +533,13 @@ public class DiaryActivity extends AppCompatActivity
             startActivity(intent);
             finish();
         } else if (id == R.id.nav_photos) {
-
+            Intent intent = new Intent(this, PhotosActivity.class);
+            startActivity(intent);
+            finish();
         } else if (id == R.id.nav_tips) {
-
+            Intent intent = new Intent(this, TipsActivity.class);
+            startActivity(intent);
+            finish();
         } else if (id == R.id.nav_challenges) {
             Intent intent = new Intent(this, ChallengesActivity.class);
             startActivity(intent);

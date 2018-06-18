@@ -2,11 +2,12 @@ package com.hb.mydietcoach.model;
 
 import android.view.animation.Animation;
 
-public class AnimationChallenge extends NormalChallenge {
+
+public class AnimationChallenge extends NormalChallenge{
     private Animation animation;
 
-    public AnimationChallenge(int imageId, String title, int stars, int totalCount, int currentPosition, Animation animation, int type) {
-        super(imageId, title, stars, totalCount, currentPosition, type);
+    public AnimationChallenge(int imageId, String title, int stars, int totalCount, Animation animation, int type) {
+        super(imageId, title, stars, totalCount, type);
         this.animation = animation;
     }
 

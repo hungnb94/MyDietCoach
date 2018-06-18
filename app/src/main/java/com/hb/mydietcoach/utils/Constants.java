@@ -19,9 +19,28 @@ public class Constants {
     public static final String NOTIFICATION_REPEATE_TIME_INTERVAL = "interval_time";
     public static final int DEFAULT_NUMBER_GLASSES = 8;
     public static final int COLUMN_GLASSES_COUNT = 4;
-    public static final int STARS_FOR_DRINK_WATER = 3;
 
     public static final int CHALLENGE_TYPE_DRINK_WATER = 0;
     public static final int CHALLENGE_TYPE_PUSH_UP = 1;
     public static final int CHALLENGE_TYPE_GYM = 2;
+    public static final int CHALLENGE_TYPE_FILL_MY_PLATE = 3;
+    public static final int CHALLENGE_TYPE_AVOID_JUNK_FOOD = 4;
+    public static final int CHALLENGE_TYPE_AVOID_SUGARY_DRINK= 5;
+    public static final int CHALLENGE_TYPE_AVOID_SNACKING= 6;
+    public static final int CHALLENGE_TYPE_OF_MY= 7;
+
+    //Exercise challenges
+    public static final int STARS_FOR_GYM_EXERCISE = 40;
+    public static final int STARS_FOR_WALK_A_MILE = 20;
+    //Eating habit challenges
+    public static final int STARS_FOR_DRINK_WATER = 3;
+    public static final int STARS_FOR_FILL_MY_PLATE = 9;
+    //Self control challenges
+    public static final int STARS_FOR_AVOID_JUNK_FOOD = 30;
+    public static final int STARS_FOR_AVOID_SURGARY_DRINKS= 20;
+    public static final int STARS_FOR_AVOID_SNACKING = 80;
+    //My challenges
+    public static final int STARS_FOR_MY_CHALLENGE = 5;
+
+    public static final String MY_FOLDER = "mydietcoach";
 }

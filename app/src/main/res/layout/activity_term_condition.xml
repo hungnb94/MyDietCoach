@@ -29,7 +29,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/mg_layout"
                 android:layout_marginTop="@dimen/mg_layout"
-                android:text="Welcome to My Diet Coach"
+                android:text="@string/welcome_to_my_diet_coach"
                 android:textSize="@dimen/txt_title_term_condition" />
 
             <TextView
@@ -48,7 +48,8 @@
                     android:id="@+id/edtWeight"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="2" />
+                    android:layout_weight="2"
+                    tools:ignore="LabelFor" />
 
                 <Spinner
                     android:id="@+id/spinnerWeightType"

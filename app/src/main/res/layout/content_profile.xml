@@ -52,13 +52,13 @@
                     android:textStyle="bold" />
 
                 <EditText
-                    android:textSize="@dimen/txt_normal"
                     android:id="@+id/edtCaloriesGoal"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:inputType="numberSigned" />
+                    android:inputType="numberSigned"
+                    android:textSize="@dimen/txt_normal" />
             </LinearLayout>
 
             <LinearLayout
@@ -77,13 +77,13 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:textSize="@dimen/txt_normal"
                     android:id="@+id/tvBMI"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="18" />
+                    android:text="18"
+                    android:textSize="@dimen/txt_normal" />
             </LinearLayout>
 
         </LinearLayout>
@@ -105,9 +105,9 @@
         android:layout_height="match_parent">
 
         <LinearLayout
-            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -165,14 +165,14 @@
                     android:text="@string/age" />
 
                 <EditText
-                    android:textSize="@dimen/txt_normal"
                     android:id="@+id/edtAge"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
                     android:inputType="numberSigned"
-                    android:text="18" />
+                    android:text="18"
+                    android:textSize="@dimen/txt_normal" />
             </LinearLayout>
 
             <LinearLayout
@@ -189,13 +189,13 @@
                     android:text="@string/height_cms" />
 
                 <EditText
-                    android:textSize="@dimen/txt_normal"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
                     android:inputType="numberDecimal"
-                    android:text="160.9" />
+                    android:text="160.9"
+                    android:textSize="@dimen/txt_normal" />
             </LinearLayout>
 
             <LinearLayout
@@ -212,13 +212,13 @@
                     android:text="@string/current_weight" />
 
                 <EditText
-                    android:textSize="@dimen/txt_normal"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
                     android:inputType="numberDecimal"
-                    android:text="80.0" />
+                    android:text="80.0"
+                    android:textSize="@dimen/txt_normal" />
             </LinearLayout>
 
             <LinearLayout
@@ -235,13 +235,13 @@
                     android:text="@string/goal_weight" />
 
                 <EditText
-                    android:textSize="@dimen/txt_normal"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
                     android:inputType="numberDecimal"
-                    android:text="64.0" />
+                    android:text="64.0"
+                    android:textSize="@dimen/txt_normal" />
             </LinearLayout>
 
             <LinearLayout
@@ -279,14 +279,14 @@
                     android:text="@string/weeky_weight_loss_goal" />
 
                 <EditText
-                    android:textSize="@dimen/txt_normal"
                     android:id="@+id/edtWeightLossGoal"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
                     android:inputType="numberDecimal"
-                    android:text="0.2" />
+                    android:text="0.2"
+                    android:textSize="@dimen/txt_normal" />
             </LinearLayout>
 
             <LinearLayout
@@ -310,26 +310,19 @@
                     android:gravity="center" />
             </LinearLayout>
 
-            <LinearLayout
+            <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/row_profile_height"
                 android:gravity="center_vertical"
                 android:paddingLeft="@dimen/mg_layout"
                 android:paddingRight="@dimen/mg_layout">
 
-                <View
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="2" />
-
                 <Button
                     android:id="@+id/button"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="@drawable/border_button"
+                    style="@style/ButtonBottom"
+                    android:layout_gravity="bottom|end"
                     android:text="@string/continue_" />
-            </LinearLayout>
+            </FrameLayout>
 
         </LinearLayout>
 

@@ -182,9 +182,9 @@
                 <Button
                     android:id="@+id/btnCancel"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="@dimen/_30sdp"
                     android:layout_gravity="center"
-                    android:layout_marginRight="@dimen/mg_layout"
+                    android:layout_marginEnd="@dimen/mg_layout"
                     android:layout_weight="1"
                     android:background="@color/colorCream"
                     android:gravity="center"
@@ -193,17 +193,12 @@
                     android:textStyle="bold" />
 
                 <Button
+                    style="@style/ButtonBottom"
                     android:id="@+id/btnSave"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/mg_layout"
+                    android:layout_marginStart="@dimen/mg_layout"
                     android:layout_weight="1"
-                    android:background="@drawable/border_button"
-                    android:gravity="center"
-                    android:padding="@dimen/pd_btn_save"
                     android:text="@string/save"
-                    android:textAllCaps="true"
-                    android:textColor="@color/colorWhite"
                     android:textStyle="bold" />
             </LinearLayout>
         </RelativeLayout>

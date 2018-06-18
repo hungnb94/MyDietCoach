@@ -2,9 +2,8 @@ package com.hb.mydietcoach.model;
 
 import java.io.Serializable;
 
-import io.realm.RealmObject;
 
-public class Challenge extends RealmObject implements Serializable {
+public class Challenge implements Serializable {
 
     private int imageId;
     private String title;

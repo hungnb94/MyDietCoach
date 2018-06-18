@@ -15,7 +15,9 @@ import android.view.View;
 import com.hb.mydietcoach.R;
 import com.hb.mydietcoach.activity.challenge.ChallengesActivity;
 import com.hb.mydietcoach.activity.diary.DiaryActivity;
+import com.hb.mydietcoach.activity.photo.PhotosActivity;
 import com.hb.mydietcoach.activity.reminder.ReminderActivity;
+import com.hb.mydietcoach.activity.tip.TipsActivity;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -96,9 +98,9 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_reminder) {
             openReminderActivity();
         } else if (id == R.id.nav_photos) {
-
+            openPhotosActivity();
         } else if (id == R.id.nav_tips) {
-
+            openTipsActivity();
         } else if (id == R.id.nav_challenges) {
             openChallengesActivity();
         } else if (id == R.id.nav_rewards) {
@@ -146,6 +148,26 @@ public class MainActivity extends AppCompatActivity
     //Open ChallengesActivity
     private void openChallengesActivity(){
         Intent intent = new Intent(this, ChallengesActivity.class);
+        startActivity(intent);
+    }
+
+    @OnClick(R.id.llPhotos)
+    void clickPhotos(View view){
+        openPhotosActivity();
+    }
+
+    void openPhotosActivity(){
+        Intent intent = new Intent(this, PhotosActivity.class);
+        startActivity(intent);
+    }
+
+    @OnClick(R.id.llTips)
+    void clickTips(View view){
+        openTipsActivity();
+    }
+
+    void openTipsActivity(){
+        Intent intent = new Intent(this, TipsActivity.class);
         startActivity(intent);
     }
 }

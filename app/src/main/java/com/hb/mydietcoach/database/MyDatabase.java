@@ -6,10 +6,13 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import com.hb.mydietcoach.R;
+import com.hb.mydietcoach.model.Challenge;
 import com.hb.mydietcoach.model.Exercise;
 import com.hb.mydietcoach.model.Food;
 import com.hb.mydietcoach.model.IItemDiary;
 import com.hb.mydietcoach.model.Reminder;
+import com.hb.mydietcoach.utils.Constants;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -23,24 +26,28 @@ public class MyDatabase extends SQLiteOpenHelper {
     private static final int DB_VERSION = 2;
     private static final String TABLE_FOOD_EXERCISE = "diary_activity";
     private static final String TABLE_REMINDER = "reminders";
+    private static final String TABLE_MY_CHALLENGE = "challenges";
 
     //Type for table food & exercise
     public static final int TYPE_FOOD = 0;
     public static final int TYPE_EXERCISE = 1;
 
-    //Table food & exercise column name
+    //Comnon column name
     public static final String FIELD_ID = "id";
+    public static final String FIELD_NAME = "name";
+
+    //Table food & exercise column name
     public static final String FIELD_TYPE = "type";
     public static final String FIELD_TIME = "time";
-    public static final String FIELD_NAME = "name";
     public static final String FIELD_CALORIES = "calories";
     public static final String FIELD_WEIGHT = "weight";
 
-
     //Table Reminder column name
-    private static final String FIELD_CONTENT = "content";
-    private static final String FIELD_START_DATE = "start_date";
-    private static final String FIELD_REPEAT_MILISECONDS = "repeat_miliseconds";
+    public static final String FIELD_CONTENT = "content";
+    public static final String FIELD_START_DATE = "start_date";
+    public static final String FIELD_REPEAT_MILISECONDS = "repeat_miliseconds";
+
+    //Table Challenge column name
 
     private static final String CREATE_TABLE_FOOD_EXERCISE = "CREATE TABLE " + TABLE_FOOD_EXERCISE + "("
             + FIELD_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
@@ -58,8 +65,14 @@ public class MyDatabase extends SQLiteOpenHelper {
             + FIELD_REPEAT_MILISECONDS + " LONG"
             + ")";
 
+    private static final String CREATE_TABLE_MY_CHALLENGE = "CREATE TABLE " + TABLE_MY_CHALLENGE + "("
+            + FIELD_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+            + FIELD_NAME + " TEXT"
+            + ")";
+
     private static final String DROP_TABLE_FOOD_EXERCISE = "DROP TABLE IF EXISTS " + TABLE_FOOD_EXERCISE;
     private static final String DROP_TABLE_REMINDER = "DROP TABLE IF EXISTS " + TABLE_REMINDER;
+    private static final String DROP_TABLE_MY_CHALLENGE = "DROP TABLE IF EXISTS " + TABLE_MY_CHALLENGE;
 
     public MyDatabase(Context context) {
         super(context, DB_NAME, null, DB_VERSION);
@@ -69,12 +82,14 @@ public class MyDatabase extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         sqLiteDatabase.execSQL(CREATE_TABLE_FOOD_EXERCISE);
         sqLiteDatabase.execSQL(CREATE_TABLE_REMINDER);
+        sqLiteDatabase.execSQL(CREATE_TABLE_MY_CHALLENGE);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
         sqLiteDatabase.execSQL(DROP_TABLE_FOOD_EXERCISE);
         sqLiteDatabase.execSQL(DROP_TABLE_REMINDER);
+        sqLiteDatabase.execSQL(DROP_TABLE_MY_CHALLENGE);
         onCreate(sqLiteDatabase);
     }
 
@@ -292,5 +307,35 @@ public class MyDatabase extends SQLiteOpenHelper {
                 new String[]{String.valueOf(reminderId)});
         db.close();
         return num > 0;
+    }
+
+    public long insertMyChallenge(Challenge challenge) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(FIELD_NAME, challenge.getTitle());
+        long id = db.insert(TABLE_MY_CHALLENGE, null, values);
+        db.close();
+        return id;
+    }
+
+    public List<Challenge> getAllMyChallenge() {
+        List<Challenge> list = new ArrayList();
+        SQLiteDatabase db = this.getReadableDatabase();
+        String sql = "SELECT * FROM " + TABLE_MY_CHALLENGE;
+
+        Cursor cursor = db.rawQuery(sql, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                Challenge challenge = new Challenge();
+                challenge.setImageId(R.drawable.challenges_general_after);
+                challenge.setTitle(cursor.getString(cursor.getColumnIndex(FIELD_CONTENT)));
+                challenge.setStars(Constants.STARS_FOR_MY_CHALLENGE);
+                challenge.setType(Constants.CHALLENGE_TYPE_OF_MY);
+                list.add(challenge);
+            } while (cursor.moveToNext());
+        }
+        db.close();
+        return list;
     }
 }

@@ -36,4 +36,8 @@ dependencies {
     implementation 'com.wdullaer:materialdatetimepicker:3.6.0'
     implementation "com.daimajia.swipelayout:library:1.2.0@aar"
     implementation 'com.tomergoldst.android:tooltips:1.0.10'
+    implementation 'me.grantland:autofittextview:0.2.+'
+    implementation 'com.nineoldandroids:library:2.4.0'
+    implementation 'com.daimajia.slider:library:1.1.5@aar'
+    implementation 'com.squareup.picasso:picasso:2.3.2'
 }
