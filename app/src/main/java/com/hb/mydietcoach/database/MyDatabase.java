@@ -11,6 +11,7 @@ import com.hb.mydietcoach.model.Challenge;
 import com.hb.mydietcoach.model.Exercise;
 import com.hb.mydietcoach.model.Food;
 import com.hb.mydietcoach.model.IItemDiary;
+import com.hb.mydietcoach.model.NormalChallenge;
 import com.hb.mydietcoach.model.Reminder;
 import com.hb.mydietcoach.utils.Constants;
 
@@ -21,6 +22,8 @@ import java.util.List;
 
 public class MyDatabase extends SQLiteOpenHelper {
     private final String TAG = MyDatabase.class.getSimpleName();
+
+    private Context context;
 
     private static final String DB_NAME = "fat_secret";
     private static final int DB_VERSION = 2;
@@ -76,6 +79,7 @@ public class MyDatabase extends SQLiteOpenHelper {
 
     public MyDatabase(Context context) {
         super(context, DB_NAME, null, DB_VERSION);
+        this.context = context;
     }
 
     @Override
@@ -125,38 +129,6 @@ public class MyDatabase extends SQLiteOpenHelper {
         // return newly inserted row id
         return id;
     }
-
-//    public List getAll() {
-//        List list = new ArrayList();
-//        String selectQuery = "SELECT * FROM " + TABLE_FOOD_EXERCISE;
-//
-//        SQLiteDatabase db = this.getWritableDatabase();
-//        Cursor cursor = db.rawQuery(selectQuery, null);
-//
-//        if (cursor.moveToFirst()) {
-//            do {
-//                int type = cursor.getInt(cursor.getColumnIndex(FIELD_TYPE));
-//                if (type == TYPE_FOOD) {
-//                    Food food = new Food();
-//                    food.setId(cursor.getInt(cursor.getColumnIndex(FIELD_ID)));
-//                    food.setName(cursor.getString(cursor.getColumnIndex(FIELD_NAME)));
-//                    food.setTime(cursor.getString(cursor.getColumnIndex(FIELD_TIME)));
-//                    food.setCalories(cursor.getString(cursor.getColumnIndex(FIELD_CALORIES)));
-//                    food.setWeight(cursor.getString(cursor.getColumnIndex(FIELD_WEIGHT)));
-//                    list.add(food);
-//                } else {
-//                    Exercise exercise = new Exercise();
-//                    exercise.setId(cursor.getInt(cursor.getColumnIndex(FIELD_ID)));
-//                    exercise.setName(cursor.getString(cursor.getColumnIndex(FIELD_NAME)));
-//                    exercise.setTime(cursor.getString(cursor.getColumnIndex(FIELD_TIME)));
-//                    exercise.setCalories(cursor.getString(cursor.getColumnIndex(FIELD_CALORIES)));
-//                    list.add(exercise);
-//                }
-//            } while (cursor.moveToNext());
-//        }
-//        db.close();
-//        return list;
-//    }
 
     public List getAllFood() {
         List<Food> list = new ArrayList();
@@ -319,7 +291,7 @@ public class MyDatabase extends SQLiteOpenHelper {
     }
 
     public List<Challenge> getAllMyChallenge() {
-        List<Challenge> list = new ArrayList();
+        ArrayList<Challenge> list = new ArrayList();
         SQLiteDatabase db = this.getReadableDatabase();
         String sql = "SELECT * FROM " + TABLE_MY_CHALLENGE;
 
@@ -327,11 +299,14 @@ public class MyDatabase extends SQLiteOpenHelper {
 
         if (cursor.moveToFirst()) {
             do {
-                Challenge challenge = new Challenge();
+                NormalChallenge challenge = new NormalChallenge();
                 challenge.setImageId(R.drawable.challenges_general_after);
-                challenge.setTitle(cursor.getString(cursor.getColumnIndex(FIELD_CONTENT)));
+                challenge.setTitle(cursor.getString(cursor.getColumnIndex(FIELD_NAME)));
                 challenge.setStars(Constants.STARS_FOR_MY_CHALLENGE);
                 challenge.setType(Constants.CHALLENGE_TYPE_OF_MY);
+                challenge.setTotalCount(3);
+                challenge.setCurrentPosition(0);
+                challenge.setUnit(context.getString(R.string.events));
                 list.add(challenge);
             } while (cursor.moveToNext());
         }

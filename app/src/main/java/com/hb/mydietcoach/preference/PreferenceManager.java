@@ -24,12 +24,13 @@ public class PreferenceManager {
     public static final String IS_GENDER_FEMALE = "gender";
 
     public static final String CHALLENGE_TYPE = "challenge_type";
-    public static final String NUMBLE_TOTAL_GLASSES = "number_glasses";
-    public static final String NUMBLE_GLASSES_DRINKED = "glasses_drinked";
+    public static final String NORMAL_CHALLENGE_TOTAL_ITEMS = "total";
+    public static final String NORMAL_CHALLENGE_CURRENT_POSITION = "current";
     public static final String TITLE_CHALLENGE = "title_challenge";
-    public static final String LAST_DRINKED_DATE = "last_drinked_date";
+    public static final String LAST_TIME_USING = "last_drinked_date";
 
     public static final String IS_FIRST_TIME_TOOLTIP_CHALLENGE = "tooltip_challenge";
+    public static final String IS_HAS_MOTIVATIONAL_PHOTO = "motivational_photo";
 
     public PreferenceManager(Context context) {
         this.context = context;

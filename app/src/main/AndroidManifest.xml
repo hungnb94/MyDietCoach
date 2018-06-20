@@ -42,7 +42,7 @@
             android:theme="@style/AppTheme" />
         <activity android:name=".activity.diary.AddExerciseActivity" />
         <activity
-            android:name=".activity.ProfileActivity"
+            android:name=".activity.diary.ProfileActivity"
             android:label="@string/title_activity_profile"
             android:theme="@style/AppTheme" />
         <activity android:name=".activity.diary.EdittingMealHistoryActivity" />

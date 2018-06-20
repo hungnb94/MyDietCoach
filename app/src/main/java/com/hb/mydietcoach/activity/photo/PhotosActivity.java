@@ -25,18 +25,25 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import com.daimajia.slider.library.Indicators.PagerIndicator;
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.DefaultSliderView;
 import com.hb.mydietcoach.R;
+import com.hb.mydietcoach.activity.ContactFAQActivity;
 import com.hb.mydietcoach.activity.MainActivity;
+import com.hb.mydietcoach.activity.SettingsActivity;
+import com.hb.mydietcoach.activity.WeightLoggingActivity;
 import com.hb.mydietcoach.activity.challenge.ChallengesActivity;
 import com.hb.mydietcoach.activity.diary.DiaryActivity;
+import com.hb.mydietcoach.activity.reminder.EdittingReminderActivity;
 import com.hb.mydietcoach.activity.reminder.ReminderActivity;
 import com.hb.mydietcoach.activity.tip.TipsActivity;
 import com.hb.mydietcoach.adapter.MiniPhotoAdapter;
+import com.hb.mydietcoach.model.Reminder;
+import com.hb.mydietcoach.preference.PreferenceManager;
 import com.hb.mydietcoach.utils.Constants;
 
 import java.io.File;
@@ -50,6 +57,12 @@ import java.util.List;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+import static com.hb.mydietcoach.activity.reminder.EdittingReminderActivity.HOUR_MINISECOND;
+import static com.hb.mydietcoach.utils.Constants.RC_CAMERA_PERMISSION;
+import static com.hb.mydietcoach.utils.Constants.RC_EXTERNAL_STORAGE;
+import static com.hb.mydietcoach.utils.Constants.RC_PICK_IMAGE;
+import static com.hb.mydietcoach.utils.Constants.RC_TAKE_PHOTO;
+
 public class PhotosActivity extends AppCompatActivity implements MiniPhotoAdapter.OnItemClickListener,
         NavigationView.OnNavigationItemSelectedListener {
     private static String[] PERMISSIONS_STORAGE = {
@@ -59,11 +72,6 @@ public class PhotosActivity extends AppCompatActivity implements MiniPhotoAdapte
 
     private static final String TAG = PhotosActivity.class.getSimpleName();
 
-    private static final int RC_PICK_IMAGE = 1;
-    private static final int RC_TAKE_PHOTO = 2;
-    private static final int RC_CAMERA_PERMISSION = 3;
-    private static final int RC_EXTERNAL_STORAGE = 4;
-
     private DrawerLayout drawer;
 
     //    private FloatingActionButton fabSelectGallery, fabTakeSnapshot;
@@ -72,6 +80,8 @@ public class PhotosActivity extends AppCompatActivity implements MiniPhotoAdapte
     private RecyclerView recyclerView;
     MiniPhotoAdapter adapter;
     private List<File> imageList;
+
+    private FrameLayout flAddbutton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,9 +111,21 @@ public class PhotosActivity extends AppCompatActivity implements MiniPhotoAdapte
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.setCheckedItem(R.id.nav_photos);
 
+        //Add button is gone or visible
+        flAddbutton = findViewById(R.id.flAddButton);
+
         sliderShow = findViewById(R.id.slider);
         sliderShow.setIndicatorVisibility(PagerIndicator.IndicatorVisibility.Invisible);
         sliderShow.stopAutoCycle();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        PreferenceManager pre = new PreferenceManager(this);
+        boolean hasPhoto = pre.getBoolean(PreferenceManager.IS_HAS_MOTIVATIONAL_PHOTO, false);
+        if (hasPhoto) flAddbutton.setVisibility(View.GONE);
     }
 
     @OnClick(R.id.fabSelectFrGallery)
@@ -126,6 +148,20 @@ public class PhotosActivity extends AppCompatActivity implements MiniPhotoAdapte
             Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
             startActivityForResult(cameraIntent, RC_TAKE_PHOTO);
         }
+    }
+
+    @OnClick(R.id.btnAddReminder)
+    void clickAddReminder() {
+        Intent intent = new Intent(this, EdittingReminderActivity.class);
+        Bundle bundle = new Bundle();
+        Reminder reminder = new Reminder(0,
+                "View my motivational photos",
+                Calendar.getInstance(),
+                24 * HOUR_MINISECOND);
+        bundle.putSerializable(Constants.DATA_SERIALIZABLE, reminder);
+        bundle.putBoolean(EdittingReminderActivity.IS_MOTIVATIONAL_REMINDER, true);
+        intent.putExtras(bundle);
+        startActivity(intent);
     }
 
     public void verifyStoragePermissions() {
@@ -185,6 +221,7 @@ public class PhotosActivity extends AppCompatActivity implements MiniPhotoAdapte
         FileOutputStream out = null;
         try {
             File directory = new File(Environment.getExternalStorageDirectory(), Constants.MY_FOLDER);
+            if (!directory.exists()) directory.mkdirs();
             SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
             file = new File(directory, sdf.format(Calendar.getInstance().getTime()) + ".png");
             file.createNewFile();
@@ -204,7 +241,6 @@ public class PhotosActivity extends AppCompatActivity implements MiniPhotoAdapte
                 }
             } catch (IOException e) {
                 e.printStackTrace();
-                return null;
             }
         }
     }
@@ -222,7 +258,13 @@ public class PhotosActivity extends AppCompatActivity implements MiniPhotoAdapte
             } else {
                 Toast.makeText(this, R.string.camera_permission_denied, Toast.LENGTH_SHORT).show();
             }
-
+        } else if (requestCode == RC_EXTERNAL_STORAGE) {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                if (imageList == null || imageList.size() == 0) {
+                    FileTask fileTask = new FileTask();
+                    fileTask.execute();
+                }
+            }
         }
     }
 
@@ -241,15 +283,17 @@ public class PhotosActivity extends AppCompatActivity implements MiniPhotoAdapte
             startActivity(intent);
             finish();
         } else if (id == R.id.nav_log_weight) {
-
+            Intent intent = new Intent(this, WeightLoggingActivity.class);
+            startActivity(intent);
+            finish();
         } else if (id == R.id.nav_reminder) {
             Intent intent = new Intent(this, ReminderActivity.class);
             startActivity(intent);
             finish();
         } else if (id == R.id.nav_photos) {
-            Intent intent = new Intent(this, PhotosActivity.class);
-            startActivity(intent);
-            finish();
+            drawer.closeDrawer(GravityCompat.START);
+            return true;
+            //Blank
         } else if (id == R.id.nav_tips) {
             Intent intent = new Intent(this, TipsActivity.class);
             startActivity(intent);
@@ -261,9 +305,13 @@ public class PhotosActivity extends AppCompatActivity implements MiniPhotoAdapte
         } else if (id == R.id.nav_rewards) {
 
         } else if (id == R.id.nav_settings) {
-
+            Intent intent = new Intent(this, SettingsActivity.class);
+            startActivity(intent);
+            finish();
         } else if (id == R.id.nav_contact) {
-
+            Intent intent = new Intent(this, ContactFAQActivity.class);
+            startActivity(intent);
+            finish();
         }
 
         drawer.closeDrawer(GravityCompat.START);
@@ -313,7 +361,7 @@ public class PhotosActivity extends AppCompatActivity implements MiniPhotoAdapte
         /**
          * Get all image from app directory
          *
-         * @return
+         * @return all image from app folder
          */
         private List<File> getAllImage() {
             List<File> list = new ArrayList<>();
@@ -330,8 +378,8 @@ public class PhotosActivity extends AppCompatActivity implements MiniPhotoAdapte
         /**
          * Compare file is image or not
          *
-         * @param fileName
-         * @return
+         * @param fileName: name of file
+         * @return true if is image, false if otherwise
          */
         private boolean isImageFile(String fileName) {
             for (String extention : ImageExtensions) {

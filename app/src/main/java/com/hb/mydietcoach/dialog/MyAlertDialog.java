@@ -27,7 +27,7 @@ public class MyAlertDialog extends Dialog {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.dialog_alert);
 
-        textView = findViewById(R.id.textView);
+        textView = findViewById(R.id.tvAlert);
         textView.setText(content);
 
         new Handler().postDelayed(new Runnable() {

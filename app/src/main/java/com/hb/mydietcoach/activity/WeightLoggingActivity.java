@@ -47,7 +47,7 @@ public class WeightLoggingActivity extends AppCompatActivity
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-        navigationView.setCheckedItem(R.id.nav_photos);
+        navigationView.setCheckedItem(R.id.nav_log_weight);
     }
 
 
@@ -66,7 +66,7 @@ public class WeightLoggingActivity extends AppCompatActivity
             startActivity(intent);
             finish();
         } else if (id == R.id.nav_log_weight) {
-
+            //Blank
         } else if (id == R.id.nav_reminder) {
             Intent intent = new Intent(this, ReminderActivity.class);
             startActivity(intent);
@@ -86,9 +86,13 @@ public class WeightLoggingActivity extends AppCompatActivity
         } else if (id == R.id.nav_rewards) {
 
         } else if (id == R.id.nav_settings) {
-
+            Intent intent = new Intent(this, SettingsActivity.class);
+            startActivity(intent);
+            finish();
         } else if (id == R.id.nav_contact) {
-
+            Intent intent = new Intent(this, ContactFAQActivity.class);
+            startActivity(intent);
+            finish();
         }
 
         drawer.closeDrawer(GravityCompat.START);

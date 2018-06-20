@@ -15,10 +15,12 @@ public class NotificationManager {
         this.context = context;
     }
 
-    public void setAlarm(long nofificationId, String strContent, long triggerTime) {
+    public void setAlarm(long nofificationId, boolean isMotivationalNotification,
+                         String strContent, long triggerTime) {
         Intent notifyIntent = new Intent(context, NotificationReceiver.class);
         Bundle bundle = new Bundle();
         bundle.putString(Constants.NOTIFICATION_CONTENT_TEXT, strContent);
+        bundle.putBoolean(Constants.IS_MOTIVATIONAL_NOTIFICATION, isMotivationalNotification);
         notifyIntent.putExtras(bundle);
         PendingIntent pendingIntent = PendingIntent.getBroadcast
                 (context, (int) nofificationId, notifyIntent, PendingIntent.FLAG_UPDATE_CURRENT);
@@ -28,10 +30,12 @@ public class NotificationManager {
         alarmManager.set(AlarmManager.RTC_WAKEUP, triggerTime, pendingIntent);
     }
 
-    public void setRepeatAlarm(long notificationId, String strContent, long triggerTime, long repeatMiliseconds) {
+    public void setRepeatAlarm(long notificationId, boolean isMotivationalNotification,
+                               String strContent, long triggerTime, long repeatMiliseconds) {
         Intent notifyIntent = new Intent(context, NotificationReceiver.class);
         Bundle bundle = new Bundle();
         bundle.putString(Constants.NOTIFICATION_CONTENT_TEXT, strContent);
+        bundle.putBoolean(Constants.IS_MOTIVATIONAL_NOTIFICATION, isMotivationalNotification);
         notifyIntent.putExtras(bundle);
         PendingIntent pendingIntent = PendingIntent.getBroadcast
                 (context, (int) notificationId, notifyIntent, PendingIntent.FLAG_UPDATE_CURRENT);

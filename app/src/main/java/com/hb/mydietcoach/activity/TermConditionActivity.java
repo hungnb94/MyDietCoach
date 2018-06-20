@@ -15,6 +15,7 @@ import android.widget.Spinner;
 import com.hb.mydietcoach.R;
 import com.hb.mydietcoach.dialog.MyAlertDialog;
 import com.hb.mydietcoach.preference.PreferenceManager;
+import com.hb.mydietcoach.utils.Constants;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -27,14 +28,17 @@ public class TermConditionActivity extends AppCompatActivity {
     private Spinner spinnerWeightType, spinnerGender;
     private CheckBox checkBox;
 
-    private String weightTypes[] = {"kgs", "lbs"};
-    private String genders[] = {"Female", "Male"};
+    private String weightTypes[];
+    private String genderTypes[];
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_term_condition);
+
+        weightTypes = getResources().getStringArray(R.array.weight_types);
+        genderTypes = getResources().getStringArray(R.array.gender_types);
 
         initView();
     }
@@ -53,7 +57,7 @@ public class TermConditionActivity extends AppCompatActivity {
 
         spinnerGender = findViewById(R.id.spinnerGender);
         adapter = new ArrayAdapter<>(
-                this, android.R.layout.simple_list_item_1, genders);
+                this, android.R.layout.simple_list_item_1, genderTypes);
         spinnerGender.setAdapter(adapter);
 
         checkBox = findViewById(R.id.checkbox);
@@ -61,33 +65,21 @@ public class TermConditionActivity extends AppCompatActivity {
 
     //Click cancel
     @OnClick(R.id.btnCancel)
-    void clickCancel(View view){
+    void clickCancel(View view) {
         finish();
     }
 
     //Click agree with terms and conditions
     @OnClick(R.id.btnAgree)
-    void clickAgree(View view){
-        try {
+    void clickAgree(View view) {
+        if (allParametersAvailable()) {
+            int position = spinnerGender.getSelectedItemPosition();
+            boolean isFemale = (position == 0);
             String strWeight = edtWeight.getText().toString();
-            if (TextUtils.isEmpty(strWeight)){
-                MyAlertDialog dialog = new MyAlertDialog(this, getString(R.string.enter_your_weight));
-                dialog.show();
-                return;
-            }
             float weight = Float.valueOf(strWeight);
-            if (weight<=0){
-                MyAlertDialog dialog = new MyAlertDialog(this, getString(R.string.bigger_than_zero));
-                dialog.show();
-                return;
+            if (spinnerWeightType.getSelectedItemPosition()==1){
+                weight = changeLbToKg(weight);
             }
-            if (!checkBox.isChecked()){
-                MyAlertDialog dialog = new MyAlertDialog(this, getString(R.string.must_accept_terms_conditions));
-                dialog.show();
-                return;
-            }
-            String strGender = genders[spinnerGender.getSelectedItemPosition()];
-            boolean isFemale = strGender.equalsIgnoreCase("Female");
 
             PreferenceManager pre = new PreferenceManager(this);
             pre.putBoolean(PreferenceManager.IS_FIRST_TIME_LAUNCH, false);
@@ -97,9 +89,37 @@ public class TermConditionActivity extends AppCompatActivity {
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
             finish();
-        } catch (Exception ex){
+        }
+    }
+
+    private boolean allParametersAvailable() {
+        try {
+            String strWeight = edtWeight.getText().toString();
+            if (TextUtils.isEmpty(strWeight)) {
+                MyAlertDialog dialog = new MyAlertDialog(this, getString(R.string.enter_your_weight));
+                dialog.show();
+                return false;
+            }
+            float weight = Float.valueOf(strWeight);
+            if (weight <= 0) {
+                MyAlertDialog dialog = new MyAlertDialog(this, getString(R.string.bigger_than_zero));
+                dialog.show();
+                return false;
+            }
+            if (!checkBox.isChecked()) {
+                MyAlertDialog dialog = new MyAlertDialog(this, getString(R.string.must_accept_terms_conditions));
+                dialog.show();
+                return false;
+            }
+        } catch (Exception ex) {
             Log.e(TAG, ex.getMessage());
             ex.printStackTrace();
+            return false;
         }
+        return true;
+    }
+
+    private float changeLbToKg(float lbWeight){
+        return lbWeight * Constants.LB_TO_KG;
     }
 }

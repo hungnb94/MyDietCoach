@@ -188,4 +188,12 @@
     <string name="how_do_i_delete_or_edit_and_item_from_the_diary">How do I delete or edit and Item from the diary?</string>
     <string name="make_notifications_vibrate">Make Notifications Vibrate</string>
     <string name="display_customized_avatar_on_home_screen">Display customized avatar on Home screen</string>
+    <string name="create_challenge">Create Challenge</string>
+    <string name="you_did_not_enter_challenge_text">You did not enter challenge text</string>
+    <string name="times">times</string>
+    <string name="meals">meals</string>
+    <string name="events">events</string>
+    <string name="all_day">All Day</string>
+    <string name="miles">miles</string>
+    <string name="go_to_the_gym">Go to the gym or exercise class</string>
 </resources>

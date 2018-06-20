@@ -11,6 +11,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 
 import com.hb.mydietcoach.R;
 import com.hb.mydietcoach.activity.challenge.ChallengesActivity;
@@ -18,6 +19,7 @@ import com.hb.mydietcoach.activity.diary.DiaryActivity;
 import com.hb.mydietcoach.activity.photo.PhotosActivity;
 import com.hb.mydietcoach.activity.reminder.ReminderActivity;
 import com.hb.mydietcoach.activity.tip.TipsActivity;
+import com.hb.mydietcoach.preference.PreferenceManager;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -28,10 +30,16 @@ public class MainActivity extends AppCompatActivity
     private DrawerLayout drawer;
     private NavigationView navigationView;
 
+    private ImageView ivFatPerson, ivSlimPerson;
+
+    private PreferenceManager pre;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        pre = new PreferenceManager(this);
 
         initView();
     }
@@ -49,7 +57,24 @@ public class MainActivity extends AppCompatActivity
 
         navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        ivFatPerson = findViewById(R.id.ivFatPerson);
+        ivSlimPerson = findViewById(R.id.ivSlimPerson);
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
         navigationView.setCheckedItem(R.id.nav_home);
+        boolean isFemale = pre.getBoolean(PreferenceManager.IS_GENDER_FEMALE, true);
+        if (isFemale){
+            ivFatPerson.setImageResource(R.drawable.fat_avatar_default);
+            ivSlimPerson.setImageResource(R.drawable.img_slim_avatar);
+        } else {
+            ivFatPerson.setImageResource(R.drawable.fat_man_avatar_default);
+            ivSlimPerson.setImageResource(R.drawable.slim_man_avatar_default);
+        }
     }
 
     @Override
@@ -90,11 +115,11 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_home) {
-
+            //Blank
         } else if (id == R.id.nav_diary) {
             openDiaryActivity();
         } else if (id == R.id.nav_log_weight) {
-
+            openWeightLoggingActivity();
         } else if (id == R.id.nav_reminder) {
             openReminderActivity();
         } else if (id == R.id.nav_photos) {
@@ -106,9 +131,9 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_rewards) {
 
         } else if (id == R.id.nav_settings) {
-
+            openSettingsActivity();
         } else if (id == R.id.nav_contact) {
-
+            openContactFAQActivity();
         }
 
         drawer.closeDrawer(GravityCompat.START);
@@ -121,9 +146,19 @@ public class MainActivity extends AppCompatActivity
         openDiaryActivity();
     }
 
-    //Open DiaryActivity
+    /**
+     * Open DiaryActivity
+     */
     private void openDiaryActivity() {
         Intent intent = new Intent(this, DiaryActivity.class);
+        startActivity(intent);
+    }
+
+    /**
+     * Open WeightLoggingActivity
+     */
+    private void openWeightLoggingActivity(){
+        Intent intent = new Intent(this, WeightLoggingActivity.class);
         startActivity(intent);
     }
 
@@ -145,7 +180,9 @@ public class MainActivity extends AppCompatActivity
         openChallengesActivity();
     }
 
-    //Open ChallengesActivity
+    /**
+     * Open ChallengesActivity
+     */
     private void openChallengesActivity(){
         Intent intent = new Intent(this, ChallengesActivity.class);
         startActivity(intent);
@@ -156,7 +193,10 @@ public class MainActivity extends AppCompatActivity
         openPhotosActivity();
     }
 
-    void openPhotosActivity(){
+    /**
+     * Open PhotosActivity
+     */
+    private void openPhotosActivity(){
         Intent intent = new Intent(this, PhotosActivity.class);
         startActivity(intent);
     }
@@ -166,8 +206,27 @@ public class MainActivity extends AppCompatActivity
         openTipsActivity();
     }
 
-    void openTipsActivity(){
+    /**
+     * Open TipsActivity
+     */
+    private void openTipsActivity(){
         Intent intent = new Intent(this, TipsActivity.class);
+        startActivity(intent);
+    }
+
+    /**
+     * Open SettingsActivity
+     */
+    private void openSettingsActivity(){
+        Intent intent = new Intent(this, SettingsActivity.class);
+        startActivity(intent);
+    }
+
+    /**
+     * Open ContacFAQActivity
+     */
+    private void openContactFAQActivity(){
+        Intent intent =  new Intent(this, ContactFAQActivity.class);
         startActivity(intent);
     }
 }

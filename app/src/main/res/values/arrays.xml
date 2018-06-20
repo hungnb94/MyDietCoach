@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string-array name="gender_types">
+        <item>Female</item>
+        <item>Male</item>
+    </string-array>
+    <string-array name="weight_types">
+        <item>kgs</item>
+        <item>lbs</item>
+    </string-array>
     <string-array name="spinner_dialog_remender">
         <item>before event</item>
         <item>after event</item>

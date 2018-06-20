@@ -19,6 +19,7 @@ import com.hb.mydietcoach.R;
 import com.hb.mydietcoach.database.MyDatabase;
 import com.hb.mydietcoach.model.Reminder;
 import com.hb.mydietcoach.notification.NotificationManager;
+import com.hb.mydietcoach.preference.PreferenceManager;
 import com.hb.mydietcoach.utils.Constants;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 import com.wdullaer.materialdatetimepicker.time.TimePickerDialog;
@@ -32,7 +33,9 @@ import butterknife.OnClick;
 public class EdittingReminderActivity extends AppCompatActivity {
 
     public static final String IS_EDIT = "is_edit";
+    public static final String IS_MOTIVATIONAL_REMINDER = "is_motivational";
     private boolean isEdit = false;
+    private boolean isMotivational = false;
 
     private Reminder reminder;
     private EditText editText;
@@ -45,7 +48,7 @@ public class EdittingReminderActivity extends AppCompatActivity {
 
     String arr[];
     private ArrayAdapter<String> adapter;
-    private long HOUR_MINISECOND = 60 * 1000;
+    public static final int HOUR_MINISECOND = 60 * 60 * 1000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,9 +78,19 @@ public class EdittingReminderActivity extends AppCompatActivity {
         initSpinner();
 
         Bundle bundle = getIntent().getExtras();
-        if (bundle != null) isEdit = bundle.getBoolean(IS_EDIT, false);
+        if (bundle != null) {
+            isEdit = bundle.getBoolean(IS_EDIT, false);
+            isMotivational = bundle.getBoolean(IS_MOTIVATIONAL_REMINDER, false);
+        }
 
         if (isEdit) {
+            reminder = (Reminder) bundle.getSerializable(Constants.DATA_SERIALIZABLE);
+            editText.setText(reminder.getContent());
+            Calendar calendar = reminder.getStartDate();
+            tvDate.setText(formatDate.format(calendar.getTime()));
+            tvTime.setText(formatTime.format(calendar.getTime()));
+            setSpinnerSelection(reminder.getRepeatMilisecond());
+        } else if (isMotivational) {
             reminder = (Reminder) bundle.getSerializable(Constants.DATA_SERIALIZABLE);
             editText.setText(reminder.getContent());
             Calendar calendar = reminder.getStartDate();
@@ -108,6 +121,11 @@ public class EdittingReminderActivity extends AppCompatActivity {
             finish();
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
     }
 
     /**
@@ -171,6 +189,7 @@ public class EdittingReminderActivity extends AppCompatActivity {
     /**
      * Click on tvDate
      * Show DatePickerDialog
+     *
      * @param view
      */
     @OnClick(R.id.tvDate)
@@ -182,6 +201,7 @@ public class EdittingReminderActivity extends AppCompatActivity {
     /**
      * Click on tvTime
      * Show TimePickerDialog
+     *
      * @param view
      */
     @OnClick(R.id.tvTime)
@@ -210,6 +230,10 @@ public class EdittingReminderActivity extends AppCompatActivity {
             database.updateReminder(reminder);
         } else {
             database.insertReminder(reminder);
+            if (isMotivational){
+                PreferenceManager pre = new PreferenceManager(this);
+                pre.putBoolean(PreferenceManager.IS_HAS_MOTIVATIONAL_PHOTO, true);
+            }
         }
         if (reminder.getRepeatMilisecond() > 0) {
             setNotification();
@@ -235,6 +259,7 @@ public class EdittingReminderActivity extends AppCompatActivity {
 
     /**
      * Set selected position for spinner
+     *
      * @param repeatMilisecond: Repeat time in miliseconds
      */
     private void setSpinnerSelection(long repeatMilisecond) {

@@ -18,7 +18,10 @@ import com.baoyz.swipemenulistview.SwipeMenuCreator;
 import com.baoyz.swipemenulistview.SwipeMenuItem;
 import com.baoyz.swipemenulistview.SwipeMenuListView;
 import com.hb.mydietcoach.R;
+import com.hb.mydietcoach.activity.ContactFAQActivity;
 import com.hb.mydietcoach.activity.MainActivity;
+import com.hb.mydietcoach.activity.SettingsActivity;
+import com.hb.mydietcoach.activity.WeightLoggingActivity;
 import com.hb.mydietcoach.activity.challenge.ChallengesActivity;
 import com.hb.mydietcoach.activity.diary.DiaryActivity;
 import com.hb.mydietcoach.activity.photo.PhotosActivity;
@@ -31,11 +34,11 @@ import com.hb.mydietcoach.utils.Constants;
 
 import java.util.List;
 
+import static com.hb.mydietcoach.utils.Constants.RC_ADD_REMINDER;
+import static com.hb.mydietcoach.utils.Constants.RC_EDIT_REMINDER;
+
 public class ReminderActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-
-    private static final int RC_ADD_REMINDER = 12;
-    private static final int RC_EDIT_REMINDER = 13;
 
     private DrawerLayout drawer;
     private NavigationView navigationView;
@@ -183,11 +186,11 @@ public class ReminderActivity extends AppCompatActivity
             startActivity(intent);
             finish();
         } else if (id == R.id.nav_log_weight) {
-
-        } else if (id == R.id.nav_reminder) {
-            Intent intent = new Intent(this, ReminderActivity.class);
+            Intent intent = new Intent(this, WeightLoggingActivity.class);
             startActivity(intent);
             finish();
+        } else if (id == R.id.nav_reminder) {
+            //Blank
         } else if (id == R.id.nav_photos) {
             Intent intent = new Intent(this, PhotosActivity.class);
             startActivity(intent);
@@ -203,9 +206,13 @@ public class ReminderActivity extends AppCompatActivity
         } else if (id == R.id.nav_rewards) {
 
         } else if (id == R.id.nav_settings) {
-
+            Intent intent = new Intent(this, SettingsActivity.class);
+            startActivity(intent);
+            finish();
         } else if (id == R.id.nav_contact) {
-
+            Intent intent = new Intent(this, ContactFAQActivity.class);
+            startActivity(intent);
+            finish();
         }
 
         drawer.closeDrawer(GravityCompat.START);

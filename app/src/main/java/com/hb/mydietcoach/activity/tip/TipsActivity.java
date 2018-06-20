@@ -12,7 +12,10 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
 import com.hb.mydietcoach.R;
+import com.hb.mydietcoach.activity.ContactFAQActivity;
 import com.hb.mydietcoach.activity.MainActivity;
+import com.hb.mydietcoach.activity.SettingsActivity;
+import com.hb.mydietcoach.activity.WeightLoggingActivity;
 import com.hb.mydietcoach.activity.challenge.ChallengesActivity;
 import com.hb.mydietcoach.activity.diary.DiaryActivity;
 import com.hb.mydietcoach.activity.photo.PhotosActivity;
@@ -63,7 +66,9 @@ public class TipsActivity extends AppCompatActivity
             startActivity(intent);
             finish();
         } else if (id == R.id.nav_log_weight) {
-
+            Intent intent = new Intent(this, WeightLoggingActivity.class);
+            startActivity(intent);
+            finish();
         } else if (id == R.id.nav_reminder) {
             Intent intent = new Intent(this, ReminderActivity.class);
             startActivity(intent);
@@ -73,9 +78,7 @@ public class TipsActivity extends AppCompatActivity
             startActivity(intent);
             finish();
         } else if (id == R.id.nav_tips) {
-            Intent intent = new Intent(this, TipsActivity.class);
-            startActivity(intent);
-            finish();
+            //Blank
         } else if (id == R.id.nav_challenges) {
             Intent intent = new Intent(this, ChallengesActivity.class);
             startActivity(intent);
@@ -83,9 +86,13 @@ public class TipsActivity extends AppCompatActivity
         } else if (id == R.id.nav_rewards) {
 
         } else if (id == R.id.nav_settings) {
-
+            Intent intent = new Intent(this, SettingsActivity.class);
+            startActivity(intent);
+            finish();
         } else if (id == R.id.nav_contact) {
-
+            Intent intent = new Intent(this, ContactFAQActivity.class);
+            startActivity(intent);
+            finish();
         }
 
         drawer.closeDrawer(GravityCompat.START);

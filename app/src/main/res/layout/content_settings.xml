@@ -60,7 +60,7 @@
                     android:layout_width="@dimen/_100sdp"
                     android:layout_height="wrap_content"
                     android:backgroundTint="@color/colorAccent"
-                    android:inputType="number"
+                    android:inputType="numberSigned"
                     android:textSize="@dimen/_13ssp"
                     tools:targetApi="lollipop"
                     tools:ignore="LabelFor" />
@@ -246,6 +246,7 @@
         android:layout_marginTop="@dimen/_5sdp">
 
         <Button
+            android:id="@+id/btnSave"
             style="@style/ButtonBottom"
             android:text="@string/save" />
     </RelativeLayout>

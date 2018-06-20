@@ -31,7 +31,12 @@ import java.util.List;
 
 import butterknife.ButterKnife;
 
-public class AddingChallengeActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+import static com.hb.mydietcoach.utils.Constants.RC_NEW_MY_CHALLENGE;
+
+public class AddingChallengeActivity extends AppCompatActivity
+        implements AdapterView.OnItemSelectedListener {
+    public static final String NEW_MY_CHALLENGE_TITLE = "title";
+
     private String arr[];
     private ArrayAdapter<String> spinnerAdapter;
     private Spinner spinner;
@@ -94,43 +99,92 @@ public class AddingChallengeActivity extends AppCompatActivity implements Adapte
             finish();
         } else if (id == R.id.action_new_challenge) {
             Intent intent = new Intent(this, NewChallengeActivity.class);
-            startActivity(intent);
+            startActivityForResult(intent, RC_NEW_MY_CHALLENGE);
         }
         return super.onOptionsItemSelected(item);
     }
 
-    public List<Challenge> generateExerciseChallenges() {
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode==RC_NEW_MY_CHALLENGE){
+            if (resultCode==RESULT_OK){
+                Intent intent = new Intent();
+                Bundle bundle = new Bundle();
+                String strTitle = data.getExtras().getString(NEW_MY_CHALLENGE_TITLE);
+                Challenge challenge = new Challenge(
+                        R.drawable.challenges_general_after,
+                        strTitle,
+                        Constants.STARS_FOR_MY_CHALLENGE,
+                        Constants.CHALLENGE_TYPE_OF_MY);
+                bundle.putSerializable(Constants.DATA_SERIALIZABLE, challenge);
+                intent.putExtras(bundle);
+                setResult(RESULT_OK, intent);
+                finish();
+            }
+        }
+    }
+
+    /**
+     * Generate default exercise challenge list
+     * @return list exercise challenge
+     */
+    private List<Challenge> generateExerciseChallenges() {
         List<Challenge> list = new ArrayList<>();
         list.add(new NormalChallenge(R.drawable.challenges_gym1,
-                getString(R.string.push_up_challenge_title), Constants.STARS_FOR_GYM_EXERCISE,
+                getString(R.string.go_to_the_gym),
+                Constants.STARS_FOR_GYM_EXERCISE,
                 2,
+                0,
+                getString(R.string.times),
+                Constants.CHALLENGE_TYPE_GYM));
+        list.add(new NormalChallenge(
+                R.drawable.challenges_pushups01_sh,
+                getString(R.string.push_up_challenge_title),
+                Constants.CHALLENGE_TYPE_PUSH_UP,
+                2,
+                0,
+                getString(R.string.sets),
                 Constants.CHALLENGE_TYPE_PUSH_UP));
         list.add(new RunChallenge(R.drawable.challenges_walk1_sh,
                 getString(R.string.walk_2_miles),
                 Constants.STARS_FOR_WALK_A_MILE,
                 2,
+                getString(R.string.miles),
                 0.01,
-                Constants.CHALLENGE_TYPE_GYM));
+                Constants.CHALLENGE_TYPE_WALK_A_MILE));
         return list;
     }
 
-    public List<Challenge> generateEatHabitChallenges() {
+    /**
+     * Generate default eat habit challenge list
+     * @return list eat habit challenge
+     */
+    private List<Challenge> generateEatHabitChallenges() {
         List<Challenge> list = new ArrayList<>();
         list.add(new NormalChallenge(R.drawable.challenge_water_full,
                 getString(R.string.drink_more_water),
                 Constants.STARS_FOR_DRINK_WATER,
                 8,
+                0,
+                getString(R.string.glasses),
                 Constants.CHALLENGE_TYPE_DRINK_WATER));
         list.add(new AnimationChallenge(R.drawable.challenges_table_plate,
                 getString(R.string.fill_my_plate),
                 Constants.STARS_FOR_FILL_MY_PLATE,
                 5,
+                0,
+                getString(R.string.meals),
                 animation,
                 Constants.CHALLENGE_TYPE_FILL_MY_PLATE));
         return list;
     }
 
-    public List<Challenge> generateSelfControlChallenges() {
+    /**
+     * Generate default self control challenge list
+     * @return list self control challenge
+     */
+    private List<Challenge> generateSelfControlChallenges() {
         List<Challenge> list = new ArrayList<>();
         list.add(new SelfControlChallenge(R.drawable.junk_food_avoid,
                 getString(R.string.avoid_junk_food),
@@ -163,6 +217,5 @@ public class AddingChallengeActivity extends AppCompatActivity implements Adapte
 
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {
-
     }
 }

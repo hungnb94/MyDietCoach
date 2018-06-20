@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="@dimen/alert_dialog_width"
+    android:id="@+id/llAlert"
+    android:layout_width="@dimen/_180sdp"
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
@@ -9,40 +10,40 @@
         android:layout_height="@dimen/line_lv_2"
         android:background="@color/colorAccent" />
 
-    <ScrollView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@color/colorWhite"
+        android:orientation="horizontal">
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <View
+            android:layout_width="@dimen/line_lv_2"
+            android:layout_height="match_parent"
+            android:background="@color/colorAccent" />
+
+        <TextView
+            android:id="@+id/tvAlert"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_weight="1"
+            android:fontFamily="@font/museo_sans_rounded_100"
+            android:gravity="center"
+            android:padding="@dimen/_15sdp"
+            android:text="@string/you_did_not_enter_challenge_text"
+            android:textColor="@color/colorBlack"
+            android:textSize="@dimen/_13ssp"
+            android:textStyle="bold" />
 
-            <View
-                android:layout_width="@dimen/line_lv_2"
-                android:layout_height="match_parent"
-                android:background="@color/colorAccent" />
+        <View
+            android:layout_width="@dimen/line_lv_2"
+            android:layout_height="match_parent"
+            android:background="@color/colorAccent" />
 
-            <TextView
-                android:layout_margin="@dimen/mg_layout"
-                android:id="@+id/textView"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:padding="@dimen/mg_layout"
-                android:textStyle="bold" />
-
-            <View
-                android:layout_width="@dimen/line_lv_2"
-                android:layout_height="match_parent"
-                android:background="@color/colorAccent" />
-        </LinearLayout>
-
-    </ScrollView>
+    </LinearLayout>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/line_lv_2"
         android:background="@color/colorAccent" />
+
 </LinearLayout>

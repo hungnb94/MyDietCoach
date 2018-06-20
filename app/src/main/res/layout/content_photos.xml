@@ -71,10 +71,12 @@
             android:layout_marginTop="@dimen/_5sdp" />
 
         <FrameLayout
+            android:id="@+id/flAddButton"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <Button
+                android:id="@+id/btnAddReminder"
                 style="@style/ButtonBottom"
                 android:layout_gravity="bottom|end"
                 android:text="@string/add_reminder" />

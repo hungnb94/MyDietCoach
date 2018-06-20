@@ -1,8 +1,10 @@
 package com.hb.mydietcoach.activity.diary;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.content.ContextCompat;
@@ -33,9 +35,11 @@ import com.baoyz.swipemenulistview.SwipeMenuItem;
 import com.baoyz.swipemenulistview.SwipeMenuListView;
 import com.google.gson.Gson;
 import com.hb.mydietcoach.R;
+import com.hb.mydietcoach.activity.ContactFAQActivity;
+import com.hb.mydietcoach.activity.SettingsActivity;
+import com.hb.mydietcoach.activity.WeightLoggingActivity;
 import com.hb.mydietcoach.activity.challenge.ChallengesActivity;
 import com.hb.mydietcoach.activity.MainActivity;
-import com.hb.mydietcoach.activity.ProfileActivity;
 import com.hb.mydietcoach.activity.photo.PhotosActivity;
 import com.hb.mydietcoach.activity.reminder.ReminderActivity;
 import com.hb.mydietcoach.activity.tip.TipsActivity;
@@ -65,12 +69,13 @@ import butterknife.OnClick;
 import butterknife.OnFocusChange;
 import butterknife.OnTextChanged;
 
+import static com.hb.mydietcoach.utils.Constants.RC_ADD_EXERCISE;
+import static com.hb.mydietcoach.utils.Constants.RC_EDIT_MEAL_HISTORY;
+
 public class DiaryActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private static final String TAG = DiaryActivity.class.getSimpleName();
-    private static final int RC_ADD_EXERCISE = 10;
-    private static final int RC_EDIT_MEAL_HISTORY = 11;
 
     private DrawerLayout drawer;
 
@@ -91,7 +96,8 @@ public class DiaryActivity extends AppCompatActivity
     private ImageView ivBarcode;
     private AutoCompleteTextView autoFoodName;
     private Animation rotationAnimation;
-    private List<FoodAssets> foodAssets, listSearchingFood;
+    private ArrayList<FoodAssets> foodAssets;
+    private List<FoodAssets> listSearchingFood;
     private SearchingFoodAdapter searchingAdapter;
     private EditText edtAmount, edtCalories;
 
@@ -117,6 +123,7 @@ public class DiaryActivity extends AppCompatActivity
     /**
      * Init all params needed
      */
+    @SuppressLint("SimpleDateFormat")
     private void initParams() {
         currentDate = Calendar.getInstance();
         todayDate = Calendar.getInstance();
@@ -139,7 +146,7 @@ public class DiaryActivity extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.setCheckedItem(R.id.nav_diary);
 
@@ -169,8 +176,9 @@ public class DiaryActivity extends AppCompatActivity
     /**
      * Set current date for tvCurrentDate
      */
+    @SuppressLint("SimpleDateFormat")
     private void setCurrentDate() {
-        String strCurrentDate = "";
+        String strCurrentDate;
         SimpleDateFormat sdf;
         if (todayDate.equals(currentDate)) {
             sdf = new SimpleDateFormat(Constants.FORMAT_TODAY_DATE);
@@ -462,7 +470,7 @@ public class DiaryActivity extends AppCompatActivity
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -513,7 +521,7 @@ public class DiaryActivity extends AppCompatActivity
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
@@ -523,11 +531,11 @@ public class DiaryActivity extends AppCompatActivity
             startActivity(intent);
             finish();
         } else if (id == R.id.nav_diary) {
-            Intent intent = new Intent(this, DiaryActivity.class);
+            //Blank
+        } else if (id == R.id.nav_log_weight) {
+            Intent intent = new Intent(this, WeightLoggingActivity.class);
             startActivity(intent);
             finish();
-        } else if (id == R.id.nav_log_weight) {
-
         } else if (id == R.id.nav_reminder) {
             Intent intent = new Intent(this, ReminderActivity.class);
             startActivity(intent);
@@ -547,9 +555,13 @@ public class DiaryActivity extends AppCompatActivity
         } else if (id == R.id.nav_rewards) {
 
         } else if (id == R.id.nav_settings) {
-
+            Intent intent = new Intent(this, SettingsActivity.class);
+            startActivity(intent);
+            finish();
         } else if (id == R.id.nav_contact) {
-
+            Intent intent = new Intent(this, ContactFAQActivity.class);
+            startActivity(intent);
+            finish();
         }
 
         drawer.closeDrawer(GravityCompat.START);

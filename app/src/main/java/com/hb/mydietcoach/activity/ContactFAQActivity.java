@@ -47,7 +47,7 @@ public class ContactFAQActivity extends AppCompatActivity
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-        navigationView.setCheckedItem(R.id.nav_photos);
+        navigationView.setCheckedItem(R.id.nav_contact);
     }
 
     @Override
@@ -65,7 +65,9 @@ public class ContactFAQActivity extends AppCompatActivity
             startActivity(intent);
             finish();
         } else if (id == R.id.nav_log_weight) {
-
+            Intent intent = new Intent(this, WeightLoggingActivity.class);
+            startActivity(intent);
+            finish();
         } else if (id == R.id.nav_reminder) {
             Intent intent = new Intent(this, ReminderActivity.class);
             startActivity(intent);
@@ -85,9 +87,11 @@ public class ContactFAQActivity extends AppCompatActivity
         } else if (id == R.id.nav_rewards) {
 
         } else if (id == R.id.nav_settings) {
-
+            Intent intent = new Intent(this, SettingsActivity.class);
+            startActivity(intent);
+            finish();
         } else if (id == R.id.nav_contact) {
-
+            //Blank
         }
 
         drawer.closeDrawer(GravityCompat.START);

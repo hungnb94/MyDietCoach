@@ -28,13 +28,19 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.hb.mydietcoach.R;
+import com.hb.mydietcoach.activity.ContactFAQActivity;
 import com.hb.mydietcoach.activity.MainActivity;
+import com.hb.mydietcoach.activity.SettingsActivity;
+import com.hb.mydietcoach.activity.WeightLoggingActivity;
 import com.hb.mydietcoach.activity.diary.DiaryActivity;
 import com.hb.mydietcoach.activity.photo.PhotosActivity;
 import com.hb.mydietcoach.activity.reminder.ReminderActivity;
 import com.hb.mydietcoach.activity.tip.TipsActivity;
 import com.hb.mydietcoach.adapter.ChallengesAdapter;
 import com.hb.mydietcoach.custom_view.DrawingView;
+import com.hb.mydietcoach.model.AnimationChallenge;
+import com.hb.mydietcoach.model.Challenge;
+import com.hb.mydietcoach.model.NormalChallenge;
 import com.hb.mydietcoach.preference.PreferenceManager;
 import com.hb.mydietcoach.utils.Constants;
 import com.tomergoldst.tooltips.ToolTip;
@@ -46,6 +52,9 @@ import java.util.GregorianCalendar;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+import static com.hb.mydietcoach.utils.Constants.CHALLENGE_TYPE_DRINK_WATER;
+import static com.hb.mydietcoach.utils.Constants.RC_EDITTING_CHALLENGE;
+
 public class ChallengesActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, ChallengesAdapter.ItemEventListener {
 
@@ -56,8 +65,6 @@ public class ChallengesActivity extends AppCompatActivity
     public static final String ITEM_TYPE = "item_type";
     public static final String ITEM_TITLE = "item_title";
     public static final String ITEM_AMOUNT = "item_amount";
-
-    private static final int RC_EDITTING_CHALLENGE = 0;
 
     private DrawerLayout drawer;
 
@@ -80,10 +87,8 @@ public class ChallengesActivity extends AppCompatActivity
     private LinearLayout llPoint;
     private Animation animScale;
     //Data from last challenge
-    private int challengeType;
-    private int numTotalItems;
-    private int numCurentPosition;
-    private String strTitleChallenge;
+    private Challenge challenge;
+
     private long lastDate;
 
     //Function show tooltip
@@ -94,6 +99,8 @@ public class ChallengesActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_challenges);
+
+        pre = new PreferenceManager(this);
 
         //Funcion guideline
         animTranslateTop = AnimationUtils.loadAnimation(this, R.anim.translate_top);
@@ -111,12 +118,8 @@ public class ChallengesActivity extends AppCompatActivity
         animComeBack.addAnimation(animationTemp2);
 
         //Funcion for challenge drink water
-        pre = new PreferenceManager(this);
-        challengeType = pre.getInt(PreferenceManager.CHALLENGE_TYPE, Constants.CHALLENGE_TYPE_DRINK_WATER);
-        numTotalItems = pre.getInt(PreferenceManager.NUMBLE_TOTAL_GLASSES, Constants.DEFAULT_NUMBER_GLASSES);
-        numCurentPosition = pre.getInt(PreferenceManager.NUMBLE_GLASSES_DRINKED, 0);
-        strTitleChallenge = pre.getString(PreferenceManager.TITLE_CHALLENGE, getString(R.string.drink_more_water));
-        lastDate = pre.getLong(PreferenceManager.LAST_DRINKED_DATE, Calendar.getInstance().getTimeInMillis());
+        initChallenge();
+        lastDate = pre.getLong(PreferenceManager.LAST_TIME_USING, Calendar.getInstance().getTimeInMillis());
         isFirstChallenges = pre.getBoolean(PreferenceManager.IS_FIRST_TIME_CHALLENGES, true);
         animScale = AnimationUtils.loadAnimation(this, R.anim.scale);
         animScale.setDuration(ANIMATION_CHALLENGE_LENGTH);
@@ -125,6 +128,56 @@ public class ChallengesActivity extends AppCompatActivity
         isShowToolTip = pre.getBoolean(PreferenceManager.IS_FIRST_TIME_TOOLTIP_CHALLENGE, true);
 
         initView();
+    }
+
+    void initChallenge() {
+        int type = pre.getInt(PreferenceManager.CHALLENGE_TYPE, CHALLENGE_TYPE_DRINK_WATER);
+        if (type == CHALLENGE_TYPE_DRINK_WATER) {
+            int total = pre.getInt(PreferenceManager.NORMAL_CHALLENGE_TOTAL_ITEMS, 8);
+            int currentPosition = pre.getInt(PreferenceManager.NORMAL_CHALLENGE_CURRENT_POSITION, 0);
+            challenge = new NormalChallenge(
+                    R.drawable.challenge_water_full,
+                    getString(R.string.drink_more_water),
+                    Constants.STARS_FOR_DRINK_WATER,
+                    total,
+                    currentPosition,
+                    getString(R.string.glasses),
+                    type);
+        } else if (type == Constants.CHALLENGE_TYPE_PUSH_UP) {
+            int total = pre.getInt(PreferenceManager.NORMAL_CHALLENGE_TOTAL_ITEMS, 8);
+            int currentPosition = pre.getInt(PreferenceManager.NORMAL_CHALLENGE_CURRENT_POSITION, 0);
+            challenge = new NormalChallenge(
+                    R.drawable.challenges_pushups01_sh,
+                    getString(R.string.push_up_challenge_title),
+                    Constants.CHALLENGE_TYPE_PUSH_UP,
+                    total,
+                    currentPosition,
+                    getString(R.string.sets),
+                    type);
+        } else if (type == Constants.CHALLENGE_TYPE_GYM) {
+            int total = pre.getInt(PreferenceManager.NORMAL_CHALLENGE_TOTAL_ITEMS, 8);
+            int currentPosition = pre.getInt(PreferenceManager.NORMAL_CHALLENGE_CURRENT_POSITION, 0);
+            challenge = new NormalChallenge(
+                    R.drawable.challenges_gym1,
+                    getString(R.string.gym_challenge_title),
+                    Constants.CHALLENGE_TYPE_GYM,
+                    total,
+                    currentPosition,
+                    getString(R.string.times),
+                    type);
+        } else if (type == Constants.CHALLENGE_TYPE_FILL_MY_PLATE) {
+            int total = pre.getInt(PreferenceManager.NORMAL_CHALLENGE_TOTAL_ITEMS, 8);
+            int currentPosition = pre.getInt(PreferenceManager.NORMAL_CHALLENGE_CURRENT_POSITION, 0);
+            Animation animation = AnimationUtils.loadAnimation(this, R.anim.translate_top_back);
+            challenge = new AnimationChallenge(R.drawable.challenges_portion2,
+                    getString(R.string.fill_my_plate),
+                    Constants.STARS_FOR_FILL_MY_PLATE,
+                    total,
+                    currentPosition,
+                    getString(R.string.meals),
+                    animation,
+                    type);
+        }
     }
 
     /**
@@ -167,7 +220,7 @@ public class ChallengesActivity extends AppCompatActivity
         tvPoint = findViewById(R.id.tvPoint);
         llPoint = findViewById(R.id.llPoint);
         tvTitleChallenge = findViewById(R.id.tvTitleChallenge);
-        tvTitleChallenge.setText(strTitleChallenge);
+        tvTitleChallenge.setText(challenge.getTitle());
 
         //Funcion for challenge drink water
         recyclerView = findViewById(R.id.recyclerView);
@@ -177,19 +230,24 @@ public class ChallengesActivity extends AppCompatActivity
     }
 
     private void initRecyclerView() {
-        if (challengeType == Constants.CHALLENGE_TYPE_DRINK_WATER
-                || challengeType == Constants.CHALLENGE_TYPE_PUSH_UP
-                || challengeType == Constants.CHALLENGE_TYPE_GYM) {
-            adapter = new ChallengesAdapter(this, numTotalItems);
+        int type = challenge.getType();
+        if (type == CHALLENGE_TYPE_DRINK_WATER
+                || type == Constants.CHALLENGE_TYPE_PUSH_UP
+                || type == Constants.CHALLENGE_TYPE_GYM) {
+            if (challenge instanceof NormalChallenge) {
+                NormalChallenge normalChallenge = (NormalChallenge) challenge;
+                adapter = new ChallengesAdapter(this, normalChallenge.getTotalCount());
 
-            Calendar lastDrinkedDate = new GregorianCalendar();
-            lastDrinkedDate.setTimeInMillis(lastDate);
-            Calendar todayDate = Calendar.getInstance();
-            if (lastDrinkedDate.get(Calendar.DAY_OF_MONTH) == todayDate.get(Calendar.DAY_OF_MONTH)
-                    && lastDrinkedDate.get(Calendar.MONTH) == todayDate.get(Calendar.MONTH)
-                    && lastDrinkedDate.get(Calendar.YEAR) == todayDate.get(Calendar.YEAR)) {
-                adapter.setNumCurrentPosition(numCurentPosition);
+                Calendar lastDrinkedDate = new GregorianCalendar();
+                lastDrinkedDate.setTimeInMillis(lastDate);
+                Calendar todayDate = Calendar.getInstance();
+                if (lastDrinkedDate.get(Calendar.DAY_OF_MONTH) == todayDate.get(Calendar.DAY_OF_MONTH)
+                        && lastDrinkedDate.get(Calendar.MONTH) == todayDate.get(Calendar.MONTH)
+                        && lastDrinkedDate.get(Calendar.YEAR) == todayDate.get(Calendar.YEAR)) {
+                    adapter.setNumCurrentPosition(normalChallenge.getCurrentPosition());
+                }
             }
+
             RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(this, Constants.COLUMN_GLASSES_COUNT);
             recyclerView.setLayoutManager(mLayoutManager);
             recyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -203,9 +261,6 @@ public class ChallengesActivity extends AppCompatActivity
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
-        if (hasFocus) {
-            showToolTip();
-        }
     }
 
     /**
@@ -234,6 +289,7 @@ public class ChallengesActivity extends AppCompatActivity
                     llGuideBottom.clearAnimation();
                     flGuide.clearAnimation();
                     flGuide.setVisibility(View.GONE);
+                    showToolTip();
 
                 }
             }, ANIMATION_CHALLENGE_LENGTH);
@@ -281,18 +337,26 @@ public class ChallengesActivity extends AppCompatActivity
         if (requestCode == RC_EDITTING_CHALLENGE) {
             if (resultCode == RESULT_OK) {
                 Bundle bundle = data.getExtras();
-                numTotalItems = bundle.getInt(ITEM_AMOUNT, 8);
-                adapter.updateTotalItems(numTotalItems);
-                adapter.notifyDataSetChanged();
+                challenge = (Challenge) bundle.getSerializable(Constants.DATA_SERIALIZABLE);
+                if (challenge instanceof NormalChallenge) {
+                    NormalChallenge c = (NormalChallenge) challenge;
+                    adapter = new ChallengesAdapter(ChallengesActivity.this, c.getTotalCount());
+                    adapter.setNumCurrentPosition(c.getCurrentPosition());
+                    recyclerView.setAdapter(adapter);
+                }
             }
         }
     }
 
     @Override
     protected void onStop() {
-        if (adapter.getType() == Constants.CHALLENGE_TYPE_DRINK_WATER) {
-            pre.putInt(PreferenceManager.NUMBLE_GLASSES_DRINKED, adapter.getCurentPosition());
-            pre.putLong(PreferenceManager.LAST_DRINKED_DATE, Calendar.getInstance().getTimeInMillis());
+        if (challenge instanceof NormalChallenge) {
+            pre.putInt(PreferenceManager.CHALLENGE_TYPE, challenge.getType());
+            pre.putInt(PreferenceManager.NORMAL_CHALLENGE_TOTAL_ITEMS,
+                    ((NormalChallenge) challenge).getTotalCount());
+            pre.putInt(PreferenceManager.NORMAL_CHALLENGE_CURRENT_POSITION,
+                    ((NormalChallenge) challenge).getCurrentPosition());
+            pre.putLong(PreferenceManager.LAST_TIME_USING, Calendar.getInstance().getTimeInMillis());
         }
         super.onStop();
     }
@@ -317,9 +381,11 @@ public class ChallengesActivity extends AppCompatActivity
         } else if (id == R.id.action_edit) {
             Intent intent = new Intent(this, EdittingChallengeActivity.class);
             Bundle bundle = new Bundle();
-            bundle.putInt(ITEM_TYPE, challengeType);
-            if (adapter != null) bundle.putInt(ITEM_AMOUNT, adapter.getItemCount());
-            bundle.putString(ITEM_TITLE, strTitleChallenge);
+            bundle.putSerializable(Constants.DATA_SERIALIZABLE, challenge);
+            if (adapter != null && challenge instanceof NormalChallenge) {
+                NormalChallenge normalChallenge = (NormalChallenge) challenge;
+                normalChallenge.setTotalCount(adapter.getItemCount());
+            }
             intent.putExtras(bundle);
             startActivityForResult(intent, RC_EDITTING_CHALLENGE);
         }
@@ -377,7 +443,9 @@ public class ChallengesActivity extends AppCompatActivity
             startActivity(intent);
             finish();
         } else if (id == R.id.nav_log_weight) {
-
+            Intent intent = new Intent(this, WeightLoggingActivity.class);
+            startActivity(intent);
+            finish();
         } else if (id == R.id.nav_reminder) {
             Intent intent = new Intent(this, ReminderActivity.class);
             startActivity(intent);
@@ -391,15 +459,17 @@ public class ChallengesActivity extends AppCompatActivity
             startActivity(intent);
             finish();
         } else if (id == R.id.nav_challenges) {
-            Intent intent = new Intent(this, ChallengesActivity.class);
-            startActivity(intent);
-            finish();
+            //Blank
         } else if (id == R.id.nav_rewards) {
 
         } else if (id == R.id.nav_settings) {
-
+            Intent intent = new Intent(this, SettingsActivity.class);
+            startActivity(intent);
+            finish();
         } else if (id == R.id.nav_contact) {
-
+            Intent intent = new Intent(this, ContactFAQActivity.class);
+            startActivity(intent);
+            finish();
         }
 
         drawer.closeDrawer(GravityCompat.START);

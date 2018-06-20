@@ -24,31 +24,35 @@ public class Challenge implements Serializable {
         return imageId;
     }
 
-    public void setImageId(int imageId) {
+    public Challenge setImageId(int imageId) {
         this.imageId = imageId;
+        return this;
     }
 
     public String getTitle() {
         return title;
     }
 
-    public void setTitle(String title) {
+    public Challenge setTitle(String title) {
         this.title = title;
+        return this;
     }
 
     public int getType() {
         return type;
     }
 
-    public void setType(int type) {
+    public Challenge setType(int type) {
         this.type = type;
+        return this;
     }
 
     public int getStars() {
         return stars;
     }
 
-    public void setStars(int stars) {
+    public Challenge setStars(int stars) {
         this.stars = stars;
+        return this;
     }
 }

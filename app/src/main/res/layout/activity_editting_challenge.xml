@@ -99,13 +99,28 @@
             android:paddingLeft="@dimen/mg_layout"
             android:paddingRight="@dimen/mg_layout">
 
-            <Spinner
-                android:id="@+id/spinner"
+            <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="1"
-                android:gravity="center_vertical"
-                tools:ignore="NestedWeights" />
+                android:layout_weight="1">
+
+                <TextView
+                    android:visibility="gone"
+                    android:id="@+id/tvAllDay"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:alpha="0.6"
+                    android:gravity="center_vertical"
+                    android:text="@string/all_day"
+                    android:textSize="@dimen/_15ssp" />
+
+                <Spinner
+                    android:id="@+id/spinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical" />
+
+            </FrameLayout>
 
             <View
                 android:layout_width="match_parent"
@@ -146,14 +161,14 @@
     </LinearLayout>
 
     <RelativeLayout
-        android:gravity="bottom|end"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:gravity="bottom|end"
         android:padding="@dimen/mg_layout">
 
         <Button
-            style="@style/ButtonBottom"
             android:id="@+id/btnSave"
+            style="@style/ButtonBottom"
             android:text="@string/save" />
 
     </RelativeLayout>
