@@ -6,19 +6,26 @@
     android:padding="@dimen/mg_layout">
 
     <FrameLayout
-        android:layout_width="@dimen/ic_glass_water_width"
-        android:layout_height="@dimen/ic_glass_water_width">
+        android:layout_width="@dimen/_60sdp"
+        android:layout_height="@dimen/_60sdp">
 
         <ImageView
             android:id="@+id/ivGlassWater"
-            android:layout_width="@dimen/ic_glass_water_width"
-            android:layout_height="@dimen/ic_glass_water_height"
-            android:src="@drawable/challenges_water_dark" />
+            android:layout_width="@dimen/_60sdp"
+            android:layout_height="@dimen/_60sdp"
+            android:src="@drawable/challenges_portion1" />
+
+        <ImageView
+            android:visibility="invisible"
+            android:id="@+id/ivAbove"
+            android:layout_width="@dimen/_60sdp"
+            android:layout_height="@dimen/_60sdp"
+            android:src="@drawable/challenges_fill_plate_helper" />
 
         <ImageView
             android:id="@+id/ivSign"
-            android:layout_width="@dimen/ic_sign_item_challenge_width"
-            android:layout_height="@dimen/ic_sign_item_challenge_height"
+            android:layout_width="@dimen/_25sdp"
+            android:layout_height="@dimen/_20sdp"
             android:layout_gravity="center_vertical"
             android:src="@drawable/vi_sign_brown"
             android:visibility="gone" />
@@ -27,9 +34,9 @@
 
     <ImageView
         android:id="@+id/ivArrow"
-        android:layout_width="@dimen/arrow_up_water_width"
-        android:layout_height="@dimen/arrow_up_water_height"
+        android:layout_width="@dimen/_20sdp"
+        android:layout_height="@dimen/_10sdp"
         android:layout_gravity="center"
         android:src="@drawable/arrow_head_up_md"
-        android:visibility="invisible" />
+        android:visibility="gone" />
 </LinearLayout>

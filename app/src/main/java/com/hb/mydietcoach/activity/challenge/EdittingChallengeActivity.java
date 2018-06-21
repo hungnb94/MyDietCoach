@@ -160,10 +160,11 @@ public class EdittingChallengeActivity extends AppCompatActivity implements Adap
     }
 
     @OnClick(R.id.btnSave)
-    void clickSave(View view) {
+    void clickSave() {
         Intent intent = new Intent();
         Bundle bundle = new Bundle();
         bundle.putSerializable(Constants.DATA_SERIALIZABLE, challenge);
+        intent.putExtras(bundle);
         setResult(RESULT_OK, intent);
         finish();
     }

@@ -141,7 +141,6 @@
     <string name="stop">Stop</string>
     <string name="undo">Undo</string>
     <string name="earned">Earned</string>
-    <string name="glasses_left">glasses left.</string>
     <string name="hh_points">HH points,</string>
     <string name="edit_challenges">Edit challenges</string>
     <string name="share">Share</string>
@@ -196,4 +195,6 @@
     <string name="all_day">All Day</string>
     <string name="miles">miles</string>
     <string name="go_to_the_gym">Go to the gym or exercise class</string>
+    <string name="title">title</string>
+    <string name="_0_00">0.00</string>
 </resources>

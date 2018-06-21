@@ -2,15 +2,18 @@ package com.hb.mydietcoach.model;
 
 public class RunChallenge extends Challenge {
     private double totalLength;
+    private double currentPosition;
     private String unit;
     private double lengthUnit;
 
     public RunChallenge() {
     }
 
-    public RunChallenge(int imageId, String title, int stars, double length, String unit, double lengthUnit, int type) {
+    public RunChallenge(int imageId, String title, int stars, double length, double currentPosition,
+                        String unit, double lengthUnit, int type) {
         super(imageId, title, stars, type);
         this.totalLength = length;
+        this.currentPosition = currentPosition;
         this.unit = unit;
         this.lengthUnit = lengthUnit;
     }
@@ -21,6 +24,14 @@ public class RunChallenge extends Challenge {
 
     public void setTotalLength(double length) {
         this.totalLength = length;
+    }
+
+    public double getCurrentPosition() {
+        return currentPosition;
+    }
+
+    public void setCurrentPosition(double currentPosition) {
+        this.currentPosition = currentPosition;
     }
 
     public double getLengthUnit() {

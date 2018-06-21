@@ -26,7 +26,9 @@ public class PreferenceManager {
     public static final String CHALLENGE_TYPE = "challenge_type";
     public static final String NORMAL_CHALLENGE_TOTAL_ITEMS = "total";
     public static final String NORMAL_CHALLENGE_CURRENT_POSITION = "current";
-    public static final String TITLE_CHALLENGE = "title_challenge";
+    public static final String MY_CHALLENGE_TITLE = "my_challenge_title";
+    public static final String RUN_CHALLENGE_TOTAL_LENGTH = "run_length";
+    public static final String RUN_CHALLENGE_CURRENT_POSITION = "run_current_position";
     public static final String LAST_TIME_USING = "last_drinked_date";
 
     public static final String IS_FIRST_TIME_TOOLTIP_CHALLENGE = "tooltip_challenge";

@@ -34,15 +34,17 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/mg_layout"
+                android:layout_margin="@dimen/_10sdp"
                 android:background="@drawable/border_layout"
-                android:orientation="vertical"
-                android:padding="@dimen/mg_layout">
+                android:orientation="vertical">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center_vertical">
+                    android:gravity="center_vertical"
+                    android:paddingLeft="@dimen/_10sdp"
+                    android:paddingRight="@dimen/_10sdp"
+                    android:paddingTop="@dimen/_10sdp">
 
                     <TextView
                         android:id="@+id/tvTitleChallenge"
@@ -69,18 +71,114 @@
 
                 </LinearLayout>
 
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/recyclerView"
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="@dimen/mg_layout" />
+                    android:layout_height="wrap_content">
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/recyclerView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/mg_layout"
+                        android:paddingLeft="@dimen/_10sdp"
+                        android:paddingRight="@dimen/_10sdp"
+                        android:visibility="gone" />
+
+                    <RelativeLayout
+                        android:id="@+id/rlHumanPosition"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone">
+
+                        <LinearLayout
+                            android:id="@+id/llHumanPosition"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_minus10sdp"
+                            android:orientation="vertical"
+                            tools:ignore="UseCompoundDrawables">
+
+                            <ImageView
+                                android:id="@+id/ivHumanPosition"
+                                android:layout_width="@dimen/_60sdp"
+                                android:layout_height="@dimen/_60sdp"
+                                android:src="@drawable/challenges_walk1_sh" />
+
+                            <TextView
+                                android:id="@+id/tvHumanPosision"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="bottom"
+                                android:layout_marginStart="@dimen/_15sdp"
+                                android:layout_marginTop="@dimen/_minus3sdp"
+                                android:text="@string/_0_00"
+                                android:textSize="@dimen/_12ssp" />
+
+                        </LinearLayout>
+
+                        <SeekBar
+                            android:id="@+id/seekBar"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/llHumanPosition"
+                            android:layout_marginEnd="@dimen/_30sdp"
+                            android:layout_marginStart="@dimen/_10sdp"
+                            android:paddingEnd="0dp"
+                            android:paddingStart="0dp" />
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/rlSelfControlChallenge"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_20sdp">
+
+                        <FrameLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+
+                            <ImageView
+                                android:layout_width="@dimen/_120sdp"
+                                android:layout_height="@dimen/_85sdp"
+                                android:src="@drawable/avoid_girl_beneath" />
+
+                            <LinearLayout
+                                android:id="@+id/llAvoidShadow"
+                                android:layout_width="@dimen/_120sdp"
+                                android:layout_height="@dimen/_85sdp">
+
+                                <ImageView
+                                    android:layout_width="@dimen/_120sdp"
+                                    android:layout_height="@dimen/_85sdp"
+                                    android:src="@drawable/avoid_girl_shadow" />
+
+                            </LinearLayout>
+
+                            <ImageView
+                                android:id="@+id/ivAvoidFood"
+                                android:layout_width="@dimen/_40sdp"
+                                android:layout_height="@dimen/_40sdp"
+                                android:layout_gravity="center"
+                                android:src="@drawable/junk_food_avoid"
+                                android:visibility="invisible" />
+
+                        </FrameLayout>
+
+                    </RelativeLayout>
+
+                </RelativeLayout>
 
                 <LinearLayout
                     android:id="@+id/llPoint"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/mg_layout"
-                    android:gravity="center_vertical">
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:gravity="center_vertical"
+                    android:paddingBottom="@dimen/_10sdp"
+                    android:paddingEnd="@dimen/_10sdp"
+                    android:paddingStart="@dimen/_10sdp"
+                    tools:ignore="UseCompoundDrawables">
 
                     <ImageView
                         android:layout_width="@dimen/ic_star_point"
@@ -91,7 +189,7 @@
                         android:id="@+id/tvPoint"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/mg_earn_point"
+                        android:layout_marginStart="@dimen/mg_earn_point"
                         android:text="@string/earn_x_hh_points"
                         android:textColor="@color/colorBlack" />
 
@@ -106,7 +204,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    tools:ignore="UselessParent">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -118,7 +217,7 @@
                             android:layout_width="@dimen/arrow_up_guide_option"
                             android:layout_height="@dimen/arrow_up_guide_option"
                             android:layout_marginBottom="@dimen/mg_arrow_up_guide_line"
-                            android:layout_marginRight="@dimen/mg_layout"
+                            android:layout_marginEnd="@dimen/mg_layout"
                             android:background="@drawable/border_arrow_up"
                             android:padding="@dimen/pd_arrow_up_guide_option"
                             android:src="@drawable/arrow_head_up_md" />
@@ -147,7 +246,7 @@
                             android:id="@+id/btnStop"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/mg_layout"
+                            android:layout_marginStart="@dimen/mg_layout"
                             android:layout_weight="1"
                             android:background="@drawable/border_button"
                             android:text="@string/stop"
@@ -219,7 +318,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="right"
-                        android:src="@drawable/ribbon_top" />
+                        android:src="@drawable/ribbon_top"
+                        tools:ignore="RtlHardcoded" />
 
                 </LinearLayout>
 
@@ -228,7 +328,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="right"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    tools:ignore="RtlHardcoded">
 
                     <ImageView
                         android:layout_width="wrap_content"

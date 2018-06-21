@@ -32,6 +32,7 @@ public class Constants {
 
     //Exercise challenges
     public static final int STARS_FOR_GYM_EXERCISE = 40;
+    public static final int STARS_FOR_PUSH_UP = 15;
     public static final int STARS_FOR_WALK_A_MILE = 20;
     //Eating habit challenges
     public static final int STARS_FOR_DRINK_WATER = 3;
@@ -46,6 +47,7 @@ public class Constants {
     public static final String MY_FOLDER = "mydietcoach";
 
     //Request code for project
+    public static final int RC_MOTIVATIONAL_PHOTO = 0;
     public static final int RC_PICK_IMAGE = 1;
     public static final int RC_TAKE_PHOTO = 2;
     public static final int RC_CAMERA_PERMISSION = 3;

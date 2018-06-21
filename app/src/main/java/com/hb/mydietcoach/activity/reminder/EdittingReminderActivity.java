@@ -230,7 +230,7 @@ public class EdittingReminderActivity extends AppCompatActivity {
             database.updateReminder(reminder);
         } else {
             database.insertReminder(reminder);
-            if (isMotivational){
+            if (isMotivational) {
                 PreferenceManager pre = new PreferenceManager(this);
                 pre.putBoolean(PreferenceManager.IS_HAS_MOTIVATIONAL_PHOTO, true);
             }
@@ -251,10 +251,16 @@ public class EdittingReminderActivity extends AppCompatActivity {
      */
     private void setNotification() {
         NotificationManager manager = new NotificationManager(this);
-        manager.setRepeatAlarm((int) reminder.getId(),
-                reminder.getContent(),
-                reminder.getStartDate().getTimeInMillis(),
-                reminder.getRepeatMilisecond());
+        if (isMotivational) {
+            manager.setRepeatAlarmMotivational(reminder.getContent(),
+                    reminder.getStartDate().getTimeInMillis(),
+                    reminder.getRepeatMilisecond());
+        } else {
+            manager.setRepeatAlarm((int) reminder.getId(),
+                    reminder.getContent(),
+                    reminder.getStartDate().getTimeInMillis(),
+                    reminder.getRepeatMilisecond());
+        }
     }
 
     /**

@@ -11,7 +11,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.animation.Animation;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
@@ -45,8 +44,6 @@ public class AddingChallengeActivity extends AppCompatActivity
     private AddingChallengeAdapter challengeAdapter;
     private List<Challenge> listExercise, listEatHabit, listSelfControl, listMyChallenge;
     MyDatabase database;
-
-    Animation animation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,15 +104,17 @@ public class AddingChallengeActivity extends AppCompatActivity
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode==RC_NEW_MY_CHALLENGE){
-            if (resultCode==RESULT_OK){
+        if (requestCode == RC_NEW_MY_CHALLENGE) {
+            if (resultCode == RESULT_OK) {
                 Intent intent = new Intent();
                 Bundle bundle = new Bundle();
                 String strTitle = data.getExtras().getString(NEW_MY_CHALLENGE_TITLE);
-                Challenge challenge = new Challenge(
-                        R.drawable.challenges_general_after,
+                Challenge challenge = new NormalChallenge(R.drawable.challenges_general_after,
                         strTitle,
                         Constants.STARS_FOR_MY_CHALLENGE,
+                        8,
+                        0,
+                        getString(R.string.times),
                         Constants.CHALLENGE_TYPE_OF_MY);
                 bundle.putSerializable(Constants.DATA_SERIALIZABLE, challenge);
                 intent.putExtras(bundle);
@@ -127,6 +126,7 @@ public class AddingChallengeActivity extends AppCompatActivity
 
     /**
      * Generate default exercise challenge list
+     *
      * @return list exercise challenge
      */
     private List<Challenge> generateExerciseChallenges() {
@@ -138,10 +138,9 @@ public class AddingChallengeActivity extends AppCompatActivity
                 0,
                 getString(R.string.times),
                 Constants.CHALLENGE_TYPE_GYM));
-        list.add(new NormalChallenge(
-                R.drawable.challenges_pushups01_sh,
+        list.add(new NormalChallenge(R.drawable.challenges_pushups01_sh,
                 getString(R.string.push_up_challenge_title),
-                Constants.CHALLENGE_TYPE_PUSH_UP,
+                Constants.STARS_FOR_PUSH_UP,
                 2,
                 0,
                 getString(R.string.sets),
@@ -150,6 +149,7 @@ public class AddingChallengeActivity extends AppCompatActivity
                 getString(R.string.walk_2_miles),
                 Constants.STARS_FOR_WALK_A_MILE,
                 2,
+                0,
                 getString(R.string.miles),
                 0.01,
                 Constants.CHALLENGE_TYPE_WALK_A_MILE));
@@ -158,6 +158,7 @@ public class AddingChallengeActivity extends AppCompatActivity
 
     /**
      * Generate default eat habit challenge list
+     *
      * @return list eat habit challenge
      */
     private List<Challenge> generateEatHabitChallenges() {
@@ -169,19 +170,20 @@ public class AddingChallengeActivity extends AppCompatActivity
                 0,
                 getString(R.string.glasses),
                 Constants.CHALLENGE_TYPE_DRINK_WATER));
+
         list.add(new AnimationChallenge(R.drawable.challenges_table_plate,
                 getString(R.string.fill_my_plate),
                 Constants.STARS_FOR_FILL_MY_PLATE,
                 5,
                 0,
                 getString(R.string.meals),
-                animation,
                 Constants.CHALLENGE_TYPE_FILL_MY_PLATE));
         return list;
     }
 
     /**
      * Generate default self control challenge list
+     *
      * @return list self control challenge
      */
     private List<Challenge> generateSelfControlChallenges() {
