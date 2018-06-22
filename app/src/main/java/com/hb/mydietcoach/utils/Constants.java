@@ -16,10 +16,9 @@ public class Constants {
     public static final int RESULT_DELETE_REMINDER = 94;
     public static final String IS_REPEAT_NOTIFICATION = "repeate_nofification";
     public static final String NOTIFICATION_REPEATE_TIME_INTERVAL = "interval_time";
-    public static final int DEFAULT_NUMBER_GLASSES = 8;
     public static final int COLUMN_GLASSES_COUNT = 4;
 
-    //Normal challenge
+    //Challenge type
     public static final int CHALLENGE_TYPE_DRINK_WATER = 0;
     public static final int CHALLENGE_TYPE_PUSH_UP = 1;
     public static final int CHALLENGE_TYPE_GYM = 2;
@@ -29,6 +28,14 @@ public class Constants {
     public static final int CHALLENGE_TYPE_AVOID_SNACKING = 6;
     public static final int CHALLENGE_TYPE_OF_MY = 7;
     public static final int CHALLENGE_TYPE_WALK_A_MILE = 8;
+
+    //Challenge type
+    public static final int DEFAULT_DRINK_WATER = 8;
+    public static final int DEFAULT_PUSH_UP = 2;
+    public static final int DEFAULT_GYM = 2;
+    public static final int DEFAULT_FILL_MY_PLATE = 5;
+    public static final int DEFAULT_MY_CHALLENGE = 4;
+    public static final float DEFAULT_WALK_A_MILE = 2;
 
     //Exercise challenges
     public static final int STARS_FOR_GYM_EXERCISE = 40;
@@ -43,6 +50,15 @@ public class Constants {
     public static final int STARS_FOR_AVOID_SNACKING = 80;
     //My challenges
     public static final int STARS_FOR_MY_CHALLENGE = 5;
+
+    //SELF CONTROL TOTAL ITEMS
+    public static final int SELF_CONTROL_CHALLENGE_TOTAL_ITEMS = 10;
+
+    //Challenge object type
+    public static final int OBJECT_NORMAL_CHALLENGE = 1;
+    public static final int OBJECT_ANIMATION_CHALLENGE = 2;
+    public static final int OBJECT_RUN_CHALLENGE = 3;
+    public static final int OBJECT_SELF_CONTROL_CHALLENGE = 4;
 
     public static final String MY_FOLDER = "mydietcoach";
 

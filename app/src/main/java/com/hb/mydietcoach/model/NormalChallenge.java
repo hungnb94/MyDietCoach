@@ -8,39 +8,38 @@ public class NormalChallenge extends Challenge{
     public NormalChallenge() {
     }
 
-    public NormalChallenge(int imageId, String title, int stars, int totalCount, int currentPosition,
-                           String unit, int type) {
-        super(imageId, title, stars, type);
+    public NormalChallenge(long id, int imageId, String title, int stars, int totalCount, int currentPosition,
+                           String unit, int type, long lastTime) {
+        super(id, imageId, title, stars, type, lastTime);
         setTotalCount(totalCount);
         setCurrentPosition(currentPosition);
         setUnit(unit);
-    }
-
-    public NormalChallenge(Challenge challenge) {
-        super(challenge.getImageId(), challenge.getTitle(), challenge.getStars(), challenge.getType());
     }
 
     public int getTotalCount() {
         return totalCount;
     }
 
-    public void setTotalCount(int totalCount) {
+    public NormalChallenge setTotalCount(int totalCount) {
         this.totalCount = totalCount;
+        return this;
     }
 
     public int getCurrentPosition() {
         return currentPosition;
     }
 
-    public void setCurrentPosition(int currentPosition) {
+    public NormalChallenge setCurrentPosition(int currentPosition) {
         this.currentPosition = currentPosition;
+        return this;
     }
 
     public String getUnit() {
         return unit;
     }
 
-    public void setUnit(String unit) {
+    public NormalChallenge setUnit(String unit) {
         this.unit = unit;
+        return this;
     }
 }

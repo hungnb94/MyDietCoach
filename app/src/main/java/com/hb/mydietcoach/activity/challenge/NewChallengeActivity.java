@@ -13,7 +13,7 @@ import android.widget.TextView;
 
 import com.hb.mydietcoach.R;
 import com.hb.mydietcoach.database.MyDatabase;
-import com.hb.mydietcoach.model.Challenge;
+import com.hb.mydietcoach.model.NormalChallenge;
 import com.hb.mydietcoach.utils.Constants;
 
 import butterknife.ButterKnife;
@@ -68,12 +68,15 @@ public class NewChallengeActivity extends AppCompatActivity {
             llAlert.setVisibility(View.VISIBLE);
             return;
         }
-        Challenge challenge = new Challenge(
-                R.drawable.challenges_general_after,
-                strContent,
-                Constants.STARS_FOR_MY_CHALLENGE,
-                Constants.CHALLENGE_TYPE_OF_MY);
-        database.insertMyChallenge(challenge);
+        NormalChallenge challenge = new NormalChallenge();
+        challenge.setTotalCount(Constants.DEFAULT_MY_CHALLENGE)
+                .setUnit(getString(R.string.times))
+                .setImageId(R.drawable.challenges_general_after)
+                .setTitle(strContent)
+                .setStars(Constants.STARS_FOR_MY_CHALLENGE)
+                .setType(Constants.CHALLENGE_TYPE_OF_MY);
+        long id =database.insertChallenge(challenge);
+        challenge.setId(id);
         Intent intent = new Intent();
         Bundle bundle = new Bundle();
         bundle.putString(AddingChallengeActivity.NEW_MY_CHALLENGE_TITLE, strContent);

@@ -323,7 +323,7 @@ public class DiaryActivity extends AppCompatActivity
                     }
                 }
 
-                database.deleteItem(listItems.get(position));
+                database.deleteItem(listItems.get(position).getId());
                 listItems.remove(position);
                 adapter.notifyDataSetChanged();
                 // false : close the menu; true : not close the menu

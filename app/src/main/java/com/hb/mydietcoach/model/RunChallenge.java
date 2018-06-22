@@ -9,9 +9,9 @@ public class RunChallenge extends Challenge {
     public RunChallenge() {
     }
 
-    public RunChallenge(int imageId, String title, int stars, double length, double currentPosition,
-                        String unit, double lengthUnit, int type) {
-        super(imageId, title, stars, type);
+    public RunChallenge(long id, int imageId, String title, int stars, double length, double currentPosition,
+                        String unit, double lengthUnit, int type, long lastTime) {
+        super(id, imageId, title, stars, type, lastTime);
         this.totalLength = length;
         this.currentPosition = currentPosition;
         this.unit = unit;
@@ -22,31 +22,35 @@ public class RunChallenge extends Challenge {
         return totalLength;
     }
 
-    public void setTotalLength(double length) {
+    public RunChallenge setTotalLength(double length) {
         this.totalLength = length;
+        return this;
     }
 
     public double getCurrentPosition() {
         return currentPosition;
     }
 
-    public void setCurrentPosition(double currentPosition) {
+    public RunChallenge setCurrentPosition(double currentPosition) {
         this.currentPosition = currentPosition;
+        return this;
     }
 
     public double getLengthUnit() {
         return lengthUnit;
     }
 
-    public void setLengthUnit(double lengthUnit) {
+    public RunChallenge setLengthUnit(double lengthUnit) {
         this.lengthUnit = lengthUnit;
+        return this;
     }
 
     public String getUnit() {
         return unit;
     }
 
-    public void setUnit(String unit) {
+    public RunChallenge setUnit(String unit) {
         this.unit = unit;
+        return this;
     }
 }

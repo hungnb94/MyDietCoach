@@ -45,6 +45,7 @@ import com.hb.mydietcoach.model.AnimationChallenge;
 import com.hb.mydietcoach.model.Challenge;
 import com.hb.mydietcoach.model.NormalChallenge;
 import com.hb.mydietcoach.model.RunChallenge;
+import com.hb.mydietcoach.model.SelfControlChallenge;
 import com.hb.mydietcoach.preference.PreferenceManager;
 import com.hb.mydietcoach.utils.Constants;
 import com.tomergoldst.tooltips.ToolTip;
@@ -98,6 +99,9 @@ public class ChallengesActivity extends AppCompatActivity
     private TextView tvHumanPosition;
     private ImageView ivHumanPosition;
     private SeekBar seekBar;
+    //Self Control Challenge
+    private LinearLayout llSelfControlChallenge, llHumanShadow;
+    private ImageView ivAvoidHuman, ivAvoidFoodIcon, ivAvoidFoodAnimation, ivSelfControlSign;
     //Data from last challenge
     private Challenge challenge;
 
@@ -116,6 +120,56 @@ public class ChallengesActivity extends AppCompatActivity
         initView();
     }
 
+    @SuppressWarnings("StatementWithEmptyBody")
+    @Override
+    public boolean onNavigationItemSelected(MenuItem item) {
+        // Handle navigation view item clicks here.
+        int id = item.getItemId();
+
+        if (id == R.id.nav_home) {
+            Intent intent = new Intent(this, MainActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
+            finish();
+        } else if (id == R.id.nav_diary) {
+            Intent intent = new Intent(this, DiaryActivity.class);
+            startActivity(intent);
+            finish();
+        } else if (id == R.id.nav_log_weight) {
+            Intent intent = new Intent(this, WeightLoggingActivity.class);
+            startActivity(intent);
+            finish();
+        } else if (id == R.id.nav_reminder) {
+            Intent intent = new Intent(this, ReminderActivity.class);
+            startActivity(intent);
+            finish();
+        } else if (id == R.id.nav_photos) {
+            Intent intent = new Intent(this, PhotosActivity.class);
+            startActivity(intent);
+            finish();
+        } else if (id == R.id.nav_tips) {
+            Intent intent = new Intent(this, TipsActivity.class);
+            startActivity(intent);
+            finish();
+        } else if (id == R.id.nav_challenges) {
+            //Blank
+        } else if (id == R.id.nav_rewards) {
+
+        } else if (id == R.id.nav_settings) {
+            Intent intent = new Intent(this, SettingsActivity.class);
+            startActivity(intent);
+            finish();
+        } else if (id == R.id.nav_contact) {
+            Intent intent = new Intent(this, ContactFAQActivity.class);
+            startActivity(intent);
+            finish();
+        }
+
+        drawer.closeDrawer(GravityCompat.START);
+        return true;
+    }
+
+    //Common funcion
     private void initParam() {
         //Funcion guideline
         animTranslateTop = AnimationUtils.loadAnimation(this, R.anim.translate_top);
@@ -132,11 +186,13 @@ public class ChallengesActivity extends AppCompatActivity
         animComeBack.addAnimation(animationTemp1);
         animComeBack.addAnimation(animationTemp2);
 
-        //Funcion for Normal Challenge
-        isFirstChallenges = pre.getBoolean(PreferenceManager.IS_FIRST_TIME_CHALLENGES, true);
+        //Using for all challenge
         animScale = AnimationUtils.loadAnimation(this, R.anim.scale);
         animScale.setDuration(ANIMATION_CHALLENGE_LENGTH);
         animScale.setAnimationListener(animScaleListener);
+
+        //Funcion for Normal Challenge
+        isFirstChallenges = pre.getBoolean(PreferenceManager.IS_FIRST_TIME_CHALLENGES, true);
 
         //Function for Run Challenge
         format = NumberFormat.getNumberInstance();
@@ -152,8 +208,15 @@ public class ChallengesActivity extends AppCompatActivity
     private void initChallenge() {
         int type = pre.getInt(PreferenceManager.CHALLENGE_TYPE, CHALLENGE_TYPE_DRINK_WATER);
         if (type == CHALLENGE_TYPE_DRINK_WATER) {
-            int total = pre.getInt(PreferenceManager.NORMAL_CHALLENGE_TOTAL_ITEMS, 8);
-            int currentPosition = pre.getInt(PreferenceManager.NORMAL_CHALLENGE_CURRENT_POSITION, 0);
+            int total = pre.getInt(PreferenceManager.DRINK_WATER_TOTAL_ITEMS, 8);
+            int currentPosition = 0;
+            long time = pre.getLong(PreferenceManager.DRINK_WATER_LAST_TIME, 0);
+            Calendar lastTime = new GregorianCalendar();
+            lastTime.setTimeInMillis(time);
+            boolean isToday = lastTimeUsingisToday(lastTime);
+            if (isToday) {
+                currentPosition = pre.getInt(PreferenceManager.DRINK_WATER_CURRENT_POSITION, 0);
+            }
             challenge = new NormalChallenge(R.drawable.challenge_water_full,
                     getString(R.string.drink_more_water),
                     Constants.STARS_FOR_DRINK_WATER,
@@ -162,8 +225,15 @@ public class ChallengesActivity extends AppCompatActivity
                     getString(R.string.glasses),
                     type);
         } else if (type == Constants.CHALLENGE_TYPE_PUSH_UP) {
-            int total = pre.getInt(PreferenceManager.NORMAL_CHALLENGE_TOTAL_ITEMS, 8);
-            int currentPosition = pre.getInt(PreferenceManager.NORMAL_CHALLENGE_CURRENT_POSITION, 0);
+            int total = pre.getInt(PreferenceManager.PUSH_UP_TOTAL_ITEMS, 8);
+            long time = pre.getLong(PreferenceManager.PUSH_UP_LAST_TIME, 0);
+            Calendar lastTime = new GregorianCalendar();
+            lastTime.setTimeInMillis(time);
+            boolean isToday = lastTimeUsingisToday(lastTime);
+            int currentPosition = 0;
+            if (isToday) {
+                currentPosition = pre.getInt(PreferenceManager.PUSH_UP_CURRENT_POSITION, 0);
+            }
             challenge = new NormalChallenge(R.drawable.challenges_pushups01_sh,
                     getString(R.string.push_up_challenge_title),
                     Constants.STARS_FOR_PUSH_UP,
@@ -172,8 +242,15 @@ public class ChallengesActivity extends AppCompatActivity
                     getString(R.string.sets),
                     type);
         } else if (type == Constants.CHALLENGE_TYPE_GYM) {
-            int total = pre.getInt(PreferenceManager.NORMAL_CHALLENGE_TOTAL_ITEMS, 8);
-            int currentPosition = pre.getInt(PreferenceManager.NORMAL_CHALLENGE_CURRENT_POSITION, 0);
+            int total = pre.getInt(PreferenceManager.GYM_EXERCISE_TOTAL_ITEMS, 8);
+            long time = pre.getLong(PreferenceManager.GYM_EXERCISE_LAST_TIME, 0);
+            Calendar lastTime = new GregorianCalendar();
+            lastTime.setTimeInMillis(time);
+            boolean isToday = lastTimeUsingisToday(lastTime);
+            int currentPosition = 0;
+            if (isToday) {
+                currentPosition = pre.getInt(PreferenceManager.GYM_EXERCISE_CURRENT_POSITION, 0);
+            }
             challenge = new NormalChallenge(R.drawable.challenges_gym1,
                     getString(R.string.gym_challenge_title),
                     Constants.STARS_FOR_GYM_EXERCISE,
@@ -182,8 +259,15 @@ public class ChallengesActivity extends AppCompatActivity
                     getString(R.string.times),
                     type);
         } else if (type == Constants.CHALLENGE_TYPE_OF_MY) {
-            int total = pre.getInt(PreferenceManager.NORMAL_CHALLENGE_TOTAL_ITEMS, 3);
-            int currentPosition = pre.getInt(PreferenceManager.NORMAL_CHALLENGE_CURRENT_POSITION, 0);
+            int total = pre.getInt(PreferenceManager.MY_CHALLENGE_TOTAL_ITEMS, 3);
+            long time = pre.getLong(PreferenceManager.MY_CHALLENGE_LAST_TIME, 0);
+            Calendar lastTime = new GregorianCalendar();
+            lastTime.setTimeInMillis(time);
+            boolean isToday = lastTimeUsingisToday(lastTime);
+            int currentPosition = 0;
+            if (isToday) {
+                currentPosition = pre.getInt(PreferenceManager.MY_CHALLENGE_CURRENT_POSITION, 0);
+            }
             String title = pre.getString(PreferenceManager.MY_CHALLENGE_TITLE, getString(R.string.title));
             challenge = new NormalChallenge(R.drawable.challenges_general_before,
                     title,
@@ -193,8 +277,15 @@ public class ChallengesActivity extends AppCompatActivity
                     getString(R.string.times),
                     type);
         } else if (type == Constants.CHALLENGE_TYPE_FILL_MY_PLATE) {
-            int total = pre.getInt(PreferenceManager.NORMAL_CHALLENGE_TOTAL_ITEMS, 8);
-            int currentPosition = pre.getInt(PreferenceManager.NORMAL_CHALLENGE_CURRENT_POSITION, 0);
+            int total = pre.getInt(PreferenceManager.FILL_MY_PLATE_TOTAL_ITEMS, 8);
+            long time = pre.getLong(PreferenceManager.FILL_MY_PLATE_LAST_TIME, 0);
+            Calendar lastTime = new GregorianCalendar();
+            lastTime.setTimeInMillis(time);
+            boolean isToday = lastTimeUsingisToday(lastTime);
+            int currentPosition = 0;
+            if (isToday) {
+                currentPosition = pre.getInt(PreferenceManager.FILL_MY_PLATE_CURRENT_POSITION, 0);
+            }
             challenge = new AnimationChallenge(R.drawable.challenges_portion2,
                     getString(R.string.fill_my_plate),
                     Constants.STARS_FOR_FILL_MY_PLATE,
@@ -204,7 +295,14 @@ public class ChallengesActivity extends AppCompatActivity
                     type);
         } else if (type == Constants.CHALLENGE_TYPE_WALK_A_MILE) {
             double total = pre.getFloat(PreferenceManager.RUN_CHALLENGE_TOTAL_LENGTH, 2);
-            double currentPosition = pre.getFloat(PreferenceManager.RUN_CHALLENGE_CURRENT_POSITION, 0);
+            long time = pre.getLong(PreferenceManager.RUN_CHALLENGE_LAST_TIME, 0);
+            Calendar lastTime = new GregorianCalendar();
+            lastTime.setTimeInMillis(time);
+            boolean isToday = lastTimeUsingisToday(lastTime);
+            double currentPosition = 0;
+            if (isToday) {
+                currentPosition = pre.getFloat(PreferenceManager.RUN_CHALLENGE_CURRENT_POSITION, 0);
+            }
             challenge = new RunChallenge(R.drawable.challenges_walk1_sh,
                     getString(R.string.walk_2_miles),
                     Constants.STARS_FOR_WALK_A_MILE,
@@ -212,6 +310,48 @@ public class ChallengesActivity extends AppCompatActivity
                     currentPosition,
                     getString(R.string.miles),
                     0.01,
+                    type);
+        } else if (type == Constants.CHALLENGE_TYPE_AVOID_JUNK_FOOD) {
+            long time = pre.getLong(PreferenceManager.AVOID_JUNK_FOOD_LAST_TIME, 0);
+            Calendar lastTime = new GregorianCalendar();
+            lastTime.setTimeInMillis(time);
+            boolean isToday = lastTimeUsingisToday(lastTime);
+            int currentPosition = 0;
+            if (isToday) {
+                currentPosition = pre.getInt(PreferenceManager.AVOID_JUNK_FOOD_CURRENT_POSITION, 0);
+            }
+            challenge = new SelfControlChallenge(R.drawable.junk_food_avoid,
+                    getString(R.string.avoid_junk_food),
+                    currentPosition,
+                    Constants.STARS_FOR_AVOID_JUNK_FOOD,
+                    type);
+        } else if (type == Constants.CHALLENGE_TYPE_AVOID_SUGARY_DRINK) {
+            long time = pre.getLong(PreferenceManager.AVOID_SUGARY_DRINK_LAST_TIME, 0);
+            Calendar lastTime = new GregorianCalendar();
+            lastTime.setTimeInMillis(time);
+            boolean isToday = lastTimeUsingisToday(lastTime);
+            int currentPosition = 0;
+            if (isToday) {
+                currentPosition = pre.getInt(PreferenceManager.AVOID_SUGARY_DRINK_CURRENT_POSITION, 0);
+            }
+            challenge = new SelfControlChallenge(R.drawable.sugray_drink,
+                    getString(R.string.avoid_sugary_drinks),
+                    currentPosition,
+                    Constants.STARS_FOR_AVOID_SURGARY_DRINKS,
+                    type);
+        } else if (type == Constants.CHALLENGE_TYPE_AVOID_SNACKING) {
+            long time = pre.getLong(PreferenceManager.AVOID_SNACKING_LAST_TIME, 0);
+            Calendar lastTime = new GregorianCalendar();
+            lastTime.setTimeInMillis(time);
+            boolean isToday = lastTimeUsingisToday(lastTime);
+            int currentPosition = 0;
+            if (isToday) {
+                currentPosition = pre.getInt(PreferenceManager.AVOID_SNACKING_CURRENT_POSITION, 0);
+            }
+            challenge = new SelfControlChallenge(R.drawable.snack,
+                    getString(R.string.avoid_snacking),
+                    currentPosition,
+                    Constants.STARS_FOR_AVOID_SNACKING,
                     type);
         }
     }
@@ -272,36 +412,42 @@ public class ChallengesActivity extends AppCompatActivity
         seekBar.setMax(SEEKBAR_MAX_VALUE);
         seekBar.setOnSeekBarChangeListener(this);
         seekBar.setOnTouchListener(seekbarListener);
-    }
 
-    @Override
-    public void onWindowFocusChanged(boolean hasFocus) {
-        super.onWindowFocusChanged(hasFocus);
-        if (hasFocus) updateChallengeUI();
+        //Self control challenge
+        llSelfControlChallenge = findViewById(R.id.llSelfControlChallenge);
+        llHumanShadow = findViewById(R.id.llHumanShadow);
+        ivAvoidHuman = findViewById(R.id.ivAvoidHuman);
+        ivAvoidFoodIcon = findViewById(R.id.ivAvoidFoodIcon);
+        ivAvoidFoodAnimation = findViewById(R.id.ivAvoidFoodAnimation);
+        ivSelfControlSign = findViewById(R.id.ivSelfControlSign);
     }
 
     /**
-     * SeekBar TouchListener
-     * Does not allow change progress when it already finish
+     * Click stop button
+     * After click show guideline layout
      */
-    View.OnTouchListener seekbarListener = new View.OnTouchListener() {
-
-        @Override
-        public boolean onTouch(View view, MotionEvent motionEvent) {
-            float seekBarPosition;
-
-            if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
-                if (challenge instanceof RunChallenge) {
-                    RunChallenge rc = (RunChallenge) challenge;
-                    return rc.getTotalLength() == rc.getCurrentPosition();
-                }
-            }
-            return false;
-        }
-    };
+    @OnClick(R.id.btnStop)
+    public void clickButtonStop() {
+        ivArrowOption.setRotation(0);
+        llGuideOption.setVisibility(View.GONE);
+        flGuide.setVisibility(View.VISIBLE);
+        flGuide.startAnimation(animComeBack);
+    }
 
     /**
-     * Update UI for challenge UI only
+     * Check last time using this challenge is today?
+     *
+     * @return true if last time is today, false if otherwise
+     */
+    private boolean lastTimeUsingisToday(Calendar lastDay) {
+        Calendar today = Calendar.getInstance();
+        return (lastDay.get(Calendar.DAY_OF_YEAR) == today.get(Calendar.DAY_OF_YEAR)
+                && lastDay.get(Calendar.MONTH) == today.get(Calendar.MONTH)
+                && lastDay.get(Calendar.YEAR) == today.get(Calendar.YEAR));
+    }
+
+    /**
+     * Update UI for challenge
      */
     private void updateChallengeUI() {
         Log.e(TAG, "Challenge type: " + challenge.getClass().getSimpleName());
@@ -312,12 +458,15 @@ public class ChallengesActivity extends AppCompatActivity
             //Show recycler view
             recyclerView.setVisibility(View.VISIBLE);
 
-            //Hide human layout
+            //Hide human layout, self control layout
             rlHumanPosition.setVisibility(View.GONE);
-            initRecyclerView();
+            llSelfControlChallenge.setVisibility(View.GONE);
+
+            updateNormalChallenge((NormalChallenge) challenge);
         } else if (challenge instanceof RunChallenge) {
-            //Hide recycler view
+            //Hide recycler view, self control layout
             recyclerView.setVisibility(View.GONE);
+            llSelfControlChallenge.setVisibility(View.GONE);
 
             //Show human layout
             rlHumanPosition.setVisibility(View.VISIBLE);
@@ -328,29 +477,21 @@ public class ChallengesActivity extends AppCompatActivity
             double total = rc.getTotalLength();
             int progress = (int) (current / total * SEEKBAR_MAX_VALUE);
             seekBar.setProgress(progress);
+        } else if (challenge instanceof SelfControlChallenge) {
+            //Hide recycler view, human layout
+            recyclerView.setVisibility(View.GONE);
+            rlHumanPosition.setVisibility(View.GONE);
+
+            //Show self control layout
+            llSelfControlChallenge.setVisibility(View.VISIBLE);
+
+            ivAvoidFoodIcon.setImageResource(challenge.getImageId());
+            ivAvoidFoodAnimation.setImageResource(challenge.getImageId());
+
+            updateSelfControlChallenge((SelfControlChallenge) challenge);
         }
 
         updatePoint();
-    }
-
-    private void initRecyclerView() {
-        if (challenge instanceof NormalChallenge) {
-            NormalChallenge nmChallenge = (NormalChallenge) challenge;
-            adapter = new ChallengesAdapter(this, challenge, nmChallenge.getTotalCount());
-            adapter.setOnItemEventListener(this);
-
-            Calendar lastDrinkedDate = new GregorianCalendar();
-            long lastDate = pre.getLong(PreferenceManager.LAST_TIME_USING, Calendar.getInstance().getTimeInMillis());
-            lastDrinkedDate.setTimeInMillis(lastDate);
-            Calendar todayDate = Calendar.getInstance();
-            if (lastDrinkedDate.get(Calendar.DAY_OF_MONTH) == todayDate.get(Calendar.DAY_OF_MONTH)
-                    && lastDrinkedDate.get(Calendar.MONTH) == todayDate.get(Calendar.MONTH)
-                    && lastDrinkedDate.get(Calendar.YEAR) == todayDate.get(Calendar.YEAR)) {
-                adapter.setNumCurrentPosition(nmChallenge.getCurrentPosition());
-            }
-
-            recyclerView.setAdapter(adapter);
-        }
     }
 
     /**
@@ -373,14 +514,44 @@ public class ChallengesActivity extends AppCompatActivity
                     + " " + getString(R.string.hh_points) + " " + format.format(lengthLeft)
                     + " " + rc.getUnit() + " " + getString(R.string.left);
             tvPoint.setText(string);
+        } else if (challenge instanceof SelfControlChallenge) {
+            SelfControlChallenge scc = (SelfControlChallenge) challenge;
 
-            //Disable scroll seek bar when walk all length
-//            if (rc.getCurrentPosition() == rc.getTotalLength()) seekBar.setEnabled(false);
-//            else seekBar.setEnabled(true);
+            //Set icon for self control sign
+            if (scc.getCurrentPosition() == Constants.SELF_CONTROL_CHALLENGE_TOTAL_ITEMS) {
+                ivSelfControlSign.setImageResource(R.drawable.victory_sign);
+                ivAvoidHuman.setEnabled(false);
+            } else {
+                ivSelfControlSign.setImageResource(R.drawable.stop_sign);
+                ivAvoidHuman.setEnabled(true);
+            }
+
+            int stars = scc.getCurrentPosition() * scc.getStars() / Constants.SELF_CONTROL_CHALLENGE_TOTAL_ITEMS;
+            double left = Constants.SELF_CONTROL_CHALLENGE_TOTAL_ITEMS - scc.getCurrentPosition();
+            String string = getString(R.string.earned) + " " + stars
+                    + " " + getString(R.string.hh_points) + " " + left
+                    + " " + getString(R.string.hours) + " " + getString(R.string.left);
+            tvPoint.setText(string);
         }
         llPoint.startAnimation(animScale);
     }
 
+    private Animation.AnimationListener animScaleListener = new Animation.AnimationListener() {
+        @Override
+        public void onAnimationStart(Animation animation) {
+        }
+
+        @Override
+        public void onAnimationEnd(Animation animation) {
+//            llPoint.clearAnimation();
+        }
+
+        @Override
+        public void onAnimationRepeat(Animation animation) {
+        }
+    };
+
+    //Listener when first click ribbon (ruy băng)
     DrawingView.OnDrawingListener listener = new DrawingView.OnDrawingListener() {
         @Override
         public void onDrawing() {
@@ -429,7 +600,6 @@ public class ChallengesActivity extends AppCompatActivity
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -451,20 +621,56 @@ public class ChallengesActivity extends AppCompatActivity
 
     @Override
     protected void onStop() {
-        if (challenge instanceof NormalChallenge) {
-            pre.putInt(PreferenceManager.CHALLENGE_TYPE, challenge.getType());
-            pre.putInt(PreferenceManager.NORMAL_CHALLENGE_TOTAL_ITEMS,
-                    ((NormalChallenge) challenge).getTotalCount());
-            pre.putInt(PreferenceManager.NORMAL_CHALLENGE_CURRENT_POSITION,
-                    ((NormalChallenge) challenge).getCurrentPosition());
-            pre.putLong(PreferenceManager.LAST_TIME_USING, Calendar.getInstance().getTimeInMillis());
+        int type = challenge.getType();
+        pre.putInt(PreferenceManager.CHALLENGE_TYPE, type);
+        if (challenge instanceof AnimationChallenge) {
+            AnimationChallenge ac = (AnimationChallenge) challenge;
+            if (type == Constants.CHALLENGE_TYPE_FILL_MY_PLATE) {
+                pre.putInt(PreferenceManager.FILL_MY_PLATE_TOTAL_ITEMS, ac.getTotalCount());
+                pre.putInt(PreferenceManager.FILL_MY_PLATE_CURRENT_POSITION, ac.getCurrentPosition());
+                pre.putLong(PreferenceManager.FILL_MY_PLATE_LAST_TIME, Calendar.getInstance().getTimeInMillis());
+            }
+        } else if (challenge instanceof NormalChallenge) {
+            NormalChallenge nc = (NormalChallenge) challenge;
+            if (type == Constants.CHALLENGE_TYPE_DRINK_WATER) {
+                pre.putInt(PreferenceManager.DRINK_WATER_TOTAL_ITEMS, nc.getTotalCount());
+                pre.putInt(PreferenceManager.DRINK_WATER_CURRENT_POSITION, nc.getCurrentPosition());
+                pre.putLong(PreferenceManager.DRINK_WATER_LAST_TIME, Calendar.getInstance().getTimeInMillis());
+            } else if (type == Constants.CHALLENGE_TYPE_GYM) {
+                pre.putInt(PreferenceManager.GYM_EXERCISE_TOTAL_ITEMS, nc.getTotalCount());
+                pre.putInt(PreferenceManager.GYM_EXERCISE_CURRENT_POSITION, nc.getCurrentPosition());
+                pre.putLong(PreferenceManager.GYM_EXERCISE_LAST_TIME, Calendar.getInstance().getTimeInMillis());
+            } else if (type == Constants.CHALLENGE_TYPE_PUSH_UP) {
+                pre.putInt(PreferenceManager.PUSH_UP_TOTAL_ITEMS, nc.getTotalCount());
+                pre.putInt(PreferenceManager.PUSH_UP_CURRENT_POSITION, nc.getCurrentPosition());
+                pre.putLong(PreferenceManager.PUSH_UP_LAST_TIME, Calendar.getInstance().getTimeInMillis());
+            } else if (type == Constants.CHALLENGE_TYPE_OF_MY) {
+                pre.putString(PreferenceManager.MY_CHALLENGE_TITLE, nc.getTitle());
+                pre.putInt(PreferenceManager.MY_CHALLENGE_TOTAL_ITEMS, nc.getTotalCount());
+                pre.putInt(PreferenceManager.MY_CHALLENGE_CURRENT_POSITION, nc.getCurrentPosition());
+                pre.putLong(PreferenceManager.MY_CHALLENGE_LAST_TIME, Calendar.getInstance().getTimeInMillis());
+            }
         } else if (challenge instanceof RunChallenge) {
-            pre.putInt(PreferenceManager.CHALLENGE_TYPE, challenge.getType());
-            pre.putFloat(PreferenceManager.RUN_CHALLENGE_TOTAL_LENGTH,
-                    (float) ((RunChallenge) challenge).getTotalLength());
-            pre.putFloat(PreferenceManager.RUN_CHALLENGE_CURRENT_POSITION,
-                    (float) ((RunChallenge) challenge).getCurrentPosition());
-            pre.putLong(PreferenceManager.LAST_TIME_USING, Calendar.getInstance().getTimeInMillis());
+            if (type == Constants.CHALLENGE_TYPE_WALK_A_MILE) {
+                pre.putInt(PreferenceManager.CHALLENGE_TYPE, challenge.getType());
+                pre.putFloat(PreferenceManager.RUN_CHALLENGE_TOTAL_LENGTH,
+                        (float) ((RunChallenge) challenge).getTotalLength());
+                pre.putFloat(PreferenceManager.RUN_CHALLENGE_CURRENT_POSITION,
+                        (float) ((RunChallenge) challenge).getCurrentPosition());
+                pre.putLong(PreferenceManager.RUN_CHALLENGE_LAST_TIME, Calendar.getInstance().getTimeInMillis());
+            }
+        } else if (challenge instanceof SelfControlChallenge) {
+            SelfControlChallenge scc = (SelfControlChallenge) challenge;
+            if (type == Constants.CHALLENGE_TYPE_AVOID_JUNK_FOOD) {
+                pre.putInt(PreferenceManager.AVOID_JUNK_FOOD_CURRENT_POSITION, scc.getCurrentPosition());
+                pre.putLong(PreferenceManager.AVOID_JUNK_FOOD_LAST_TIME, Calendar.getInstance().getTimeInMillis());
+            } else if (type == Constants.CHALLENGE_TYPE_AVOID_SUGARY_DRINK) {
+                pre.putInt(PreferenceManager.AVOID_SUGARY_DRINK_CURRENT_POSITION, scc.getCurrentPosition());
+                pre.putLong(PreferenceManager.AVOID_SUGARY_DRINK_LAST_TIME, Calendar.getInstance().getTimeInMillis());
+            } else if (type == Constants.CHALLENGE_TYPE_AVOID_SNACKING) {
+                pre.putInt(PreferenceManager.AVOID_SNACKING_CURRENT_POSITION, scc.getCurrentPosition());
+                pre.putLong(PreferenceManager.AVOID_SNACKING_LAST_TIME, Calendar.getInstance().getTimeInMillis());
+            }
         }
         super.onStop();
     }
@@ -503,7 +709,7 @@ public class ChallengesActivity extends AppCompatActivity
 
     //Show/hiden guideline option
     @OnClick(R.id.ivArrowOption)
-    public void clickArrowOption(View view) {
+    public void clickArrowOption() {
         if (llGuideOption.getVisibility() == View.VISIBLE) {
             llGuideOption.setVisibility(View.GONE);
             ivArrowOption.setRotation(0);
@@ -514,73 +720,19 @@ public class ChallengesActivity extends AppCompatActivity
     }
 
     /**
-     * Click stop button
-     * After click show guideline layout
+     * Normal challenge
      */
-    @OnClick(R.id.btnStop)
-    public void clickButtonStop() {
-        ivArrowOption.setRotation(0);
-        llGuideOption.setVisibility(View.GONE);
-        flGuide.setVisibility(View.VISIBLE);
-        flGuide.startAnimation(animComeBack);
-    }
 
-    @OnClick(R.id.btnUndo)
-    public void clickUndo() {
-        btnUndo.setVisibility(View.INVISIBLE);
-        if (adapter.isAllItemDone())
-            tvTitleChallenge.setPaintFlags(tvTitleChallenge.getPaintFlags() & (~Paint.STRIKE_THRU_TEXT_FLAG));
-        adapter.backToPreviousItem();
-    }
-
-
-    @SuppressWarnings("StatementWithEmptyBody")
-    @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
-        int id = item.getItemId();
-
-        if (id == R.id.nav_home) {
-            Intent intent = new Intent(this, MainActivity.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            startActivity(intent);
-            finish();
-        } else if (id == R.id.nav_diary) {
-            Intent intent = new Intent(this, DiaryActivity.class);
-            startActivity(intent);
-            finish();
-        } else if (id == R.id.nav_log_weight) {
-            Intent intent = new Intent(this, WeightLoggingActivity.class);
-            startActivity(intent);
-            finish();
-        } else if (id == R.id.nav_reminder) {
-            Intent intent = new Intent(this, ReminderActivity.class);
-            startActivity(intent);
-            finish();
-        } else if (id == R.id.nav_photos) {
-            Intent intent = new Intent(this, PhotosActivity.class);
-            startActivity(intent);
-            finish();
-        } else if (id == R.id.nav_tips) {
-            Intent intent = new Intent(this, TipsActivity.class);
-            startActivity(intent);
-            finish();
-        } else if (id == R.id.nav_challenges) {
-            //Blank
-        } else if (id == R.id.nav_rewards) {
-
-        } else if (id == R.id.nav_settings) {
-            Intent intent = new Intent(this, SettingsActivity.class);
-            startActivity(intent);
-            finish();
-        } else if (id == R.id.nav_contact) {
-            Intent intent = new Intent(this, ContactFAQActivity.class);
-            startActivity(intent);
-            finish();
-        }
-
-        drawer.closeDrawer(GravityCompat.START);
-        return true;
+    /**
+     * Update UI for Normal Challenge
+     *
+     * @param challenge: Normal Challenge
+     */
+    private void updateNormalChallenge(NormalChallenge challenge) {
+        adapter = new ChallengesAdapter(this, challenge, challenge.getTotalCount());
+        adapter.setOnItemEventListener(this);
+        adapter.setNumCurrentPosition(challenge.getCurrentPosition());
+        recyclerView.setAdapter(adapter);
     }
 
     @Override
@@ -588,21 +740,12 @@ public class ChallengesActivity extends AppCompatActivity
         btnUndo.setVisibility(View.INVISIBLE);
     }
 
-
-    private Animation.AnimationListener animScaleListener = new Animation.AnimationListener() {
-        @Override
-        public void onAnimationStart(Animation animation) {
-        }
-
-        @Override
-        public void onAnimationEnd(Animation animation) {
-//            llPoint.clearAnimation();
-        }
-
-        @Override
-        public void onAnimationRepeat(Animation animation) {
-        }
-    };
+    @Override
+    public void itemViewDone() {
+        btnUndo.setVisibility(View.VISIBLE);
+        new Handler().postDelayed(undoRunnable, 3000);
+        updatePoint();
+    }
 
     Runnable undoRunnable = new Runnable() {
         @Override
@@ -612,15 +755,68 @@ public class ChallengesActivity extends AppCompatActivity
     };
 
     @Override
-    public void itemViewDone() {
-        btnUndo.setVisibility(View.VISIBLE);
-        new Handler().postDelayed(undoRunnable, 3000);
-        updatePoint();
-    }
-
-    @Override
     public void allItemDone() {
         tvTitleChallenge.setPaintFlags(tvTitleChallenge.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+    }
+
+    /**
+     * Back to previous item from recycler view
+     */
+    @OnClick(R.id.btnUndo)
+    public void clickUndo() {
+        btnUndo.setVisibility(View.INVISIBLE);
+        if (adapter.isAllItemDone())
+            tvTitleChallenge.setPaintFlags(tvTitleChallenge.getPaintFlags() & (~Paint.STRIKE_THRU_TEXT_FLAG));
+        adapter.backToPreviousItem();
+    }
+
+    /**
+     * RunChallenge
+     */
+
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
+        if (hasFocus) updateChallengeUI();
+    }
+
+    /**
+     * SeekBar TouchListener
+     * Does not allow change progress when it already finish
+     */
+    View.OnTouchListener seekbarListener = new View.OnTouchListener() {
+
+        @Override
+        public boolean onTouch(View view, MotionEvent motionEvent) {
+
+            if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
+                if (challenge instanceof RunChallenge) {
+                    RunChallenge rc = (RunChallenge) challenge;
+                    return rc.getTotalLength() == rc.getCurrentPosition();
+                }
+            }
+            return false;
+        }
+    };
+
+    /**
+     * Change image continuous like walking
+     */
+    private void changeImageLikeWalking() {
+        if (isContinue) {
+            if (currentImageId == R.drawable.challenges_walk1_sh) {
+                currentImageId = R.drawable.challenges_walk2_sh;
+            } else {
+                currentImageId = R.drawable.challenges_walk1_sh;
+            }
+            ivHumanPosition.setImageResource(currentImageId);
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    changeImageLikeWalking();
+                }
+            }, 200);
+        }
     }
 
     @Override
@@ -670,23 +866,56 @@ public class ChallengesActivity extends AppCompatActivity
         updatePoint();
     }
 
-    /**
-     * Change image continuous like walking
+    /*
+      SelfControlChallenge
      */
-    private void changeImageLikeWalking() {
-        if (isContinue) {
-            if (currentImageId == R.drawable.challenges_walk1_sh) {
-                currentImageId = R.drawable.challenges_walk2_sh;
-            } else {
-                currentImageId = R.drawable.challenges_walk1_sh;
+
+
+    /**
+     * Update UI for SelfControlChallenge
+     *
+     * @param challenge: SelfControlChallenge
+     */
+    private void updateSelfControlChallenge(SelfControlChallenge challenge) {
+        //Set width for shaddow
+        int width = ivAvoidHuman.getWidth();
+        int height = ivAvoidHuman.getHeight();
+        int left = Constants.SELF_CONTROL_CHALLENGE_TOTAL_ITEMS - challenge.getCurrentPosition();
+        //New width for shaddow
+        int nwidth = width * left / Constants.SELF_CONTROL_CHALLENGE_TOTAL_ITEMS;
+        llHumanShadow.setLayoutParams(new FrameLayout.LayoutParams(nwidth, height));
+
+        Animation animation = AnimationUtils.loadAnimation(this, R.anim.translate_top);
+        animation.setDuration(Constants.ANIMATION_LENGTH);
+        ivAvoidFoodAnimation.startAnimation(animation);
+        animation.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
             }
-            ivHumanPosition.setImageResource(currentImageId);
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    changeImageLikeWalking();
-                }
-            }, 200);
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                updatePoint();
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+            }
+        });
+    }
+
+    /**
+     * Click on Avoid Human
+     */
+    @OnClick(R.id.ivAvoidHuman)
+    void clickAvoidHuman() {
+        if (challenge instanceof SelfControlChallenge) {
+            SelfControlChallenge scc = (SelfControlChallenge) challenge;
+            int currentPosition = scc.getCurrentPosition();
+            scc.setCurrentPosition(currentPosition + 1);
+            updateSelfControlChallenge((SelfControlChallenge) challenge);
         }
     }
+
+
 }

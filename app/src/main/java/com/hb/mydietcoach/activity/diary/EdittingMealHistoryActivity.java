@@ -118,7 +118,7 @@ public class EdittingMealHistoryActivity extends AppCompatActivity {
                         getString(R.string.item_was_deleted),
                         Toast.LENGTH_SHORT)
                         .show();
-                database.deleteItem(listItems.get(position));
+                database.deleteItem(listItems.get(position).getId());
                 listItems.remove(position);
                 adapter.notifyDataSetChanged();
                 // false : close the menu; true : not close the menu

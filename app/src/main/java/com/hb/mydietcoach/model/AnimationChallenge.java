@@ -10,9 +10,9 @@ import com.hb.mydietcoach.utils.Constants;
 
 public class AnimationChallenge extends NormalChallenge {
 
-    public AnimationChallenge(int imageId, String title, int stars, int totalCount, int currentPosition,
-                              String unit, int type) {
-        super(imageId, title, stars, totalCount, currentPosition, unit, type);
+    public AnimationChallenge(long id, int imageId, String title, int stars, int totalCount, int currentPosition,
+                              String unit, int type, long lastTime) {
+        super(id, imageId, title, stars, totalCount, currentPosition, unit, type, lastTime);
     }
 
     public AnimationChallenge() {

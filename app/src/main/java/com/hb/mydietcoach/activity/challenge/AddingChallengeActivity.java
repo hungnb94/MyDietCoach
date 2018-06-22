@@ -23,9 +23,12 @@ import com.hb.mydietcoach.model.Challenge;
 import com.hb.mydietcoach.model.NormalChallenge;
 import com.hb.mydietcoach.model.RunChallenge;
 import com.hb.mydietcoach.model.SelfControlChallenge;
+import com.hb.mydietcoach.preference.PreferenceManager;
 import com.hb.mydietcoach.utils.Constants;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import butterknife.ButterKnife;
@@ -43,19 +46,21 @@ public class AddingChallengeActivity extends AppCompatActivity
     private RecyclerView recyclerView;
     private AddingChallengeAdapter challengeAdapter;
     private List<Challenge> listExercise, listEatHabit, listSelfControl, listMyChallenge;
-    MyDatabase database;
+    private MyDatabase database;
+    private PreferenceManager pre;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_adding_challenge);
 
+        pre = new PreferenceManager(this);
         arr = getResources().getStringArray(R.array.spinner_adding_challenge);
         listExercise = generateExerciseChallenges();
         listEatHabit = generateEatHabitChallenges();
         listSelfControl = generateSelfControlChallenges();
         database = new MyDatabase(this);
-        listMyChallenge = database.getAllMyChallenge();
+        listMyChallenge = database.getMyChallenges();
 
         initView();
     }
@@ -130,26 +135,33 @@ public class AddingChallengeActivity extends AppCompatActivity
      * @return list exercise challenge
      */
     private List<Challenge> generateExerciseChallenges() {
+        double currentPosition=0;
         List<Challenge> list = new ArrayList<>();
+        long time = pre.getLong(PreferenceManager.GYM_EXERCISE_LAST_TIME, 0);
+        if (isToday(time)) currentPosition = pre.getInt(PreferenceManager.GYM_EXERCISE_CURRENT_POSITION, 0);
         list.add(new NormalChallenge(R.drawable.challenges_gym1,
                 getString(R.string.go_to_the_gym),
                 Constants.STARS_FOR_GYM_EXERCISE,
                 2,
-                0,
+                (int) currentPosition,
                 getString(R.string.times),
                 Constants.CHALLENGE_TYPE_GYM));
+        time = pre.getLong(PreferenceManager.PUSH_UP_LAST_TIME, 0);
+        if (isToday(time)) currentPosition = pre.getInt(PreferenceManager.PUSH_UP_CURRENT_POSITION, 0);
         list.add(new NormalChallenge(R.drawable.challenges_pushups01_sh,
                 getString(R.string.push_up_challenge_title),
                 Constants.STARS_FOR_PUSH_UP,
                 2,
-                0,
+                (int) currentPosition,
                 getString(R.string.sets),
                 Constants.CHALLENGE_TYPE_PUSH_UP));
+        time = pre.getLong(PreferenceManager.RUN_CHALLENGE_LAST_TIME, 0);
+        if (isToday(time)) currentPosition = pre.getFloat(PreferenceManager.RUN_CHALLENGE_CURRENT_POSITION, 0);
         list.add(new RunChallenge(R.drawable.challenges_walk1_sh,
                 getString(R.string.walk_2_miles),
                 Constants.STARS_FOR_WALK_A_MILE,
                 2,
-                0,
+                currentPosition,
                 getString(R.string.miles),
                 0.01,
                 Constants.CHALLENGE_TYPE_WALK_A_MILE));
@@ -163,19 +175,25 @@ public class AddingChallengeActivity extends AppCompatActivity
      */
     private List<Challenge> generateEatHabitChallenges() {
         List<Challenge> list = new ArrayList<>();
+        long time = 0;
+        int currentPosition = 0;
+        time = pre.getLong(PreferenceManager.DRINK_WATER_LAST_TIME, 0);
+        if (isToday(time)) currentPosition = pre.getInt(PreferenceManager.DRINK_WATER_CURRENT_POSITION, 0);
         list.add(new NormalChallenge(R.drawable.challenge_water_full,
                 getString(R.string.drink_more_water),
                 Constants.STARS_FOR_DRINK_WATER,
                 8,
-                0,
+                currentPosition,
                 getString(R.string.glasses),
                 Constants.CHALLENGE_TYPE_DRINK_WATER));
 
+        time = pre.getLong(PreferenceManager.FILL_MY_PLATE_LAST_TIME, 0);
+        if (isToday(time)) currentPosition = pre.getInt(PreferenceManager.FILL_MY_PLATE_CURRENT_POSITION, 0);
         list.add(new AnimationChallenge(R.drawable.challenges_table_plate,
                 getString(R.string.fill_my_plate),
                 Constants.STARS_FOR_FILL_MY_PLATE,
                 5,
-                0,
+                currentPosition,
                 getString(R.string.meals),
                 Constants.CHALLENGE_TYPE_FILL_MY_PLATE));
         return list;
@@ -187,20 +205,36 @@ public class AddingChallengeActivity extends AppCompatActivity
      * @return list self control challenge
      */
     private List<Challenge> generateSelfControlChallenges() {
+        long time=0;
+        int currentPosition=0;
         List<Challenge> list = new ArrayList<>();
+        time = pre.getLong(PreferenceManager.DRINK_WATER_LAST_TIME, 0);
+        if (isToday(time)) currentPosition = pre.getInt(PreferenceManager.DRINK_WATER_CURRENT_POSITION, 0);
         list.add(new SelfControlChallenge(R.drawable.junk_food_avoid,
                 getString(R.string.avoid_junk_food),
+                currentPosition,
                 Constants.STARS_FOR_AVOID_JUNK_FOOD,
                 Constants.CHALLENGE_TYPE_AVOID_JUNK_FOOD));
         list.add(new SelfControlChallenge(R.drawable.sugray_drink,
                 getString(R.string.avoid_sugary_drinks),
+                currentPosition,
                 Constants.STARS_FOR_AVOID_SURGARY_DRINKS,
                 Constants.CHALLENGE_TYPE_AVOID_SUGARY_DRINK));
         list.add(new SelfControlChallenge(R.drawable.snack,
                 getString(R.string.avoid_snacking),
+                currentPosition,
                 Constants.STARS_FOR_AVOID_SNACKING,
                 Constants.CHALLENGE_TYPE_AVOID_SNACKING));
         return list;
+    }
+
+    private boolean isToday(long time) {
+        Calendar lastDay = new GregorianCalendar();
+        lastDay.setTimeInMillis(time);
+        Calendar today = Calendar.getInstance();
+        return (lastDay.get(Calendar.DAY_OF_YEAR) == today.get(Calendar.DAY_OF_YEAR)
+                && lastDay.get(Calendar.MONTH) == today.get(Calendar.MONTH)
+                && lastDay.get(Calendar.YEAR) == today.get(Calendar.YEAR));
     }
 
     @Override
