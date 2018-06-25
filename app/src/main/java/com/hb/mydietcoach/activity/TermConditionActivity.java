@@ -1,6 +1,8 @@
 package com.hb.mydietcoach.activity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -13,9 +15,18 @@ import android.widget.EditText;
 import android.widget.Spinner;
 
 import com.hb.mydietcoach.R;
+import com.hb.mydietcoach.database.MyDatabase;
 import com.hb.mydietcoach.dialog.MyAlertDialog;
+import com.hb.mydietcoach.model.AnimationChallenge;
+import com.hb.mydietcoach.model.Challenge;
+import com.hb.mydietcoach.model.NormalChallenge;
+import com.hb.mydietcoach.model.RunChallenge;
+import com.hb.mydietcoach.model.SelfControlChallenge;
 import com.hb.mydietcoach.preference.PreferenceManager;
 import com.hb.mydietcoach.utils.Constants;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -39,6 +50,16 @@ public class TermConditionActivity extends AppCompatActivity {
 
         weightTypes = getResources().getStringArray(R.array.weight_types);
         genderTypes = getResources().getStringArray(R.array.gender_types);
+
+        PreferenceManager pre = new PreferenceManager(this);
+        boolean isFirstInsertDatabase = pre.getBoolean(PreferenceManager.IS_FIRST_TIME_INSERT_SQLITE, true);
+        //First time run app, insert default challenges to sqlite
+
+        if (isFirstInsertDatabase) {
+            DatabaseTask task = new DatabaseTask();
+            task.execute();
+            pre.putBoolean(PreferenceManager.IS_FIRST_TIME_INSERT_SQLITE, false);
+        }
 
         initView();
     }
@@ -121,5 +142,129 @@ public class TermConditionActivity extends AppCompatActivity {
 
     private float changeLbToKg(float lbWeight){
         return lbWeight * Constants.LB_TO_KG;
+    }
+
+
+    @SuppressLint("StaticFieldLeak")
+    private class DatabaseTask extends AsyncTask<Void, Void, Void> {
+        private MyDatabase database;
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            database = new MyDatabase(TermConditionActivity.this);
+        }
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            List<Challenge> list = generateExerciseChallenges();
+            list.addAll(generateEatingHabitChallenges());
+            list.addAll(generateSelfControlChallenges());
+            for (Challenge challenge : list) {
+                long id = database.insertChallenge(challenge);
+                challenge.setId(id);
+            }
+            return null;
+        }
+
+        /**
+         * Generate default Exercise challenge list
+         *
+         * @return: default list
+         */
+        private List<Challenge> generateExerciseChallenges() {
+            List<Challenge> list = new ArrayList<>();
+
+            NormalChallenge nc = new NormalChallenge();
+            nc.setTotalCount(Constants.DEFAULT_GYM)
+                    .setUnit(getString(R.string.times))
+                    .setImageId(R.drawable.challenges_gym1)
+                    .setTitle(getString(R.string.go_to_the_gym))
+                    .setStars(Constants.STARS_FOR_GYM_EXERCISE)
+                    .setType(Constants.CHALLENGE_TYPE_GYM);
+            list.add(nc);
+
+            nc = new NormalChallenge();
+            nc.setTotalCount(Constants.DEFAULT_PUSH_UP)
+                    .setUnit(getString(R.string.sets))
+                    .setImageId(R.drawable.challenges_pushups01_sh)
+                    .setTitle(getString(R.string.push_up_challenge_title))
+                    .setStars(Constants.STARS_FOR_PUSH_UP)
+                    .setType(Constants.CHALLENGE_TYPE_PUSH_UP);
+            list.add(nc);
+
+            RunChallenge rc = new RunChallenge();
+            rc.setTotalLength(Constants.DEFAULT_WALK_A_MILE_TOTAL)
+                    .setLengthUnit(Constants.DEFAULT_WALK_A_MILE_LENGTH_UNIT)
+                    .setUnit(getString(R.string.miles))
+                    .setImageId(R.drawable.challenges_walk1_sh)
+                    .setTitle(getString(R.string.walk_2_miles))
+                    .setStars(Constants.STARS_FOR_WALK_A_MILE)
+                    .setType(Constants.CHALLENGE_TYPE_WALK_A_MILE);
+            list.add(rc);
+
+            return list;
+        }
+
+        /**
+         * Generate default Eating Habit challenge list
+         *
+         * @return: default list
+         */
+        private List<Challenge> generateEatingHabitChallenges() {
+            List<Challenge> list = new ArrayList<>();
+
+            NormalChallenge nc = new NormalChallenge();
+            nc.setTotalCount(Constants.DEFAULT_DRINK_WATER)
+                    .setUnit(getString(R.string.glasses))
+                    .setImageId(R.drawable.challenge_water_full)
+                    .setTitle(getString(R.string.drink_more_water))
+                    .setStars(Constants.STARS_FOR_DRINK_WATER)
+                    .setType(Constants.CHALLENGE_TYPE_DRINK_WATER);
+            list.add(nc);
+
+            AnimationChallenge ac = new AnimationChallenge();
+            ac.setTotalCount(Constants.DEFAULT_FILL_MY_PLATE)
+                    .setUnit(getString(R.string.meals))
+                    .setImageId(R.drawable.challenges_table_plate)
+                    .setTitle(getString(R.string.fill_my_plate))
+                    .setStars(Constants.STARS_FOR_FILL_MY_PLATE)
+                    .setType(Constants.CHALLENGE_TYPE_FILL_MY_PLATE);
+            list.add(ac);
+
+            return list;
+        }
+
+        /**
+         * Generate default Self Control challenge list
+         *
+         * @return: default list
+         */
+        private List<Challenge> generateSelfControlChallenges() {
+            List<Challenge> list = new ArrayList<>();
+
+            SelfControlChallenge scc = new SelfControlChallenge();
+            scc.setImageId(R.drawable.junk_food_avoid)
+                    .setTitle(getString(R.string.avoid_junk_food))
+                    .setStars(Constants.STARS_FOR_AVOID_JUNK_FOOD)
+                    .setType(Constants.CHALLENGE_TYPE_AVOID_JUNK_FOOD);
+            list.add(scc);
+
+            scc = new SelfControlChallenge();
+            scc.setImageId(R.drawable.sugray_drink)
+                    .setTitle(getString(R.string.avoid_sugary_drinks))
+                    .setStars(Constants.STARS_FOR_AVOID_SURGARY_DRINKS)
+                    .setType(Constants.CHALLENGE_TYPE_AVOID_SUGARY_DRINK);
+            list.add(scc);
+
+            scc = new SelfControlChallenge();
+            scc.setImageId(R.drawable.snack)
+                    .setTitle(getString(R.string.avoid_snacking))
+                    .setStars(Constants.STARS_FOR_AVOID_SNACKING)
+                    .setType(Constants.CHALLENGE_TYPE_AVOID_SNACKING);
+            list.add(scc);
+
+            return list;
+        }
     }
 }

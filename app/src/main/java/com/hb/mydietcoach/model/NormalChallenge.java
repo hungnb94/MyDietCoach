@@ -29,8 +29,8 @@ public class NormalChallenge extends Challenge{
         return currentPosition;
     }
 
-    public NormalChallenge setCurrentPosition(int currentPosition) {
-        this.currentPosition = currentPosition;
+    public NormalChallenge setCurrentPosition(float integerPosition) {
+        this.currentPosition = (int) integerPosition;
         return this;
     }
 

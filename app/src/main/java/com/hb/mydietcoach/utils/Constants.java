@@ -35,7 +35,8 @@ public class Constants {
     public static final int DEFAULT_GYM = 2;
     public static final int DEFAULT_FILL_MY_PLATE = 5;
     public static final int DEFAULT_MY_CHALLENGE = 4;
-    public static final float DEFAULT_WALK_A_MILE = 2;
+    public static final float DEFAULT_WALK_A_MILE_TOTAL = 2;
+    public static final double DEFAULT_WALK_A_MILE_LENGTH_UNIT = 0.01;
 
     //Exercise challenges
     public static final int STARS_FOR_GYM_EXERCISE = 40;

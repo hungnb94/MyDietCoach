@@ -198,4 +198,6 @@
     <string name="title">title</string>
     <string name="_0_00">0.00</string>
     <string name="hours">hours</string>
+    <string name="restarting_daily_challenges">Restarting daily challenges</string>
+    <string name="new_day_your_challenges_have_been_renewed">It\'s a new day! Your challenges have been renewed...\nStarting over</string>
 </resources>

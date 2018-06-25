@@ -12,6 +12,7 @@ import com.hb.mydietcoach.preference.PreferenceManager;
 import com.hb.mydietcoach.utils.Constants;
 
 public class SplashActivity extends AppCompatActivity {
+    private final String TAG = SplashActivity.class.getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +29,7 @@ public class SplashActivity extends AppCompatActivity {
             @Override
             public void run() {
                 Intent intent;
-                if (isFirstTimeRun){
+                if (isFirstTimeRun) {
                     intent = new Intent(SplashActivity.this, TermConditionActivity.class);
                 } else {
                     intent = new Intent(SplashActivity.this, MainActivity.class);

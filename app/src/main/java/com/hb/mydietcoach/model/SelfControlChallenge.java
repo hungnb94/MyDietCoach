@@ -6,8 +6,8 @@ public class SelfControlChallenge extends Challenge {
     public SelfControlChallenge() {
     }
 
-    public SelfControlChallenge(int imageId, String title, int currentPosition, int stars, int type) {
-        super(imageId, title, stars, type);
+    public SelfControlChallenge(long id, int imageId, String title, int currentPosition, int stars, int type, long lastTime) {
+        super(id, imageId, title, stars, type, lastTime);
         this.currentPosition = currentPosition;
     }
 
@@ -15,7 +15,8 @@ public class SelfControlChallenge extends Challenge {
         return currentPosition;
     }
 
-    public void setCurrentPosition(int currentPosition) {
-        this.currentPosition = currentPosition;
+    public SelfControlChallenge setCurrentPosition(float integerPosition) {
+        this.currentPosition = (int) integerPosition;
+        return this;
     }
 }

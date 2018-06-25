@@ -79,7 +79,7 @@ public class NewChallengeActivity extends AppCompatActivity {
         challenge.setId(id);
         Intent intent = new Intent();
         Bundle bundle = new Bundle();
-        bundle.putString(AddingChallengeActivity.NEW_MY_CHALLENGE_TITLE, strContent);
+        bundle.putSerializable(Constants.DATA_SERIALIZABLE, challenge);
         intent.putExtras(bundle);
         setResult(RESULT_OK, intent);
         finish();

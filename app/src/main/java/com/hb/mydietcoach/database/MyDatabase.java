@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.hb.mydietcoach.R;
 import com.hb.mydietcoach.model.AnimationChallenge;
@@ -20,6 +21,7 @@ import com.hb.mydietcoach.model.SelfControlChallenge;
 import com.hb.mydietcoach.utils.Constants;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.GregorianCalendar;
@@ -38,33 +40,33 @@ public class MyDatabase extends SQLiteOpenHelper {
 
     //Type for table food & exercise
     private static final int TYPE_FOOD = 0;
-    public static final int TYPE_EXERCISE = 1;
+    private static final int TYPE_EXERCISE = 1;
 
     //Comnon column name
-    public static final String FIELD_ID = "id";
-    public static final String FIELD_NAME = "name";
+    private static final String FIELD_ID = "id";
+    private static final String FIELD_NAME = "name";
 
     //Table food & exercise column name
-    public static final String FIELD_TYPE = "type";
-    public static final String FIELD_TIME = "time";
-    public static final String FIELD_CALORIES = "calories";
-    public static final String FIELD_WEIGHT = "weight";
+    private static final String FIELD_TYPE = "type";
+    private static final String FIELD_TIME = "time";
+    private static final String FIELD_CALORIES = "calories";
+    private static final String FIELD_WEIGHT = "weight";
 
     //Table Reminder column name
-    public static final String FIELD_CONTENT = "content";
-    public static final String FIELD_START_DATE = "start_date";
-    public static final String FIELD_REPEAT_MILISECONDS = "repeat_miliseconds";
+    private static final String FIELD_CONTENT = "content";
+    private static final String FIELD_START_DATE = "start_date";
+    private static final String FIELD_REPEAT_MILISECONDS = "repeat_miliseconds";
 
     //Table Challenge column name
-    public static final String FIELD_IMAGE_ID = "image_id";
-    public static final String FIELD_TITLE = "title";
-    public static final String FIELD_STARS = "stars";
-    public static final String FIELD_OBJECT_TYPE = "object_type";
-    public static final String FIELD_CHALLENGE_TYPE = "challenge_type";
-    public static final String FIELD_LAST_TIME_USING = "last_time";
-    public static final String FIELD_TOTAL = "total";
-    public static final String FIELD_CURRENT = "current";
-    public static final String FIELD_UNIT = "unit";
+    private static final String FIELD_IMAGE_ID = "image_id";
+    private static final String FIELD_TITLE = "title";
+    private static final String FIELD_STARS = "stars";
+    private static final String FIELD_OBJECT_TYPE = "object_type";
+    private static final String FIELD_CHALLENGE_TYPE = "challenge_type";
+    private static final String FIELD_LAST_TIME_USING = "last_time";
+    private static final String FIELD_TOTAL = "total";
+    private static final String FIELD_CURRENT = "current";
+    private static final String FIELD_UNIT = "unit";
 
     private static final String CREATE_TABLE_FOOD_EXERCISE = "CREATE TABLE " + TABLE_FOOD_EXERCISE + "("
             + FIELD_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
@@ -390,6 +392,7 @@ public class MyDatabase extends SQLiteOpenHelper {
         String[] types = {Constants.CHALLENGE_TYPE_GYM + "",
                 Constants.CHALLENGE_TYPE_PUSH_UP + "",
                 Constants.CHALLENGE_TYPE_WALK_A_MILE + ""};
+
         return getChallengeFromTypes(types);
     }
 
@@ -417,6 +420,7 @@ public class MyDatabase extends SQLiteOpenHelper {
                 Constants.CHALLENGE_TYPE_AVOID_SNACKING + ""};
         return getChallengeFromTypes(types);
     }
+
     /**
      * Get all my challenge from sqlite
      *
@@ -435,7 +439,7 @@ public class MyDatabase extends SQLiteOpenHelper {
                 NormalChallenge challenge = new NormalChallenge();
                 challenge.setId(cursor.getInt(cursor.getColumnIndex(FIELD_ID)))
                         .setImageId(R.drawable.challenges_general_after)
-                        .setTitle(cursor.getString(cursor.getColumnIndex(FIELD_NAME)))
+                        .setTitle(cursor.getString(cursor.getColumnIndex(FIELD_TITLE)))
                         .setStars(Constants.STARS_FOR_MY_CHALLENGE)
                         .setType(Constants.CHALLENGE_TYPE_OF_MY)
                         .setLastTime(cursor.getLong(cursor.getColumnIndex(FIELD_LAST_TIME_USING)));
@@ -461,6 +465,8 @@ public class MyDatabase extends SQLiteOpenHelper {
 
         //InClauses example: ?,?,? (Amount of ? depend types.length)
         String inClauses = TextUtils.join(",", Collections.nCopies(types.length, "?"));
+        Log.e(TAG, "WhereClauses: " + inClauses);
+        Log.e(TAG, "Sellections Args: " + Arrays.toString(types));
 
         String sql = "SELECT * FROM " + TABLE_CHALLENGE + " WHERE "
                 + FIELD_CHALLENGE_TYPE + " IN (" + inClauses + ")";
@@ -485,19 +491,19 @@ public class MyDatabase extends SQLiteOpenHelper {
      */
     private Challenge getChallengFromCursor(Cursor cursor) {
         Challenge challenge;
-        int objectType = cursor.getInt(cursor.getColumnIndex(FIELD_CHALLENGE_TYPE));
-        if (objectType == Constants.OBJECT_NORMAL_CHALLENGE) {
-            NormalChallenge nc = new NormalChallenge();
-            nc.setTotalCount((int) cursor.getFloat(cursor.getColumnIndex(FIELD_TOTAL)))
-                    .setCurrentPosition((int) cursor.getFloat(cursor.getColumnIndex(FIELD_CURRENT)))
-                    .setUnit(cursor.getString(cursor.getColumnIndex(FIELD_UNIT)));
-            challenge = nc;
-        } else if (objectType == Constants.OBJECT_ANIMATION_CHALLENGE) {
+        int objectType = cursor.getInt(cursor.getColumnIndex(FIELD_OBJECT_TYPE));
+        if (objectType == Constants.OBJECT_ANIMATION_CHALLENGE) {
             AnimationChallenge ac = new AnimationChallenge();
             ac.setTotalCount((int) cursor.getFloat(cursor.getColumnIndex(FIELD_TOTAL)))
                     .setCurrentPosition((int) cursor.getFloat(cursor.getColumnIndex(FIELD_CURRENT)))
                     .setUnit(cursor.getString(cursor.getColumnIndex(FIELD_UNIT)));
             challenge = ac;
+        } else if (objectType == Constants.OBJECT_NORMAL_CHALLENGE) {
+            NormalChallenge nc = new NormalChallenge();
+            nc.setTotalCount((int) cursor.getFloat(cursor.getColumnIndex(FIELD_TOTAL)))
+                    .setCurrentPosition((int) cursor.getFloat(cursor.getColumnIndex(FIELD_CURRENT)))
+                    .setUnit(cursor.getString(cursor.getColumnIndex(FIELD_UNIT)));
+            challenge = nc;
         } else if (objectType == Constants.OBJECT_RUN_CHALLENGE) {
             RunChallenge rc = new RunChallenge();
             rc.setTotalLength(cursor.getFloat(cursor.getColumnIndex(FIELD_TOTAL)))
@@ -513,20 +519,25 @@ public class MyDatabase extends SQLiteOpenHelper {
         }
         challenge.setId(cursor.getInt(cursor.getColumnIndex(FIELD_ID)))
                 .setImageId(cursor.getInt(cursor.getColumnIndex(FIELD_IMAGE_ID)))
-                .setTitle(cursor.getString(cursor.getColumnIndex(FIELD_NAME)))
+                .setTitle(cursor.getString(cursor.getColumnIndex(FIELD_TITLE)))
                 .setStars(Constants.STARS_FOR_MY_CHALLENGE)
-                .setType(Constants.CHALLENGE_TYPE_OF_MY)
+                .setType(cursor.getInt(cursor.getColumnIndex(FIELD_CHALLENGE_TYPE)))
                 .setLastTime(cursor.getLong(cursor.getColumnIndex(FIELD_LAST_TIME_USING)));
         return challenge;
     }
 
-    public Challenge getLastChallenge(){
+    /**
+     * Get last challenge depend last time using this challenge
+     *
+     * @return: last challenge
+     */
+    public Challenge getLastChallenge() {
         SQLiteDatabase db = this.getReadableDatabase();
-        String sql = "SELECT MAX(" + FIELD_LAST_TIME_USING +"), "
+        String sql = "SELECT MAX(" + FIELD_LAST_TIME_USING + ") AS " + FIELD_LAST_TIME_USING + ", "
                 + FIELD_ID + ", " + FIELD_IMAGE_ID + ", " + FIELD_TITLE + ", "
-                + FIELD_STARS + ", " + FIELD_TYPE + ", " + FIELD_OBJECT_TYPE + ", "
+                + FIELD_STARS + ", " + FIELD_OBJECT_TYPE + ", " + FIELD_CHALLENGE_TYPE + ", "
                 + FIELD_TOTAL + ", " + FIELD_CURRENT + ", " + FIELD_UNIT
-                + " FROM " + TABLE_FOOD_EXERCISE + " WHERE "
+                + " FROM " + TABLE_CHALLENGE + " WHERE "
                 + FIELD_LAST_TIME_USING + " > 0";
         Cursor cursor = db.rawQuery(sql, null);
 
@@ -540,4 +551,109 @@ public class MyDatabase extends SQLiteOpenHelper {
         return null;
     }
 
+    public Challenge getDrinkWaterChallenge() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String sql = "SELECT * FROM " + TABLE_CHALLENGE + " WHERE "
+                + FIELD_CHALLENGE_TYPE + " = ?";
+
+        Cursor cursor = db.rawQuery(sql, new String[]{String.valueOf(Constants.CHALLENGE_TYPE_DRINK_WATER)});
+
+        if (cursor.moveToFirst()) {
+            do {
+                NormalChallenge challenge = new NormalChallenge();
+                challenge.setId(cursor.getInt(cursor.getColumnIndex(FIELD_ID)))
+                        .setImageId(R.drawable.challenge_water_full)
+                        .setTitle(cursor.getString(cursor.getColumnIndex(FIELD_TITLE)))
+                        .setStars(cursor.getInt(cursor.getColumnIndex(FIELD_STARS)))
+                        .setType(cursor.getInt(cursor.getColumnIndex(FIELD_CHALLENGE_TYPE)))
+                        .setLastTime(cursor.getLong(cursor.getColumnIndex(FIELD_LAST_TIME_USING)));
+                challenge.setTotalCount((int) cursor.getFloat(cursor.getColumnIndex(FIELD_TOTAL)))
+                        .setCurrentPosition((int) cursor.getFloat(cursor.getColumnIndex(FIELD_CURRENT)))
+                        .setUnit(context.getString(R.string.events));
+                return challenge;
+            } while (cursor.moveToNext());
+        }
+        db.close();
+        return null;
+    }
+
+    /**
+     * Update last using challenge
+     *
+     * @param challenge: last challenge
+     * @return true if success, false if failed
+     */
+    public boolean updateLastChallenge(Challenge challenge) {
+        if (challenge instanceof NormalChallenge) {
+            return updateNormalChallenge((NormalChallenge) challenge);
+        } else if (challenge instanceof RunChallenge) {
+            return updateRunChallenge((RunChallenge) challenge);
+        } else if (challenge instanceof SelfControlChallenge) {
+            return updateSelfControlChallenge((SelfControlChallenge) challenge);
+        }
+        return false;
+    }
+
+    private boolean updateNormalChallenge(NormalChallenge challenge) {
+        SQLiteDatabase db = getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(FIELD_TOTAL, (float) challenge.getTotalCount());
+        values.put(FIELD_CURRENT, (float) challenge.getCurrentPosition());
+        values.put(FIELD_LAST_TIME_USING, challenge.getLastTime());
+
+        int num = db.update(TABLE_CHALLENGE, values,
+                FIELD_ID + "= ?", new String[]{String.valueOf(challenge.getId())});
+
+        db.close();
+
+        return num > 0;
+    }
+
+    private boolean updateRunChallenge(RunChallenge challenge) {
+        SQLiteDatabase db = getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(FIELD_TOTAL, (float) challenge.getTotalLength());
+        values.put(FIELD_CURRENT, (float) challenge.getCurrentPosition());
+        values.put(FIELD_LAST_TIME_USING, challenge.getLastTime());
+
+        int num = db.update(TABLE_CHALLENGE, values,
+                FIELD_ID + "= ?", new String[]{String.valueOf(challenge.getId())});
+
+        db.close();
+
+        return num > 0;
+    }
+
+    private boolean updateSelfControlChallenge(SelfControlChallenge challenge) {
+        SQLiteDatabase db = getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(FIELD_CURRENT, (float) challenge.getCurrentPosition());
+        values.put(FIELD_LAST_TIME_USING, challenge.getLastTime());
+
+        int num = db.update(TABLE_CHALLENGE, values,
+                FIELD_ID + "= ?", new String[]{String.valueOf(challenge.getId())});
+
+        db.close();
+
+        return num > 0;
+    }
+
+    public void showLogListChallenge(String nameList, List<Challenge> list) {
+        Log.e(TAG, "List name: " + nameList);
+        for (Challenge challenge : list) {
+            showLogChallenge(challenge);
+        }
+    }
+
+    public void showLogChallenge(Challenge challenge) {
+        Log.e(TAG, "ID: " + challenge.getId());
+        Log.e(TAG, "Name: " + challenge.getTitle());
+        Log.e(TAG, "Star: " + challenge.getStars());
+        Log.e(TAG, "Type: " + challenge.getType());
+        Log.e(TAG, "Last time: " + challenge.getLastTime());
+        Log.e(TAG, "");
+    }
 }

@@ -31,7 +31,7 @@ public class RunChallenge extends Challenge {
         return currentPosition;
     }
 
-    public RunChallenge setCurrentPosition(double currentPosition) {
+    public RunChallenge setCurrentPosition(float currentPosition) {
         this.currentPosition = currentPosition;
         return this;
     }

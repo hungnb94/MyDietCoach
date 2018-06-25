@@ -40,7 +40,7 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="@dimen/_40sdp"
                     android:gravity="center_vertical"
                     android:paddingLeft="@dimen/_10sdp"
                     android:paddingRight="@dimen/_10sdp"
@@ -63,11 +63,11 @@
                     <Button
                         android:id="@+id/btnUndo"
                         android:layout_width="wrap_content"
-                        android:layout_height="@dimen/btn_undo_h"
+                        android:layout_height="@dimen/_25sdp"
                         android:background="@drawable/border_button"
                         android:text="@string/undo"
                         android:textColor="@color/colorWhite"
-                        android:visibility="invisible" />
+                        android:visibility="gone" />
 
                 </LinearLayout>
 
@@ -88,7 +88,7 @@
                         android:id="@+id/rlHumanPosition"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:visibility="visible">
+                        android:visibility="gone">
 
                         <LinearLayout
                             android:id="@+id/llHumanPosition"
@@ -133,7 +133,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/_5sdp"
-                        android:visibility="gone">
+                        android:visibility="visible">
 
                         <FrameLayout
                             android:id="@+id/flSelfControlChallenge"
@@ -280,6 +280,7 @@
             </RelativeLayout>
         </LinearLayout>
 
+
         <FrameLayout
             android:id="@+id/flGuide"
             android:layout_width="match_parent"
@@ -289,21 +290,21 @@
             <com.hb.mydietcoach.custom_view.DrawingView
                 android:id="@+id/drawingView"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:alpha="0.5" />
 
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:alpha="0.8"
                 android:background="@color/colorBlack"
-                android:orientation="vertical"
-                tools:ignore="InvalidId">
+                android:gravity="bottom"
+                android:orientation="vertical">
 
                 <LinearLayout
                     android:id="@+id/llGuideTop"
                     android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
                     android:gravity="bottom"
                     android:orientation="vertical">
 
@@ -337,31 +338,31 @@
                     </LinearLayout>
 
                     <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="right"
-                        android:src="@drawable/ribbon_top"
-                        tools:ignore="RtlHardcoded" />
+                        android:layout_width="@dimen/_300sdp"
+                        android:layout_height="@dimen/_113sdp"
+                        android:layout_gravity="end"
+                        android:src="@drawable/ribbon_top" />
 
                 </LinearLayout>
 
                 <LinearLayout
                     android:id="@+id/llGuideBottom"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="right"
-                    android:orientation="vertical"
-                    tools:ignore="RtlHardcoded">
+                    android:layout_below="@id/llGuideTop"
+                    android:gravity="end"
+                    android:orientation="vertical">
 
                     <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="@dimen/_300sdp"
+                        android:layout_height="@dimen/_230sdp"
                         android:src="@drawable/ribbon_bottom" />
 
                 </LinearLayout>
-            </LinearLayout>
+            </RelativeLayout>
 
         </FrameLayout>
+
     </FrameLayout>
 
 </RelativeLayout>

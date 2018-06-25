@@ -1,11 +1,13 @@
 package com.hb.mydietcoach.model;
 
+import com.hb.mydietcoach.utils.Constants;
+
 import java.io.Serializable;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 
-public class Challenge implements Serializable {
+public abstract class Challenge implements Serializable {
 
     private long id;
     private int imageId;
@@ -62,6 +64,22 @@ public class Challenge implements Serializable {
         return this;
     }
 
+    public String getTypeString() {
+        if (getType() == Constants.CHALLENGE_TYPE_DRINK_WATER) return "CHALLENGE_TYPE_DRINK_WATER";
+        if (getType() == Constants.CHALLENGE_TYPE_GYM) return "CHALLENGE_TYPE_GYM";
+        if (getType() == Constants.CHALLENGE_TYPE_FILL_MY_PLATE)
+            return "CHALLENGE_TYPE_FILL_MY_PLATE";
+        if (getType() == Constants.CHALLENGE_TYPE_AVOID_JUNK_FOOD)
+            return "CHALLENGE_TYPE_AVOID_JUNK_FOOD";
+        if (getType() == Constants.CHALLENGE_TYPE_AVOID_SUGARY_DRINK)
+            return "CHALLENGE_TYPE_AVOID_SUGARY_DRINK";
+        if (getType() == Constants.CHALLENGE_TYPE_AVOID_SNACKING)
+            return "CHALLENGE_TYPE_AVOID_SNACKING";
+        if (getType() == Constants.CHALLENGE_TYPE_OF_MY) return "CHALLENGE_TYPE_OF_MY";
+        if (getType() == Constants.CHALLENGE_TYPE_WALK_A_MILE) return "CHALLENGE_TYPE_WALK_A_MILE";
+        return null;
+    }
+
     public int getStars() {
         return stars;
     }
@@ -81,11 +99,14 @@ public class Challenge implements Serializable {
     }
 
     public boolean isNewDay(){
+        if (lastTime == 0) return false;
         Calendar lastDay = new GregorianCalendar();
         lastDay.setTimeInMillis(lastTime);
         Calendar today = Calendar.getInstance();
-        return (lastDay.get(Calendar.DAY_OF_YEAR) == today.get(Calendar.DAY_OF_YEAR)
-                && lastDay.get(Calendar.MONTH) == today.get(Calendar.MONTH)
-                && lastDay.get(Calendar.YEAR) == today.get(Calendar.YEAR));
+        return lastDay.get(Calendar.DAY_OF_YEAR) != today.get(Calendar.DAY_OF_YEAR)
+                || lastDay.get(Calendar.MONTH) != today.get(Calendar.MONTH)
+                || lastDay.get(Calendar.YEAR) != today.get(Calendar.YEAR);
     }
+
+    public abstract Challenge setCurrentPosition(float currentPosition);
 }

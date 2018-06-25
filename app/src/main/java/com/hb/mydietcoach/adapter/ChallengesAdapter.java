@@ -12,7 +12,6 @@ import android.widget.ImageView;
 
 import com.hb.mydietcoach.R;
 import com.hb.mydietcoach.model.AnimationChallenge;
-import com.hb.mydietcoach.model.Challenge;
 import com.hb.mydietcoach.model.NormalChallenge;
 import com.hb.mydietcoach.utils.Constants;
 
@@ -20,15 +19,12 @@ public class ChallengesAdapter extends RecyclerView.Adapter<ChallengesAdapter.My
 
     private final String TAG = ChallengesAdapter.class.getSimpleName();
 
-    private final int DRINK_WATER_LENGTH = 250;
+    private final int CHANGING_IMAGE_LENGTH = 250;
 
     private ItemEventListener listener;
-    //    private Context context;
-    private int numTotalItems;
-    private int numCurrentPosition = 0;
 
     private LayoutInflater inflater;
-    private Challenge challenge;
+    private NormalChallenge challenge;
 
     private int[] arrDrinkWaters = {R.drawable.challenges_water_dark,
             R.drawable.challenge_water_b1, R.drawable.challenge_water_b2,
@@ -61,10 +57,9 @@ public class ChallengesAdapter extends RecyclerView.Adapter<ChallengesAdapter.My
             R.drawable.challenges_fill_plate_helper,
             R.drawable.challenges_portion2};
 
-    public ChallengesAdapter(Context context, Challenge challenge, int numGlasses) {
+    public ChallengesAdapter(Context context, NormalChallenge challenge) {
 //        this.context = context;
         this.challenge = challenge;
-        this.numTotalItems = numGlasses;
 
         inflater = LayoutInflater.from(context);
     }
@@ -80,11 +75,11 @@ public class ChallengesAdapter extends RecyclerView.Adapter<ChallengesAdapter.My
     public void onBindViewHolder(@NonNull final MyViewHolder holder, final int position) {
         int[] arrImage = getImageArray();
 
-        if (position == numCurrentPosition) {
+        if (position == challenge.getCurrentPosition()) {
             if (arrImage != null) holder.ivGlass.setImageResource(arrImage[1]);
             holder.ivSign.setVisibility(View.GONE);
             holder.ivArrow.setVisibility(View.VISIBLE);
-        } else if (position < numCurrentPosition) {
+        } else if (position < challenge.getCurrentPosition()) {
             if (arrImage != null) holder.ivGlass.setImageResource(arrImage[arrImage.length - 1]);
             holder.ivSign.setVisibility(View.VISIBLE);
             holder.ivArrow.setVisibility(View.GONE);
@@ -101,12 +96,13 @@ public class ChallengesAdapter extends RecyclerView.Adapter<ChallengesAdapter.My
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (position == numCurrentPosition) {
+                if (position == challenge.getCurrentPosition()) {
                     if (listener != null) listener.startClick();
-                    numCurrentPosition++;
+                    challenge.setCurrentPosition(challenge.getCurrentPosition() + 1);
                     int[] arrImage = getImageArray();
                     if (challenge instanceof AnimationChallenge) {
-                        startAnimationFromChallenge(holder.ivGlass, holder.ivAbove, arrImage, challenge);
+                        AnimationChallenge ac = (AnimationChallenge) challenge;
+                        startAnimationFromChallenge(holder.ivGlass, holder.ivAbove, arrImage, ac);
                     } else if (challenge instanceof NormalChallenge) {
                         changeBackgroundLikeAnimation(holder.ivGlass, arrImage, 1);
                     }
@@ -126,14 +122,15 @@ public class ChallengesAdapter extends RecyclerView.Adapter<ChallengesAdapter.My
     }
 
     private void startAnimationFromChallenge(final ImageView ivBelow, final ImageView ivAbove,
-                                             final int[] resId, Challenge challenge) {
+                                             final int[] resId, final AnimationChallenge challenge) {
         if (listener != null) listener.startClick();
-        Animation animation = ((AnimationChallenge) challenge).getAnimation(ivAbove.getContext());
+        Animation animation = challenge.getAnimation(ivAbove.getContext());
         if (animation == null) {
             notifyDataSetChanged();
             if (listener != null) {
                 listener.itemViewDone();
-                if (numCurrentPosition == numTotalItems) listener.allItemDone();
+                if (challenge.getCurrentPosition() == challenge.getTotalCount())
+                    listener.allItemDone();
             }
             return;
         }
@@ -145,9 +142,11 @@ public class ChallengesAdapter extends RecyclerView.Adapter<ChallengesAdapter.My
             @Override
             public void onAnimationEnd(Animation animation) {
                 notifyDataSetChanged();
+
                 if (listener != null) {
                     listener.itemViewDone();
-                    if (numCurrentPosition == numTotalItems) listener.allItemDone();
+                    if (challenge.getCurrentPosition() == challenge.getTotalCount())
+                        listener.allItemDone();
                 }
             }
 
@@ -160,29 +159,29 @@ public class ChallengesAdapter extends RecyclerView.Adapter<ChallengesAdapter.My
 
     @Override
     public int getItemCount() {
-        return numTotalItems;
+        return challenge.getTotalCount();
     }
 
     public void backToPreviousItem() {
-        numCurrentPosition--;
+        challenge.setCurrentPosition(challenge.getCurrentPosition() - 1);
         notifyDataSetChanged();
     }
 
     public int getCurentPosition() {
-        return numCurrentPosition;
+        return challenge.getCurrentPosition();
     }
 
-    public void setNumCurrentPosition(int numGlassesLeft) {
-        numCurrentPosition = numGlassesLeft;
-    }
+//    public void setNumCurrentPosition(int numGlassesLeft) {
+//        challenge.setCurrentPosition(numGlassesLeft);
+//    }
 
     public int getType() {
         return this.challenge.getType();
     }
 
-    public void updateTotalItems(int newValue) {
-        this.numTotalItems = newValue;
-    }
+//    public void updateTotalItems(int newValue) {
+//        challenge.setTotalCount(newValue);
+//    }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
@@ -222,7 +221,7 @@ public class ChallengesAdapter extends RecyclerView.Adapter<ChallengesAdapter.My
                 }
             }
         };
-        handler.postDelayed(runnable, DRINK_WATER_LENGTH);
+        handler.postDelayed(runnable, CHANGING_IMAGE_LENGTH);
     }
 
     public void setOnItemEventListener(ItemEventListener itemEventListener) {
@@ -230,7 +229,7 @@ public class ChallengesAdapter extends RecyclerView.Adapter<ChallengesAdapter.My
     }
 
     public boolean isAllItemDone() {
-        return numTotalItems == numCurrentPosition;
+        return challenge.getTotalCount() == challenge.getCurrentPosition();
     }
 
     public interface ItemEventListener {
