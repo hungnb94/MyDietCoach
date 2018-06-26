@@ -41,7 +41,7 @@ import com.hb.mydietcoach.activity.diary.DiaryActivity;
 import com.hb.mydietcoach.activity.photo.PhotosActivity;
 import com.hb.mydietcoach.activity.reminder.ReminderActivity;
 import com.hb.mydietcoach.activity.tip.TipsActivity;
-import com.hb.mydietcoach.adapter.ChallengesAdapter;
+import com.hb.mydietcoach.adapter.challenge.ChallengesAdapter;
 import com.hb.mydietcoach.custom_view.DrawingView;
 import com.hb.mydietcoach.database.MyDatabase;
 import com.hb.mydietcoach.dialog.RestartChallengeDialog;

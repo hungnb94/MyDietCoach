@@ -1,4 +1,4 @@
-package com.hb.mydietcoach.adapter;
+package com.hb.mydietcoach.adapter.challenge;
 
 import android.app.Activity;
 import android.content.Intent;

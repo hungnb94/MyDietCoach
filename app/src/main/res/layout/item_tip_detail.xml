@@ -28,7 +28,7 @@
             android:layout_width="@dimen/_250sdp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:maxLines="4"
+            android:maxLines="3"
             android:text="@string/emotion_eating_guide"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="@dimen/_20ssp"

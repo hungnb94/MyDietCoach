@@ -8,15 +8,19 @@ import android.support.v7.widget.PagerSnapHelper;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SnapHelper;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
 
 import com.hb.mydietcoach.R;
-import com.hb.mydietcoach.adapter.TipDetailAdapter;
+import com.hb.mydietcoach.adapter.tip.TipDetailAdapter;
 import com.hb.mydietcoach.model.TipCategory;
 import com.hb.mydietcoach.model.TipDetail;
+import com.hb.mydietcoach.utils.MyUtils;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Objects;
 
 import butterknife.ButterKnife;
@@ -32,6 +36,7 @@ public class TipDetailActivity extends AppCompatActivity implements TipDetailAda
     public static final String TIP_IMAGE_RESOURCE = "image";
 
     private Bundle bundle;
+    private Realm realm;
 
     private FrameLayout flArrow;
 
@@ -50,13 +55,15 @@ public class TipDetailActivity extends AppCompatActivity implements TipDetailAda
         bundle = getIntent().getExtras();
 
         //Get data from realm
-        Realm realm = Realm.getDefaultInstance();
+        realm = Realm.getDefaultInstance();
         TipCategory results = realm.where(TipCategory.class)
                 .equalTo(TipCategory.ID, bundle.getInt(TIP_CATEGORY_ID))
                 .findFirst();
 
         list = new RealmList<>();
         list.addAll(Objects.requireNonNull(results).getAdvices());
+        sort(list);
+
         initView();
     }
 
@@ -85,15 +92,60 @@ public class TipDetailActivity extends AppCompatActivity implements TipDetailAda
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.tip_detail, menu);
+        return true;
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
                 finish();
                 break;
+            case R.id.action_share:
+                share();
+                break;
+            case R.id.action_like:
+                like();
+                break;
+            case R.id.action_dislike:
+                dislike();
+                break;
+            case R.id.action_add_reminder:
+                setReminder();
+                break;
             default:
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void share() {
+        //TODO: Share
+
+    }
+
+    private void like() {
+        TipDetail detail = list.get(manager.findFirstVisibleItemPosition());
+        realm.beginTransaction();
+        detail.setPiority(Objects.requireNonNull(detail).getPiority() + 1);
+        realm.insertOrUpdate(detail);
+        realm.commitTransaction();
+        MyUtils.showToast(this, getString(R.string.like_toast_msg));
+    }
+
+    private void dislike() {
+        MyUtils.showToast(this, getString(R.string.dislike_toast_msg));
+        final TipDetail detail = list.get(manager.findFirstVisibleItemPosition());
+        realm.beginTransaction();
+        Objects.requireNonNull(detail).deleteFromRealm();
+        realm.commitTransaction();
+    }
+
+    private void setReminder() {
+        //TODO: set reminder
+
     }
 
     //Using for hide/show next/back icon
@@ -125,5 +177,21 @@ public class TipDetailActivity extends AppCompatActivity implements TipDetailAda
         if (position < list.size() - 1)
             manager.smoothScrollToPosition(recyclerView, null, position + 1);
         else manager.smoothScrollToPosition(recyclerView, null, 0);
+    }
+
+    /**
+     * Sort list by piority
+     *
+     * @param list: list of tip detail
+     */
+    private void sort(RealmList<TipDetail> list) {
+        Collections.sort(list, new Comparator<TipDetail>() {
+            @Override
+            public int compare(TipDetail tipDetail, TipDetail t1) {
+                if (tipDetail.getPiority() > t1.getPiority()) return -1;
+                else if (tipDetail.getPiority() == t1.getPiority()) return 0;
+                return 1;
+            }
+        });
     }
 }

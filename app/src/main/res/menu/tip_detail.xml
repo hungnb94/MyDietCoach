@@ -1,4 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <item
+        android:id="@+id/action_share"
+        android:title="@string/share"
+        android:icon="@drawable/ic_overflow_menu_share"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_like"
+        android:title="@string/liked"
+        android:icon="@drawable/ic_overflow_menu_like"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_dislike"
+        android:title="@string/not_for_me"
+        android:icon="@drawable/ic_overflow_menu_dislike"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_add_reminder"
+        android:title="@string/set_reminder"
+        android:icon="@drawable/ic_overflow_menu_reminder"
+        app:showAsAction="never" />
 </menu>

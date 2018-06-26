@@ -28,6 +28,7 @@
             android:textSize="@dimen/_12ssp" />
 
         <EditText
+            android:id="@+id/editText"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_90sdp"
             android:layout_marginTop="@dimen/_10sdp"
@@ -73,6 +74,7 @@
             android:layout_height="match_parent">
 
             <Button
+                android:id="@+id/btnSave"
                 style="@style/ButtonBottom"
                 android:layout_gravity="bottom|end"
                 android:text="@string/save" />

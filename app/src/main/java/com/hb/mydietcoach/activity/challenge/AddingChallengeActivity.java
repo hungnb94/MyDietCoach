@@ -18,7 +18,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
 import com.hb.mydietcoach.R;
-import com.hb.mydietcoach.adapter.AddingChallengeAdapter;
+import com.hb.mydietcoach.adapter.challenge.AddingChallengeAdapter;
 import com.hb.mydietcoach.database.MyDatabase;
 import com.hb.mydietcoach.model.Challenge;
 import com.hb.mydietcoach.utils.Constants;

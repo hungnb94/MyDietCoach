@@ -1,4 +1,4 @@
-package com.hb.mydietcoach.adapter;
+package com.hb.mydietcoach.adapter.diary;
 
 import android.content.Context;
 import android.support.annotation.Nullable;

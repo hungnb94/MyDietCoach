@@ -1,19 +1,28 @@
 package com.hb.mydietcoach.model;
 
-import io.realm.RealmModel;
-import io.realm.annotations.RealmClass;
+import io.realm.RealmObject;
 
-@RealmClass
-public class TipDetail implements RealmModel {
+public class TipDetail extends RealmObject {
     public static final String MESSAGE = "message";
+    public static final String PIORITY = "piority";
 
     private String message;
+    private int piority;
 
     public TipDetail() {
     }
 
-    public TipDetail(String message) {
+    public TipDetail(String message, int piority) {
         this.message = message;
+        this.piority = piority;
+    }
+
+    public int getPiority() {
+        return piority;
+    }
+
+    public void setPiority(int piority) {
+        this.piority = piority;
     }
 
     public String getMessage() {

@@ -205,4 +205,11 @@
     <string name="eating_out">Eating Out</string>
     <string name="food_temptation">Food Temptation</string>
     <string name="family_meal">Family Meal</string>
+    <string name="liked">Liked</string>
+    <string name="not_for_me">Not For Me</string>
+    <string name="set_reminder">Set Reminder</string>
+    <string name="like_toast_msg">This tip will get piority</string>
+    <string name="dislike_toast_msg">This tip will not appear anymore (from the next activation)</string>
+    <string name="add_tip">Add Tip</string>
+    <string name="alert_empty_tip">You are trying to add an empty tip</string>
 </resources>

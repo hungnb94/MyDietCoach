@@ -3,11 +3,9 @@ package com.hb.mydietcoach.model;
 import java.util.List;
 
 import io.realm.RealmList;
-import io.realm.RealmModel;
-import io.realm.annotations.RealmClass;
+import io.realm.RealmObject;
 
-@RealmClass
-public class TipCategory implements RealmModel {
+public class TipCategory extends RealmObject {
     public static final String ID = "id";
     public static final String TITLE = "title";
 

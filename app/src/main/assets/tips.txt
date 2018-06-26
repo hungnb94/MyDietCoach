@@ -1,7 +1,7 @@
 [
     {
         "id":1;
-        "title":"food_cravings",
+        "title":"Food Cravings",
         "advices":[
             {
                 "message":"Chew sugar-free gum"
@@ -16,7 +16,7 @@
     },
     {
         "id":2;
-        "title":"emotional_eating",
+        "title":"Emotional Eating",
         "advices":[
             {
                 "message":"Imagine what it would be like to have a shapely, firm stomach. Do you want one? Control yourself"
@@ -31,7 +31,7 @@
     },
     {
         "id":3;
-        "title":"eating_out",
+        "title":"Eating Out",
         "advices":[
             {
                 "message":"Don't be tempted to eat fast food - it's very unhealthy"
@@ -46,7 +46,7 @@
     },
     {
         "id":4;
-        "title":"food_temptation",
+        "title":"Food Temptation",
         "advices":[
             {
                 "message":"Chew sugar-free gum"
@@ -61,7 +61,7 @@
     },
     {
         "id":5;
-        "title":"family_meal",
+        "title":"Family Meal",
         "advices":[
             {
                 "message":"Remember the way you want to look and feel? Yeah, it's worth controlling yourself"

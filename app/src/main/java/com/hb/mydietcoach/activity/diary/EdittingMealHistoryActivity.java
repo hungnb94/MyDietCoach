@@ -15,7 +15,7 @@ import com.baoyz.swipemenulistview.SwipeMenuCreator;
 import com.baoyz.swipemenulistview.SwipeMenuItem;
 import com.baoyz.swipemenulistview.SwipeMenuListView;
 import com.hb.mydietcoach.R;
-import com.hb.mydietcoach.adapter.DiaryActivityAdapter;
+import com.hb.mydietcoach.adapter.diary.DiaryActivityAdapter;
 import com.hb.mydietcoach.database.MyDatabase;
 import com.hb.mydietcoach.model.IItemDiary;
 import com.hb.mydietcoach.preference.PreferenceManager;
