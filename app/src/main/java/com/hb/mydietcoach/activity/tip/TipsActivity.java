@@ -9,6 +9,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.view.MenuItem;
 
 import com.hb.mydietcoach.R;
@@ -20,8 +21,10 @@ import com.hb.mydietcoach.activity.challenge.ChallengesActivity;
 import com.hb.mydietcoach.activity.diary.DiaryActivity;
 import com.hb.mydietcoach.activity.photo.PhotosActivity;
 import com.hb.mydietcoach.activity.reminder.ReminderActivity;
+import com.hb.mydietcoach.utils.Constants;
 
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class TipsActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -34,6 +37,30 @@ public class TipsActivity extends AppCompatActivity
 
         initView();
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.tips, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_new_tip:
+                openAddingTipActicity();
+                break;
+            default:
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void openAddingTipActicity() {
+        Intent intent = new Intent(this, AddingTipActivity.class);
+        startActivity(intent);
+    }
+
 
     private void initView() {
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -49,6 +76,51 @@ public class TipsActivity extends AppCompatActivity
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.setCheckedItem(R.id.nav_tips);
+    }
+
+    @OnClick(R.id.llFoodCravings)
+    void clickFoodCravings() {
+        openTipDetailActivity(Constants.ID_FOOD_CRAVINGS,
+                getString(R.string.food_cravings),
+                R.drawable.ic_cravings_tips);
+    }
+
+    @OnClick(R.id.llEmotionalEating)
+    void clickEmotionalEating() {
+        openTipDetailActivity(Constants.ID_EMOTIONAL_EATING,
+                getString(R.string.emotional_eating),
+                R.drawable.ic_emotional_tips);
+    }
+
+    @OnClick(R.id.llEatingOut)
+    void clickEatingOut() {
+        openTipDetailActivity(Constants.ID_EATING_OUT,
+                getString(R.string.eating_out),
+                R.drawable.ic_eating_out_tips);
+    }
+
+    @OnClick(R.id.llFoodTemptation)
+    void clickFoodTemptation() {
+        openTipDetailActivity(Constants.ID_FOOD_TEMPTATIOIN,
+                getString(R.string.food_temptation),
+                R.drawable.ic_temptation_tips);
+    }
+
+    @OnClick(R.id.llFamilyMeal)
+    void clickFamilyMeal() {
+        openTipDetailActivity(Constants.ID_FAMILY_MEAL,
+                getString(R.string.family_meal),
+                R.drawable.ic_family_meal_tips);
+    }
+
+    private void openTipDetailActivity(int tipID, String title, int imgResID) {
+        Intent intent = new Intent(this, TipDetailActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putInt(TipDetailActivity.TIP_CATEGORY_ID, tipID);
+        bundle.putInt(TipDetailActivity.TIP_IMAGE_RESOURCE, imgResID);
+        intent.putExtras(bundle);
+        startActivity(intent);
+
     }
 
     @Override

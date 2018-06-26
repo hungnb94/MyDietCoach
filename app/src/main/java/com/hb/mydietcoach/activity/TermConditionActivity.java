@@ -22,14 +22,22 @@ import com.hb.mydietcoach.model.Challenge;
 import com.hb.mydietcoach.model.NormalChallenge;
 import com.hb.mydietcoach.model.RunChallenge;
 import com.hb.mydietcoach.model.SelfControlChallenge;
+import com.hb.mydietcoach.model.TipCategory;
+import com.hb.mydietcoach.model.TipDetail;
 import com.hb.mydietcoach.preference.PreferenceManager;
 import com.hb.mydietcoach.utils.Constants;
+import com.hb.mydietcoach.utils.FileUtils;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import io.realm.Realm;
 
 public class TermConditionActivity extends AppCompatActivity {
 
@@ -152,7 +160,7 @@ public class TermConditionActivity extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            database = new MyDatabase(TermConditionActivity.this);
+            database = new MyDatabase(getApplicationContext());
         }
 
         @Override
@@ -164,6 +172,14 @@ public class TermConditionActivity extends AppCompatActivity {
                 long id = database.insertChallenge(challenge);
                 challenge.setId(id);
             }
+
+            List<TipCategory> categories = getDefaultCategories();
+
+            //Insert to realm database
+            Realm realm = Realm.getDefaultInstance();
+            realm.beginTransaction();
+            realm.insertOrUpdate(categories);
+            realm.commitTransaction();
             return null;
         }
 
@@ -264,6 +280,38 @@ public class TermConditionActivity extends AppCompatActivity {
                     .setType(Constants.CHALLENGE_TYPE_AVOID_SNACKING);
             list.add(scc);
 
+            return list;
+        }
+
+        private List<TipCategory> getDefaultCategories() {
+            List<TipCategory> list = new ArrayList<>();
+
+            String content = FileUtils.readFileFromAssets(getApplicationContext(), "tips.txt");
+            Log.e(TAG, "Read from asset file: ");
+            Log.e(TAG, content);
+
+            //Parse json
+            try {
+                JSONArray jsonArray = new JSONArray(content);
+                for (int i = 0; i < jsonArray.length(); i++) {
+                    JSONObject object = jsonArray.getJSONObject(i);
+                    TipCategory tip = new TipCategory();
+                    tip.setId(object.getInt("id"));
+                    tip.setTitle(object.getString("title"));
+
+                    JSONArray array = object.getJSONArray("advices");
+                    List<TipDetail> details = new ArrayList<>();
+                    for (int j = 0; j < array.length(); j++) {
+                        TipDetail td = new TipDetail();
+                        td.setMessage(array.getJSONObject(j).getString("message"));
+                        details.add(td);
+                    }
+                    tip.setAdvices(details);
+                    list.add(tip);
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
             return list;
         }
     }

@@ -44,4 +44,33 @@
         <item name="android:textSize">@dimen/_13ssp</item>
     </style>
 
+    <style name="TipsActivityLinearLayout">
+        <item name="android:paddingTop">@dimen/_5sdp</item>
+        <item name="android:paddingBottom">@dimen/_5sdp</item>
+        <item name="android:layout_marginStart">@dimen/_15sdp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center_vertical</item>
+    </style>
+
+    <style name="TipsActivityImageView">
+        <item name="android:layout_width">@dimen/_35sdp</item>
+        <item name="android:layout_height">@dimen/_35sdp</item>
+    </style>
+
+    <style name="TipsActivityTextView">
+        <item name="android:fontFamily">@font/museo_sans_rounded_500</item>
+        <item name="android:layout_marginStart">@dimen/_10sdp</item>
+        <item name="android:textSize">@dimen/_14ssp</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="TipsActivitySeperator">
+        <item name="android:layout_marginStart">@dimen/_60sdp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/_1sdp</item>
+        <item name="android:background">@color/colorGrey</item>
+    </style>
+
 </resources>

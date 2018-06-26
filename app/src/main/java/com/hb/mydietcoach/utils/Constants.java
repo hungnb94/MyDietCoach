@@ -80,4 +80,11 @@ public class Constants {
 
     public static final float LB_TO_KG = (float) 0.45359237;
     public static final String IS_MOTIVATIONAL_NOTIFICATION = "motivational";
+
+    //TIPS CATEGORY ID
+    public static final int ID_FOOD_CRAVINGS = 1;
+    public static final int ID_EMOTIONAL_EATING = 2;
+    public static final int ID_EATING_OUT = 3;
+    public static final int ID_FOOD_TEMPTATIOIN = 4;
+    public static final int ID_FAMILY_MEAL = 5;
 }

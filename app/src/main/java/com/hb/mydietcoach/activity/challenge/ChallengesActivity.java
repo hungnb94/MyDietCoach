@@ -69,6 +69,7 @@ public class ChallengesActivity extends AppCompatActivity
     private static final String TAG = ChallengesActivity.class.getSimpleName();
     private static final long ANIMATION_CHALLENGE_LENGTH = 2000;
     private static final long ANIMATION_TEMP_LENGTH = 1000;
+    private static final long UNDO_BUTTON_LENGTH = 3000;
 
     private static final int SEEKBAR_MAX_VALUE = 1000;
 
@@ -90,11 +91,11 @@ public class ChallengesActivity extends AppCompatActivity
     //All challenge type
     private LinearLayout llPoint;
     private TextView tvPoint, tvTitleChallenge;
+    private Button btnUndo;
 
     //Function for normal challenges
     private RecyclerView recyclerView;
     private ChallengesAdapter adapter;
-    private Button btnUndo;
     private Animation animScale;
     //Function for run challenge
     private NumberFormat format;
@@ -623,20 +624,20 @@ public class ChallengesActivity extends AppCompatActivity
 
     @Override
     public void startClick() {
-        btnUndo.setVisibility(View.INVISIBLE);
+        btnUndo.setVisibility(View.GONE);
     }
 
     @Override
     public void itemViewDone() {
         btnUndo.setVisibility(View.VISIBLE);
-        new Handler().postDelayed(undoRunnable, 3000);
+        new Handler().postDelayed(undoRunnable, UNDO_BUTTON_LENGTH);
         updatePoint(true);
     }
 
     Runnable undoRunnable = new Runnable() {
         @Override
         public void run() {
-            btnUndo.setVisibility(View.INVISIBLE);
+            btnUndo.setVisibility(View.GONE);
         }
     };
 
@@ -651,8 +652,17 @@ public class ChallengesActivity extends AppCompatActivity
     @OnClick(R.id.btnUndo)
     public void clickUndo() {
         btnUndo.setVisibility(View.GONE);
-        if (adapter.isAllItemDone()) clearStrikeTextTitle();
-        adapter.backToPreviousItem();
+        if (challenge instanceof NormalChallenge) {
+            if (adapter.isAllItemDone()) clearStrikeTextTitle();
+            adapter.backToPreviousItem();
+        } else if (challenge instanceof SelfControlChallenge) {
+            SelfControlChallenge scc = (SelfControlChallenge) challenge;
+            int current = scc.getCurrentPosition();
+            --current;
+            scc.setCurrentPosition(current);
+
+            updateSelfControlChallenge(scc, false);
+        }
     }
 
     /**
@@ -807,10 +817,16 @@ public class ChallengesActivity extends AppCompatActivity
     @OnClick(R.id.ivAvoidHuman)
     void clickAvoidHuman() {
         if (challenge instanceof SelfControlChallenge) {
+            //Set current position
             SelfControlChallenge scc = (SelfControlChallenge) challenge;
             int currentPosition = scc.getCurrentPosition();
             if (currentPosition == Constants.SELF_CONTROL_CHALLENGE_TOTAL_ITEMS) return;
             scc.setCurrentPosition(currentPosition + 1);
+
+            //Show undo button
+            btnUndo.setVisibility(View.VISIBLE);
+            new Handler().postDelayed(undoRunnable, UNDO_BUTTON_LENGTH);
+
             updateSelfControlChallenge((SelfControlChallenge) challenge, true);
         }
     }

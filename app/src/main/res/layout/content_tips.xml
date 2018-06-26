@@ -1,24 +1,108 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.tip.TipsActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".activity.tip.TipsActivity">
 
-    <include android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        layout="@layout/app_bar_main"/>
+    <include
+        layout="@layout/app_bar_main"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recyclerView"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
-    </LinearLayout>
+            android:layout_height="wrap_content"
+            android:background="@color/colorCream"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/llFoodCravings"
+                style="@style/TipsActivityLinearLayout">
+
+                <ImageView
+                    style="@style/TipsActivityImageView"
+                    android:src="@drawable/ic_cravings_tips" />
+
+                <TextView
+                    style="@style/TipsActivityTextView"
+                    android:text="@string/food_cravings" />
+
+            </LinearLayout>
+
+            <View style="@style/TipsActivitySeperator" />
+
+            <LinearLayout
+                android:id="@+id/llEmotionalEating"
+                style="@style/TipsActivityLinearLayout">
+
+                <ImageView
+                    style="@style/TipsActivityImageView"
+                    android:src="@drawable/ic_emotional_tips" />
+
+                <TextView
+                    style="@style/TipsActivityTextView"
+                    android:text="@string/emotional_eating" />
+
+            </LinearLayout>
+
+            <View style="@style/TipsActivitySeperator" />
+
+            <LinearLayout
+                android:id="@+id/llEatingOut"
+                style="@style/TipsActivityLinearLayout">
+
+                <ImageView
+                    style="@style/TipsActivityImageView"
+                    android:src="@drawable/ic_eating_out_tips" />
+
+                <TextView
+                    style="@style/TipsActivityTextView"
+                    android:text="@string/eating_out" />
+
+            </LinearLayout>
+
+            <View style="@style/TipsActivitySeperator" />
+
+            <LinearLayout
+                android:id="@+id/llFoodTemptation"
+                style="@style/TipsActivityLinearLayout">
+
+                <ImageView
+                    style="@style/TipsActivityImageView"
+                    android:src="@drawable/ic_temptation_tips" />
+
+                <TextView
+                    style="@style/TipsActivityTextView"
+                    android:text="@string/food_temptation" />
+
+            </LinearLayout>
+
+            <View style="@style/TipsActivitySeperator" />
+
+            <LinearLayout
+                android:id="@+id/llFamilyMeal"
+                style="@style/TipsActivityLinearLayout">
+
+                <ImageView
+                    style="@style/TipsActivityImageView"
+                    android:src="@drawable/family_meal_tip_l" />
+
+                <TextView
+                    style="@style/TipsActivityTextView"
+                    android:text="@string/family_meal" />
+
+            </LinearLayout>
+
+            <View style="@style/TipsActivitySeperator" />
+
+        </LinearLayout>
+
+    </ScrollView>
 
 </LinearLayout>

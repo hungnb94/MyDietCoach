@@ -13,30 +13,35 @@
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_15sdp">
+        android:layout_height="match_parent">
 
-        <ImageView
-            android:layout_width="@dimen/_280sdp"
-            android:layout_height="@dimen/_200sdp"
-            android:layout_gravity="center"
-            android:scaleType="fitXY"
-            android:src="@drawable/feedbacks_bubble" />
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
 
-        <ImageView
-            android:id="@+id/ivTipType"
-            android:layout_width="@dimen/_30sdp"
-            android:layout_height="@dimen/_30sdp"
-            android:layout_marginStart="@dimen/_10sdp"
-            android:src="@drawable/ic_cravings_tips" />
-
-        <me.grantland.widget.AutofitTextView
-            android:id="@+id/textView"
-            android:layout_width="@dimen/_250sdp"
+        <FrameLayout
+            android:id="@+id/flArrow"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="@string/emotion_eating_guide"
-            android:textColor="@color/colorPrimaryDark" />
+            android:layout_gravity="center_vertical"
+            android:visibility="gone">
+
+            <ImageView
+                android:id="@+id/ivBack"
+                android:layout_width="@dimen/_45sdp"
+                android:layout_height="@dimen/_45sdp"
+                android:src="@drawable/left_arrow" />
+
+            <ImageView
+                android:id="@+id/ivNext"
+                android:layout_width="@dimen/_45sdp"
+                android:layout_height="@dimen/_45sdp"
+                android:layout_gravity="end"
+                android:src="@drawable/right_arrow" />
+
+        </FrameLayout>
 
     </FrameLayout>
+
 </LinearLayout>

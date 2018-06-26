@@ -1,0 +1,77 @@
+[
+    {
+        "id":1;
+        "title":"food_cravings",
+        "advices":[
+            {
+                "message":"Chew sugar-free gum"
+            },
+            {
+                "message":"Have a taste - one or two bites - but if you can't resist eating it all, better avoid these foods altogether"
+            },
+            {
+                "message":"Is it emotional eating? Write down your emotions in your diary and then spend 5 minutes thinking about them"
+            }
+        ]
+    },
+    {
+        "id":2;
+        "title":"emotional_eating",
+        "advices":[
+            {
+                "message":"Imagine what it would be like to have a shapely, firm stomach. Do you want one? Control yourself"
+            },
+            {
+                "message":"Identify your emotions. Whatever they are - stress, anger, sadness - eating won't help!"
+            },
+            {
+                "message":"If you're stressed, try to relax. Meditate. Food won't alleviate stress"
+            }
+        ]
+    },
+    {
+        "id":3;
+        "title":"eating_out",
+        "advices":[
+            {
+                "message":"Don't be tempted to eat fast food - it's very unhealthy"
+            },
+            {
+                "message":"Eat skinless, boiled or baked chicken"
+            },
+            {
+                "message":"Don't eat rich creamy food"
+            }
+        ]
+    },
+    {
+        "id":4;
+        "title":"food_temptation",
+        "advices":[
+            {
+                "message":"Chew sugar-free gum"
+            },
+            {
+                "message":"Have a taste - one or two bites - but if you can't resist eating it all, better avoid these foods altogether"
+            },
+            {
+                "message":"Is it emotional eating? Write down your emotions in your diary and then spend 5 minutes thinking about them"
+            }
+        ]
+    },
+    {
+        "id":5;
+        "title":"family_meal",
+        "advices":[
+            {
+                "message":"Remember the way you want to look and feel? Yeah, it's worth controlling yourself"
+            },
+            {
+                "message":"Imagine what it would be leke to have a flat belly. Want one? Control yourself"
+            },
+            {
+                "message":"Hungry? Eat a healthy snack immediately and wait 20 minutes!"
+            }
+        ]
+    }
+]

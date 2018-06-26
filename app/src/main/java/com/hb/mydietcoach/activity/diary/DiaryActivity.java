@@ -36,10 +36,10 @@ import com.baoyz.swipemenulistview.SwipeMenuListView;
 import com.google.gson.Gson;
 import com.hb.mydietcoach.R;
 import com.hb.mydietcoach.activity.ContactFAQActivity;
+import com.hb.mydietcoach.activity.MainActivity;
 import com.hb.mydietcoach.activity.SettingsActivity;
 import com.hb.mydietcoach.activity.WeightLoggingActivity;
 import com.hb.mydietcoach.activity.challenge.ChallengesActivity;
-import com.hb.mydietcoach.activity.MainActivity;
 import com.hb.mydietcoach.activity.photo.PhotosActivity;
 import com.hb.mydietcoach.activity.reminder.ReminderActivity;
 import com.hb.mydietcoach.activity.tip.TipsActivity;
@@ -53,16 +53,15 @@ import com.hb.mydietcoach.model.IItemDiary;
 import com.hb.mydietcoach.notification.NotificationManager;
 import com.hb.mydietcoach.preference.PreferenceManager;
 import com.hb.mydietcoach.utils.Constants;
+import com.hb.mydietcoach.utils.FileUtils;
 import com.tomergoldst.tooltips.ToolTip;
 import com.tomergoldst.tooltips.ToolTipsManager;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.StringTokenizer;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -205,30 +204,23 @@ public class DiaryActivity extends AppCompatActivity
      * Get all food from assets file
      */
     private void getFoodFromAssets() {
-        foodAssets = new ArrayList();
-        BufferedReader reader = null;
-        try {
-            reader = new BufferedReader(
-                    new InputStreamReader(getAssets().open("new_food_db_1.txt")));
-
-            // do reading, usually loop until end of file reading
-            String mLine;
-            while ((mLine = reader.readLine()) != null) {
+        foodAssets = new ArrayList<>();
+        String content = FileUtils.readFileFromAssets(DiaryActivity.this, "new_food_db_1.txt");
+        StringTokenizer tokenizer = new StringTokenizer(content, "\n");
+        while (tokenizer.hasMoreTokens()) {
+            try {
+                String mLine = tokenizer.nextToken();
                 mLine = mLine.substring(8, mLine.length() - 1);
+
+                //Convert text to object
                 Gson gson = new Gson();
                 FoodAssets food = gson.fromJson(mLine, FoodAssets.class);
+
+                //Add to list
                 foodAssets.add(food);
-            }
-        } catch (Exception e) {
-            Log.e(TAG, "Exception " + e.getMessage());
-            e.printStackTrace();
-        } finally {
-            if (reader != null) {
-                try {
-                    reader.close();
-                } catch (IOException e) {
-                    //log the exception
-                }
+            } catch (Exception e) {
+                Log.e(TAG, "Exception");
+                e.printStackTrace();
             }
         }
     }

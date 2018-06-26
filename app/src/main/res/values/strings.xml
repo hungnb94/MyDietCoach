@@ -200,4 +200,9 @@
     <string name="hours">hours</string>
     <string name="restarting_daily_challenges">Restarting daily challenges</string>
     <string name="new_day_your_challenges_have_been_renewed">It\'s a new day! Your challenges have been renewed...\nStarting over</string>
+    <string name="food_cravings">Food Cravings</string>
+    <string name="emotional_eating">Emotional Eating</string>
+    <string name="eating_out">Eating Out</string>
+    <string name="food_temptation">Food Temptation</string>
+    <string name="family_meal">Family Meal</string>
 </resources>
