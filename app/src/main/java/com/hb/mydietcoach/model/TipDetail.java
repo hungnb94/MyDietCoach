@@ -1,16 +1,12 @@
 package com.hb.mydietcoach.model;
 
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
-
 import io.realm.RealmModel;
 import io.realm.annotations.RealmClass;
 
 @RealmClass
 public class TipDetail implements RealmModel {
+    public static final String MESSAGE = "message";
 
-    @SerializedName("message")
-    @Expose
     private String message;
 
     public TipDetail() {

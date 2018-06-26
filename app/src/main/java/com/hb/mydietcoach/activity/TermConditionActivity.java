@@ -178,6 +178,9 @@ public class TermConditionActivity extends AppCompatActivity {
             //Insert to realm database
             Realm realm = Realm.getDefaultInstance();
             realm.beginTransaction();
+            for (TipCategory tipCategory : categories) {
+                realm.insertOrUpdate(tipCategory.getAdvices());
+            }
             realm.insertOrUpdate(categories);
             realm.commitTransaction();
             return null;

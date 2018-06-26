@@ -137,6 +137,7 @@ public class DiaryActivity extends AppCompatActivity
     private void initView() {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle(R.string.diet_diary);
         ButterKnife.bind(this);
 
         drawer = findViewById(R.id.drawer_layout);

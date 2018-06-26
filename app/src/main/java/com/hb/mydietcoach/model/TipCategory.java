@@ -8,6 +8,8 @@ import io.realm.annotations.RealmClass;
 
 @RealmClass
 public class TipCategory implements RealmModel {
+    public static final String ID = "id";
+    public static final String TITLE = "title";
 
     private int id;
     private String title;
@@ -44,6 +46,6 @@ public class TipCategory implements RealmModel {
 
     public void setAdvices(List<TipDetail> advices) {
         this.advices = new RealmList<>();
-        advices.addAll(advices);
+        this.advices.addAll(advices);
     }
 }

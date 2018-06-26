@@ -93,7 +93,7 @@
     <string name="cals_left_today">Cals left today</string>
     <string name="title_activity_diary">DiaryActivity</string>
     <string name="title_activity_reminder">ReminderActivity</string>
-    <string name="event">Other...</string>
+    <string name="event">Other…</string>
     <string name="today_may_23">Today, May 23</string>
     <string name="title_activity_profile">ProfileActivity</string>
     <string name="example_hour">10:14 PM</string>
@@ -174,7 +174,7 @@
     <string name="goal">Goal:</string>
     <string name="welcome_to_my_diet_coach">Welcome to My Diet Coach</string>
     <string name="notifications">Notifications</string>
-    <string name="others">Others...</string>
+    <string name="others">Others…</string>
     <string name="set_sleeping_hours">Set sleeping hours</string>
     <string name="play_notifications_sound">Play Notifications Sound</string>
     <string name="acknowledgements">Acknowledgements</string>
@@ -199,7 +199,7 @@
     <string name="_0_00">0.00</string>
     <string name="hours">hours</string>
     <string name="restarting_daily_challenges">Restarting daily challenges</string>
-    <string name="new_day_your_challenges_have_been_renewed">It\'s a new day! Your challenges have been renewed...\nStarting over</string>
+    <string name="new_day_your_challenges_have_been_renewed">It\'s a new day! Your challenges have been renewed…\nStarting over</string>
     <string name="food_cravings">Food Cravings</string>
     <string name="emotional_eating">Emotional Eating</string>
     <string name="eating_out">Eating Out</string>

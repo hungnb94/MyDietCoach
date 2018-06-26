@@ -117,6 +117,7 @@ public class TipsActivity extends AppCompatActivity
         Intent intent = new Intent(this, TipDetailActivity.class);
         Bundle bundle = new Bundle();
         bundle.putInt(TipDetailActivity.TIP_CATEGORY_ID, tipID);
+        bundle.putString(TipDetailActivity.TIP_TITLE, title);
         bundle.putInt(TipDetailActivity.TIP_IMAGE_RESOURCE, imgResID);
         intent.putExtras(bundle);
         startActivity(intent);
