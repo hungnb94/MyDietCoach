@@ -1,5 +1,6 @@
 package com.hb.mydietcoach.activity.tip;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
@@ -112,9 +113,9 @@ public class TipDetailActivity extends AppCompatActivity implements TipDetailAda
             case R.id.action_dislike:
                 dislike();
                 break;
-            case R.id.action_add_reminder:
-                setReminder();
-                break;
+//            case R.id.action_add_reminder:
+//                setReminder();
+//                break;
             default:
                 break;
         }
@@ -122,12 +123,18 @@ public class TipDetailActivity extends AppCompatActivity implements TipDetailAda
     }
 
     private void share() {
-        //TODO: Share
+        TipDetail tip = getCurrentTip();
+        String message = tip.getMessage() + getString(R.string.via_my_diet_coach);
 
+        Intent intent = new Intent();
+        intent.setAction(Intent.ACTION_SEND);
+        intent.putExtra(Intent.EXTRA_TEXT, message);
+        intent.setType("plain/text");
+        startActivity(intent);
     }
 
     private void like() {
-        TipDetail detail = list.get(manager.findFirstVisibleItemPosition());
+        TipDetail detail = getCurrentTip();
         realm.beginTransaction();
         detail.setPiority(Objects.requireNonNull(detail).getPiority() + 1);
         realm.insertOrUpdate(detail);
@@ -137,7 +144,7 @@ public class TipDetailActivity extends AppCompatActivity implements TipDetailAda
 
     private void dislike() {
         MyUtils.showToast(this, getString(R.string.dislike_toast_msg));
-        final TipDetail detail = list.get(manager.findFirstVisibleItemPosition());
+        final TipDetail detail = getCurrentTip();
         realm.beginTransaction();
         Objects.requireNonNull(detail).deleteFromRealm();
         realm.commitTransaction();
@@ -145,7 +152,6 @@ public class TipDetailActivity extends AppCompatActivity implements TipDetailAda
 
     private void setReminder() {
         //TODO: set reminder
-
     }
 
     //Using for hide/show next/back icon
@@ -177,6 +183,11 @@ public class TipDetailActivity extends AppCompatActivity implements TipDetailAda
         if (position < list.size() - 1)
             manager.smoothScrollToPosition(recyclerView, null, position + 1);
         else manager.smoothScrollToPosition(recyclerView, null, 0);
+    }
+
+    private TipDetail getCurrentTip() {
+        int position = manager.findFirstVisibleItemPosition();
+        return list.get(position);
     }
 
     /**
