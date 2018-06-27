@@ -73,4 +73,10 @@
         <item name="android:background">@color/colorGrey</item>
     </style>
 
+    <style name="WeightLoggingItemRuler">
+        <item name="android:layout_width">@dimen/_15sdp</item>
+        <item name="android:layout_height">@dimen/_10sdp</item>
+        <item name="android:src">@drawable/track_animation_1</item>
+    </style>
+
 </resources>

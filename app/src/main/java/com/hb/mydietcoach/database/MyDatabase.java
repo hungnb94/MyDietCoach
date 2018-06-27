@@ -21,7 +21,6 @@ import com.hb.mydietcoach.model.SelfControlChallenge;
 import com.hb.mydietcoach.utils.Constants;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.GregorianCalendar;
@@ -465,8 +464,6 @@ public class MyDatabase extends SQLiteOpenHelper {
 
         //InClauses example: ?,?,? (Amount of ? depend types.length)
         String inClauses = TextUtils.join(",", Collections.nCopies(types.length, "?"));
-        Log.e(TAG, "WhereClauses: " + inClauses);
-        Log.e(TAG, "Sellections Args: " + Arrays.toString(types));
 
         String sql = "SELECT * FROM " + TABLE_CHALLENGE + " WHERE "
                 + FIELD_CHALLENGE_TYPE + " IN (" + inClauses + ")";

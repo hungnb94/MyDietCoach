@@ -290,8 +290,6 @@ public class TermConditionActivity extends AppCompatActivity {
             List<TipCategory> list = new ArrayList<>();
 
             String content = FileUtils.readFileFromAssets(getApplicationContext(), "tips.txt");
-            Log.e(TAG, "Read from asset file: ");
-            Log.e(TAG, content);
 
             //Parse json
             try {

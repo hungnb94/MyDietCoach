@@ -213,4 +213,12 @@
     <string name="add_tip">Add Tip</string>
     <string name="alert_empty_tip">You are trying to add an empty tip</string>
     <string name="via_my_diet_coach">\n\nVia My Diet Coach</string>
+    <string name="current">Current:</string>
+    <string name="you_gained">You gained:</string>
+    <string name="_100_gr">100 gr</string>
+    <string name="in_7_days">in 7 days</string>
+    <string name="_1000">1000</string>
+    <string name="_1680">1680</string>
+    <string name="_1930">1930</string>
+    <string name="_80_00">80.00</string>
 </resources>

@@ -257,6 +257,8 @@
                     android:text="@string/tips"
                     android:textSize="@dimen/txt_btm_main_act" />
             </LinearLayout>
+
         </LinearLayout>
+
     </HorizontalScrollView>
 </LinearLayout>

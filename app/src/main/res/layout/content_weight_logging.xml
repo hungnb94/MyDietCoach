@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -13,28 +14,32 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="@dimen/_15sdp">
+        android:paddingEnd="@dimen/_15sdp"
+        android:paddingStart="@dimen/_15sdp">
 
         <TextView
             android:id="@+id/tvSetGoal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_15sdp"
             android:text="@string/set_your_goal"
             android:textSize="@dimen/_17ssp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:visibility="gone" />
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@id/tvSetGoal"
-            android:paddingTop="@dimen/_20sdp">
+            android:layout_marginTop="@dimen/_10sdp">
 
             <FrameLayout
+                android:id="@+id/flWeightGoal"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_40sdp">
+                android:layout_height="wrap_content">
 
                 <ImageView
+                    android:id="@+id/ivWeightWheel"
                     android:layout_width="@dimen/_120sdp"
                     android:layout_height="@dimen/_120sdp"
                     android:src="@drawable/weight_wheel" />
@@ -49,6 +54,7 @@
                     android:textSize="@dimen/_14ssp" />
 
                 <EditText
+                    android:id="@+id/edtWeightGoal"
                     android:layout_width="@dimen/_70sdp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -61,52 +67,233 @@
             </FrameLayout>
 
             <RelativeLayout
+                android:id="@+id/rlChangeWeight"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:alpha="0.6">
+                android:layout_height="match_parent">
 
-                <ImageView
-                    android:id="@+id/ivWeightRuler"
-                    android:layout_width="@dimen/_130sdp"
-                    android:layout_height="@dimen/_245sdp"
-                    android:layout_marginStart="@dimen/_112sdp"
-                    android:src="@drawable/track_empty" />
-
-                <FrameLayout
-                    android:id="@+id/flStartWeight"
+                <RelativeLayout
+                    android:id="@+id/rlWeightRuler"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/_90sdp"
+                    android:layout_marginStart="@dimen/_72sdp">
+
+                    <ImageView
+                        android:id="@+id/ivRuler"
+                        android:layout_width="@dimen/_130sdp"
+                        android:layout_height="@dimen/_245sdp"
+                        android:src="@drawable/track_empty" />
+
+                    <LinearLayout
+                        android:id="@+id/llRuler"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_65sdp"
+                        android:layout_marginTop="@dimen/_80sdp"
+                        android:orientation="vertical"
+                        android:paddingBottom="@dimen/_5sdp"
+                        android:paddingEnd="0dp"
+                        android:paddingStart="@dimen/_25sdp"
+                        android:paddingTop="@dimen/_5sdp">
+
+                        <ImageView
+                            android:id="@+id/ivItemRuler1"
+                            style="@style/WeightLoggingItemRuler" />
+
+                        <ImageView
+                            android:id="@+id/ivItemRuler2"
+                            style="@style/WeightLoggingItemRuler" />
+
+                        <ImageView
+                            android:id="@+id/ivItemRuler3"
+                            style="@style/WeightLoggingItemRuler" />
+
+                        <ImageView
+                            android:id="@+id/ivItemRuler4"
+                            style="@style/WeightLoggingItemRuler" />
+
+
+                        <ImageView
+                            android:id="@+id/ivItemRuler5"
+                            style="@style/WeightLoggingItemRuler"
+                            android:layout_marginTop="@dimen/_60sdp" />
+
+                        <ImageView
+                            android:id="@+id/ivItemRuler6"
+                            style="@style/WeightLoggingItemRuler" />
+
+                        <ImageView
+                            android:id="@+id/ivItemRuler7"
+                            style="@style/WeightLoggingItemRuler" />
+
+                        <ImageView
+                            android:id="@+id/ivItemRuler8"
+                            style="@style/WeightLoggingItemRuler" />
+
+                        <ImageView
+                            android:id="@+id/ivItemRuler9"
+                            style="@style/WeightLoggingItemRuler" />
+                    </LinearLayout>
+
+                </RelativeLayout>
+
+                <android.support.constraint.ConstraintLayout
+                    android:id="@+id/clCurrentWeight"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_40sdp"
                     android:layout_marginTop="@dimen/_120sdp">
 
                     <TextView
+                        android:id="@+id/tvCurrentWeight"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:text="@string/start_weight"
+                        android:text="@string/current"
                         android:textColor="@color/colorBlack"
-                        android:textSize="@dimen/_13sdp" />
+                        android:textSize="@dimen/_13sdp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/flWrapCurrWeight"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-                    <ImageView
-                        android:layout_width="@dimen/_75sdp"
-                        android:layout_height="@dimen/_65sdp"
-                        android:layout_marginStart="@dimen/_70sdp"
-                        android:scaleType="fitXY"
-                        android:src="@drawable/track_weight_container" />
+                    <FrameLayout
+                        android:id="@+id/flWrapCurrWeight"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_75sdp"
+                        app:layout_constraintStart_toStartOf="parent">
 
-                </FrameLayout>
+                        <ImageView
+                            android:layout_width="@dimen/_80sdp"
+                            android:layout_height="@dimen/_65sdp"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/track_weight_container" />
+
+                        <ImageView
+                            android:id="@+id/ivWeightGain"
+                            android:layout_width="@dimen/_60sdp"
+                            android:layout_height="@dimen/_10sdp"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginTop="@dimen/_8sdp"
+                            android:paddingEnd="@dimen/_25sdp"
+                            android:paddingStart="@dimen/_25sdp"
+                            android:paddingTop="@dimen/_5sdp"
+                            android:src="@drawable/top_arrow" />
+
+                        <EditText
+                            android:id="@+id/edtCurrentWeight"
+                            android:layout_width="@dimen/_60sdp"
+                            android:layout_height="@dimen/_30sdp"
+                            android:layout_gravity="center"
+                            android:backgroundTint="@color/colorAccent"
+                            android:gravity="center"
+                            android:text="@string/_80_00"
+                            android:textSize="@dimen/_12ssp"
+                            tools:targetApi="lollipop"
+                            android:inputType="numberSigned"
+                            tools:ignore="LabelFor" />
+
+                        <ImageView
+                            android:id="@+id/ivWeightLoss"
+                            android:layout_width="@dimen/_60sdp"
+                            android:layout_height="@dimen/_10sdp"
+                            android:layout_gravity="center_horizontal|bottom"
+                            android:layout_marginBottom="@dimen/_8sdp"
+                            android:paddingBottom="@dimen/_5sdp"
+                            android:paddingEnd="@dimen/_25sdp"
+                            android:paddingStart="@dimen/_25sdp"
+                            android:src="@drawable/down_arrow" />
+
+                    </FrameLayout>
+
+                </android.support.constraint.ConstraintLayout>
+
+                <LinearLayout
+                    android:id="@+id/llAlertWeight"
+                    android:layout_width="@dimen/_100sdp"
+                    android:layout_height="@dimen/_80sdp"
+                    android:layout_below="@id/clCurrentWeight"
+                    android:layout_marginTop="@dimen/_35sdp"
+                    android:background="@color/colorPrimaryDark"
+                    android:orientation="vertical"
+                    android:paddingBottom="@dimen/_5sdp"
+                    android:paddingTop="@dimen/_5sdp"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:id="@+id/tvAlertChangeWeight"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="@string/you_gained"
+                        android:textColor="@color/colorWhite"
+                        android:textSize="@dimen/_14ssp" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_1sdp"
+                        android:background="@color/colorWhite" />
+
+                    <TextView
+                        android:id="@+id/tvAmountWeightChange"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:paddingTop="@dimen/_5sdp"
+                        android:text="@string/_100_gr"
+                        android:textColor="@color/colorWhite"
+                        android:textSize="@dimen/_16ssp" />
+
+                    <TextView
+                        android:id="@+id/tvAmountDayChange"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:paddingTop="@dimen/_5sdp"
+                        android:text="@string/in_7_days"
+                        android:textColor="@color/colorWhite"
+                        android:textSize="@dimen/_14ssp" />
+
+                </LinearLayout>
 
                 <ImageView
-                    android:layout_marginStart="@dimen/_150sdp"
-                    android:src="@drawable/weights_container"
                     android:layout_width="@dimen/_100sdp"
                     android:layout_height="@dimen/_35sdp"
+                    android:layout_below="@id/rlWeightRuler"
+                    android:layout_marginStart="@dimen/_110sdp"
                     android:layout_marginTop="@dimen/_20sdp"
-                    android:layout_below="@id/ivWeightRuler" />
+                    android:src="@drawable/weights_container" />
+
+                <FrameLayout
+                    android:id="@+id/flSwitchWeight"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/rlWeightRuler"
+                    android:layout_marginStart="@dimen/_220sdp"
+                    android:layout_marginTop="@dimen/_23sdp">
+
+                    <ImageView
+                        android:layout_width="@dimen/_15sdp"
+                        android:layout_height="@dimen/_30sdp"
+                        android:src="@drawable/switch_off" />
+
+                    <ImageView
+                        android:layout_width="@dimen/_20sdp"
+                        android:layout_height="@dimen/_20sdp"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:src="@drawable/tracking_handle" />
+
+                </FrameLayout>
 
             </RelativeLayout>
 
         </RelativeLayout>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true">
+
+
+        </ScrollView>
 
     </RelativeLayout>
 

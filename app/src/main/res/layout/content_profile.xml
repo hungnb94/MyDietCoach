@@ -322,6 +322,7 @@
                     style="@style/ButtonBottom"
                     android:layout_gravity="bottom|end"
                     android:text="@string/continue_" />
+
             </FrameLayout>
 
         </LinearLayout>
