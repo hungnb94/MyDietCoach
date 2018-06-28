@@ -12,7 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.hb.mydietcoach.R;
-import com.hb.mydietcoach.model.Challenge;
+import com.hb.mydietcoach.model.challenge.Challenge;
 import com.hb.mydietcoach.utils.Constants;
 
 import java.util.List;

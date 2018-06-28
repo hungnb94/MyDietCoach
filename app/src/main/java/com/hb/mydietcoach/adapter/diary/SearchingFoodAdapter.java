@@ -9,7 +9,7 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.hb.mydietcoach.R;
-import com.hb.mydietcoach.model.FoodAssets;
+import com.hb.mydietcoach.model.diary.FoodAssets;
 
 import java.util.List;
 

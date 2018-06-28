@@ -1,4 +1,4 @@
-package com.hb.mydietcoach.model;
+package com.hb.mydietcoach.model.challenge;
 
 public class SelfControlChallenge extends Challenge {
     private int currentPosition;

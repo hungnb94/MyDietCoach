@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/ivItemRuler1"
+        style="@style/WeightLoggingItemRuler" />
+
+    <ImageView
+        android:id="@+id/ivItemRuler2"
+        style="@style/WeightLoggingItemRuler" />
+
+    <ImageView
+        android:id="@+id/ivItemRuler3"
+        style="@style/WeightLoggingItemRuler" />
+
+    <ImageView
+        android:id="@+id/ivItemRuler4"
+        style="@style/WeightLoggingItemRuler" />
+
+
+    <ImageView
+        android:id="@+id/ivItemRuler5"
+        style="@style/WeightLoggingItemRuler"
+        android:layout_marginTop="@dimen/_60sdp" />
+
+    <ImageView
+        android:id="@+id/ivItemRuler6"
+        style="@style/WeightLoggingItemRuler" />
+
+    <ImageView
+        android:id="@+id/ivItemRuler7"
+        style="@style/WeightLoggingItemRuler" />
+
+    <ImageView
+        android:id="@+id/ivItemRuler8"
+        style="@style/WeightLoggingItemRuler" />
+
+    <ImageView
+        android:id="@+id/ivItemRuler9"
+        style="@style/WeightLoggingItemRuler" />
+
+</LinearLayout>

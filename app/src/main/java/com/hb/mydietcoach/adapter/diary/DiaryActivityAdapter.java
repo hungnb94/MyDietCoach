@@ -12,9 +12,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.hb.mydietcoach.R;
-import com.hb.mydietcoach.model.Exercise;
-import com.hb.mydietcoach.model.Food;
-import com.hb.mydietcoach.model.IItemDiary;
+import com.hb.mydietcoach.model.diary.Exercise;
+import com.hb.mydietcoach.model.diary.Food;
+import com.hb.mydietcoach.model.diary.IItemDiary;
 import com.hb.mydietcoach.utils.Constants;
 
 import java.util.List;

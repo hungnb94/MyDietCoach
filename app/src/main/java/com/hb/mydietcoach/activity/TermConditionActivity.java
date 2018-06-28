@@ -17,13 +17,13 @@ import android.widget.Spinner;
 import com.hb.mydietcoach.R;
 import com.hb.mydietcoach.database.MyDatabase;
 import com.hb.mydietcoach.dialog.MyAlertDialog;
-import com.hb.mydietcoach.model.AnimationChallenge;
-import com.hb.mydietcoach.model.Challenge;
-import com.hb.mydietcoach.model.NormalChallenge;
-import com.hb.mydietcoach.model.RunChallenge;
-import com.hb.mydietcoach.model.SelfControlChallenge;
-import com.hb.mydietcoach.model.TipCategory;
-import com.hb.mydietcoach.model.TipDetail;
+import com.hb.mydietcoach.model.challenge.AnimationChallenge;
+import com.hb.mydietcoach.model.challenge.Challenge;
+import com.hb.mydietcoach.model.challenge.NormalChallenge;
+import com.hb.mydietcoach.model.challenge.RunChallenge;
+import com.hb.mydietcoach.model.challenge.SelfControlChallenge;
+import com.hb.mydietcoach.model.tip.TipCategory;
+import com.hb.mydietcoach.model.tip.TipDetail;
 import com.hb.mydietcoach.preference.PreferenceManager;
 import com.hb.mydietcoach.utils.Constants;
 import com.hb.mydietcoach.utils.FileUtils;
@@ -112,7 +112,7 @@ public class TermConditionActivity extends AppCompatActivity {
 
             PreferenceManager pre = new PreferenceManager(this);
             pre.putBoolean(PreferenceManager.IS_FIRST_TIME_LAUNCH, false);
-            pre.putFloat(PreferenceManager.USER_WEIGHT, weight);
+            pre.putFloat(PreferenceManager.START_WEIGHT, weight);
             pre.putBoolean(PreferenceManager.IS_GENDER_FEMALE, isFemale);
 
             Intent intent = new Intent(this, MainActivity.class);

@@ -87,4 +87,6 @@ public class Constants {
     public static final int ID_EATING_OUT = 3;
     public static final int ID_FOOD_TEMPTATIOIN = 4;
     public static final int ID_FAMILY_MEAL = 5;
+
+    public static final long TRACKING_HANDLE_ANIM_LENGTH = 1500;
 }

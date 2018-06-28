@@ -9,7 +9,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.hb.mydietcoach.R;
-import com.hb.mydietcoach.model.TipCategory;
+import com.hb.mydietcoach.model.tip.TipCategory;
 
 import io.realm.RealmResults;
 

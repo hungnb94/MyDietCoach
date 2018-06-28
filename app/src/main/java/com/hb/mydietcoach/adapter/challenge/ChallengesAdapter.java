@@ -11,8 +11,8 @@ import android.view.animation.Animation;
 import android.widget.ImageView;
 
 import com.hb.mydietcoach.R;
-import com.hb.mydietcoach.model.AnimationChallenge;
-import com.hb.mydietcoach.model.NormalChallenge;
+import com.hb.mydietcoach.model.challenge.AnimationChallenge;
+import com.hb.mydietcoach.model.challenge.NormalChallenge;
 import com.hb.mydietcoach.utils.Constants;
 
 public class ChallengesAdapter extends RecyclerView.Adapter<ChallengesAdapter.MyViewHolder> {

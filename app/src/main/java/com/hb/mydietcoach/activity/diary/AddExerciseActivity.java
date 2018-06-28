@@ -15,7 +15,7 @@ import android.widget.Toast;
 import com.hb.mydietcoach.R;
 import com.hb.mydietcoach.database.MyDatabase;
 import com.hb.mydietcoach.dialog.SettingReminderDialog;
-import com.hb.mydietcoach.model.Exercise;
+import com.hb.mydietcoach.model.diary.Exercise;
 import com.hb.mydietcoach.notification.NotificationManager;
 import com.hb.mydietcoach.utils.Constants;
 import com.wdullaer.materialdatetimepicker.time.TimePickerDialog;

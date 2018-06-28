@@ -18,10 +18,11 @@ public class PreferenceManager {
     public static final String IS_FIRST_TIME_ADD_MEAL = "add_meal";
     public static final String IS_FIRST_TIME_CHALLENGES = "first_challenge";
 
-    public static final String USER_WEIGHT = "weight";
+    public static final String START_WEIGHT = "weight";
     public static final String TARGET_WEIGHT = "target_weight";
     public static final String CURRENT_WEIGHT = "current_weight";
     public static final String IS_GENDER_FEMALE = "gender";
+    public static final String LAST_WEIGHT_LOGGING_DAY = "day_weight_log";
 
     public static final String IS_FIRST_TIME_TOOLTIP_CHALLENGE = "tooltip_challenge";
     public static final String IS_HAS_MOTIVATIONAL_PHOTO = "motivational_photo";

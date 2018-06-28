@@ -89,49 +89,16 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/_65sdp"
                         android:layout_marginTop="@dimen/_80sdp"
-                        android:orientation="vertical"
                         android:paddingBottom="@dimen/_5sdp"
                         android:paddingEnd="0dp"
                         android:paddingStart="@dimen/_25sdp"
                         android:paddingTop="@dimen/_5sdp">
 
-                        <ImageView
-                            android:id="@+id/ivItemRuler1"
-                            style="@style/WeightLoggingItemRuler" />
+                        <include
+                            layout="@layout/include_weight_log_ruler"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
 
-                        <ImageView
-                            android:id="@+id/ivItemRuler2"
-                            style="@style/WeightLoggingItemRuler" />
-
-                        <ImageView
-                            android:id="@+id/ivItemRuler3"
-                            style="@style/WeightLoggingItemRuler" />
-
-                        <ImageView
-                            android:id="@+id/ivItemRuler4"
-                            style="@style/WeightLoggingItemRuler" />
-
-
-                        <ImageView
-                            android:id="@+id/ivItemRuler5"
-                            style="@style/WeightLoggingItemRuler"
-                            android:layout_marginTop="@dimen/_60sdp" />
-
-                        <ImageView
-                            android:id="@+id/ivItemRuler6"
-                            style="@style/WeightLoggingItemRuler" />
-
-                        <ImageView
-                            android:id="@+id/ivItemRuler7"
-                            style="@style/WeightLoggingItemRuler" />
-
-                        <ImageView
-                            android:id="@+id/ivItemRuler8"
-                            style="@style/WeightLoggingItemRuler" />
-
-                        <ImageView
-                            android:id="@+id/ivItemRuler9"
-                            style="@style/WeightLoggingItemRuler" />
                     </LinearLayout>
 
                 </RelativeLayout>
@@ -185,11 +152,11 @@
                             android:layout_gravity="center"
                             android:backgroundTint="@color/colorAccent"
                             android:gravity="center"
+                            android:inputType="numberSigned"
                             android:text="@string/_80_00"
                             android:textSize="@dimen/_12ssp"
-                            tools:targetApi="lollipop"
-                            android:inputType="numberSigned"
-                            tools:ignore="LabelFor" />
+                            tools:ignore="LabelFor"
+                            tools:targetApi="lollipop" />
 
                         <ImageView
                             android:id="@+id/ivWeightLoss"
@@ -207,7 +174,7 @@
                 </android.support.constraint.ConstraintLayout>
 
                 <LinearLayout
-                    android:id="@+id/llAlertWeight"
+                    android:id="@+id/llWeightChangeDetail"
                     android:layout_width="@dimen/_100sdp"
                     android:layout_height="@dimen/_80sdp"
                     android:layout_below="@id/clCurrentWeight"
@@ -254,13 +221,66 @@
 
                 </LinearLayout>
 
-                <ImageView
+                <FrameLayout
+                    android:id="@+id/flWeightContainer"
                     android:layout_width="@dimen/_100sdp"
-                    android:layout_height="@dimen/_35sdp"
+                    android:layout_height="wrap_content"
                     android:layout_below="@id/rlWeightRuler"
-                    android:layout_marginStart="@dimen/_110sdp"
-                    android:layout_marginTop="@dimen/_20sdp"
-                    android:src="@drawable/weights_container" />
+                    android:layout_marginStart="@dimen/_110sdp">
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <ImageView
+                            android:id="@+id/ivDumbbell1"
+                            android:layout_width="@dimen/_20sdp"
+                            android:layout_height="@dimen/_20sdp"
+                            android:layout_marginStart="@dimen/_30sdp"
+                            android:layout_marginTop="@dimen/_20sdp"
+                            android:src="@drawable/weight_green" />
+
+                        <ImageView
+                            android:id="@+id/ivDumbbell2"
+                            android:layout_width="@dimen/_20sdp"
+                            android:layout_height="@dimen/_20sdp"
+                            android:layout_marginStart="@dimen/_50sdp"
+                            android:layout_marginTop="@dimen/_20sdp"
+                            android:src="@drawable/weight_green" />
+
+                        <ImageView
+                            android:id="@+id/ivDumbbell3"
+                            android:layout_width="@dimen/_20sdp"
+                            android:layout_height="@dimen/_20sdp"
+                            android:layout_marginStart="@dimen/_20sdp"
+                            android:layout_marginTop="@dimen/_12sdp"
+                            android:src="@drawable/weight_green" />
+
+                        <ImageView
+                            android:id="@+id/ivDumbbell4"
+                            android:layout_width="@dimen/_20sdp"
+                            android:layout_height="@dimen/_20sdp"
+                            android:layout_marginStart="@dimen/_40sdp"
+                            android:layout_marginTop="@dimen/_12sdp"
+                            android:src="@drawable/weight_green" />
+
+                        <ImageView
+                            android:id="@+id/ivDumbbell5"
+                            android:layout_width="@dimen/_20sdp"
+                            android:layout_height="@dimen/_20sdp"
+                            android:layout_marginStart="@dimen/_60sdp"
+                            android:layout_marginTop="@dimen/_12sdp"
+                            android:src="@drawable/weight_green" />
+
+                    </FrameLayout>
+
+                    <ImageView
+                        android:layout_width="@dimen/_100sdp"
+                        android:layout_height="@dimen/_35sdp"
+                        android:layout_marginTop="@dimen/_20sdp"
+                        android:src="@drawable/weights_container" />
+
+                </FrameLayout>
 
                 <FrameLayout
                     android:id="@+id/flSwitchWeight"
@@ -268,7 +288,8 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/rlWeightRuler"
                     android:layout_marginStart="@dimen/_220sdp"
-                    android:layout_marginTop="@dimen/_23sdp">
+                    android:layout_marginTop="@dimen/_23sdp"
+                    android:visibility="gone">
 
                     <ImageView
                         android:layout_width="@dimen/_15sdp"
@@ -276,9 +297,10 @@
                         android:src="@drawable/switch_off" />
 
                     <ImageView
+                        android:id="@+id/ivTrackingHandle"
                         android:layout_width="@dimen/_20sdp"
                         android:layout_height="@dimen/_20sdp"
-                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginStart="@dimen/_8sdp"
                         android:src="@drawable/tracking_handle" />
 
                 </FrameLayout>

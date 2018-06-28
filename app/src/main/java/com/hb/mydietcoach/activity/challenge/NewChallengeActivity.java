@@ -13,7 +13,7 @@ import android.widget.TextView;
 
 import com.hb.mydietcoach.R;
 import com.hb.mydietcoach.database.MyDatabase;
-import com.hb.mydietcoach.model.NormalChallenge;
+import com.hb.mydietcoach.model.challenge.NormalChallenge;
 import com.hb.mydietcoach.utils.Constants;
 
 import butterknife.ButterKnife;

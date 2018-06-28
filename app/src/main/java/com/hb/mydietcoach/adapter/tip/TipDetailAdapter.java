@@ -10,7 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.hb.mydietcoach.R;
-import com.hb.mydietcoach.model.TipDetail;
+import com.hb.mydietcoach.model.tip.TipDetail;
 
 import io.realm.RealmList;
 

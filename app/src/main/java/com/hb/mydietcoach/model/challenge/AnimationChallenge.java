@@ -1,4 +1,4 @@
-package com.hb.mydietcoach.model;
+package com.hb.mydietcoach.model.challenge;
 
 import android.content.Context;
 import android.view.animation.Animation;

@@ -81,7 +81,7 @@ public class SettingsActivity extends AppCompatActivity
 
         edtStartWeight = findViewById(R.id.edtWeight);
 
-        float weight  = pre.getFloat(PreferenceManager.USER_WEIGHT, 80);
+        float weight = pre.getFloat(PreferenceManager.START_WEIGHT, 80);
         edtStartWeight.setText(String.valueOf(weight));
     }
 
@@ -109,7 +109,7 @@ public class SettingsActivity extends AppCompatActivity
         if (!TextUtils.isEmpty(strWeight)){
             try {
                 float weight = Float.parseFloat(strWeight);
-                if (weight>0) pre.putFloat(PreferenceManager.USER_WEIGHT, weight);
+                if (weight > 0) pre.putFloat(PreferenceManager.START_WEIGHT, weight);
             } catch (Exception e){
                 Log.e(TAG, "Weight not valid: " + strWeight);
                 e.printStackTrace();

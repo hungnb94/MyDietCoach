@@ -10,8 +10,8 @@ import android.widget.Spinner;
 
 import com.hb.mydietcoach.R;
 import com.hb.mydietcoach.adapter.tip.SpinnerTipCategoryAdapter;
-import com.hb.mydietcoach.model.TipCategory;
-import com.hb.mydietcoach.model.TipDetail;
+import com.hb.mydietcoach.model.tip.TipCategory;
+import com.hb.mydietcoach.model.tip.TipDetail;
 import com.hb.mydietcoach.utils.MyUtils;
 
 import java.util.Objects;

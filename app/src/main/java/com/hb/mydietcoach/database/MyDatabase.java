@@ -9,15 +9,15 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.hb.mydietcoach.R;
-import com.hb.mydietcoach.model.AnimationChallenge;
-import com.hb.mydietcoach.model.Challenge;
-import com.hb.mydietcoach.model.Exercise;
-import com.hb.mydietcoach.model.Food;
-import com.hb.mydietcoach.model.IItemDiary;
-import com.hb.mydietcoach.model.NormalChallenge;
+import com.hb.mydietcoach.model.challenge.AnimationChallenge;
+import com.hb.mydietcoach.model.challenge.Challenge;
+import com.hb.mydietcoach.model.diary.Exercise;
+import com.hb.mydietcoach.model.diary.Food;
+import com.hb.mydietcoach.model.diary.IItemDiary;
+import com.hb.mydietcoach.model.challenge.NormalChallenge;
 import com.hb.mydietcoach.model.Reminder;
-import com.hb.mydietcoach.model.RunChallenge;
-import com.hb.mydietcoach.model.SelfControlChallenge;
+import com.hb.mydietcoach.model.challenge.RunChallenge;
+import com.hb.mydietcoach.model.challenge.SelfControlChallenge;
 import com.hb.mydietcoach.utils.Constants;
 
 import java.util.ArrayList;

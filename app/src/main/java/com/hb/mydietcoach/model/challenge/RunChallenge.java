@@ -1,4 +1,4 @@
-package com.hb.mydietcoach.model;
+package com.hb.mydietcoach.model.challenge;
 
 public class RunChallenge extends Challenge {
     private double totalLength;

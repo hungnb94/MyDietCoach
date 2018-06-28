@@ -19,10 +19,10 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.hb.mydietcoach.R;
-import com.hb.mydietcoach.model.Challenge;
-import com.hb.mydietcoach.model.NormalChallenge;
-import com.hb.mydietcoach.model.RunChallenge;
-import com.hb.mydietcoach.model.SelfControlChallenge;
+import com.hb.mydietcoach.model.challenge.Challenge;
+import com.hb.mydietcoach.model.challenge.NormalChallenge;
+import com.hb.mydietcoach.model.challenge.RunChallenge;
+import com.hb.mydietcoach.model.challenge.SelfControlChallenge;
 import com.hb.mydietcoach.utils.Constants;
 
 import butterknife.ButterKnife;

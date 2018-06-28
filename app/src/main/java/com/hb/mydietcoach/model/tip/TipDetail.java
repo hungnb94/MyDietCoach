@@ -1,4 +1,4 @@
-package com.hb.mydietcoach.model;
+package com.hb.mydietcoach.model.tip;
 
 import io.realm.RealmObject;
 
