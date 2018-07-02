@@ -19,7 +19,7 @@
             android:id="@+id/tvSetGoal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_15sdp"
+            android:layout_marginStart="@dimen/_15sdp"
             android:text="@string/set_your_goal"
             android:textSize="@dimen/_17ssp"
             android:textStyle="bold"
@@ -28,12 +28,11 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@id/tvSetGoal"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:paddingEnd="@dimen/_15sdp"
-            android:paddingStart="@dimen/_15sdp">
+            android:layout_below="@id/tvSetGoal">
 
             <FrameLayout
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginStart="@dimen/_15sdp"
                 android:id="@+id/flWeightGoal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
@@ -72,6 +71,9 @@
                 android:layout_height="match_parent">
 
                 <RelativeLayout
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:paddingEnd="@dimen/_15sdp"
+                    android:paddingStart="@dimen/_15sdp"
                     android:id="@+id/rlWeightRuler"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -107,8 +109,8 @@
                     android:id="@+id/clCurrentWeight"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/_40sdp"
-                    android:layout_marginTop="@dimen/_120sdp">
+                    android:layout_marginStart="@dimen/_55sdp"
+                    android:layout_marginTop="@dimen/_130sdp">
 
                     <TextView
                         android:id="@+id/tvCurrentWeight"
@@ -226,7 +228,7 @@
                     android:layout_width="@dimen/_100sdp"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/rlWeightRuler"
-                    android:layout_marginStart="@dimen/_110sdp">
+                    android:layout_marginStart="@dimen/_125sdp">
 
                     <FrameLayout
                         android:layout_width="match_parent"
@@ -287,7 +289,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/rlWeightRuler"
-                    android:layout_marginStart="@dimen/_220sdp"
+                    android:layout_marginStart="@dimen/_235sdp"
                     android:layout_marginTop="@dimen/_23sdp"
                     android:visibility="gone">
 
@@ -305,15 +307,39 @@
 
                 </FrameLayout>
 
+                <RelativeLayout
+                    android:id="@+id/rlRecyclerView"
+                    android:background="@color/colorCream"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@id/flWeightContainer">
+
+                    <View
+                        android:id="@+id/line"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/line_lv_1"
+                        android:background="@color/colorGrey" />
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/recyclerView"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentBottom="true"
+                        android:layout_below="@id/line" />
+
+                    <ImageView
+                        android:id="@+id/ivShowMore"
+                        android:layout_width="@dimen/_30sdp"
+                        android:layout_height="@dimen/_25sdp"
+                        android:layout_alignParentEnd="true"
+                        android:rotation="180"
+                        android:src="@drawable/ic_arrow_more_close" />
+
+                </RelativeLayout>
+
             </RelativeLayout>
 
         </RelativeLayout>
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recyclerView"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_100sdp"
-            android:layout_alignParentBottom="true" />
 
     </RelativeLayout>
 

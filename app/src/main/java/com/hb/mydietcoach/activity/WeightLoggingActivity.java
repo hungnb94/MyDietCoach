@@ -20,6 +20,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.AnimationSet;
@@ -313,6 +314,49 @@ public class WeightLoggingActivity extends AppCompatActivity
                 weightHistories, recyclerView.getWidth());
         recyclerView.setAdapter(adapter);
     }
+
+    boolean isShowRecyclerView = false;
+
+    @OnClick(R.id.ivShowMore)
+    void clickShowRecyclerView() {
+        if (isShowRecyclerView) {
+            isShowRecyclerView = false;
+            showNormalRecyclerView();
+        } else {
+            isShowRecyclerView = true;
+            showFullRecyclerView();
+        }
+    }
+
+    private void showNormalRecyclerView() {
+        //Down arrow
+        ImageView ivShowMore = findViewById(R.id.ivShowMore);
+        ivShowMore.setRotation(180);
+
+        RelativeLayout rlRecyclerView = findViewById(R.id.rlRecyclerView);
+
+        //RecyclerView under flWeightContainer
+        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.MATCH_PARENT);
+        params.addRule(RelativeLayout.BELOW, R.id.flWeightContainer);
+
+        rlRecyclerView.setLayoutParams(params);
+    }
+
+    private void showFullRecyclerView() {
+        //Up arrow
+        ImageView ivShowMore = findViewById(R.id.ivShowMore);
+        ivShowMore.setRotation(0);
+
+        RelativeLayout rlRecyclerView = findViewById(R.id.rlRecyclerView);
+
+        //RecyclerView under flWeightContainer
+        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.MATCH_PARENT);
+
+        rlRecyclerView.setLayoutParams(params);
+    }
+
 
     private ImageView[] getImageViewDumbbells() {
         ImageView[] arr = new ImageView[5];
