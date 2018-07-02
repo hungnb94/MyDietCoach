@@ -1,6 +1,7 @@
 package com.hb.mydietcoach.activity.photo;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -53,6 +54,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Objects;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -98,7 +100,7 @@ public class PhotosActivity extends AppCompatActivity implements MiniPhotoAdapte
     private void initView() {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle(R.string.my_motivational_photo);
+        Objects.requireNonNull(getSupportActionBar()).setTitle(R.string.my_motivational_photo);
         ButterKnife.bind(this);
 
         drawer = findViewById(R.id.drawer_layout);
@@ -129,7 +131,7 @@ public class PhotosActivity extends AppCompatActivity implements MiniPhotoAdapte
     }
 
     @OnClick(R.id.fabSelectFrGallery)
-    void clickSelectFromGallery(View view) {
+    void clickSelectFromGallery() {
         Intent intent = new Intent();
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
@@ -139,7 +141,7 @@ public class PhotosActivity extends AppCompatActivity implements MiniPhotoAdapte
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     @OnClick(R.id.fabTakeSnapshot)
-    void clickTakeSnapshot(View view) {
+    void clickTakeSnapshot() {
         if (checkSelfPermission(Manifest.permission.CAMERA)
                 != PackageManager.PERMISSION_GRANTED) {
             requestPermissions(new String[]{Manifest.permission.CAMERA},
@@ -201,7 +203,7 @@ public class PhotosActivity extends AppCompatActivity implements MiniPhotoAdapte
     /**
      * Save bitmap to app directory and update UI
      *
-     * @param bitmap
+     * @param bitmap: image
      */
     void saveAndUpdateUI(Bitmap bitmap) {
         File newImg = saveBitmap(bitmap);
@@ -222,7 +224,7 @@ public class PhotosActivity extends AppCompatActivity implements MiniPhotoAdapte
         try {
             File directory = new File(Environment.getExternalStorageDirectory(), Constants.MY_FOLDER);
             if (!directory.exists()) directory.mkdirs();
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+            @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
             file = new File(directory, sdf.format(Calendar.getInstance().getTime()) + ".png");
             file.createNewFile();
             out = new FileOutputStream(file);
@@ -323,6 +325,7 @@ public class PhotosActivity extends AppCompatActivity implements MiniPhotoAdapte
         sliderShow.setCurrentPosition(position);
     }
 
+    @SuppressLint("StaticFieldLeak")
     public class FileTask extends AsyncTask<Void, Void, Void> {
 
         @Override
