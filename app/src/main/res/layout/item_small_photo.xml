@@ -4,11 +4,11 @@
     android:layout_height="wrap_content">
 
     <ImageView
-        android:layout_marginLeft="@dimen/_3sdp"
-        android:layout_marginRight="@dimen/_3sdp"
         android:id="@+id/imageView"
         android:layout_width="@dimen/_50sdp"
         android:layout_height="@dimen/_50sdp"
+        android:layout_marginLeft="@dimen/_3sdp"
+        android:layout_marginRight="@dimen/_3sdp"
         android:scaleType="centerCrop"
         android:src="@color/colorAccent" />
 </LinearLayout>

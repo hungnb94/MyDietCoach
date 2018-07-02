@@ -205,17 +205,30 @@ public class PhotosActivity extends AppCompatActivity implements MiniPhotoAdapte
      *
      * @param bitmap: image
      */
-    void saveAndUpdateUI(Bitmap bitmap) {
-        File newImg = saveBitmap(bitmap);
-        if (newImg != null) {
-            imageList.add(newImg);
-            adapter.notifyDataSetChanged();
+    @SuppressLint("StaticFieldLeak")
+    void saveAndUpdateUI(final Bitmap bitmap) {
 
-            DefaultSliderView sliderView = new DefaultSliderView(this);
-            sliderView.image(newImg);
-            sliderShow.addSlider(sliderView);
-            sliderShow.setCurrentPosition(imageList.size() - 1);
-        }
+        new AsyncTask<Void, Void, File>() {
+            @Override
+            protected File doInBackground(Void... voids) {
+                File newImg = saveBitmap(bitmap);
+                return newImg;
+            }
+
+            @Override
+            protected void onPostExecute(File newImg) {
+                super.onPostExecute(newImg);
+                if (newImg != null) {
+                    imageList.add(newImg);
+                    adapter.notifyDataSetChanged();
+
+                    DefaultSliderView sliderView = new DefaultSliderView(PhotosActivity.this);
+                    sliderView.image(newImg);
+                    sliderShow.addSlider(sliderView);
+                    sliderShow.setCurrentPosition(imageList.size() - 1);
+                }
+            }
+        }.execute();
     }
 
     File saveBitmap(Bitmap bitmap) {
