@@ -14,7 +14,7 @@
     <application
         android:name=".App"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/icon_my_diet_coach"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
@@ -31,21 +31,29 @@
         <activity
             android:name=".activity.MainActivity"
             android:label="@string/title_activity_main"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activity.diary.DiaryActivity"
             android:label="@string/title_activity_diary"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
             android:name=".activity.reminder.ReminderActivity"
             android:label="@string/title_activity_reminder"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
-        <activity android:name=".activity.diary.AddExerciseActivity" />
+        <activity
+            android:name=".activity.diary.AddExerciseActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.diary.ProfileActivity"
             android:label="@string/title_activity_profile"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
-        <activity android:name=".activity.diary.EdittingMealHistoryActivity" />
+        <activity
+            android:name=".activity.diary.EdittingMealHistoryActivity"
+            android:screenOrientation="portrait" />
 
         <receiver
             android:name=".notification.NotificationReceiver"
@@ -56,22 +64,47 @@
             android:name=".notification.NotificationIntentService"
             android:exported="false" />
 
-        <activity android:name=".activity.TermConditionActivity" />
-        <activity android:name=".activity.reminder.EdittingReminderActivity" />
+        <activity
+            android:name=".activity.TermConditionActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.reminder.EdittingReminderActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.challenge.ChallengesActivity"
             android:label="@string/title_activity_challenges"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
-        <activity android:name=".activity.challenge.EdittingChallengeActivity" />
-        <activity android:name=".activity.challenge.AddingChallengeActivity" />
-        <activity android:name=".activity.challenge.NewChallengeActivity" />
-        <activity android:name=".activity.photo.PhotosActivity" />
-        <activity android:name=".activity.tip.TipsActivity" />
-        <activity android:name=".activity.tip.TipDetailActivity" />
-        <activity android:name=".activity.tip.AddingTipActivity" />
-        <activity android:name=".activity.WeightLoggingActivity" />
-        <activity android:name=".activity.SettingsActivity" />
-        <activity android:name=".activity.ContactFAQActivity"></activity>
+        <activity
+            android:name=".activity.challenge.EdittingChallengeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.challenge.AddingChallengeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.challenge.NewChallengeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.photo.PhotosActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.tip.TipsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.tip.TipDetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.tip.AddingTipActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.WeightLoggingActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.SettingsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.ContactFAQActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

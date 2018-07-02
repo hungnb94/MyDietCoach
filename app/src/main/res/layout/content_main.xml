@@ -21,7 +21,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="30dp">
+            android:layout_height="@dimen/_25sdp">
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -36,13 +36,13 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="@dimen/line_lv_1"
-            android:layout_marginLeft="@dimen/mg_line_main"
-            android:layout_marginRight="@dimen/mg_line_main"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
             android:background="@color/colorWhite" />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp">
+            android:layout_height="@dimen/_40sdp">
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -57,7 +57,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
         android:layout_weight="1"
         android:paddingBottom="@dimen/mg_vertical_content_main"
         android:paddingTop="@dimen/mg_vertical_content_main">
@@ -67,7 +67,8 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:src="@drawable/fat_man_avatar_default" />
+            android:src="@drawable/fat_man_avatar_default"
+            tools:ignore="NestedWeights" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -92,6 +93,7 @@
                 android:layout_width="@dimen/ic_weight_main"
                 android:layout_height="@dimen/ic_weight_main"
                 android:src="@drawable/ic_weight" />
+
         </LinearLayout>
 
         <ImageView
@@ -113,7 +115,7 @@
         android:layout_height="@dimen/bottom_main_act_height">
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center_vertical"
             android:paddingBottom="@dimen/mg_btm_main_act"
@@ -124,7 +126,8 @@
                 android:layout_width="@dimen/item_btm_main_width"
                 android:layout_height="match_parent"
                 android:gravity="center_horizontal"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                tools:ignore="UseCompoundDrawables">
 
                 <ImageView
                     android:layout_width="@dimen/ic_btm_main"
@@ -148,7 +151,8 @@
                 android:layout_width="@dimen/item_btm_main_width"
                 android:layout_height="match_parent"
                 android:gravity="center_horizontal"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                tools:ignore="UseCompoundDrawables">
 
                 <ImageView
                     android:layout_width="@dimen/ic_btm_main"
@@ -172,7 +176,8 @@
                 android:layout_width="@dimen/item_btm_main_width"
                 android:layout_height="match_parent"
                 android:gravity="center_horizontal"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                tools:ignore="UseCompoundDrawables">
 
                 <ImageView
                     android:layout_width="@dimen/ic_btm_main"
@@ -220,7 +225,8 @@
                 android:layout_width="@dimen/item_btm_main_width"
                 android:layout_height="match_parent"
                 android:gravity="center_horizontal"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                tools:ignore="UseCompoundDrawables">
 
                 <ImageView
                     android:layout_width="@dimen/ic_btm_main"
@@ -244,7 +250,8 @@
                 android:layout_width="@dimen/item_btm_main_width"
                 android:layout_height="match_parent"
                 android:gravity="center_horizontal"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                tools:ignore="UseCompoundDrawables">
 
                 <ImageView
                     android:layout_width="@dimen/ic_btm_main"
@@ -261,4 +268,5 @@
         </LinearLayout>
 
     </HorizontalScrollView>
+
 </LinearLayout>

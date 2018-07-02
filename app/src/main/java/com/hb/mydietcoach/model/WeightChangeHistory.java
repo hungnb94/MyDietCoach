@@ -5,13 +5,15 @@ import io.realm.RealmObject;
 public class WeightChangeHistory extends RealmObject {
 
     private long time;
+    private float curentWeight;
     private float weightChange;
 
     public WeightChangeHistory() {
     }
 
-    public WeightChangeHistory(long time, float weightChange) {
+    public WeightChangeHistory(long time, float curentWeight, float weightChange) {
         this.time = time;
+        this.curentWeight = curentWeight;
         this.weightChange = weightChange;
     }
 
@@ -31,4 +33,11 @@ public class WeightChangeHistory extends RealmObject {
         this.weightChange = weightChange;
     }
 
+    public float getCurentWeight() {
+        return curentWeight;
+    }
+
+    public void setCurentWeight(float curentWeight) {
+        this.curentWeight = curentWeight;
+    }
 }

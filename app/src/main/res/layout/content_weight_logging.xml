@@ -13,9 +13,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingEnd="@dimen/_15sdp"
-        android:paddingStart="@dimen/_15sdp">
+        android:layout_height="match_parent">
 
         <TextView
             android:id="@+id/tvSetGoal"
@@ -31,7 +29,9 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@id/tvSetGoal"
-            android:layout_marginTop="@dimen/_10sdp">
+            android:layout_marginTop="@dimen/_10sdp"
+            android:paddingEnd="@dimen/_15sdp"
+            android:paddingStart="@dimen/_15sdp">
 
             <FrameLayout
                 android:id="@+id/flWeightGoal"
@@ -309,13 +309,11 @@
 
         </RelativeLayout>
 
-        <ScrollView
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true">
-
-
-        </ScrollView>
+            android:layout_height="@dimen/_100sdp"
+            android:layout_alignParentBottom="true" />
 
     </RelativeLayout>
 

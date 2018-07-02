@@ -12,6 +12,8 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
@@ -36,18 +38,22 @@ import com.hb.mydietcoach.activity.diary.DiaryActivity;
 import com.hb.mydietcoach.activity.photo.PhotosActivity;
 import com.hb.mydietcoach.activity.reminder.ReminderActivity;
 import com.hb.mydietcoach.activity.tip.TipsActivity;
+import com.hb.mydietcoach.adapter.WeightHistoryAdapter;
 import com.hb.mydietcoach.model.WeightChangeHistory;
 import com.hb.mydietcoach.preference.PreferenceManager;
 import com.hb.mydietcoach.utils.Constants;
 import com.hb.mydietcoach.utils.MyUtils;
 
 import java.text.NumberFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Objects;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import io.realm.Realm;
+import io.realm.RealmResults;
 
 public class WeightLoggingActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -108,6 +114,9 @@ public class WeightLoggingActivity extends AppCompatActivity
     //Detail weight change
     private LinearLayout llDetailWeightChange;
     private TextView tvAlertWeightChange, tvAmountWeightChange, tvAmountDayChange;
+    private RecyclerView recyclerView;
+    private List<WeightChangeHistory> weightHistories;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -124,6 +133,9 @@ public class WeightLoggingActivity extends AppCompatActivity
 
     private void initParam() {
         databaseRealm = Realm.getDefaultInstance();
+        RealmResults<WeightChangeHistory> historyResults = databaseRealm.where(WeightChangeHistory.class).findAll();
+        weightHistories = new ArrayList<>();
+        weightHistories.addAll(historyResults);
 
         //Number format
         numberFormat = NumberFormat.getNumberInstance();
@@ -183,6 +195,7 @@ public class WeightLoggingActivity extends AppCompatActivity
 
             @Override
             public void onAnimationEnd(Animation animation) {
+                showRecyclerView();
                 ivDumbbells[0].clearAnimation();
                 flWeightContainer.setRotation(0);
             }
@@ -269,6 +282,10 @@ public class WeightLoggingActivity extends AppCompatActivity
         flWeightContainer = findViewById(R.id.flWeightContainer);
         ivDumbbells = getImageViewDumbbells();
 
+        recyclerView = findViewById(R.id.recyclerView);
+        recyclerView.setLayoutManager(new LinearLayoutManager(WeightLoggingActivity.this,
+                LinearLayoutManager.VERTICAL, false));
+
         if (currWeight > 0) {
             updateCurrentWeight(currWeight);
         } else {
@@ -282,6 +299,19 @@ public class WeightLoggingActivity extends AppCompatActivity
 
         //last weight
         lastWeight = currWeight;
+    }
+
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
+        showRecyclerView();
+    }
+
+    @SuppressLint("StaticFieldLeak")
+    private void showRecyclerView() {
+        WeightHistoryAdapter adapter = new WeightHistoryAdapter(WeightLoggingActivity.this,
+                weightHistories, recyclerView.getWidth());
+        recyclerView.setAdapter(adapter);
     }
 
     private ImageView[] getImageViewDumbbells() {
@@ -459,16 +489,20 @@ public class WeightLoggingActivity extends AppCompatActivity
             public void run() {
                 ivDumbbells[0].startAnimation(translateTop);
             }
-        }, 100);
+        }, 200);
     }
 
     private void saveWeightChange() {
         //Save preference
         if (currWeight > 0) pm.putFloat(PreferenceManager.CURRENT_WEIGHT, currWeight);
 
-        //Save realm database
         float wchange = MyUtils.roundFloat(numberFormat, currWeight - lastWeight);
-        WeightChangeHistory history = new WeightChangeHistory(Calendar.getInstance().getTimeInMillis(), wchange);
+        WeightChangeHistory history = new WeightChangeHistory(Calendar.getInstance().getTimeInMillis(), currWeight, wchange);
+
+        //Add to list
+        weightHistories.add(history);
+
+        //Save realm database
         databaseRealm.beginTransaction();
         databaseRealm.insertOrUpdate(history);
         databaseRealm.commitTransaction();
