@@ -1,4 +1,4 @@
-package com.hb.mydietcoach.adapter;
+package com.hb.mydietcoach.adapter.photo;
 
 import android.annotation.SuppressLint;
 import android.content.Context;

@@ -1,6 +1,7 @@
 package com.hb.mydietcoach.activity.photo;
 
 import android.Manifest;
+import android.animation.Animator;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -16,6 +17,8 @@ import android.support.annotation.RequiresApi;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -27,12 +30,10 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewAnimationUtils;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
-import com.daimajia.slider.library.Indicators.PagerIndicator;
-import com.daimajia.slider.library.SliderLayout;
-import com.daimajia.slider.library.SliderTypes.DefaultSliderView;
 import com.hb.mydietcoach.R;
 import com.hb.mydietcoach.activity.ContactFAQActivity;
 import com.hb.mydietcoach.activity.MainActivity;
@@ -43,7 +44,8 @@ import com.hb.mydietcoach.activity.diary.DiaryActivity;
 import com.hb.mydietcoach.activity.reminder.EdittingReminderActivity;
 import com.hb.mydietcoach.activity.reminder.ReminderActivity;
 import com.hb.mydietcoach.activity.tip.TipsActivity;
-import com.hb.mydietcoach.adapter.MiniPhotoAdapter;
+import com.hb.mydietcoach.adapter.photo.ImageSliderAdapter;
+import com.hb.mydietcoach.adapter.photo.MiniPhotoAdapter;
 import com.hb.mydietcoach.model.Reminder;
 import com.hb.mydietcoach.preference.PreferenceManager;
 import com.hb.mydietcoach.utils.Constants;
@@ -77,12 +79,10 @@ public class PhotosActivity extends AppCompatActivity implements MiniPhotoAdapte
 
     private DrawerLayout drawer;
 
-    //    private FloatingActionButton fabSelectGallery, fabTakeSnapshot;
-    private SliderLayout sliderShow;
-
     private RecyclerView recyclerView;
     private MiniPhotoAdapter adapter;
     private List<File> imageList;
+    private ViewPager viewPager;
 
     private FrameLayout flAddbutton;
 
@@ -95,6 +95,7 @@ public class PhotosActivity extends AppCompatActivity implements MiniPhotoAdapte
         fileTask.execute();
 
         initView();
+        addEvent();
         verifyStoragePermissions();
     }
 
@@ -117,9 +118,31 @@ public class PhotosActivity extends AppCompatActivity implements MiniPhotoAdapte
         //Add button is gone or visible
         flAddbutton = findViewById(R.id.flAddButton);
 
-        sliderShow = findViewById(R.id.slider);
-        sliderShow.setIndicatorVisibility(PagerIndicator.IndicatorVisibility.Invisible);
-        sliderShow.stopAutoCycle();
+        viewPager = findViewById(R.id.viewPager);
+    }
+
+    private void addEvent() {
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                LinearLayoutManager manager = (LinearLayoutManager) recyclerView.getLayoutManager();
+                int first = manager.findFirstCompletelyVisibleItemPosition();
+                int last = manager.findLastCompletelyVisibleItemPosition();
+                if (position < first || position > last) {
+                    RecyclerView.SmoothScroller scroller = new LinearSmoothScroller(PhotosActivity.this);
+                    scroller.setTargetPosition(position);
+                    manager.startSmoothScroll(scroller);
+                }
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+            }
+        });
     }
 
     @Override
@@ -222,11 +245,14 @@ public class PhotosActivity extends AppCompatActivity implements MiniPhotoAdapte
                     imageList.add(newImg);
                     adapter.notifyDataSetChanged();
 
-                    DefaultSliderView sliderView = new DefaultSliderView(PhotosActivity.this);
-                    sliderView.image(newImg);
-                    sliderShow.addSlider(sliderView);
-                    sliderShow.setCurrentPosition(imageList.size() - 1);
+                    //Update image slider
+                    PagerAdapter adapter = viewPager.getAdapter();
+                    if (adapter != null) {
+                        adapter.notifyDataSetChanged();
+                        viewPager.setCurrentItem(imageList.size() - 1, true);
+                    }
 
+                    //Update recycler view
                     RecyclerView.LayoutManager manager = recyclerView.getLayoutManager();
                     RecyclerView.SmoothScroller smoothScroller = new LinearSmoothScroller(PhotosActivity.this);
                     smoothScroller.setTargetPosition(imageList.size() - 1);
@@ -338,15 +364,24 @@ public class PhotosActivity extends AppCompatActivity implements MiniPhotoAdapte
         return true;
     }
 
-    boolean isSliderEnd = true;
-
     @Override
     public void onItemClick(int position) {
         Log.e(TAG, "Click item position " + position);
-        Log.e(TAG, "Is slider end " + isSliderEnd);
 
-        if (isSliderEnd) {
-            sliderShow.setCurrentPosition(position);
+        viewPager.setCurrentItem(position);
+
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+            //Start position for circler animator
+            int x = (viewPager.getLeft() + viewPager.getRight()) / 2;
+            int y = viewPager.getBottom();
+
+            float startRadius = 0;
+            float endRadius = (float) Math.hypot(viewPager.getWidth(), viewPager.getHeight());
+
+            Animator anim = ViewAnimationUtils.createCircularReveal(viewPager, x, y, startRadius, endRadius);
+            anim.setDuration(1000);
+
+            anim.start();
         }
     }
 
@@ -370,20 +405,11 @@ public class PhotosActivity extends AppCompatActivity implements MiniPhotoAdapte
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
-            addImageToPhotoSlider();
+            if (imageList.size() > 0) findViewById(R.id.imageView).setVisibility(View.VISIBLE);
 
-            recyclerView = findViewById(R.id.recyclerView);
-            recyclerView.setLayoutManager(
-                    new LinearLayoutManager(PhotosActivity.this,
-                            LinearLayoutManager.HORIZONTAL,
-                            false));
-            recyclerView.setItemAnimator(new DefaultItemAnimator());
-            if (imageList == null) imageList = new ArrayList<>();
-            adapter = new MiniPhotoAdapter(PhotosActivity.this, imageList);
-            recyclerView.setAdapter(adapter);
+            updateRecyclerView();
 
-            adapter.setOnItemClickListener(PhotosActivity.this);
-
+            updateImageSlider();
         }
 
         /**
@@ -417,11 +443,25 @@ public class PhotosActivity extends AppCompatActivity implements MiniPhotoAdapte
         }
     }
 
-    private void addImageToPhotoSlider() {
-        for (File file : imageList) {
-            DefaultSliderView sliderView = new DefaultSliderView(this);
-            sliderView.image(file);
-            sliderShow.addSlider(sliderView);
-        }
+    /**
+     * Update recyclerview
+     */
+    private void updateRecyclerView() {
+        recyclerView = findViewById(R.id.recyclerView);
+        recyclerView.setLayoutManager(
+                new LinearLayoutManager(PhotosActivity.this,
+                        LinearLayoutManager.HORIZONTAL,
+                        false));
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        if (imageList == null) imageList = new ArrayList<>();
+        adapter = new MiniPhotoAdapter(PhotosActivity.this, imageList);
+        recyclerView.setAdapter(adapter);
+
+        adapter.setOnItemClickListener(PhotosActivity.this);
+    }
+
+    private void updateImageSlider() {
+        ImageSliderAdapter sliderAdapter = new ImageSliderAdapter(this, imageList);
+        viewPager.setAdapter(sliderAdapter);
     }
 }
