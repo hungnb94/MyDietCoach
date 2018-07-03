@@ -4,7 +4,7 @@ import java.util.List;
 
 public class FoodAssets {
 
-//    private Srvs srvs;
+    private Srvs srvs;
 
     private String fn;
 
@@ -14,12 +14,13 @@ public class FoodAssets {
 
     private String bn;
 
-//    public void setSrvs(Srvs srvs){
-//        this.srvs = srvs;
-//    }
-//    public Srvs getSrvs(){
-//        return this.srvs;
-//    }
+    public void setSrvs(Srvs srvs) {
+        this.srvs = srvs;
+    }
+
+    public Srvs getSrvs() {
+        return this.srvs;
+    }
     public void setFn(String fn){
         this.fn = fn;
     }
@@ -64,51 +65,51 @@ public class FoodAssets {
 
     public class Srv
     {
-        private String cm;
+        private String cm;  //Calcium %
 
-        private String va;
+        private String va;  //Vitamin A %
 
         private String srvd;
 
-        private String vc;
+        private String vc;  //Vitamin C %
 
-        private String cr;
+        private String cr;  //Carbs g
 
-        private String msu;
+        private String msu; //Unit for msa (MS Unit)
 
-        private String fat;
+        private String fat; //Fats g
 
-        private String fi;
+        private String fi;  //Dietary Fiber g
 
-        private String so;
+        private String so;  //Sodium mg
 
-        private String pf;
+        private String pf;  //Polyunsaturated Fat g
 
-        private String ch;
+        private String ch;  //Cholesterol mg
 
-        private String ir;
+        private String ir;  //Iron %
 
-        private String tf;
+        private String tf;  //Trans Fat g
 
-        private String sid;
+        private String sid; //Unknown this number meaning
 
-        private String pr;
+        private String pr;  //Protein g
 
-        private String mf;
+        private String mf;  //Monounsaturated Fat g
 
-        private String po;
+        private String po;  //Polyunsaturated Fat g
 
-        private String nou;
+        private String nou; //Unknown but always is 1
 
-        private String cal;
+        private String cal; //Calories
 
-        private String md;
+        private String md;  //Unit
 
-        private String sf;
+        private String sf;  //Saturated Fat g
 
-        private String msa;
+        private String msa; //Weight (MS Amount)
 
-        private String su;
+        private String su;  //Sugars g
 
         public void setCm(String cm){
             this.cm = cm;

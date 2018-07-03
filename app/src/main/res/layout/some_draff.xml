@@ -3,72 +3,11 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="bottom">
-
-        <ImageView
-            android:layout_width="@dimen/_30sdp"
-            android:layout_height="@dimen/_25sdp"
-            android:layout_margin="@dimen/_3sdp"
-            android:src="@drawable/weight_green" />
-
-        <ImageView
-            android:layout_width="@dimen/_20sdp"
-            android:layout_height="@dimen/_15sdp"
-            android:layout_margin="@dimen/_3sdp"
-            android:src="@drawable/weight_green" />
-
-        <ImageView
-            android:layout_width="@dimen/_20sdp"
-            android:layout_height="@dimen/_15sdp"
-            android:layout_margin="@dimen/_3sdp"
-            android:src="@drawable/weight_green_half" />
-
-        <ImageView
-            android:layout_width="@dimen/_17sdp"
-            android:layout_height="@dimen/_30sdp"
-            android:layout_margin="@dimen/_3sdp"
-            android:src="@drawable/pin" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="bottom">
-
-        <ImageView
-            android:layout_width="@dimen/_35sdp"
-            android:layout_height="@dimen/_30sdp"
-            android:layout_margin="@dimen/_3sdp"
-            android:src="@drawable/weight_green" />
-
-        <ImageView
-            android:layout_width="@dimen/_35sdp"
-            android:layout_height="@dimen/_30sdp"
-            android:layout_margin="@dimen/_3sdp"
-            android:src="@drawable/weight_green" />
-
-        <ImageView
-            android:layout_width="@dimen/_25sdp"
-            android:layout_height="@dimen/_20sdp"
-            android:layout_margin="@dimen/_3sdp"
-            android:src="@drawable/weight_green" />
-
-        <ImageView
-            android:layout_width="@dimen/_25sdp"
-            android:layout_height="@dimen/_20sdp"
-            android:layout_margin="@dimen/_3sdp"
-            android:src="@drawable/weight_green_half" />
-
-        <ImageView
-            android:layout_width="@dimen/_20sdp"
-            android:layout_height="@dimen/_35sdp"
-            android:layout_margin="@dimen/_3sdp"
-            android:src="@drawable/pin" />
-
-    </LinearLayout>
+    <ImageView
+        android:scaleType="centerInside"
+        android:src="@drawable/slim_man_avatar_default"
+        android:layout_width="@dimen/_190sdp"
+        android:layout_height="@dimen/_190sdp"
+        android:contentDescription="@string/you_lost" />
 
 </LinearLayout>

@@ -21,6 +21,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.LinearSmoothScroller;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -80,7 +81,7 @@ public class PhotosActivity extends AppCompatActivity implements MiniPhotoAdapte
     private SliderLayout sliderShow;
 
     private RecyclerView recyclerView;
-    MiniPhotoAdapter adapter;
+    private MiniPhotoAdapter adapter;
     private List<File> imageList;
 
     private FrameLayout flAddbutton;
@@ -194,7 +195,7 @@ public class PhotosActivity extends AppCompatActivity implements MiniPhotoAdapte
             }
         } else if (requestCode == RC_TAKE_PHOTO) {
             if (resultCode == RESULT_OK && data != null) {
-                Bitmap bitmap = (Bitmap) data.getExtras().get("data");
+                Bitmap bitmap = (Bitmap) Objects.requireNonNull(data.getExtras()).get("data");
                 saveAndUpdateUI(bitmap);
             }
         }
@@ -211,8 +212,7 @@ public class PhotosActivity extends AppCompatActivity implements MiniPhotoAdapte
         new AsyncTask<Void, Void, File>() {
             @Override
             protected File doInBackground(Void... voids) {
-                File newImg = saveBitmap(bitmap);
-                return newImg;
+                return saveBitmap(bitmap);
             }
 
             @Override
@@ -226,6 +226,11 @@ public class PhotosActivity extends AppCompatActivity implements MiniPhotoAdapte
                     sliderView.image(newImg);
                     sliderShow.addSlider(sliderView);
                     sliderShow.setCurrentPosition(imageList.size() - 1);
+
+                    RecyclerView.LayoutManager manager = recyclerView.getLayoutManager();
+                    RecyclerView.SmoothScroller smoothScroller = new LinearSmoothScroller(PhotosActivity.this);
+                    smoothScroller.setTargetPosition(imageList.size() - 1);
+                    manager.startSmoothScroll(smoothScroller);
                 }
             }
         }.execute();
@@ -246,7 +251,7 @@ public class PhotosActivity extends AppCompatActivity implements MiniPhotoAdapte
             return file;
         } catch (Exception e) {
             Log.e(TAG, "Save image file failed");
-            Log.e(TAG, "File name " + file.getAbsolutePath());
+            Log.e(TAG, "File name " + Objects.requireNonNull(file).getAbsolutePath());
             e.printStackTrace();
             return null;
         } finally {
@@ -333,9 +338,16 @@ public class PhotosActivity extends AppCompatActivity implements MiniPhotoAdapte
         return true;
     }
 
+    boolean isSliderEnd = true;
+
     @Override
     public void onItemClick(int position) {
-        sliderShow.setCurrentPosition(position);
+        Log.e(TAG, "Click item position " + position);
+        Log.e(TAG, "Is slider end " + isSliderEnd);
+
+        if (isSliderEnd) {
+            sliderShow.setCurrentPosition(position);
+        }
     }
 
     @SuppressLint("StaticFieldLeak")

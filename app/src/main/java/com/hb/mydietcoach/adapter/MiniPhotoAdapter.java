@@ -2,7 +2,6 @@ package com.hb.mydietcoach.adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -11,13 +10,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
 import com.hb.mydietcoach.R;
-import com.hb.mydietcoach.utils.BitmapUtils;
 import com.hb.mydietcoach.utils.MyUtils;
 
 import java.io.File;
 import java.util.List;
-import java.util.Objects;
 
 public class MiniPhotoAdapter extends RecyclerView.Adapter<MiniPhotoAdapter.ViewHolder> {
     private final String TAG = MiniPhotoAdapter.class.getSimpleName();
@@ -41,17 +39,14 @@ public class MiniPhotoAdapter extends RecyclerView.Adapter<MiniPhotoAdapter.View
         return new ViewHolder(view);
     }
 
+    @SuppressLint("StaticFieldLeak")
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") final int position) {
-        File imgFile = list.get(position);
+    public void onBindViewHolder(@NonNull final ViewHolder holder, @SuppressLint("RecyclerView") final int position) {
+        final File imgFile = list.get(position);
         try {
-            Bitmap bitmap = BitmapUtils.getBitmapFromFile(imgFile);
-
-            bitmap = BitmapUtils.getResizedBitmap(Objects.requireNonNull(bitmap),
-                    holder.imageView.getWidth(),
-                    holder.imageView.getHeight());
-
-            holder.imageView.setImageBitmap(bitmap);
+            Glide.with(context)
+                    .load(imgFile)
+                    .into(holder.imageView);
 
             holder.imageView.setOnClickListener(new View.OnClickListener() {
                 @Override
