@@ -21,7 +21,6 @@ import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.LinearSmoothScroller;
@@ -35,6 +34,7 @@ import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import com.hb.mydietcoach.R;
+import com.hb.mydietcoach.activity.BaseActivity;
 import com.hb.mydietcoach.activity.ContactFAQActivity;
 import com.hb.mydietcoach.activity.MainActivity;
 import com.hb.mydietcoach.activity.SettingsActivity;
@@ -68,7 +68,7 @@ import static com.hb.mydietcoach.utils.Constants.RC_EXTERNAL_STORAGE;
 import static com.hb.mydietcoach.utils.Constants.RC_PICK_IMAGE;
 import static com.hb.mydietcoach.utils.Constants.RC_TAKE_PHOTO;
 
-public class PhotosActivity extends AppCompatActivity implements MiniPhotoAdapter.OnItemClickListener,
+public class PhotosActivity extends BaseActivity implements MiniPhotoAdapter.OnItemClickListener,
         NavigationView.OnNavigationItemSelectedListener {
     private static String[] PERMISSIONS_STORAGE = {
             Manifest.permission.READ_EXTERNAL_STORAGE,

@@ -2,6 +2,7 @@ package com.hb.mydietcoach.activity.diary;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
@@ -11,7 +12,6 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
@@ -35,6 +35,7 @@ import com.baoyz.swipemenulistview.SwipeMenuItem;
 import com.baoyz.swipemenulistview.SwipeMenuListView;
 import com.google.gson.Gson;
 import com.hb.mydietcoach.R;
+import com.hb.mydietcoach.activity.BaseActivity;
 import com.hb.mydietcoach.activity.ContactFAQActivity;
 import com.hb.mydietcoach.activity.MainActivity;
 import com.hb.mydietcoach.activity.SettingsActivity;
@@ -61,6 +62,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Objects;
 import java.util.StringTokenizer;
 
 import butterknife.ButterKnife;
@@ -71,7 +73,7 @@ import butterknife.OnTextChanged;
 import static com.hb.mydietcoach.utils.Constants.RC_ADD_EXERCISE;
 import static com.hb.mydietcoach.utils.Constants.RC_EDIT_MEAL_HISTORY;
 
-public class DiaryActivity extends AppCompatActivity
+public class DiaryActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private static final String TAG = DiaryActivity.class.getSimpleName();
@@ -81,13 +83,13 @@ public class DiaryActivity extends AppCompatActivity
     //List view
     private SwipeMenuListView listView;
     private DiaryActivityAdapter adapter;
-    private List<IItemDiary> listItems;
+    private List<IItemDiary> listItems = new ArrayList<>();
     private MyDatabase database;
     private SimpleDateFormat format;
 
     //Info at bottom
-    private ImageView ivMoreDiary;
-    private LinearLayout llContentScrollView;
+//    private ImageView ivMoreDiary;
+//    private LinearLayout llContentScrollView;
 
     //Function add meal
     private FloatingActionButton fab;
@@ -107,8 +109,10 @@ public class DiaryActivity extends AppCompatActivity
     //Function guideline for new user
     ToolTipsManager toolTipsManager;
     RelativeLayout rootLayout;
-    PreferenceManager pre;
+    private PreferenceManager pre;
     boolean isFirstTimeAddMeal;
+
+    private float caloriesLeft, caloriesConsumed, caloriesBurned;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -122,6 +126,7 @@ public class DiaryActivity extends AppCompatActivity
             Intent intent = new Intent(this, ProfileActivity.class);
             intent.putExtra(PreferenceManager.IS_FIRST_TIME_OPEN_DIARY, true);
             startActivity(intent);
+            finish();
         }
 
         initParams();
@@ -145,7 +150,7 @@ public class DiaryActivity extends AppCompatActivity
     private void initView() {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle(R.string.diet_diary);
+        Objects.requireNonNull(getSupportActionBar()).setTitle(R.string.diet_diary);
         ButterKnife.bind(this);
 
         drawer = findViewById(R.id.drawer_layout);
@@ -159,8 +164,9 @@ public class DiaryActivity extends AppCompatActivity
         navigationView.setCheckedItem(R.id.nav_diary);
 
         fab = findViewById(R.id.fab);
-        ivMoreDiary = findViewById(R.id.ivMoreDiary);
-        llContentScrollView = findViewById(R.id.llContentScrollView);
+        //TODO: EVENT FOR IV SHOW MORE DIARY
+//        ivMoreDiary = findViewById(R.id.ivMoreDiary);
+//        llContentScrollView = findViewById(R.id.llContentScrollView);
         llDetailInput = findViewById(R.id.llDetailInputDiary);
 
         //Function add meal
@@ -177,110 +183,30 @@ public class DiaryActivity extends AppCompatActivity
         //Function guideline
         rootLayout = findViewById(R.id.rootLayout);
 
-        initSwipeListView();
+        initFromDatabase();
         initAutoCompleteTextView();
     }
 
-    /**
-     * Set current date for tvCurrentDate
-     */
-    @SuppressLint("SimpleDateFormat")
-    private void setCurrentDate() {
-        String strCurrentDate;
-        SimpleDateFormat sdf;
-        if (todayDate.equals(currentDate)) {
-            sdf = new SimpleDateFormat(Constants.FORMAT_TODAY_DATE);
-            strCurrentDate = getString(R.string.today) + ", " + sdf.format(currentDate.getTime());
-        } else {
-            sdf = new SimpleDateFormat(Constants.FORMAT_NORMAL_DATE);
-            strCurrentDate = sdf.format(currentDate.getTime());
-        }
-        tvCurrentDate.setText(strCurrentDate);
-    }
-
-    /**
-     * Init AutoCompleteTextView
-     */
-    private void initAutoCompleteTextView() {
-        getFoodFromAssets();
-        listSearchingFood = new ArrayList<>();
-        searchingAdapter = new SearchingFoodAdapter(this, listSearchingFood);
-        autoFoodName.setAdapter(searchingAdapter);
-        autoFoodName.setThreshold(1);
-    }
-
-    /**
-     * Get all food from assets file
-     */
-    private void getFoodFromAssets() {
-        foodAssets = new ArrayList<>();
-        String content = FileUtils.readFileFromAssets(DiaryActivity.this, "new_food_db_1.txt");
-        StringTokenizer tokenizer = new StringTokenizer(content, "\n");
-        while (tokenizer.hasMoreTokens()) {
-            try {
-                String mLine = tokenizer.nextToken();
-                mLine = mLine.substring(8, mLine.length() - 1);
-
-                //Convert text to object
-                Gson gson = new Gson();
-                FoodAssets food = gson.fromJson(mLine, FoodAssets.class);
-
-                //Add to list
-                foodAssets.add(food);
-            } catch (Exception e) {
-                Log.e(TAG, "Exception");
-                e.printStackTrace();
+    @SuppressLint("StaticFieldLeak")
+    private void initFromDatabase() {
+        new AsyncTask<Void, Void, Void>() {
+            @Override
+            protected Void doInBackground(Void... voids) {
+                String strCurrentDate = format.format(currentDate.getTime());
+                listItems.clear();
+                listItems.addAll(database.findDiaryItemByDate(strCurrentDate));
+                return null;
             }
-        }
-    }
 
-    //State focus on auto text view in first time
-    boolean isFocusAutoTextView = false;
+            @Override
+            protected void onPostExecute(Void aVoid) {
+                super.onPostExecute(aVoid);
 
-    //Event focus on AutoCompleteTextView
-    @OnFocusChange(R.id.autoFoodName)
-    public void focusAutoTextView(View view, boolean focus) {
-        if (!isFocusAutoTextView && focus) {
-            isFocusAutoTextView = true;
-            llDetailInput.setVisibility(View.VISIBLE);
-            ivBarcode.setImageResource(R.drawable.widget_arrow);
-        }
-    }
+                initSwipeListView();
 
-    //Event change text on AutoCompleteTextView
-    @OnTextChanged(R.id.autoFoodName)
-    public void changeTextAutoTextView(CharSequence charSequence) {
-        if (llDetailInput.getVisibility() != View.VISIBLE)
-            llDetailInput.setVisibility(View.VISIBLE);
-
-        listSearchingFood.clear();
-        Log.d(TAG, "Find food for auto text view:");
-        for (FoodAssets food : foodAssets) {
-            if (food.getFn().contains(charSequence)) {
-                listSearchingFood.add(food);
+                initDetailCalories();
             }
-        }
-        searchingAdapter.notifyDataSetChanged();
-    }
-
-    /**
-     * Click add event to show AddingExerciseActivity
-     * @param view
-     */
-    @OnClick(R.id.llExercise)
-    public void addExercise(View view) {
-        Intent intent = new Intent(this, AddExerciseActivity.class);
-        startActivityForResult(intent, RC_ADD_EXERCISE);
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == RC_ADD_EXERCISE && resultCode == RESULT_OK) {
-            Bundle bundle = data.getExtras();
-            Exercise exercise = (Exercise) bundle.getSerializable(Constants.DATA_SERIALIZABLE);
-            listItems.add(exercise);
-            adapter.notifyDataSetChanged();
-        }
+        }.execute();
     }
 
     /**
@@ -288,8 +214,6 @@ public class DiaryActivity extends AppCompatActivity
      */
     private void initSwipeListView() {
         listView = findViewById(R.id.listView);
-        String strCurrentDate = format.format(currentDate.getTime());
-        listItems = database.findByDate(strCurrentDate);
         adapter = new DiaryActivityAdapter(this, listItems);
         listView.setAdapter(adapter);
 
@@ -342,13 +266,137 @@ public class DiaryActivity extends AppCompatActivity
     }
 
     /**
+     * Init view in bottom
+     * with full information about calories: left, burned, consumed
+     */
+    private void initDetailCalories() {
+        caloriesLeft = pre.getInt(PreferenceManager.DAILY_CALORIES_GOAL, 1500);
+
+        caloriesConsumed = 0;
+        caloriesBurned = 0;
+        for (int i = 0; i < listItems.size(); i++) {
+            Object object = listItems.get(i);
+            if (object instanceof Food) {
+                Food food = (Food) object;
+                float calo = parseFloats(food.getCalories());
+                caloriesConsumed += calo;
+
+                caloriesLeft -= calo;
+            } else if (object instanceof Exercise) {
+                Exercise exercise = (Exercise) object;
+                float calo = parseFloats(exercise.getCalories());
+                caloriesBurned += calo;
+
+                caloriesLeft += calo;
+            }
+        }
+
+        ((TextView) findViewById(R.id.tvCaloriesLeft)).setText(String.valueOf(Math.round(caloriesLeft)));
+        ((TextView) findViewById(R.id.tvCaloresBurned)).setText(String.valueOf(Math.round(caloriesBurned)));
+        ((TextView) findViewById(R.id.tvCaloriesConsumed)).setText(String.valueOf(Math.round(caloriesConsumed)));
+    }
+
+    /**
+     * Init AutoCompleteTextView
+     */
+    private void initAutoCompleteTextView() {
+        getFoodFromAssets();
+        listSearchingFood = new ArrayList<>();
+        searchingAdapter = new SearchingFoodAdapter(this, listSearchingFood);
+        autoFoodName.setAdapter(searchingAdapter);
+        autoFoodName.setThreshold(1);
+    }
+
+    /**
+     * Get all food from assets file
+     */
+    @SuppressLint("StaticFieldLeak")
+    private void getFoodFromAssets() {
+        new AsyncTask<Void, Void, Void>() {
+            @Override
+            protected Void doInBackground(Void... voids) {
+                foodAssets = new ArrayList<>();
+                String content = FileUtils.readFileFromAssets(DiaryActivity.this, "new_food_db_1.txt");
+                StringTokenizer tokenizer = new StringTokenizer(content, "\n");
+                while (tokenizer.hasMoreTokens()) {
+                    try {
+                        String mLine = tokenizer.nextToken();
+                        mLine = mLine.substring(8, mLine.length() - 1);
+
+                        //Convert text to object
+                        Gson gson = new Gson();
+                        FoodAssets food = gson.fromJson(mLine, FoodAssets.class);
+
+                        //Add to list
+                        foodAssets.add(food);
+                    } catch (Exception e) {
+                        Log.e(TAG, "Exception");
+                        e.printStackTrace();
+                    }
+                }
+                return null;
+            }
+        }.execute();
+    }
+
+    //State focus on auto text view in first time
+    boolean isFocusAutoTextView = false;
+
+    //Event focus on AutoCompleteTextView
+    @OnFocusChange(R.id.autoFoodName)
+    public void focusAutoTextView(View view, boolean focus) {
+        if (!isFocusAutoTextView && focus) {
+            isFocusAutoTextView = true;
+            llDetailInput.setVisibility(View.VISIBLE);
+            ivBarcode.setImageResource(R.drawable.widget_arrow);
+        }
+    }
+
+    //Event change text on AutoCompleteTextView
+    @OnTextChanged(R.id.autoFoodName)
+    public void changeTextAutoTextView(CharSequence charSequence) {
+        if (llDetailInput.getVisibility() != View.VISIBLE)
+            llDetailInput.setVisibility(View.VISIBLE);
+
+        listSearchingFood.clear();
+        Log.d(TAG, "Find food for auto text view:");
+        for (FoodAssets food : foodAssets) {
+            if (food.getFn().contains(charSequence)) {
+                listSearchingFood.add(food);
+            }
+        }
+        searchingAdapter.notifyDataSetChanged();
+    }
+
+    /**
+     * Click add event to show AddingExerciseActivity
+     */
+    @OnClick(R.id.llExercise)
+    public void addExercise() {
+        Intent intent = new Intent(this, AddExerciseActivity.class);
+        startActivityForResult(intent, RC_ADD_EXERCISE);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == RC_ADD_EXERCISE && resultCode == RESULT_OK) {
+            Bundle bundle = data.getExtras();
+            assert bundle != null;
+            Exercise exercise = (Exercise) bundle.getSerializable(Constants.DATA_SERIALIZABLE);
+            listItems.add(exercise);
+            adapter.notifyDataSetChanged();
+
+            updateDetailInformation(exercise);
+        }
+    }
+
+    /**
      * Click add food button
      * To show/hidden adding food layout
-     * @param view
      */
     @OnClick(R.id.fab)
-    public void addFood(View view) {
-        if (getSupportActionBar().isShowing()) {
+    public void addFood() {
+        if (Objects.requireNonNull(getSupportActionBar()).isShowing()) {
             getSupportActionBar().hide();
             llAddMeal.setVisibility(View.VISIBLE);
             llDetailInput.setVisibility(View.GONE);
@@ -363,10 +411,9 @@ public class DiaryActivity extends AppCompatActivity
     /**
      * Click add new meal
      * Save to database and update UI
-     * @param view
      */
     @OnClick(R.id.ivAddMeal)
-    public void addMeal(View view) {
+    public void addMeal() {
         String foodName = autoFoodName.getText().toString();
         String amount = edtAmount.getText().toString();
         String calories = edtCalories.getText().toString();
@@ -376,7 +423,7 @@ public class DiaryActivity extends AppCompatActivity
             return;
         }
         calories += " " + getString(R.string.calories);
-        SimpleDateFormat sdf = new SimpleDateFormat(Constants.FULL_DATE_FORMAT);
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new SimpleDateFormat(Constants.FULL_DATE_FORMAT);
         String time = sdf.format(Calendar.getInstance().getTime());
         Food food = new Food(0, foodName, amount, calories, time);
         long id = database.insertFood(food);
@@ -396,13 +443,31 @@ public class DiaryActivity extends AppCompatActivity
             pre.putBoolean(PreferenceManager.IS_FIRST_TIME_ADD_MEAL, false);
             isFirstTimeAddMeal = false;
         }
+
+        updateDetailInformation(food);
+    }
+
+    private void updateDetailInformation(IItemDiary itemDiary) {
+
+        if (itemDiary instanceof Food) {
+            float calo = parseFloats(((Food) itemDiary).getCalories());
+            caloriesLeft -= calo;
+            caloriesConsumed += calo;
+            ((TextView) findViewById(R.id.tvCaloriesConsumed)).setText(String.valueOf(Math.round(caloriesConsumed)));
+        } else if (itemDiary instanceof Exercise) {
+            float calo = parseFloats(((Exercise) itemDiary).getCalories());
+            caloriesLeft += calo;
+            caloriesBurned += calo;
+            ((TextView) findViewById(R.id.tvCaloresBurned)).setText(String.valueOf(Math.round(caloriesBurned)));
+        }
+        ((TextView) findViewById(R.id.tvCaloriesLeft)).setText(String.valueOf(Math.round(caloriesLeft)));
     }
 
     /**
      * Reset adding food layout
      */
     private void resetAddingFoodLayout() {
-        getSupportActionBar().show();
+        Objects.requireNonNull(getSupportActionBar()).show();
         llAddMeal.setVisibility(View.GONE);
         ivBarcode.setImageResource(R.drawable.barcode_icon);
         isFocusAutoTextView = false;
@@ -414,53 +479,44 @@ public class DiaryActivity extends AppCompatActivity
     //Click previous date
     @OnClick(R.id.ivPrevious)
     public void previousDate(View view) {
-        Log.d(TAG, "Click previous date");
         currentDate.add(Calendar.DATE, -1);
         setCurrentDate();
 
-        List items = database.findByDate(format.format(currentDate.getTime()));
-        listItems.clear();
-        listItems.addAll(items);
-        adapter.notifyDataSetChanged();
+        initFromDatabase();
     }
 
     //Click next date
     @OnClick(R.id.ivNext)
     public void nextDate(View view) {
-        Log.d(TAG, "Click next date");
         currentDate.add(Calendar.DATE, 1);
         setCurrentDate();
 
-        List items = database.findByDate(format.format(currentDate.getTime()));
-        listItems.clear();
-        listItems.addAll(items);
-        adapter.notifyDataSetChanged();
+        initFromDatabase();
     }
 
     /**
      * Click show more information about daily target
      * Show/hidden full information
-     * @param view
      */
-    @OnClick(R.id.ivMoreDiary)
-    public void showMore(View view) {
-        //Block when add meal layout is visible
-        if (llAddMeal.getVisibility() == View.VISIBLE) return;
-
-        if (llContentScrollView.getVisibility() == View.VISIBLE) {
-            llContentScrollView.setVisibility(View.GONE);
-            ivMoreDiary.setRotation(180);
-        } else {
-            llContentScrollView.setVisibility(View.VISIBLE);
-            ivMoreDiary.setRotation(0);
-        }
-    }
+//    @OnClick(R.id.ivMoreDiary)
+//    public void showMore() {
+//        //Block when add meal layout is visible
+//        if (llAddMeal.getVisibility() == View.VISIBLE) return;
+//
+//        if (llContentScrollView.getVisibility() == View.VISIBLE) {
+//            llContentScrollView.setVisibility(View.GONE);
+//            ivMoreDiary.setRotation(180);
+//        } else {
+//            llContentScrollView.setVisibility(View.VISIBLE);
+//            ivMoreDiary.setRotation(0);
+//        }
+//    }
 
     //Runnable handle click add food button (for beautiful UI) - not nessesary
     Runnable fabRunable = new Runnable() {
         @Override
         public void run() {
-            if (getSupportActionBar().isShowing()) {
+            if (Objects.requireNonNull(getSupportActionBar()).isShowing()) {
                 fab.setImageResource(R.drawable.quick_meal_icon);
             } else {
                 fab.setImageResource(R.drawable.ic_close_f_btn);
@@ -567,5 +623,31 @@ public class DiaryActivity extends AppCompatActivity
 
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+
+    /**
+     * Set current date for tvCurrentDate
+     */
+    @SuppressLint("SimpleDateFormat")
+    private void setCurrentDate() {
+        String strCurrentDate;
+        SimpleDateFormat sdf;
+        if (todayDate.equals(currentDate)) {
+            sdf = new SimpleDateFormat(Constants.FORMAT_TODAY_DATE);
+            strCurrentDate = getString(R.string.today) + ", " + sdf.format(currentDate.getTime());
+        } else {
+            sdf = new SimpleDateFormat(Constants.FORMAT_NORMAL_DATE);
+            strCurrentDate = sdf.format(currentDate.getTime());
+        }
+        tvCurrentDate.setText(strCurrentDate);
+    }
+
+    private float parseFloats(String number) {
+        try {
+            return Float.parseFloat(number);
+        } catch (Exception e) {
+            return 0;
+        }
     }
 }

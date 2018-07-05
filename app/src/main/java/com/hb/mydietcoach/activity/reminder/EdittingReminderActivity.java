@@ -2,7 +2,6 @@ package com.hb.mydietcoach.activity.reminder;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.Menu;
@@ -16,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.hb.mydietcoach.R;
+import com.hb.mydietcoach.activity.BaseActivity;
 import com.hb.mydietcoach.database.MyDatabase;
 import com.hb.mydietcoach.model.Reminder;
 import com.hb.mydietcoach.notification.NotificationManager;
@@ -30,7 +30,7 @@ import java.util.Calendar;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class EdittingReminderActivity extends AppCompatActivity {
+public class EdittingReminderActivity extends BaseActivity {
 
     public static final String IS_EDIT = "is_edit";
     public static final String IS_MOTIVATIONAL_REMINDER = "is_motivational";
@@ -47,7 +47,6 @@ public class EdittingReminderActivity extends AppCompatActivity {
     private SimpleDateFormat formatDate, formatTime;
 
     String arr[];
-    private ArrayAdapter<String> adapter;
     public static final int HOUR_MINISECOND = 60 * 60 * 1000;
 
     @Override
@@ -133,7 +132,7 @@ public class EdittingReminderActivity extends AppCompatActivity {
      */
     private void initSpinner() {
         arr = getResources().getStringArray(R.array.spinner_editting_reminder);
-        adapter = new ArrayAdapter<>(
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(
                 this, android.R.layout.simple_list_item_1, arr);
         spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener(itemSelectedListener);

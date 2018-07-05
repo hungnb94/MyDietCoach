@@ -1,8 +1,8 @@
 package com.hb.mydietcoach.activity.diary;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.hb.mydietcoach.R;
+import com.hb.mydietcoach.activity.BaseActivity;
 import com.hb.mydietcoach.database.MyDatabase;
 import com.hb.mydietcoach.dialog.SettingReminderDialog;
 import com.hb.mydietcoach.model.diary.Exercise;
@@ -22,11 +23,12 @@ import com.wdullaer.materialdatetimepicker.time.TimePickerDialog;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Objects;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class AddExerciseActivity extends AppCompatActivity
+public class AddExerciseActivity extends BaseActivity
         implements SettingReminderDialog.ChangeReminderListener {
 
     private static final String TAG = AddExerciseActivity.class.getSimpleName();
@@ -41,6 +43,7 @@ public class AddExerciseActivity extends AppCompatActivity
 
     private SimpleDateFormat sdfHour, sdfFullTime;
 
+    @SuppressLint("SimpleDateFormat")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,7 +59,7 @@ public class AddExerciseActivity extends AppCompatActivity
     private void initView() {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle(R.string.add_exercise);
+        Objects.requireNonNull(getSupportActionBar()).setTitle(R.string.add_exercise);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         ButterKnife.bind(this);

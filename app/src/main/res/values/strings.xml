@@ -242,4 +242,5 @@
     <string name="ft">ft</string>
     <string name="_5">5</string>
     <string name="_3">3</string>
+    <string name="uncaught_exception">Uncaught Exception</string>
 </resources>

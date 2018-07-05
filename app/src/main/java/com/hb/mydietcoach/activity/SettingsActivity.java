@@ -7,12 +7,10 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -28,7 +26,7 @@ import com.hb.mydietcoach.preference.PreferenceManager;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class SettingsActivity extends AppCompatActivity
+public class SettingsActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     private final String TAG = SettingsActivity.class.getSimpleName();
 
@@ -37,8 +35,6 @@ public class SettingsActivity extends AppCompatActivity
     private PreferenceManager pre;
     //Gender
     private Spinner spinnerGender;
-    private String[] genderTypes;
-    private ArrayAdapter<String> adapter;
 
     //Weight
     private EditText edtStartWeight;
@@ -70,8 +66,8 @@ public class SettingsActivity extends AppCompatActivity
         navigationView.setCheckedItem(R.id.nav_settings);
 
         spinnerGender = findViewById(R.id.spinnerGender);
-        genderTypes = getResources().getStringArray(R.array.gender_types);
-        adapter = new ArrayAdapter<>(
+        String[] genderTypes = getResources().getStringArray(R.array.gender_types);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(
                 this, android.R.layout.simple_list_item_1, genderTypes);
         spinnerGender.setAdapter(adapter);
 
@@ -86,7 +82,7 @@ public class SettingsActivity extends AppCompatActivity
     }
 
     @OnClick(R.id.btnSave)
-    void clickSave(View view){
+    void clickSave(){
         saveGender();
         saveWeight();
 

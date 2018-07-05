@@ -11,7 +11,6 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -33,6 +32,7 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.hb.mydietcoach.R;
+import com.hb.mydietcoach.activity.BaseActivity;
 import com.hb.mydietcoach.activity.ContactFAQActivity;
 import com.hb.mydietcoach.activity.MainActivity;
 import com.hb.mydietcoach.activity.SettingsActivity;
@@ -62,7 +62,7 @@ import butterknife.OnClick;
 
 import static com.hb.mydietcoach.utils.Constants.RC_EDITTING_CHALLENGE;
 
-public class ChallengesActivity extends AppCompatActivity
+public class ChallengesActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener, ChallengesAdapter.ItemEventListener,
         SeekBar.OnSeekBarChangeListener {
 

@@ -1,7 +1,6 @@
 package com.hb.mydietcoach.activity.tip;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.MenuItem;
@@ -9,6 +8,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 
 import com.hb.mydietcoach.R;
+import com.hb.mydietcoach.activity.BaseActivity;
 import com.hb.mydietcoach.adapter.tip.SpinnerTipCategoryAdapter;
 import com.hb.mydietcoach.model.tip.TipCategory;
 import com.hb.mydietcoach.model.tip.TipDetail;
@@ -21,7 +21,7 @@ import butterknife.OnClick;
 import io.realm.Realm;
 import io.realm.RealmResults;
 
-public class AddingTipActivity extends AppCompatActivity {
+public class AddingTipActivity extends BaseActivity {
     private RealmResults<TipCategory> categories;
 
     private Spinner spinner;

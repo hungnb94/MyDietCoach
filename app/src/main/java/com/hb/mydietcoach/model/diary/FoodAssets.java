@@ -73,7 +73,7 @@ public class FoodAssets {
 
         private String vc;  //Vitamin C %
 
-        private String cr;  //Carbs g
+        private String cr;  //Cabohydrates g
 
         private String msu; //Unit for msa (MS Unit)
 
@@ -97,7 +97,7 @@ public class FoodAssets {
 
         private String mf;  //Monounsaturated Fat g
 
-        private String po;  //Polyunsaturated Fat g
+        private String po;  //Potasium g
 
         private String nou; //Unknown but always is 1
 

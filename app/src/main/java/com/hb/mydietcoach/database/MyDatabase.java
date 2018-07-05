@@ -1,5 +1,6 @@
 package com.hb.mydietcoach.database;
 
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -9,15 +10,15 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.hb.mydietcoach.R;
+import com.hb.mydietcoach.model.Reminder;
 import com.hb.mydietcoach.model.challenge.AnimationChallenge;
 import com.hb.mydietcoach.model.challenge.Challenge;
+import com.hb.mydietcoach.model.challenge.NormalChallenge;
+import com.hb.mydietcoach.model.challenge.RunChallenge;
+import com.hb.mydietcoach.model.challenge.SelfControlChallenge;
 import com.hb.mydietcoach.model.diary.Exercise;
 import com.hb.mydietcoach.model.diary.Food;
 import com.hb.mydietcoach.model.diary.IItemDiary;
-import com.hb.mydietcoach.model.challenge.NormalChallenge;
-import com.hb.mydietcoach.model.Reminder;
-import com.hb.mydietcoach.model.challenge.RunChallenge;
-import com.hb.mydietcoach.model.challenge.SelfControlChallenge;
 import com.hb.mydietcoach.utils.Constants;
 
 import java.util.ArrayList;
@@ -154,7 +155,7 @@ public class MyDatabase extends SQLiteOpenHelper {
     }
 
     public List getAllFood() {
-        List<Food> list = new ArrayList();
+        List<Food> list = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
         String sql = "SELECT * FROM " + TABLE_FOOD_EXERCISE + " WHERE " + FIELD_TYPE + " = ?";
 
@@ -180,12 +181,12 @@ public class MyDatabase extends SQLiteOpenHelper {
         return list;
     }
 
-    public List<IItemDiary> findByDate(String date) {
-        List list = new ArrayList();
+    public List<IItemDiary> findDiaryItemByDate(String date) {
+        List<IItemDiary> list = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
         String sql = "SELECT * FROM " + TABLE_FOOD_EXERCISE + " WHERE "
                 + FIELD_TIME + " LIKE ?";
-        Cursor cursor = db.rawQuery(sql, new String[]{date + "%"});
+        @SuppressLint("Recycle") Cursor cursor = db.rawQuery(sql, new String[]{date + "%"});
 
         if (cursor.moveToFirst()) {
             do {

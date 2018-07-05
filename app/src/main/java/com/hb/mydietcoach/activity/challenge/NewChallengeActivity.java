@@ -2,7 +2,6 @@ package com.hb.mydietcoach.activity.challenge;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.MenuItem;
@@ -12,6 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.hb.mydietcoach.R;
+import com.hb.mydietcoach.activity.BaseActivity;
 import com.hb.mydietcoach.database.MyDatabase;
 import com.hb.mydietcoach.model.challenge.NormalChallenge;
 import com.hb.mydietcoach.utils.Constants;
@@ -19,7 +19,7 @@ import com.hb.mydietcoach.utils.Constants;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class NewChallengeActivity extends AppCompatActivity {
+public class NewChallengeActivity extends BaseActivity {
 
     private MyDatabase database;
     private EditText editText;

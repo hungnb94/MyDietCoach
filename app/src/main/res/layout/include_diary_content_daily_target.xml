@@ -21,6 +21,7 @@
             android:text="@string/carbohydrates" />
 
         <TextView
+            android:id="@+id/tvCarbohydrates"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/eg_weight" />
@@ -37,6 +38,7 @@
             android:text="@string/proteins" />
 
         <TextView
+            android:id="@+id/tvProteins"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/eg_weight_2" />
@@ -53,6 +55,7 @@
             android:text="@string/sugar" />
 
         <TextView
+            android:id="@+id/tvSugar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/eg_weight" />

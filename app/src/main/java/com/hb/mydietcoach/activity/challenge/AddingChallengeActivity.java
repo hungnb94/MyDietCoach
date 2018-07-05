@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
@@ -18,6 +17,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
 import com.hb.mydietcoach.R;
+import com.hb.mydietcoach.activity.BaseActivity;
 import com.hb.mydietcoach.adapter.challenge.AddingChallengeAdapter;
 import com.hb.mydietcoach.database.MyDatabase;
 import com.hb.mydietcoach.model.challenge.Challenge;
@@ -30,7 +30,7 @@ import butterknife.ButterKnife;
 
 import static com.hb.mydietcoach.utils.Constants.RC_NEW_MY_CHALLENGE;
 
-public class AddingChallengeActivity extends AppCompatActivity
+public class AddingChallengeActivity extends BaseActivity
         implements AdapterView.OnItemSelectedListener {
     private final String TAG = AddingChallengeActivity.class.getSimpleName();
 

@@ -3,7 +3,6 @@ package com.hb.mydietcoach.activity.tip;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.PagerSnapHelper;
 import android.support.v7.widget.RecyclerView;
@@ -15,6 +14,7 @@ import android.view.View;
 import android.widget.FrameLayout;
 
 import com.hb.mydietcoach.R;
+import com.hb.mydietcoach.activity.BaseActivity;
 import com.hb.mydietcoach.adapter.tip.TipDetailAdapter;
 import com.hb.mydietcoach.model.tip.TipCategory;
 import com.hb.mydietcoach.model.tip.TipDetail;
@@ -29,7 +29,9 @@ import butterknife.OnClick;
 import io.realm.Realm;
 import io.realm.RealmList;
 
-public class TipDetailActivity extends AppCompatActivity implements TipDetailAdapter.IClickOnItemListener {
+public class TipDetailActivity extends BaseActivity
+        implements TipDetailAdapter.IClickOnItemListener {
+
     private final String TAG = TipDetailActivity.class.getSimpleName();
 
     public static final String TIP_CATEGORY_ID = "id";
@@ -150,9 +152,9 @@ public class TipDetailActivity extends AppCompatActivity implements TipDetailAda
         realm.commitTransaction();
     }
 
-    private void setReminder() {
-        //TODO: set reminder
-    }
+//    private void setReminder() {
+        //TODO: SET REMINDER
+//    }
 
     //Using for hide/show next/back icon
     private Handler handler = new Handler();

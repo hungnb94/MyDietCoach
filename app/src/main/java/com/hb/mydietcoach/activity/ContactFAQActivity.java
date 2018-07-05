@@ -7,7 +7,6 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
@@ -18,9 +17,11 @@ import com.hb.mydietcoach.activity.photo.PhotosActivity;
 import com.hb.mydietcoach.activity.reminder.ReminderActivity;
 import com.hb.mydietcoach.activity.tip.TipsActivity;
 
+import java.util.Objects;
+
 import butterknife.ButterKnife;
 
-public class ContactFAQActivity extends AppCompatActivity
+public class ContactFAQActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private DrawerLayout drawer;
@@ -36,7 +37,7 @@ public class ContactFAQActivity extends AppCompatActivity
     private void initView() {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle(R.string.my_motivational_photo);
+        Objects.requireNonNull(getSupportActionBar()).setTitle(R.string.my_motivational_photo);
         ButterKnife.bind(this);
 
         drawer = findViewById(R.id.drawer_layout);

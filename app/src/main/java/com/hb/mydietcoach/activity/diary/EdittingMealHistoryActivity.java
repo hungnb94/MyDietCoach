@@ -1,8 +1,8 @@
 package com.hb.mydietcoach.activity.diary;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
@@ -15,6 +15,7 @@ import com.baoyz.swipemenulistview.SwipeMenuCreator;
 import com.baoyz.swipemenulistview.SwipeMenuItem;
 import com.baoyz.swipemenulistview.SwipeMenuListView;
 import com.hb.mydietcoach.R;
+import com.hb.mydietcoach.activity.BaseActivity;
 import com.hb.mydietcoach.adapter.diary.DiaryActivityAdapter;
 import com.hb.mydietcoach.database.MyDatabase;
 import com.hb.mydietcoach.model.diary.IItemDiary;
@@ -28,7 +29,7 @@ import java.util.List;
 
 import butterknife.ButterKnife;
 
-public class EdittingMealHistoryActivity extends AppCompatActivity {
+public class EdittingMealHistoryActivity extends BaseActivity {
     private static final String TAG = EdittingMealHistoryActivity.class.getSimpleName();
 
     private SwipeMenuListView listView;
@@ -44,6 +45,7 @@ public class EdittingMealHistoryActivity extends AppCompatActivity {
 
     SimpleDateFormat sdf;
 
+    @SuppressLint("SimpleDateFormat")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -2,7 +2,6 @@ package com.hb.mydietcoach.activity.challenge;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
@@ -19,6 +18,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.hb.mydietcoach.R;
+import com.hb.mydietcoach.activity.BaseActivity;
 import com.hb.mydietcoach.model.challenge.Challenge;
 import com.hb.mydietcoach.model.challenge.NormalChallenge;
 import com.hb.mydietcoach.model.challenge.RunChallenge;
@@ -31,7 +31,7 @@ import butterknife.OnTextChanged;
 
 import static com.hb.mydietcoach.utils.Constants.RC_ADD_CHALLENGE;
 
-public class EdittingChallengeActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+public class EdittingChallengeActivity extends BaseActivity implements AdapterView.OnItemSelectedListener {
 
     private static final String TAG = EdittingChallengeActivity.class.getSimpleName();
 
