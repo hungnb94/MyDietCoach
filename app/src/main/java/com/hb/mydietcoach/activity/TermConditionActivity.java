@@ -149,7 +149,7 @@ public class TermConditionActivity extends AppCompatActivity {
     }
 
     private float changeLbToKg(float lbWeight){
-        return lbWeight * Constants.LB_TO_KG;
+        return (float) (lbWeight * Constants.LB_TO_KG);
     }
 
 

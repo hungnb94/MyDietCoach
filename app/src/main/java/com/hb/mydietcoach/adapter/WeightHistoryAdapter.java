@@ -135,9 +135,12 @@ public class WeightHistoryAdapter extends RecyclerView.Adapter<WeightHistoryAdap
 
         @SuppressLint("InflateParams") View dialogView = activity.getLayoutInflater().inflate(R.layout.dialog_pin, null);
 
+        NumberFormat numberFormat = NumberFormat.getNumberInstance();
+        numberFormat.setMaximumFractionDigits(2);
+
         TextView tvCurrentWeight = dialogView.findViewById(R.id.tvCurrentWeight);
         tvCurrentWeight.setText(activity.getString(R.string.weight)
-                + " " + history.getCurentWeight()
+                + " " + numberFormat.format(history.getCurentWeight())
                 + " " + activity.getString(R.string.kgs));
 
         TextView tvDate = dialogView.findViewById(R.id.tvDate);
@@ -148,8 +151,6 @@ public class WeightHistoryAdapter extends RecyclerView.Adapter<WeightHistoryAdap
                 + " " + sdf.format(calendar.getTime()));
 
         TextView tvAmountWeightChange = dialogView.findViewById(R.id.tvAmountWeightChange);
-        NumberFormat numberFormat = NumberFormat.getNumberInstance();
-        numberFormat.setMaximumFractionDigits(2);
         if (history.getWeightChange() >= 1) {
             tvAmountWeightChange.setText(activity.getString(R.string.gain)
                     + " " + numberFormat.format(history.getWeightChange())

@@ -78,7 +78,14 @@ public class Constants {
     public static final int RC_ADD_REMINDER = 11;
     public static final int RC_EDIT_REMINDER = 12;
 
-    public static final float LB_TO_KG = (float) 0.45359237;
+    //Change unit
+    public static final double LB_TO_KG = 0.45359237;
+    public static final double KG_TO_LB = 2.204622622;
+    public static final double CM_TO_FT = 0.03280839895;
+    public static final double FT_TO_CM = 30.48;
+    public static final double CM_TO_IN = 0.3937007874;
+    public static final double IN_TO_CM = 2.54;
+
     public static final String IS_MOTIVATIONAL_NOTIFICATION = "motivational";
 
     //TIPS CATEGORY ID

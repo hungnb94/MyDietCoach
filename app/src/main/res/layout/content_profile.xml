@@ -31,8 +31,8 @@
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/mg_layout"
-            android:layout_marginTop="@dimen/mg_layout"
+            android:layout_marginBottom="@dimen/_7sdp"
+            android:layout_marginTop="@dimen/_7sdp"
             android:layout_weight="1"
             android:orientation="vertical">
 
@@ -55,10 +55,13 @@
                     android:id="@+id/edtCaloriesGoal"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:layout_weight="1.4"
                     android:gravity="center"
                     android:inputType="numberSigned"
-                    android:textSize="@dimen/txt_normal" />
+                    android:text="@string/_1550"
+                    android:textSize="@dimen/txt_normal"
+                    tools:ignore="LabelFor" />
+
             </LinearLayout>
 
             <LinearLayout
@@ -80,10 +83,11 @@
                     android:id="@+id/tvBMI"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:layout_weight="1.4"
                     android:gravity="center"
-                    android:text="18"
+                    android:text="@string/_28"
                     android:textSize="@dimen/txt_normal" />
+
             </LinearLayout>
 
         </LinearLayout>
@@ -110,6 +114,7 @@
             android:orientation="vertical">
 
             <LinearLayout
+                android:id="@+id/llWeightHeightUnit"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/row_profile_height"
                 android:gravity="center_vertical"
@@ -123,14 +128,16 @@
                     android:text="@string/weight_height_units" />
 
                 <Spinner
-                    android:id="@+id/spinnerUnit"
+                    android:id="@+id/spWeightHeightUnit"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:layout_weight="1.4"
                     android:gravity="center" />
+
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/llGender"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/row_profile_height"
                 android:gravity="center_vertical"
@@ -144,11 +151,12 @@
                     android:text="@string/gender" />
 
                 <Spinner
-                    android:id="@+id/spinnerGender"
+                    android:id="@+id/spGender"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:layout_weight="1.4"
                     android:gravity="center" />
+
             </LinearLayout>
 
             <LinearLayout
@@ -168,11 +176,13 @@
                     android:id="@+id/edtAge"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:layout_weight="1.4"
                     android:gravity="center"
                     android:inputType="numberSigned"
-                    android:text="18"
-                    android:textSize="@dimen/txt_normal" />
+                    android:text="@string/_28"
+                    android:textSize="@dimen/txt_normal"
+                    tools:ignore="LabelFor" />
+
             </LinearLayout>
 
             <LinearLayout
@@ -188,14 +198,64 @@
                     android:layout_weight="2"
                     android:text="@string/height_cms" />
 
-                <EditText
+                <LinearLayout
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:inputType="numberDecimal"
-                    android:text="160.9"
-                    android:textSize="@dimen/txt_normal" />
+                    android:layout_height="match_parent"
+                    android:layout_weight="1.4"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/edtHeight"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:inputType="numberSigned"
+                        android:text="@string/_160_0"
+                        android:textSize="@dimen/txt_normal"
+                        tools:ignore="LabelFor" />
+
+                    <LinearLayout
+                        android:id="@+id/llHeightIn"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:visibility="gone">
+
+                        <EditText
+                            android:id="@+id/edtHeightFt"
+                            android:layout_width="@dimen/_40sdp"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:inputType="numberSigned"
+                            android:text="@string/_5"
+                            android:textSize="@dimen/_14ssp"
+                            tools:ignore="LabelFor" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="@string/ft" />
+
+                        <EditText
+                            android:id="@+id/edtHeightIn"
+                            android:layout_width="@dimen/_40sdp"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:inputType="numberSigned"
+                            android:text="@string/_3"
+                            android:textSize="@dimen/_14ssp"
+                            tools:ignore="LabelFor" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="@string/in" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
             </LinearLayout>
 
             <LinearLayout
@@ -212,16 +272,20 @@
                     android:text="@string/current_weight" />
 
                 <EditText
+                    android:id="@+id/edtCurrentWeight"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:layout_weight="1.4"
                     android:gravity="center"
                     android:inputType="numberDecimal"
-                    android:text="80.0"
-                    android:textSize="@dimen/txt_normal" />
+                    android:text="@string/_80_0"
+                    android:textSize="@dimen/txt_normal"
+                    tools:ignore="LabelFor" />
+
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/llWeightGoal"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/row_profile_height"
                 android:gravity="center_vertical"
@@ -235,19 +299,23 @@
                     android:text="@string/goal_weight" />
 
                 <EditText
+                    android:id="@+id/edtWeightGoal"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:layout_weight="1.4"
                     android:gravity="center"
                     android:inputType="numberDecimal"
-                    android:text="64.0"
-                    android:textSize="@dimen/txt_normal" />
+                    android:text="@string/_64_0"
+                    android:textSize="@dimen/txt_normal"
+                    tools:ignore="LabelFor" />
+
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/row_profile_height"
+                android:layout_height="wrap_content"
                 android:gravity="center_vertical"
+                android:minHeight="@dimen/_40sdp"
                 android:paddingLeft="@dimen/mg_layout"
                 android:paddingRight="@dimen/mg_layout">
 
@@ -258,10 +326,10 @@
                     android:text="@string/activity_level" />
 
                 <Spinner
-                    android:id="@+id/spinnerActivityLevel"
+                    android:id="@+id/spActivityLevel"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:layout_weight="1.4"
                     android:gravity="center" />
             </LinearLayout>
 
@@ -279,17 +347,20 @@
                     android:text="@string/weeky_weight_loss_goal" />
 
                 <EditText
-                    android:id="@+id/edtWeightLossGoal"
+                    android:id="@+id/edtWeekyWeightLossGoal"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:layout_weight="1.4"
                     android:gravity="center"
                     android:inputType="numberDecimal"
-                    android:text="0.2"
-                    android:textSize="@dimen/txt_normal" />
+                    android:text="@string/_0_3"
+                    android:textSize="@dimen/txt_normal"
+                    tools:ignore="LabelFor" />
+
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/llUnitMeasurement"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/row_profile_height"
                 android:gravity="center_vertical"
@@ -303,10 +374,10 @@
                     android:text="@string/unit_of_measurement" />
 
                 <Spinner
-                    android:id="@+id/spinnerUnitMeasurement"
+                    android:id="@+id/spUnitMeasurement"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:layout_weight="1.4"
                     android:gravity="center" />
             </LinearLayout>
 

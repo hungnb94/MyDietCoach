@@ -14,9 +14,19 @@ public class PreferenceManager {
 
     public static final String IS_FIRST_TIME_LAUNCH = "lauch";
     public static final String IS_FIRST_TIME_INSERT_SQLITE = "sqlite";
+    public static final String IS_FIRST_TIME_OPEN_DIARY = "diary";
     public static final String IS_FIRST_TIME_DELETE_MEAL = "delete_meal";
     public static final String IS_FIRST_TIME_ADD_MEAL = "add_meal";
     public static final String IS_FIRST_TIME_CHALLENGES = "first_challenge";
+
+    //Profile of user
+    public static final String DAILY_CALORIES_GOAL = "daily_calories_goal";
+    public static final String USER_BIRTH_YEAR = "birth_year";
+    public static final String USER_HEIGHT = "user_height";
+    public static final String ACTIVITY_LEVEL = "activity_level";
+    public static final String WEEKY_WEIGHT_LOSS_GOAL = "weeky_weight_loss_goal";
+    public static final String UNIT_MEASUREMENT = "unit_measurement";
+    public static final String WEIGHT_HEIGHT_UNIT = "weight_height_unit";
 
     public static final String START_WEIGHT = "weight";
     public static final String TARGET_WEIGHT = "target_weight";

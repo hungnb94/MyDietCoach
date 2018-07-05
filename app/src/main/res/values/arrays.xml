@@ -42,4 +42,31 @@
         <item>Self Control</item>
         <item>My</item>
     </string-array>
+
+    <string-array name="weight_height_units">
+        <item>kgs/cms</item>
+        <item>lbs/in</item>
+    </string-array>
+
+    <string-array name="activity_level_titles">
+        <item>Sedentary</item>
+        <item>Lightly Active</item>
+        <item>Moderately Active</item>
+        <item>Very Active</item>
+        <item>Extremely Active</item>
+    </string-array>
+
+    <string-array name="activity_level_details">
+        <item>Sitting most of the day</item>
+        <item>On your feet most of the day</item>
+        <item>Doing physical activity most of the day</item>
+        <item>Doing heavy physical activity most of the day</item>
+        <item>Doing extremely heavy physical activity most of the day</item>
+    </string-array>
+
+    <string-array name="unit_measurements">
+        <item>gms</item>
+        <item>oz</item>
+    </string-array>
+
 </resources>

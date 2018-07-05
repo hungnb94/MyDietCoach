@@ -115,6 +115,15 @@ public class DiaryActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_diary);
 
+        //Check first time open diary
+        pre = new PreferenceManager(this);
+        boolean isFirstOpenDiary = pre.getBoolean(PreferenceManager.IS_FIRST_TIME_OPEN_DIARY, true);
+        if (isFirstOpenDiary) {
+            Intent intent = new Intent(this, ProfileActivity.class);
+            intent.putExtra(PreferenceManager.IS_FIRST_TIME_OPEN_DIARY, true);
+            startActivity(intent);
+        }
+
         initParams();
         initView();
     }
@@ -130,7 +139,6 @@ public class DiaryActivity extends AppCompatActivity
         rotationAnimation = AnimationUtils.loadAnimation(this, R.anim.rotation);
         format = new SimpleDateFormat(Constants.DATE_FORMAT);
         toolTipsManager = new ToolTipsManager();
-        pre = new PreferenceManager(this);
         isFirstTimeAddMeal = pre.getBoolean(PreferenceManager.IS_FIRST_TIME_ADD_MEAL, true);
     }
 

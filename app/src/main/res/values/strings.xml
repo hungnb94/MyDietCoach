@@ -231,4 +231,15 @@
     <string name="lost">Lost</string>
     <string name="gain">Gain</string>
     <string name="out_of_memory">Out of memory</string>
+    <string name="_64_0">64.0</string>
+    <string name="_18">18</string>
+    <string name="_28">28</string>
+    <string name="_160_0">160.0</string>
+    <string name="_80_0">80.0</string>
+    <string name="_0_3">0.3</string>
+    <string name="_1550">1550</string>
+    <string name="sitting_most_of_the_day">Sitting most of the day</string>
+    <string name="ft">ft</string>
+    <string name="_5">5</string>
+    <string name="_3">3</string>
 </resources>
