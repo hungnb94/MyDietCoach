@@ -387,6 +387,8 @@ public class DiaryActivity extends BaseActivity
             adapter.notifyDataSetChanged();
 
             updateDetailInformation(exercise);
+        } else if (requestCode == RC_EDIT_MEAL_HISTORY) {
+            initFromDatabase();
         }
     }
 
@@ -422,10 +424,9 @@ public class DiaryActivity extends BaseActivity
                     .show();
             return;
         }
-        calories += " " + getString(R.string.calories);
         @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new SimpleDateFormat(Constants.FULL_DATE_FORMAT);
         String time = sdf.format(Calendar.getInstance().getTime());
-        Food food = new Food(0, foodName, amount, calories, time);
+        Food food = new Food(0, foodName, calories, amount, time);
         long id = database.insertFood(food);
         food.setId(id);
         listItems.add(food);
@@ -448,7 +449,6 @@ public class DiaryActivity extends BaseActivity
     }
 
     private void updateDetailInformation(IItemDiary itemDiary) {
-
         if (itemDiary instanceof Food) {
             float calo = parseFloats(((Food) itemDiary).getCalories());
             caloriesLeft -= calo;
@@ -647,6 +647,8 @@ public class DiaryActivity extends BaseActivity
         try {
             return Float.parseFloat(number);
         } catch (Exception e) {
+            Log.e(TAG, "Parse float exception: " + e.getMessage());
+            e.printStackTrace();
             return 0;
         }
     }

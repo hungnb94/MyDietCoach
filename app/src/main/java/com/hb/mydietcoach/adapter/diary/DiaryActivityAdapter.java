@@ -1,5 +1,6 @@
 package com.hb.mydietcoach.adapter.diary;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Handler;
 import android.view.LayoutInflater;
@@ -62,6 +63,7 @@ public class DiaryActivityAdapter extends BaseAdapter {
         return list.get(i).getId();
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public View getView(int position, View view, ViewGroup viewGroup) {
         final ViewHolder holder;
@@ -88,7 +90,7 @@ public class DiaryActivityAdapter extends BaseAdapter {
             }
             holder.ivItemType.setImageResource(R.drawable.quick_meal_hint_apple);
             holder.tvItemName.setText(food.getName());
-            holder.tvCaloriesAmount.setText(food.getCalories());
+            holder.tvCaloriesAmount.setText(food.getCalories() + " " + context.getString(R.string.calories));
             holder.tvWeight.setText(food.getWeight());
             holder.tvWeight.setVisibility(View.INVISIBLE);
 
