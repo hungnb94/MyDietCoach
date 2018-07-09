@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorCream"
+    android:orientation="vertical"
+    android:padding="@dimen/_15sdp"
+    tools:context=".fragment.FAQ2_Fragment">
+
+    <TextView
+        style="@style/FAQ_Question"
+        android:layout_marginBottom="@dimen/_15sdp"
+        android:text="@string/faq2_question" />
+
+    <TextView
+        style="@style/FAQ_Answer"
+        android:text="@string/faq2_answer1" />
+
+    <TextView
+        style="@style/FAQ_Answer"
+        android:layout_marginStart="@dimen/_15sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:text="@string/faq2_answer2" />
+
+    <TextView
+        style="@style/FAQ_Answer"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:text="@string/for_more_details_see" />
+
+    <TextView
+        android:id="@+id/tvChangeSubcription"
+        style="@style/FAQ_Answer"
+        android:text="@string/cancel_or_change_a_subcription_on_google_play"
+        android:textColor="@color/colorPinkLink" />
+
+    <TextView
+        android:id="@+id/tvTypeHtml"
+        style="@style/FAQ_Answer"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:text="@string/faq2_answer3" />
+
+</LinearLayout>

@@ -16,19 +16,24 @@
         android:layout_weight="1">
 
         <LinearLayout
-            android:layout_margin="@dimen/_15sdp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingTop="@dimen/_15sdp"
+            android:paddingBottom="@dimen/_15sdp"
             android:orientation="vertical">
 
             <TextView
                 style="@style/SettingsActivityHeader"
+                android:paddingEnd="@dimen/_10sdp"
+                android:paddingStart="@dimen/_10sdp"
                 android:text="@string/gender" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center_vertical">
+                android:gravity="center_vertical"
+                android:paddingEnd="@dimen/_10sdp"
+                android:paddingStart="@dimen/_10sdp">
 
                 <TextView
                     style="@style/SettingsActivityNormal"
@@ -36,7 +41,7 @@
 
                 <Spinner
                     android:id="@+id/spinnerGender"
-                    android:layout_width="@dimen/_120sdp"
+                    android:layout_width="@dimen/_100sdp"
                     android:layout_height="wrap_content" />
 
             </LinearLayout>
@@ -49,7 +54,9 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center_vertical">
+                android:gravity="center_vertical"
+                android:paddingEnd="@dimen/_10sdp"
+                android:paddingStart="@dimen/_10sdp">
 
                 <TextView
                     style="@style/SettingsActivityNormal"
@@ -62,8 +69,8 @@
                     android:backgroundTint="@color/colorAccent"
                     android:inputType="numberSigned"
                     android:textSize="@dimen/_13ssp"
-                    tools:targetApi="lollipop"
-                    tools:ignore="LabelFor" />
+                    tools:ignore="LabelFor"
+                    tools:targetApi="lollipop" />
 
             </LinearLayout>
 
@@ -75,16 +82,20 @@
             <TextView
                 style="@style/SettingsActivityHeader"
                 android:layout_marginTop="@dimen/_15sdp"
+                android:paddingEnd="@dimen/_10sdp"
+                android:paddingStart="@dimen/_10sdp"
                 android:text="@string/notifications" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center_vertical">
+                android:gravity="center_vertical"
+                android:paddingEnd="@dimen/_10sdp"
+                android:paddingStart="@dimen/_10sdp">
 
                 <TextView
                     style="@style/SettingsActivityNormal"
-                    android:text="Choose Notification Sound" />
+                    android:text="@string/choose_notification_sound" />
 
                 <ImageView
                     android:layout_width="@dimen/_15sdp"
@@ -102,6 +113,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
+                android:paddingEnd="@dimen/_10sdp"
+                android:paddingStart="@dimen/_10sdp"
                 tools:ignore="UseCompoundDrawables">
 
                 <TextView
@@ -123,13 +136,16 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center_vertical">
+                android:gravity="center_vertical"
+                android:paddingEnd="@dimen/_10sdp"
+                android:paddingStart="@dimen/_10sdp">
 
                 <TextView
                     style="@style/SettingsActivityNormal"
                     android:text="@string/play_notifications_sound" />
 
                 <Switch
+                    android:id="@+id/swPlaySound"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:checked="true"
@@ -145,13 +161,16 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center_vertical">
+                android:gravity="center_vertical"
+                android:paddingEnd="@dimen/_10sdp"
+                android:paddingStart="@dimen/_10sdp">
 
                 <TextView
                     style="@style/SettingsActivityNormal"
                     android:text="@string/make_notifications_vibrate" />
 
                 <Switch
+                    android:id="@+id/swMakeVibrate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/widget_arrow" />
@@ -166,18 +185,23 @@
             <TextView
                 style="@style/SettingsActivityHeader"
                 android:layout_marginTop="@dimen/_15sdp"
+                android:paddingEnd="@dimen/_10sdp"
+                android:paddingStart="@dimen/_10sdp"
                 android:text="@string/others" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center_vertical">
+                android:gravity="center_vertical"
+                android:paddingEnd="@dimen/_10sdp"
+                android:paddingStart="@dimen/_10sdp">
 
                 <TextView
                     style="@style/SettingsActivityNormal"
                     android:text="@string/display_customized_avatar_on_home_screen" />
 
                 <Switch
+                    android:id="@+id/swCustomizedAvatar"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:checked="true"
@@ -193,7 +217,9 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center_vertical">
+                android:gravity="center_vertical"
+                android:paddingEnd="@dimen/_10sdp"
+                android:paddingStart="@dimen/_10sdp">
 
                 <TextView
                     style="@style/SettingsActivityNormal"
@@ -214,7 +240,9 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center_vertical">
+                android:gravity="center_vertical"
+                android:paddingEnd="@dimen/_10sdp"
+                android:paddingStart="@dimen/_10sdp">
 
                 <TextView
                     style="@style/SettingsActivityNormal"
@@ -239,11 +267,11 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="bottom|end"
         android:layout_marginBottom="@dimen/_5sdp"
         android:layout_marginEnd="@dimen/_15sdp"
         android:layout_marginStart="@dimen/_5sdp"
-        android:layout_marginTop="@dimen/_5sdp">
+        android:layout_marginTop="@dimen/_5sdp"
+        android:gravity="bottom|end">
 
         <Button
             android:id="@+id/btnSave"

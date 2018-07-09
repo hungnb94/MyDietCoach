@@ -181,10 +181,10 @@
     <string name="privacy_policy">Privacy Policy</string>
     <string name="contact_feedback"><![CDATA[Contact & Feedback]]></string>
     <string name="frequently_asked_questions">Frequently Asked Questions</string>
-    <string name="how_will_my_subcription_be_charged">How will my subcription be charged?</string>
-    <string name="how_do_i_cancel_my_subcription_renewal">How do I cancel my subcription renewal?</string>
-    <string name="how_di_i_add_a_foods_and_copy_meals_to_my_diary">How do I add a Foods and copy Meals to my diary?</string>
-    <string name="how_do_i_delete_or_edit_and_item_from_the_diary">How do I delete or edit and Item from the diary?</string>
+    <string name="faq1_question">How will my subcription be charged?</string>
+    <string name="faq2_question">How do I cancel my subcription renewal?</string>
+    <string name="faq4_question">How do I add a Foods and copy Meals to my diary?</string>
+    <string name="faq3_question">How do I delete or edit and Item from the diary?</string>
     <string name="make_notifications_vibrate">Make Notifications Vibrate</string>
     <string name="display_customized_avatar_on_home_screen">Display customized avatar on Home screen</string>
     <string name="create_challenge">Create Challenge</string>
@@ -243,4 +243,25 @@
     <string name="_5">5</string>
     <string name="_3">3</string>
     <string name="uncaught_exception">Uncaught Exception</string>
+    <string name="choose_notification_sound">Choose Notification Sound</string>
+    <string name="android">Android</string>
+    <string name="customers_support">Customers Support</string>
+    <string name="support_email">infor@mydietcoachapp.com</string>
+    <string name="faq1_answer">
+        <li>You will be charged through your Google Play Store account upon confirmation of purchase</li>\n
+        <li>Subcription automatically renews unless auto-renew is canceled at least 24 hours prior to the end of the current period</li>
+    </string>
+    <string name="faq2_answer1">Subcriptions can be managed by the user, where Auto-renewal can be canceled. Follow these steps to cancel a subcription on your device:</string>
+    <string name="faq2_answer2">
+        <![CDATA[1. Lauch the Google Play Store app.\n
+    2. Tap Menu -> My Apps -> Subcriptions and tap on the app of the subcription you\'d like to cancel.\n
+    3. Alternatively, tap Menu -> My Apps -> Tap the app of the subription you\'d like to cancel -> Tap the app\'s details page.]]>
+    </string>
+    <string name="for_more_details_see">For more details see:</string>
+    <string name="cancel_or_change_a_subcription_on_google_play">Cancel or change a subcription on Google Play</string>
+    <string name="faq2_answer3">
+        <li>The cancellation will bgin in the next billing period (i.e. - The following month for a monthly subcription and the following year for a yearly subcription)</li>\n
+        <li><b>Important</b>: Uninstalling an app will not automatically stop your subcription. You must cancel your subcription to end your subcription.</li></string>
+    <string name="faq3_answer1">Swipe the row of the item in the diary list to the right and press the Delete icon.</string>
+    <string name="faq3_answer2">You my also oen the item by pressing it on the diary list- this will allow you to edit or delete it.</string>
 </resources>

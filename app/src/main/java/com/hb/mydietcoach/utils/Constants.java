@@ -96,4 +96,5 @@ public class Constants {
     public static final int ID_FAMILY_MEAL = 5;
 
     public static final long TRACKING_HANDLE_ANIM_LENGTH = 1500;
+    public static final String URL_CHANGE_SUBCRIPTION = "https://support.google.com/googleplay/answer/7018481";
 }

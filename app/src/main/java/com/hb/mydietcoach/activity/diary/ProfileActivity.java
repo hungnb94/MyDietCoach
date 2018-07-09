@@ -18,7 +18,7 @@ import android.widget.TextView;
 
 import com.hb.mydietcoach.R;
 import com.hb.mydietcoach.activity.BaseActivity;
-import com.hb.mydietcoach.activity.ContactFAQActivity;
+import com.hb.mydietcoach.activity.contact_faq.ContactFAQActivity;
 import com.hb.mydietcoach.activity.MainActivity;
 import com.hb.mydietcoach.activity.SettingsActivity;
 import com.hb.mydietcoach.activity.WeightLoggingActivity;

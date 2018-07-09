@@ -14,14 +14,18 @@ import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Switch;
 
 import com.hb.mydietcoach.R;
 import com.hb.mydietcoach.activity.challenge.ChallengesActivity;
+import com.hb.mydietcoach.activity.contact_faq.ContactFAQActivity;
 import com.hb.mydietcoach.activity.diary.DiaryActivity;
 import com.hb.mydietcoach.activity.photo.PhotosActivity;
 import com.hb.mydietcoach.activity.reminder.ReminderActivity;
 import com.hb.mydietcoach.activity.tip.TipsActivity;
 import com.hb.mydietcoach.preference.PreferenceManager;
+
+import java.util.Objects;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -39,6 +43,8 @@ public class SettingsActivity extends BaseActivity
     //Weight
     private EditText edtStartWeight;
 
+    private Switch swPlaySound, swMakeVibrate, swCustomizedAvatar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,7 +58,7 @@ public class SettingsActivity extends BaseActivity
     private void initView() {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle(R.string.settings);
+        Objects.requireNonNull(getSupportActionBar()).setTitle(R.string.settings);
         ButterKnife.bind(this);
 
         drawer = findViewById(R.id.drawer_layout);
@@ -79,12 +85,28 @@ public class SettingsActivity extends BaseActivity
 
         float weight = pre.getFloat(PreferenceManager.START_WEIGHT, 80);
         edtStartWeight.setText(String.valueOf(weight));
+
+        boolean isPlaySound = pre.getBoolean(PreferenceManager.SETTING_IS_PLAY_SOUND, false);
+        swPlaySound = findViewById(R.id.swPlaySound);
+        swPlaySound.setChecked(isPlaySound);
+
+        boolean isMakeVibrate = pre.getBoolean(PreferenceManager.SETTING_IS_MAKE_VIBRATE, false);
+        swMakeVibrate = findViewById(R.id.swMakeVibrate);
+        swMakeVibrate.setChecked(isMakeVibrate);
+
+        boolean isCustomizedAvatar = pre.getBoolean(PreferenceManager.SETTING_IS_SHOW_CUSTOMIZED_AVATAR, false);
+        swCustomizedAvatar = findViewById(R.id.swCustomizedAvatar);
+        swCustomizedAvatar.setChecked(isCustomizedAvatar);
     }
 
     @OnClick(R.id.btnSave)
     void clickSave(){
         saveGender();
         saveWeight();
+
+        pre.putBoolean(PreferenceManager.SETTING_IS_PLAY_SOUND, swPlaySound.isChecked());
+        pre.putBoolean(PreferenceManager.SETTING_IS_MAKE_VIBRATE, swMakeVibrate.isChecked());
+        pre.putBoolean(PreferenceManager.SETTING_IS_SHOW_CUSTOMIZED_AVATAR, swCustomizedAvatar.isChecked());
 
         finish();
     }
@@ -149,8 +171,6 @@ public class SettingsActivity extends BaseActivity
             finish();
         } else if (id == R.id.nav_rewards) {
 
-        } else if (id == R.id.nav_settings) {
-            //Blank
         } else if (id == R.id.nav_contact) {
             Intent intent = new Intent(this, ContactFAQActivity.class);
             startActivity(intent);

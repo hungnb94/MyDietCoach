@@ -28,6 +28,11 @@ public class PreferenceManager {
     public static final String UNIT_MEASUREMENT = "unit_measurement";
     public static final String WEIGHT_HEIGHT_UNIT = "weight_height_unit";
 
+    //Setting activity
+    public static final String SETTING_IS_PLAY_SOUND = "play_sound";
+    public static final String SETTING_IS_MAKE_VIBRATE = "make_vibrate";
+    public static final String SETTING_IS_SHOW_CUSTOMIZED_AVATAR = "customized_avatar";
+
     public static final String START_WEIGHT = "weight";
     public static final String TARGET_WEIGHT = "target_weight";
     public static final String CURRENT_WEIGHT = "current_weight";

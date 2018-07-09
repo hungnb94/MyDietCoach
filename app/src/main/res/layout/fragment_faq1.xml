@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorCream"
+    android:orientation="vertical"
+    android:padding="@dimen/_15sdp"
+    tools:context=".fragment.FAQ1_Fragment">
+
+    <TextView
+        style="@style/FAQ_Question"
+        android:layout_marginBottom="@dimen/_15sdp"
+        android:text="@string/faq1_question" />
+
+    <TextView
+        style="@style/FAQ_Answer"
+        android:text="@string/faq1_answer" />
+
+</LinearLayout>

@@ -28,7 +28,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.BaseActivity"/>
+        <activity android:name=".activity.BaseActivity" />
         <activity
             android:name=".activity.MainActivity"
             android:label="@string/title_activity_main"
@@ -104,8 +104,9 @@
             android:name=".activity.SettingsActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.ContactFAQActivity"
+            android:name=".activity.contact_faq.ContactFAQActivity"
             android:screenOrientation="portrait" />
+        <activity android:name=".activity.contact_faq.FrequentAskQuestionActivity"></activity>
     </application>
 
 </manifest>

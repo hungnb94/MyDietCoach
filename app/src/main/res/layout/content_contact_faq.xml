@@ -11,6 +11,7 @@
         android:layout_height="wrap_content" />
 
     <LinearLayout
+        android:id="@+id/llContact"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorCream"
@@ -52,6 +53,7 @@
             android:textStyle="bold" />
 
         <LinearLayout
+            android:id="@+id/llSubcriptionCharged"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
@@ -59,7 +61,7 @@
 
             <TextView
                 style="@style/SettingsActivityNormal"
-                android:text="@string/how_will_my_subcription_be_charged" />
+                android:text="@string/faq1_question" />
 
             <ImageView
                 android:layout_width="@dimen/_15sdp"
@@ -75,6 +77,7 @@
             android:background="@color/colorGrey" />
 
         <LinearLayout
+            android:id="@+id/llCancelSubcriptionRenewal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
@@ -82,7 +85,7 @@
 
             <TextView
                 style="@style/SettingsActivityNormal"
-                android:text="@string/how_do_i_cancel_my_subcription_renewal" />
+                android:text="@string/faq2_question" />
 
             <ImageView
                 android:layout_width="@dimen/_15sdp"
@@ -92,12 +95,36 @@
 
         </LinearLayout>
 
+        <!--<View-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="@dimen/line_lv_1"-->
+        <!--android:background="@color/colorGrey" />-->
+
+        <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:gravity="center_vertical"-->
+        <!--tools:ignore="UseCompoundDrawables">-->
+
+        <!--<TextView-->
+        <!--style="@style/SettingsActivityNormal"-->
+        <!--android:text="@string/faq4_question" />-->
+
+        <!--<ImageView-->
+        <!--android:layout_width="@dimen/_15sdp"-->
+        <!--android:layout_height="@dimen/_15sdp"-->
+        <!--android:layout_marginStart="@dimen/_20sdp"-->
+        <!--android:src="@drawable/widget_arrow" />-->
+
+        <!--</LinearLayout>-->
+
         <View
             android:layout_width="match_parent"
             android:layout_height="@dimen/line_lv_1"
             android:background="@color/colorGrey" />
 
         <LinearLayout
+            android:id="@+id/llEditItemDiary"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
@@ -105,30 +132,7 @@
 
             <TextView
                 style="@style/SettingsActivityNormal"
-                android:text="@string/how_di_i_add_a_foods_and_copy_meals_to_my_diary" />
-
-            <ImageView
-                android:layout_width="@dimen/_15sdp"
-                android:layout_height="@dimen/_15sdp"
-                android:layout_marginStart="@dimen/_20sdp"
-                android:src="@drawable/widget_arrow" />
-
-        </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/line_lv_1"
-            android:background="@color/colorGrey" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            tools:ignore="UseCompoundDrawables">
-
-            <TextView
-                style="@style/SettingsActivityNormal"
-                android:text="@string/how_do_i_delete_or_edit_and_item_from_the_diary" />
+                android:text="@string/faq3_question" />
 
             <ImageView
                 android:layout_width="@dimen/_15sdp"
