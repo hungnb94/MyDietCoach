@@ -145,10 +145,10 @@ public class WeightLoggingActivity extends BaseActivity
         //Get target weight
         pm = new PreferenceManager(this);
         targetWeight = pm.getFloat(PreferenceManager.TARGET_WEIGHT, -1);
-        targetWeight = MyUtils.roundFloat(numberFormat, targetWeight);
+        targetWeight = MyUtils.roundFloat(2, targetWeight);
 
         previousWeight = pm.getFloat(PreferenceManager.CURRENT_WEIGHT, -1);
-        previousWeight = MyUtils.roundFloat(numberFormat, previousWeight);
+        previousWeight = MyUtils.roundFloat(2, previousWeight);
         currWeight = previousWeight;
 
         long previousDay = pm.getLong(PreferenceManager.LAST_WEIGHT_LOGGING_DAY,
@@ -430,7 +430,7 @@ public class WeightLoggingActivity extends BaseActivity
             llDetailWeightChange.setVisibility(View.VISIBLE);
         }
 
-        float wchange = MyUtils.roundFloat(numberFormat, weight - previousWeight);
+        float wchange = MyUtils.roundFloat(2, weight - previousWeight);
 
         if (wchange > 0) {
             tvAlertWeightChange.setText(R.string.you_gained);
@@ -540,7 +540,7 @@ public class WeightLoggingActivity extends BaseActivity
         //Save preference
         if (currWeight > 0) pm.putFloat(PreferenceManager.CURRENT_WEIGHT, currWeight);
 
-        float wchange = MyUtils.roundFloat(numberFormat, currWeight - lastWeight);
+        float wchange = MyUtils.roundFloat(2, currWeight - lastWeight);
         WeightChangeHistory history = new WeightChangeHistory(Calendar.getInstance().getTimeInMillis(), currWeight, wchange);
 
         //Add to list

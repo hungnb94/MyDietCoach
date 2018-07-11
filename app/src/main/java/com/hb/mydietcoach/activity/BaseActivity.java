@@ -30,6 +30,7 @@ public class BaseActivity extends AppCompatActivity {
 
                 Toast.makeText(BaseActivity.this, R.string.uncaught_exception, Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(BaseActivity.this, SplashActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
                 finish();
                 android.os.Process.killProcess(android.os.Process.myPid());

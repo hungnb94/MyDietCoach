@@ -25,6 +25,7 @@ import com.hb.mydietcoach.utils.Constants;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import butterknife.ButterKnife;
 
@@ -35,8 +36,6 @@ public class AddingChallengeActivity extends BaseActivity
     private final String TAG = AddingChallengeActivity.class.getSimpleName();
 
     private String arr[];
-    private ArrayAdapter<String> spinnerAdapter;
-    private Spinner spinner;
 
     private RecyclerView recyclerView;
     private AddingChallengeAdapter challengeAdapter;
@@ -60,13 +59,13 @@ public class AddingChallengeActivity extends BaseActivity
     private void initView() {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle(R.string.add_challenge);
+        Objects.requireNonNull(getSupportActionBar()).setTitle(R.string.add_challenge);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         ButterKnife.bind(this);
 
-        spinner = findViewById(R.id.spinner);
-        spinnerAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, arr);
+        Spinner spinner = findViewById(R.id.spinner);
+        ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, arr);
         spinner.setAdapter(spinnerAdapter);
         spinner.setOnItemSelectedListener(this);
 

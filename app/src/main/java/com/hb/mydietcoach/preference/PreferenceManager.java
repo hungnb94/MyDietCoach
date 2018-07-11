@@ -19,6 +19,15 @@ public class PreferenceManager {
     public static final String IS_FIRST_TIME_ADD_MEAL = "add_meal";
     public static final String IS_FIRST_TIME_CHALLENGES = "first_challenge";
 
+    //Reward
+    public static final String LAST_POINTS_FOR = "last_point_for";
+    public static final String POINTS = "points";
+    public static final String LEVEL = "level";
+    public static final String TOTAL_POINTS = "total_point";
+    public static final String IS_LIKE_FANPAGE_FACEBOOK = "like_fanpage";
+    public static final String IS_SHARE_GOOGLE_PLUS = "share_google_plus";
+    public static final String IS_FOLLOW_TWITTER = "follow_twitter";
+
     //Profile of user
     public static final String DAILY_CALORIES_GOAL = "daily_calories_goal";
     public static final String USER_BIRTH_YEAR = "birth_year";
@@ -97,4 +106,5 @@ public class PreferenceManager {
         editor.putString(key, value);
         return editor.commit();
     }
+
 }

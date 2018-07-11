@@ -32,17 +32,14 @@
                 android:src="@drawable/photos_no_images"
                 android:visibility="gone" />
 
-            <!--<com.daimajia.slider.library.SliderLayout-->
-            <!--android:id="@+id/slider"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="match_parent"-->
-            <!--android:layout_margin="@dimen/_15sdp" />-->
-
             <android.support.v4.view.ViewPager
                 android:id="@+id/viewPager"
-                android:layout_margin="@dimen/_15sdp"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:layout_marginBottom="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_22sdp"
+                android:layout_marginStart="@dimen/_22sdp"
+                android:layout_marginTop="@dimen/_10sdp" />
 
             <com.getbase.floatingactionbutton.FloatingActionsMenu
                 android:layout_width="wrap_content"
@@ -68,6 +65,17 @@
                     app:fab_icon="@drawable/ic_gallery_l" />
 
             </com.getbase.floatingactionbutton.FloatingActionsMenu>
+
+            <ImageView
+                android:id="@+id/ivDelete"
+                android:layout_width="@dimen/_18sdp"
+                android:layout_height="@dimen/_25sdp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginBottom="@dimen/_5sdp"
+                android:layout_marginEnd="@dimen/_5sdp"
+                android:src="@drawable/trash_icon_photos"
+                android:visibility="gone" />
 
         </RelativeLayout>
 

@@ -3,7 +3,6 @@ package com.hb.mydietcoach.utils;
 import android.content.Context;
 import android.widget.Toast;
 
-import java.text.NumberFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.concurrent.TimeUnit;
@@ -51,7 +50,10 @@ public class MyUtils {
      * @param roundNumber: number need to round
      * @return: round number
      */
-    public static float roundFloat(NumberFormat numberFormat, float roundNumber) {
-        return Float.parseFloat(numberFormat.format(roundNumber));
+    public static float roundFloat(int numberAfterDecimalPoint, float roundNumber) {
+        if (numberAfterDecimalPoint <= 0) return roundNumber;
+
+        float tmp = (float) Math.pow(10, numberAfterDecimalPoint);
+        return Math.round(roundNumber * tmp) / tmp;
     }
 }

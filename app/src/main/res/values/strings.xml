@@ -264,4 +264,39 @@
         <li><b>Important</b>: Uninstalling an app will not automatically stop your subcription. You must cancel your subcription to end your subcription.</li></string>
     <string name="faq3_answer1">Swipe the row of the item in the diary list to the right and press the Delete icon.</string>
     <string name="faq3_answer2">You my also oen the item by pressing it on the diary list- this will allow you to edit or delete it.</string>
+    <string name="my_progress">My progress</string>
+    <string name="you_ve_earned">You\'ve earned 0 HH points, so far.</string>
+    <string name="my_points">My Points</string>
+    <string name="like">Like</string>
+    <string name="follow">Follow</string>
+    <string name="level_current">Level 0, target: 100 points</string>
+    <string name="your_latest_hh_points">Your latest HH points were given for:</string>
+    <string name="adding_a_motivational_photo">Adding a motivational photo</string>
+    <string name="would_like_get_more_points">Would you like to get more HH points?</string>
+    <string name="target">Target</string>
+    <string name="_100">100</string>
+    <string name="level">Level</string>
+    <string name="_target">, target:</string>
+    <string name="points">points</string>
+    <string name="starting_with">Starting with "My Diet Coach"</string>
+    <string name="link_facebook">https://facebook.com/mydietcoachapp</string>
+    <string name="link_twitter">https://twitter.com/mydietcoachapp</string>
+    <string name="great_thanks">Great, thanks!</string>
+    <string name="restarting_your_points">We\'re re-starting your points.</string>
+    <string name="reached_level">You\'ve reached level 1 target!!!</string>
+    <string name="next_target_is">Your next target is: 126 Points</string>
+    <string name="_reached_level">You\'ve reached level</string>
+    <string name="_target_">target!!!</string>
+    <string name="your_next_target">Your next target is:</string>
+    <string name="_point">Points</string>
+    <string name="share_text">
+        Hi, I strongly recommend My Diet Coach app. It is motivating, fun, and helps me with my weight-loss efforts\n\n
+        https://y724c.app.goo.gl/HRJN
+    </string>
+    <string name="share_using">Share using</string>
+    <string name="you_earned">You\'ve earned</string>
+    <string name="point_so_far">HH points, so far.</string>
+    <string name="like_fanpage">Like our fanpage</string>
+    <string name="share_app">Share app</string>
+    <string name="follow_twitter">Follow us on twitter</string>
 </resources>

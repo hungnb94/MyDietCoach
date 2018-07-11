@@ -97,4 +97,9 @@ public class Constants {
 
     public static final long TRACKING_HANDLE_ANIM_LENGTH = 1500;
     public static final String URL_CHANGE_SUBCRIPTION = "https://support.google.com/googleplay/answer/7018481";
+
+    //Point on reward
+    public static final int POINT_FOR_LIKE_FANPAGE_FACEBOOK = 60;
+    public static final int POINT_FOR_SHARE_GOOGLE_PLUS = 60;
+    public static final int POINT_FOR_FOLLOW_TWITTER = 60;
 }

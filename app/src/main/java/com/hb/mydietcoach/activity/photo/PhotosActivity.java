@@ -31,20 +31,22 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewAnimationUtils;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.hb.mydietcoach.R;
 import com.hb.mydietcoach.activity.BaseActivity;
-import com.hb.mydietcoach.activity.contact_faq.ContactFAQActivity;
 import com.hb.mydietcoach.activity.MainActivity;
 import com.hb.mydietcoach.activity.SettingsActivity;
 import com.hb.mydietcoach.activity.WeightLoggingActivity;
 import com.hb.mydietcoach.activity.challenge.ChallengesActivity;
+import com.hb.mydietcoach.activity.contact_faq.ContactFAQActivity;
 import com.hb.mydietcoach.activity.diary.DiaryActivity;
 import com.hb.mydietcoach.activity.reminder.EdittingReminderActivity;
 import com.hb.mydietcoach.activity.reminder.ReminderActivity;
 import com.hb.mydietcoach.activity.tip.TipsActivity;
 import com.hb.mydietcoach.adapter.photo.ImageSliderAdapter;
+import com.hb.mydietcoach.adapter.photo.ImageSliderAdapter.DepthPageTransformer;
 import com.hb.mydietcoach.adapter.photo.MiniPhotoAdapter;
 import com.hb.mydietcoach.model.Reminder;
 import com.hb.mydietcoach.preference.PreferenceManager;
@@ -129,6 +131,8 @@ public class PhotosActivity extends BaseActivity implements MiniPhotoAdapter.OnI
 
             @Override
             public void onPageSelected(int position) {
+                findViewById(R.id.ivDelete).setVisibility(View.GONE);
+
                 LinearLayoutManager manager = (LinearLayoutManager) recyclerView.getLayoutManager();
                 int first = manager.findFirstCompletelyVisibleItemPosition();
                 int last = manager.findLastCompletelyVisibleItemPosition();
@@ -405,7 +409,7 @@ public class PhotosActivity extends BaseActivity implements MiniPhotoAdapter.OnI
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
-            if (imageList.size() > 0) findViewById(R.id.imageView).setVisibility(View.VISIBLE);
+            if (imageList.size() == 0) findViewById(R.id.imageView).setVisibility(View.VISIBLE);
 
             updateRecyclerView();
 
@@ -463,5 +467,45 @@ public class PhotosActivity extends BaseActivity implements MiniPhotoAdapter.OnI
     private void updateImageSlider() {
         ImageSliderAdapter sliderAdapter = new ImageSliderAdapter(this, imageList);
         viewPager.setAdapter(sliderAdapter);
+        viewPager.setPageTransformer(true, new DepthPageTransformer());
+
+        sliderAdapter.setListener(new ImageSliderAdapter.IItemClickListener() {
+            @Override
+            public void clickAt() {
+                ImageView ivDelete = findViewById(R.id.ivDelete);
+                if (ivDelete.getVisibility() == View.VISIBLE) {
+                    ivDelete.setVisibility(View.GONE);
+                } else {
+                    ivDelete.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+    }
+
+    @OnClick(R.id.ivDelete)
+    void clickDelete() {
+        int pos = viewPager.getCurrentItem();
+
+        //Delete file in new thread
+        final File deleteFile = imageList.get(pos);
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                boolean isDelete = deleteFile.getAbsoluteFile().delete();
+                Log.e(TAG, "Is delete file " + deleteFile.getAbsolutePath() + ": " + isDelete);
+            }
+        }).start();
+
+        imageList.remove(pos);
+
+        //Update recycler view
+        adapter.notifyDataSetChanged();
+
+        //Update viewpager
+        updateImageSlider();
+
+        onItemClick(pos);
+
+        findViewById(R.id.ivDelete).setVisibility(View.VISIBLE);
     }
 }
