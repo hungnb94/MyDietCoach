@@ -33,6 +33,7 @@ import android.widget.TextView;
 
 import com.hb.mydietcoach.R;
 import com.hb.mydietcoach.activity.BaseActivity;
+import com.hb.mydietcoach.activity.RewardActivity;
 import com.hb.mydietcoach.activity.contact_faq.ContactFAQActivity;
 import com.hb.mydietcoach.activity.MainActivity;
 import com.hb.mydietcoach.activity.SettingsActivity;
@@ -157,10 +158,10 @@ public class ChallengesActivity extends BaseActivity
             Intent intent = new Intent(this, TipsActivity.class);
             startActivity(intent);
             finish();
-        } else if (id == R.id.nav_challenges) {
-            //Blank
         } else if (id == R.id.nav_rewards) {
-
+            Intent intent = new Intent(this, RewardActivity.class);
+            startActivity(intent);
+            finish();
         } else if (id == R.id.nav_settings) {
             Intent intent = new Intent(this, SettingsActivity.class);
             startActivity(intent);

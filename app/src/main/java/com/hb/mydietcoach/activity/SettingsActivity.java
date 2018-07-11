@@ -170,7 +170,9 @@ public class SettingsActivity extends BaseActivity
             startActivity(intent);
             finish();
         } else if (id == R.id.nav_rewards) {
-
+            Intent intent = new Intent(this, RewardActivity.class);
+            startActivity(intent);
+            finish();
         } else if (id == R.id.nav_contact) {
             Intent intent = new Intent(this, ContactFAQActivity.class);
             startActivity(intent);

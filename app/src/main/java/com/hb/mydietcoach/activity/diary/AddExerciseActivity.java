@@ -177,7 +177,7 @@ public class AddExerciseActivity extends BaseActivity
 
     /**
      * Change reminder setting
-     * @param isReminder
+     * @param isReminder: Is set reminder
      * @param minutesFromEvent: minute from exercise event
      */
     @Override

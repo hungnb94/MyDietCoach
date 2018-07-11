@@ -56,7 +56,7 @@ import butterknife.OnClick;
 import io.realm.Realm;
 import io.realm.RealmResults;
 
-public class WeightLoggingActivity extends BaseActivity
+public class WeightLoggingActivity extends ScoreActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private final String TAG = WeightLoggingActivity.class.getSimpleName();
@@ -118,6 +118,9 @@ public class WeightLoggingActivity extends BaseActivity
     private RecyclerView recyclerView;
     private List<WeightChangeHistory> weightHistories;
 
+    //Earned points
+    private LinearLayout llEarnedPoint;
+    private TextView tvEarnedPoint;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -180,6 +183,9 @@ public class WeightLoggingActivity extends BaseActivity
             @Override
             public void onAnimationEnd(Animation animation) {
                 if (flSwitchWeight != null) flSwitchWeight.setVisibility(View.GONE);
+
+                addPoints(Constants.POINT_FOR_CHANGE_WEIGHT);
+                showEarnedPoint(Constants.POINT_FOR_CHANGE_WEIGHT);
             }
 
             @Override
@@ -279,6 +285,10 @@ public class WeightLoggingActivity extends BaseActivity
         flSwitchWeight = findViewById(R.id.flSwitchWeight);
         ivTrackingHandle = findViewById(R.id.ivTrackingHandle);
 
+        //Earned points
+        llEarnedPoint = findViewById(R.id.llEarnedPoint);
+        tvEarnedPoint = findViewById(R.id.tvEarnedPoint);
+
         // Weight Container and dumbbell
         flWeightContainer = findViewById(R.id.flWeightContainer);
         ivDumbbells = getImageViewDumbbells();
@@ -300,6 +310,19 @@ public class WeightLoggingActivity extends BaseActivity
 
         //last weight
         lastWeight = currWeight;
+    }
+
+    private void showEarnedPoint(int points) {
+        llEarnedPoint.setVisibility(View.VISIBLE);
+        String text = getString(R.string.you_earned) + " " + points + " " + getString(R.string.hh_points);
+        tvEarnedPoint.setText(text);
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                llEarnedPoint.setVisibility(View.GONE);
+            }
+        }, Constants.LENGTH_SHOW_SCORE);
     }
 
     @Override
@@ -605,7 +628,9 @@ public class WeightLoggingActivity extends BaseActivity
             startActivity(intent);
             finish();
         } else if (id == R.id.nav_rewards) {
-
+            Intent intent = new Intent(this, RewardActivity.class);
+            startActivity(intent);
+            finish();
         } else if (id == R.id.nav_settings) {
             Intent intent = new Intent(this, SettingsActivity.class);
             startActivity(intent);

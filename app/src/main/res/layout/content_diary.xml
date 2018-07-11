@@ -155,12 +155,12 @@
                             android:background="@color/colorGrey" />
 
                         <!--<ImageView-->
-                            <!--android:id="@+id/ivMoreDiary"-->
-                            <!--android:layout_width="@dimen/ic_more_diary"-->
-                            <!--android:layout_height="@dimen/ic_more_diary"-->
-                            <!--android:layout_gravity="center_horizontal"-->
-                            <!--android:rotation="180"-->
-                            <!--android:src="@drawable/ic_arrow_more_close" />-->
+                        <!--android:id="@+id/ivMoreDiary"-->
+                        <!--android:layout_width="@dimen/ic_more_diary"-->
+                        <!--android:layout_height="@dimen/ic_more_diary"-->
+                        <!--android:layout_gravity="center_horizontal"-->
+                        <!--android:rotation="180"-->
+                        <!--android:src="@drawable/ic_arrow_more_close" />-->
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -261,6 +261,21 @@
             </RelativeLayout>
 
         </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/llEarnedPoint"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_120sdp"
+        android:gravity="center"
+        android:visibility="gone">
+
+        <include
+            layout="@layout/include_points"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
 
     </LinearLayout>
 

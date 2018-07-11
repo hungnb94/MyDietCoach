@@ -1,6 +1,5 @@
 package com.hb.mydietcoach.activity;
 
-import android.app.Dialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -21,7 +20,6 @@ import com.hb.mydietcoach.activity.diary.DiaryActivity;
 import com.hb.mydietcoach.activity.photo.PhotosActivity;
 import com.hb.mydietcoach.activity.reminder.ReminderActivity;
 import com.hb.mydietcoach.activity.tip.TipsActivity;
-import com.hb.mydietcoach.dialog.TargetArchiveDialog;
 import com.hb.mydietcoach.preference.PreferenceManager;
 import com.hb.mydietcoach.utils.Constants;
 
@@ -30,14 +28,11 @@ import java.util.Objects;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class RewardActivity extends BaseActivity
+public class RewardActivity extends ScoreActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-    private final int TARGET_DISTANT = 26;
 
     private DrawerLayout drawer;
 
-    private String sLastPointFor;
-    private int nPoints, nLevel, nTarget, nTotalPoints;
     private TextView tvLevel, tvLastPointFor, tvTargetPoint, tvTotalPoint;
     private ProgressBar progressBar;
 
@@ -47,7 +42,6 @@ public class RewardActivity extends BaseActivity
         setContentView(R.layout.activity_reward);
 
         initView();
-
     }
 
     private void initView() {
@@ -72,29 +66,20 @@ public class RewardActivity extends BaseActivity
         tvTargetPoint = findViewById(R.id.tvTargetPoint);
         tvTotalPoint = findViewById(R.id.tvTotalPoints);
 
-        PreferenceManager pre = new PreferenceManager(this);
-
-        sLastPointFor = pre.getString(PreferenceManager.LAST_POINTS_FOR, getString(R.string.starting_with));
-
-        nPoints = pre.getInt(PreferenceManager.POINTS, 40);
-        nLevel = pre.getInt(PreferenceManager.LEVEL, 1);
-        nTotalPoints = pre.getInt(PreferenceManager.TOTAL_POINTS, nPoints);
-        nTarget = 100 + (nLevel - 1) * TARGET_DISTANT;
-
         updateView();
     }
 
     private void updateView() {
-        tvLastPointFor.setText(sLastPointFor);
+        tvLastPointFor.setText(getLastPointFor());
 
-        String sLevel = getString(R.string.level) + " " + nLevel +
-                getString(R.string._target) + " " + nTarget + " " + getString(R.string.points);
+        String sLevel = getString(R.string.level) + " " + getLevel() +
+                getString(R.string._target) + " " + getTarget() + " " + getString(R.string.points);
         tvLevel.setText(sLevel);
 
-        tvTargetPoint.setText(String.valueOf(nTarget));
-        progressBar.setProgress(nPoints * 100 / nTarget);
+        tvTargetPoint.setText(String.valueOf(getTarget()));
+        progressBar.setProgress(getPoints() * 100 / getTarget());
 
-        String sTotalPoint = getString(R.string.you_earned) + " " + nTotalPoints + " " + getString(R.string.point_so_far);
+        String sTotalPoint = getString(R.string.you_earned) + " " + getTotalPoints() + " " + getString(R.string.point_so_far);
         tvTotalPoint.setText(sTotalPoint);
     }
 
@@ -105,9 +90,9 @@ public class RewardActivity extends BaseActivity
         if (!isLike) {
             pre.putBoolean(PreferenceManager.IS_LIKE_FANPAGE_FACEBOOK, true);
 
-            nPoints += Constants.POINT_FOR_LIKE_FANPAGE_FACEBOOK;
-            nTotalPoints += Constants.POINT_FOR_LIKE_FANPAGE_FACEBOOK;
-            sLastPointFor = getString(R.string.like_fanpage);
+            addPoints(Constants.POINT_FOR_LIKE_FANPAGE_FACEBOOK);
+
+            setLastPointFor(getString(R.string.like_fanpage));
 
             checkLevel();
 
@@ -124,9 +109,8 @@ public class RewardActivity extends BaseActivity
         if (!isLike) {
             pre.putBoolean(PreferenceManager.IS_SHARE_GOOGLE_PLUS, true);
 
-            nPoints += Constants.POINT_FOR_SHARE_GOOGLE_PLUS;
-            nTotalPoints += Constants.POINT_FOR_SHARE_GOOGLE_PLUS;
-            sLastPointFor = getString(R.string.share_app);
+            addPoints(Constants.POINT_FOR_SHARE_GOOGLE_PLUS);
+            setLastPointFor(getString(R.string.share_app));
 
             checkLevel();
 
@@ -148,25 +132,14 @@ public class RewardActivity extends BaseActivity
         if (!isLike) {
             pre.putBoolean(PreferenceManager.IS_FOLLOW_TWITTER, true);
 
-            nPoints += Constants.POINT_FOR_FOLLOW_TWITTER;
-            nTotalPoints += Constants.POINT_FOR_FOLLOW_TWITTER;
-            sLastPointFor = getString(R.string.follow_twitter);
+            addPoints(Constants.POINT_FOR_FOLLOW_TWITTER);
+            setLastPointFor(getString(R.string.follow_twitter));
 
             checkLevel();
             updateView();
         }
 
         openWeb(getString(R.string.link_twitter));
-    }
-
-    private void checkLevel() {
-        if (nPoints >= nTarget) {
-            Dialog dialog = new TargetArchiveDialog(this, nTarget, nLevel, nTarget + TARGET_DISTANT);
-            dialog.show();
-            nPoints = 0;
-            ++nLevel;
-            nTarget += TARGET_DISTANT;
-        }
     }
 
     /**
@@ -177,16 +150,6 @@ public class RewardActivity extends BaseActivity
     private void openWeb(String url) {
         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
         startActivity(intent);
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        PreferenceManager pre = new PreferenceManager(this);
-        pre.putString(PreferenceManager.LAST_POINTS_FOR, sLastPointFor);
-        pre.putInt(PreferenceManager.POINTS, nPoints);
-        pre.putInt(PreferenceManager.LEVEL, nLevel);
-        pre.putInt(PreferenceManager.TOTAL_POINTS, nTotalPoints);
     }
 
     @Override

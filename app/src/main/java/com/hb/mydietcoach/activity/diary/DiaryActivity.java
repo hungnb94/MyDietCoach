@@ -35,12 +35,13 @@ import com.baoyz.swipemenulistview.SwipeMenuItem;
 import com.baoyz.swipemenulistview.SwipeMenuListView;
 import com.google.gson.Gson;
 import com.hb.mydietcoach.R;
-import com.hb.mydietcoach.activity.BaseActivity;
-import com.hb.mydietcoach.activity.contact_faq.ContactFAQActivity;
 import com.hb.mydietcoach.activity.MainActivity;
+import com.hb.mydietcoach.activity.RewardActivity;
+import com.hb.mydietcoach.activity.ScoreActivity;
 import com.hb.mydietcoach.activity.SettingsActivity;
 import com.hb.mydietcoach.activity.WeightLoggingActivity;
 import com.hb.mydietcoach.activity.challenge.ChallengesActivity;
+import com.hb.mydietcoach.activity.contact_faq.ContactFAQActivity;
 import com.hb.mydietcoach.activity.photo.PhotosActivity;
 import com.hb.mydietcoach.activity.reminder.ReminderActivity;
 import com.hb.mydietcoach.activity.tip.TipsActivity;
@@ -73,7 +74,7 @@ import butterknife.OnTextChanged;
 import static com.hb.mydietcoach.utils.Constants.RC_ADD_EXERCISE;
 import static com.hb.mydietcoach.utils.Constants.RC_EDIT_MEAL_HISTORY;
 
-public class DiaryActivity extends BaseActivity
+public class DiaryActivity extends ScoreActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private static final String TAG = DiaryActivity.class.getSimpleName();
@@ -111,6 +112,10 @@ public class DiaryActivity extends BaseActivity
     RelativeLayout rootLayout;
     private PreferenceManager pre;
     boolean isFirstTimeAddMeal;
+
+    //Earned points
+    private LinearLayout llEarnedPoint;
+    private TextView tvEarnedPoint;
 
     private float caloriesLeft, caloriesConsumed, caloriesBurned;
 
@@ -182,6 +187,10 @@ public class DiaryActivity extends BaseActivity
 
         //Function guideline
         rootLayout = findViewById(R.id.rootLayout);
+
+        //Earned points
+        llEarnedPoint = findViewById(R.id.llEarnedPoint);
+        tvEarnedPoint = findViewById(R.id.tvEarnedPoint);
 
         initFromDatabase();
         initAutoCompleteTextView();
@@ -387,9 +396,27 @@ public class DiaryActivity extends BaseActivity
             adapter.notifyDataSetChanged();
 
             updateDetailInformation(exercise);
+
+            //Earned point
+            addPoints(Constants.POINT_FOR_ADD_EXERCISE);
+            showEarnedPoint(Constants.POINT_FOR_ADD_EXERCISE);
+            checkLevel();
         } else if (requestCode == RC_EDIT_MEAL_HISTORY) {
             initFromDatabase();
         }
+    }
+
+    private void showEarnedPoint(int points) {
+        llEarnedPoint.setVisibility(View.VISIBLE);
+        String text = getString(R.string.you_earned) + " " + points + " " + getString(R.string.hh_points);
+        tvEarnedPoint.setText(text);
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                llEarnedPoint.setVisibility(View.GONE);
+            }
+        }, Constants.LENGTH_SHOW_SCORE);
     }
 
     /**
@@ -587,8 +614,6 @@ public class DiaryActivity extends BaseActivity
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
             finish();
-        } else if (id == R.id.nav_diary) {
-            //Blank
         } else if (id == R.id.nav_log_weight) {
             Intent intent = new Intent(this, WeightLoggingActivity.class);
             startActivity(intent);
@@ -610,7 +635,9 @@ public class DiaryActivity extends BaseActivity
             startActivity(intent);
             finish();
         } else if (id == R.id.nav_rewards) {
-
+            Intent intent = new Intent(this, RewardActivity.class);
+            startActivity(intent);
+            finish();
         } else if (id == R.id.nav_settings) {
             Intent intent = new Intent(this, SettingsActivity.class);
             startActivity(intent);

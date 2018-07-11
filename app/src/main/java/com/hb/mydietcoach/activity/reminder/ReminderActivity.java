@@ -18,11 +18,12 @@ import com.baoyz.swipemenulistview.SwipeMenuItem;
 import com.baoyz.swipemenulistview.SwipeMenuListView;
 import com.hb.mydietcoach.R;
 import com.hb.mydietcoach.activity.BaseActivity;
-import com.hb.mydietcoach.activity.contact_faq.ContactFAQActivity;
 import com.hb.mydietcoach.activity.MainActivity;
+import com.hb.mydietcoach.activity.RewardActivity;
 import com.hb.mydietcoach.activity.SettingsActivity;
 import com.hb.mydietcoach.activity.WeightLoggingActivity;
 import com.hb.mydietcoach.activity.challenge.ChallengesActivity;
+import com.hb.mydietcoach.activity.contact_faq.ContactFAQActivity;
 import com.hb.mydietcoach.activity.diary.DiaryActivity;
 import com.hb.mydietcoach.activity.photo.PhotosActivity;
 import com.hb.mydietcoach.activity.tip.TipsActivity;
@@ -47,9 +48,9 @@ public class ReminderActivity extends BaseActivity
     MyReminderAdapter myReminderAdapter;
     List<Reminder> myReminders;
 
-    SwipeMenuListView listDefaultReminders;
-    MyReminderAdapter myDefaultReminders;
-    List<Reminder> defaultReminders;
+//    SwipeMenuListView listDefaultReminders;
+//    MyReminderAdapter myDefaultReminders;
+//    List<Reminder> defaultReminders;
 
     MyDatabase database;
 
@@ -203,7 +204,9 @@ public class ReminderActivity extends BaseActivity
             startActivity(intent);
             finish();
         } else if (id == R.id.nav_rewards) {
-
+            Intent intent = new Intent(this, RewardActivity.class);
+            startActivity(intent);
+            finish();
         } else if (id == R.id.nav_settings) {
             Intent intent = new Intent(this, SettingsActivity.class);
             startActivity(intent);
@@ -228,7 +231,7 @@ public class ReminderActivity extends BaseActivity
                 myReminderAdapter.notifyDataSetChanged();
             }
         } else if (requestCode == RC_EDIT_REMINDER) {
-            if (requestCode == Constants.RESULT_DELETE_REMINDER) {
+            if (resultCode == Constants.RESULT_DELETE_REMINDER) {
                 myReminders.remove(clickPosition);
                 myReminderAdapter.notifyDataSetChanged();
             } else if (resultCode == RESULT_OK && data != null) {

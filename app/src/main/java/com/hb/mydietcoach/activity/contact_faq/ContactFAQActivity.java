@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import com.hb.mydietcoach.R;
 import com.hb.mydietcoach.activity.BaseActivity;
 import com.hb.mydietcoach.activity.MainActivity;
+import com.hb.mydietcoach.activity.RewardActivity;
 import com.hb.mydietcoach.activity.SettingsActivity;
 import com.hb.mydietcoach.activity.WeightLoggingActivity;
 import com.hb.mydietcoach.activity.challenge.ChallengesActivity;
@@ -134,7 +135,9 @@ public class ContactFAQActivity extends BaseActivity
             startActivity(intent);
             finish();
         } else if (id == R.id.nav_rewards) {
-
+            Intent intent = new Intent(this, RewardActivity.class);
+            startActivity(intent);
+            finish();
         } else if (id == R.id.nav_settings) {
             Intent intent = new Intent(this, SettingsActivity.class);
             startActivity(intent);

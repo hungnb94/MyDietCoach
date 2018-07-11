@@ -1,102 +1,123 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorCream"
-    android:orientation="vertical"
     tools:context=".activity.photo.PhotosActivity">
-
-    <include
-        layout="@layout/app_bar_main"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:padding="@dimen/_15sdp">
+        android:orientation="vertical">
 
-        <RelativeLayout
+        <include
+            layout="@layout/app_bar_main"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_290sdp"
-            android:background="@drawable/border_photo_layout">
+            android:layout_height="wrap_content" />
 
-            <ImageView
-                android:id="@+id/imageView"
-                android:layout_width="@dimen/_130sdp"
-                android:layout_height="@dimen/_90sdp"
-                android:layout_centerInParent="true"
-                android:src="@drawable/photos_no_images"
-                android:visibility="gone" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="@dimen/_15sdp">
 
-            <android.support.v4.view.ViewPager
-                android:id="@+id/viewPager"
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginBottom="@dimen/_10sdp"
-                android:layout_marginEnd="@dimen/_22sdp"
-                android:layout_marginStart="@dimen/_22sdp"
-                android:layout_marginTop="@dimen/_10sdp" />
+                android:layout_height="@dimen/_290sdp"
+                android:background="@drawable/border_photo_layout">
 
-            <com.getbase.floatingactionbutton.FloatingActionsMenu
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:fab_addButtonColorNormal="@color/colorAccent"
-                app:fab_addButtonColorPressed="@color/colorGrey"
-                app:fab_expandDirection="right">
+                <ImageView
+                    android:id="@+id/imageView"
+                    android:layout_width="@dimen/_130sdp"
+                    android:layout_height="@dimen/_90sdp"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/photos_no_images"
+                    android:visibility="gone" />
 
-                <com.getbase.floatingactionbutton.FloatingActionButton
-                    android:id="@+id/fabTakeSnapshot"
+                <android.support.v4.view.ViewPager
+                    android:id="@+id/viewPager"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_22sdp"
+                    android:layout_marginStart="@dimen/_22sdp"
+                    android:layout_marginTop="@dimen/_10sdp" />
+
+                <com.getbase.floatingactionbutton.FloatingActionsMenu
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:fab_colorNormal="@color/colorAccent"
-                    app:fab_colorPressed="@color/colorGrey"
-                    app:fab_icon="@drawable/snapshot_white" />
+                    app:fab_addButtonColorNormal="@color/colorAccent"
+                    app:fab_addButtonColorPressed="@color/colorGrey"
+                    app:fab_expandDirection="right">
 
-                <com.getbase.floatingactionbutton.FloatingActionButton
-                    android:id="@+id/fabSelectFrGallery"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:fab_colorNormal="@color/colorAccent"
-                    app:fab_colorPressed="@color/colorGrey"
-                    app:fab_icon="@drawable/ic_gallery_l" />
+                    <com.getbase.floatingactionbutton.FloatingActionButton
+                        android:id="@+id/fabTakeSnapshot"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:fab_colorNormal="@color/colorAccent"
+                        app:fab_colorPressed="@color/colorGrey"
+                        app:fab_icon="@drawable/snapshot_white" />
 
-            </com.getbase.floatingactionbutton.FloatingActionsMenu>
+                    <com.getbase.floatingactionbutton.FloatingActionButton
+                        android:id="@+id/fabSelectFrGallery"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:fab_colorNormal="@color/colorAccent"
+                        app:fab_colorPressed="@color/colorGrey"
+                        app:fab_icon="@drawable/ic_gallery_l" />
 
-            <ImageView
-                android:id="@+id/ivDelete"
-                android:layout_width="@dimen/_18sdp"
-                android:layout_height="@dimen/_25sdp"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginBottom="@dimen/_5sdp"
-                android:layout_marginEnd="@dimen/_5sdp"
-                android:src="@drawable/trash_icon_photos"
-                android:visibility="gone" />
+                </com.getbase.floatingactionbutton.FloatingActionsMenu>
 
-        </RelativeLayout>
+                <ImageView
+                    android:id="@+id/ivDelete"
+                    android:layout_width="@dimen/_18sdp"
+                    android:layout_height="@dimen/_25sdp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginBottom="@dimen/_5sdp"
+                    android:layout_marginEnd="@dimen/_5sdp"
+                    android:src="@drawable/trash_icon_photos"
+                    android:visibility="gone" />
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recyclerView"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_50sdp"
-            android:layout_marginTop="@dimen/_5sdp" />
+            </RelativeLayout>
 
-        <FrameLayout
-            android:id="@+id/flAddButton"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_50sdp"
+                android:layout_marginTop="@dimen/_5sdp" />
 
-            <Button
-                android:id="@+id/btnAddReminder"
-                style="@style/ButtonBottom"
-                android:layout_gravity="bottom|end"
-                android:text="@string/add_reminder" />
-        </FrameLayout>
+            <FrameLayout
+                android:id="@+id/flAddButton"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <Button
+                    android:id="@+id/btnAddReminder"
+                    style="@style/ButtonBottom"
+                    android:layout_gravity="bottom|end"
+                    android:text="@string/add_reminder" />
+            </FrameLayout>
+
+        </LinearLayout>
 
     </LinearLayout>
 
-</LinearLayout>
+    <LinearLayout
+        android:id="@+id/llEarnedPoint"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_80sdp"
+        android:gravity="center"
+        android:visibility="gone">
+
+        <include
+            layout="@layout/include_points"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+</RelativeLayout>

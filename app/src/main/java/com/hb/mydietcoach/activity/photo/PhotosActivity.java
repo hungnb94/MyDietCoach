@@ -11,6 +11,7 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
@@ -32,11 +33,13 @@ import android.view.View;
 import android.view.ViewAnimationUtils;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.hb.mydietcoach.R;
-import com.hb.mydietcoach.activity.BaseActivity;
 import com.hb.mydietcoach.activity.MainActivity;
+import com.hb.mydietcoach.activity.ScoreActivity;
 import com.hb.mydietcoach.activity.SettingsActivity;
 import com.hb.mydietcoach.activity.WeightLoggingActivity;
 import com.hb.mydietcoach.activity.challenge.ChallengesActivity;
@@ -65,13 +68,16 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 import static com.hb.mydietcoach.activity.reminder.EdittingReminderActivity.HOUR_MINISECOND;
+import static com.hb.mydietcoach.utils.Constants.POINT_FOR_ADD_PHOTO;
 import static com.hb.mydietcoach.utils.Constants.RC_CAMERA_PERMISSION;
 import static com.hb.mydietcoach.utils.Constants.RC_EXTERNAL_STORAGE;
 import static com.hb.mydietcoach.utils.Constants.RC_PICK_IMAGE;
 import static com.hb.mydietcoach.utils.Constants.RC_TAKE_PHOTO;
 
-public class PhotosActivity extends BaseActivity implements MiniPhotoAdapter.OnItemClickListener,
+public class PhotosActivity extends ScoreActivity
+        implements MiniPhotoAdapter.OnItemClickListener,
         NavigationView.OnNavigationItemSelectedListener {
+
     private static String[] PERMISSIONS_STORAGE = {
             Manifest.permission.READ_EXTERNAL_STORAGE,
             Manifest.permission.WRITE_EXTERNAL_STORAGE
@@ -87,6 +93,10 @@ public class PhotosActivity extends BaseActivity implements MiniPhotoAdapter.OnI
     private ViewPager viewPager;
 
     private FrameLayout flAddbutton;
+
+    //Earned points
+    private LinearLayout llEarnedPoint;
+    private TextView tvEarnedPoint;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -121,6 +131,10 @@ public class PhotosActivity extends BaseActivity implements MiniPhotoAdapter.OnI
         flAddbutton = findViewById(R.id.flAddButton);
 
         viewPager = findViewById(R.id.viewPager);
+
+        //Point
+        llEarnedPoint = findViewById(R.id.llEarnedPoint);
+        tvEarnedPoint = findViewById(R.id.tvEarnedPoint);
     }
 
     private void addEvent() {
@@ -212,20 +226,53 @@ public class PhotosActivity extends BaseActivity implements MiniPhotoAdapter.OnI
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == RC_PICK_IMAGE) {
             if (resultCode == RESULT_OK && data != null) {
+                //Add points
+                addPoints(Constants.POINT_FOR_ADD_PHOTO);
+                setLastPointFor(getString(R.string.add_photo));
+
                 Uri uri = data.getData();
                 try {
                     Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
                     saveAndUpdateUI(bitmap);
+
+                    //Earned point
+                    showEarnedPoint(Constants.POINT_FOR_ADD_PHOTO);
+
+                    //Check new level
+                    checkLevel();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             }
         } else if (requestCode == RC_TAKE_PHOTO) {
             if (resultCode == RESULT_OK && data != null) {
+                //Add points
+                addPoints(POINT_FOR_ADD_PHOTO);
+                setLastPointFor(getString(R.string.add_photo));
+
                 Bitmap bitmap = (Bitmap) Objects.requireNonNull(data.getExtras()).get("data");
                 saveAndUpdateUI(bitmap);
+
+                //Earned point
+                showEarnedPoint(Constants.POINT_FOR_ADD_PHOTO);
+
+                //Check new level
+                checkLevel();
             }
         }
+    }
+
+    private void showEarnedPoint(int points) {
+        llEarnedPoint.setVisibility(View.VISIBLE);
+        String text = getString(R.string.you_earned) + " " + points + " " + getString(R.string.hh_points);
+        tvEarnedPoint.setText(text);
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                llEarnedPoint.setVisibility(View.GONE);
+            }
+        }, Constants.LENGTH_SHOW_SCORE);
     }
 
     /**

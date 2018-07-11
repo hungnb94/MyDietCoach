@@ -121,7 +121,7 @@ public class MainActivity extends BaseActivity
         } else if (id == R.id.nav_challenges) {
             openChallengesActivity();
         } else if (id == R.id.nav_rewards) {
-
+            openRewardActivity();
         } else if (id == R.id.nav_settings) {
             openSettingsActivity();
         } else if (id == R.id.nav_contact) {
@@ -134,7 +134,7 @@ public class MainActivity extends BaseActivity
 
     //Click diary layout
     @OnClick(R.id.llDiary)
-    void clickDiary(View view) {
+    void clickDiary() {
         openDiaryActivity();
     }
 
@@ -156,7 +156,7 @@ public class MainActivity extends BaseActivity
 
     //Click reminder layout
     @OnClick(R.id.llReminder)
-    void clickReminder(View view) {
+    void clickReminder() {
         openReminderActivity();
     }
 
@@ -168,7 +168,7 @@ public class MainActivity extends BaseActivity
 
     //Click challenges layout
     @OnClick(R.id.llChallenges)
-    void clickChallenges(View view){
+    void clickChallenges() {
         openChallengesActivity();
     }
 
@@ -180,8 +180,13 @@ public class MainActivity extends BaseActivity
         startActivity(intent);
     }
 
+    @OnClick(R.id.llRewards)
+    void clickRewards() {
+        openRewardActivity();
+    }
+
     @OnClick(R.id.llPhotos)
-    void clickPhotos(View view){
+    void clickPhotos() {
         openPhotosActivity();
     }
 
@@ -203,6 +208,11 @@ public class MainActivity extends BaseActivity
      */
     private void openTipsActivity(){
         Intent intent = new Intent(this, TipsActivity.class);
+        startActivity(intent);
+    }
+
+    private void openRewardActivity() {
+        Intent intent = new Intent(this, RewardActivity.class);
         startActivity(intent);
     }
 

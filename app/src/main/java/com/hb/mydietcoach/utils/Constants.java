@@ -99,7 +99,12 @@ public class Constants {
     public static final String URL_CHANGE_SUBCRIPTION = "https://support.google.com/googleplay/answer/7018481";
 
     //Point on reward
+    public static final int TARGET_DISTANT = 26;
     public static final int POINT_FOR_LIKE_FANPAGE_FACEBOOK = 60;
     public static final int POINT_FOR_SHARE_GOOGLE_PLUS = 60;
     public static final int POINT_FOR_FOLLOW_TWITTER = 60;
+    public static final int POINT_FOR_ADD_PHOTO = 10;
+    public static final int LENGTH_SHOW_SCORE = 1000;
+    public static final int POINT_FOR_ADD_EXERCISE = 60;
+    public static final int POINT_FOR_CHANGE_WEIGHT = 50;
 }
