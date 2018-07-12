@@ -186,6 +186,10 @@ public class RewardActivity extends ScoreActivity
             Intent intent = new Intent(this, ChallengesActivity.class);
             startActivity(intent);
             finish();
+        } else if (id == R.id.nav_settings) {
+            Intent intent = new Intent(this, SettingsActivity.class);
+            startActivity(intent);
+            finish();
         } else if (id == R.id.nav_contact) {
             Intent intent = new Intent(this, ContactFAQActivity.class);
             startActivity(intent);
