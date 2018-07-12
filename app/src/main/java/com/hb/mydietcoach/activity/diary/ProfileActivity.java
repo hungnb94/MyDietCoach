@@ -436,7 +436,9 @@ public class ProfileActivity extends BaseActivity
 
     private float getFloatFromEdittext(EditText editText) {
         try {
-            float value = Float.parseFloat(editText.getText().toString());
+            String text = editText.getText().toString();
+            if (text.contains(",")) text = text.replace(",", ".");
+            float value = Float.parseFloat(text);
             return value > 0 ? value : 0;
         } catch (Exception ex) {
             Log.e(TAG, "Cannot get number from edittext");

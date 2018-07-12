@@ -1,13 +1,19 @@
 package com.hb.mydietcoach.activity.challenge;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -52,10 +58,12 @@ import com.hb.mydietcoach.model.challenge.NormalChallenge;
 import com.hb.mydietcoach.model.challenge.RunChallenge;
 import com.hb.mydietcoach.model.challenge.SelfControlChallenge;
 import com.hb.mydietcoach.preference.PreferenceManager;
+import com.hb.mydietcoach.utils.BitmapUtils;
 import com.hb.mydietcoach.utils.Constants;
 import com.tomergoldst.tooltips.ToolTip;
 import com.tomergoldst.tooltips.ToolTipsManager;
 
+import java.io.File;
 import java.text.NumberFormat;
 import java.util.Calendar;
 import java.util.Objects;
@@ -64,6 +72,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 import static com.hb.mydietcoach.utils.Constants.RC_EDITTING_CHALLENGE;
+import static com.hb.mydietcoach.utils.Constants.RC_EXTERNAL_STORAGE;
 
 public class ChallengesActivity extends ScoreActivity
         implements NavigationView.OnNavigationItemSelectedListener,
@@ -555,7 +564,6 @@ public class ChallengesActivity extends ScoreActivity
     @Override
     protected void onStop() {
         challenge.setLastTime(Calendar.getInstance().getTimeInMillis());
-        Log.e(TAG, "Save challenge before stop");
         database.showLogChallenge(challenge);
 
         new AsyncTask<Void, Void, Void>() {
@@ -587,7 +595,7 @@ public class ChallengesActivity extends ScoreActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_share) {
-
+            shareChallenge(true);
         } else if (id == R.id.action_edit) {
             Intent intent = new Intent(this, EdittingChallengeActivity.class);
             Bundle bundle = new Bundle();
@@ -601,6 +609,54 @@ public class ChallengesActivity extends ScoreActivity
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void shareChallenge(boolean withFile) {
+        if (withFile) {
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                    != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(
+                        this,
+                        new String[]{
+                                Manifest.permission.READ_EXTERNAL_STORAGE,
+                                Manifest.permission.WRITE_EXTERNAL_STORAGE
+                        },
+                        RC_EXTERNAL_STORAGE
+                );
+            } else {
+                Bitmap bitmap = screenShot(rootLayout);
+                File imgFile = BitmapUtils.saveBitmap(bitmap, "screenshot");
+
+                Intent intent = new Intent(Intent.ACTION_SEND);
+                intent.setType("text/plain");
+                String sendText = "I've begun those healthy lifestyle challenges and I'm fully commited:"
+                        + " \"" + challenge.getTitle() + "\""
+                        + "\n" + getString(R.string.link_app);
+                intent.putExtra(Intent.EXTRA_TEXT, sendText);
+                intent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(imgFile));
+                startActivity(Intent.createChooser(intent, getString(R.string.share_using)));
+            }
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == RC_EXTERNAL_STORAGE) {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                shareChallenge(true);
+            } else {
+                shareChallenge(false);
+            }
+        }
+    }
+
+    private Bitmap screenShot(View view) {
+        Bitmap bitmap = Bitmap.createBitmap(view.getWidth(),
+                view.getHeight(), Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmap);
+        view.draw(canvas);
+        return bitmap;
     }
 
     //Show/hiden guideline option
@@ -818,8 +874,7 @@ public class ChallengesActivity extends ScoreActivity
             //Add points
             addPoints(challenge.getStars());
             showEarnedPoint(challenge.getStars());
-        }
-        else clearStrikeTextTitle();
+        } else clearStrikeTextTitle();
     }
 
     private Animation getAnimationForSelfControlChallenge() {
