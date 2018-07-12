@@ -100,7 +100,7 @@ public class AddExerciseActivity extends BaseActivity
     void textChange(CharSequence text) {
         searchResults.clear();
         for (ExerciseAssets assets : defaultExercises) {
-            if (assets.getName().contains(text)) searchResults.add(assets);
+            if (assets.getName().contains(text.toString().toLowerCase())) searchResults.add(assets);
         }
         adapter.notifyDataSetChanged();
     }

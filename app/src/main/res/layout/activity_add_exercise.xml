@@ -125,9 +125,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
-                android:inputType="text"
                 android:hint="@string/enter_type_exercise"
-                android:maxLines="1" />
+                android:inputType="text"
+                android:maxLines="1"
+                android:selectAllOnFocus="true" />
 
             <TableLayout
                 android:layout_width="match_parent"
@@ -146,10 +147,10 @@
                         tools:ignore="LabelFor" />
 
                     <EditText
-                        android:inputType="numberSigned"
                         android:id="@+id/edtCalories"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/mg_calories_add_exercise"
+                        android:inputType="numberSigned"
                         android:minWidth="@dimen/edt_calories_add_exercise"
                         tools:ignore="LabelFor" />
                 </TableRow>
@@ -200,8 +201,8 @@
                     tools:ignore="ButtonStyle" />
 
                 <Button
-                    style="@style/ButtonBottom"
                     android:id="@+id/btnSave"
+                    style="@style/ButtonBottom"
                     android:layout_width="0dp"
                     android:layout_marginStart="@dimen/mg_layout"
                     android:layout_weight="1"

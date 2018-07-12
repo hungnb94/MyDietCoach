@@ -21,11 +21,13 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -100,6 +102,7 @@ public class DiaryActivity extends ScoreActivity
     private Animation rotationAnimation;
     private ArrayList<FoodAssets> foodAssets;
     private List<FoodAssets> listSearchingFood;
+    private Spinner spServing;
     private SearchingFoodAdapter searchingAdapter;
     private EditText edtAmount, edtCalories;
 
@@ -136,6 +139,7 @@ public class DiaryActivity extends ScoreActivity
 
         initParams();
         initView();
+        addEvent();
     }
 
     /**
@@ -178,6 +182,7 @@ public class DiaryActivity extends ScoreActivity
         llAddMeal = findViewById(R.id.llAddMeal);
         ivBarcode = findViewById(R.id.ivBarcode);
         autoFoodName = findViewById(R.id.autoFoodName);
+        spServing = findViewById(R.id.spServing);
         edtAmount = findViewById(R.id.edtAmount);
         edtCalories = findViewById(R.id.edtCalories);
 
@@ -319,6 +324,47 @@ public class DiaryActivity extends ScoreActivity
         updateUICalories();
     }
 
+    FoodAssets selectedFoodAsset;
+
+    private void addEvent() {
+        autoFoodName.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                //Get selected item
+                selectedFoodAsset = foodAssets.get(position);
+                //Update view
+                updateUIAddFood();
+            }
+        });
+    }
+
+    private void updateUIAddFood() {
+        String[] arr = new String[selectedFoodAsset.getSrvs().getSrv().size()];
+        for (int i = 0; i < arr.length; i++) {
+            arr[i] = selectedFoodAsset.getSrvs().getSrv().get(i).getSrvd();
+        }
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(
+                DiaryActivity.this, android.R.layout.simple_list_item_1, arr);
+        spServing.setAdapter(adapter);
+
+        spServing.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int pos, long l) {
+                FoodAssets.Srv srv = selectedFoodAsset.getSrvs().getSrv().get(pos);
+
+                edtAmount.setText(srv.getNou());
+                edtCalories.setText(srv.getCal());
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+            }
+        });
+
+        if (arr.length > 1) spServing.setEnabled(true);
+        else spServing.setEnabled(false);
+    }
+
     private void updateUICalories() {
         ((TextView) findViewById(R.id.tvCaloriesLeft)).setText(String.valueOf(Math.round(caloriesLeft)));
         ((TextView) findViewById(R.id.tvCaloresBurned)).setText(String.valueOf(Math.round(caloriesBurned)));
@@ -392,18 +438,29 @@ public class DiaryActivity extends ScoreActivity
 
     //Event change text on AutoCompleteTextView
     @OnTextChanged(R.id.autoFoodName)
-    public void changeTextAutoTextView(CharSequence charSequence) {
+    void changeTextAutoTextView(CharSequence charSequence) {
         if (llDetailInput.getVisibility() != View.VISIBLE)
             llDetailInput.setVisibility(View.VISIBLE);
 
         listSearchingFood.clear();
         Log.d(TAG, "Find food for auto text view:");
         for (FoodAssets food : foodAssets) {
-            if (food.getFn().contains(charSequence)) {
+            if (food.getFn().contains(charSequence.toString().toLowerCase())) {
                 listSearchingFood.add(food);
             }
         }
         searchingAdapter.notifyDataSetChanged();
+    }
+
+    @OnTextChanged(R.id.edtAmount)
+    void changeTextAmount(CharSequence text) {
+        if (text.length() > 0) {
+            FoodAssets.Srv srv = selectedFoodAsset.getSrvs().getSrv().get(spServing.getSelectedItemPosition());
+            float amount = parseFloats(text.toString());
+            float calo = amount * parseFloats(srv.getCal());
+
+            edtCalories.setText(String.valueOf(calo));
+        }
     }
 
     /**
@@ -527,6 +584,7 @@ public class DiaryActivity extends ScoreActivity
         llAddMeal.setVisibility(View.GONE);
         ivBarcode.setImageResource(R.drawable.barcode_icon);
         isFocusAutoTextView = false;
+        spServing.setSelection(0);
         autoFoodName.setText("");
         edtAmount.setText("");
         edtCalories.setText("");

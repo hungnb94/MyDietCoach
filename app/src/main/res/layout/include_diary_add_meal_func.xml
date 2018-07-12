@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/colorCream"
@@ -7,15 +8,27 @@
     android:padding="@dimen/mg_layout"
     android:visibility="visible">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:drawableEnd="@drawable/info_btn"
-        android:drawablePadding="@dimen/pd_drawable"
-        android:text="@string/add_foods_copy_meals"
-        android:textColor="@color/colorBlack"
-        android:textSize="@dimen/txt_title_diary"
-        android:textStyle="bold" />
+        tools:ignore="UseCompoundDrawables">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawablePadding="@dimen/pd_drawable"
+            android:text="@string/add_foods_copy_meals"
+            android:textColor="@color/colorBlack"
+            android:textSize="@dimen/txt_title_diary"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:layout_width="@dimen/_20sdp"
+            android:layout_height="@dimen/_20sdp"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:src="@drawable/info_btn" />
+
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -34,7 +47,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/mg_auto_tv_diary"
-            android:hint="@string/start_typing_food" />
+            android:hint="@string/start_typing_food"
+            android:selectAllOnFocus="true" />
 
     </LinearLayout>
 
@@ -49,13 +63,21 @@
             android:layout_height="wrap_content"
             android:gravity="center_vertical">
 
+            <Spinner
+                android:id="@+id/spServing"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2" />
+
             <EditText
                 android:id="@+id/edtAmount"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:inputType="numberDecimal"
-                android:src="@drawable/barcode_icon" />
+                android:selectAllOnFocus="true"
+                android:src="@drawable/barcode_icon"
+                tools:ignore="LabelFor" />
 
             <EditText
                 android:id="@+id/edtCalories"
@@ -63,13 +85,15 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/mg_layout"
                 android:layout_weight="1"
-                android:inputType="numberSigned" />
+                android:inputType="numberSigned"
+                android:selectAllOnFocus="true"
+                tools:ignore="LabelFor" />
 
             <ImageView
                 android:id="@+id/ivAddMeal"
-                android:layout_width="@dimen/btn_add_meal_diary"
-                android:layout_height="@dimen/btn_add_meal_diary"
-                android:layout_marginStart="@dimen/mg_layout"
+                android:layout_width="@dimen/_25sdp"
+                android:layout_height="@dimen/_25sdp"
+                android:layout_marginStart="@dimen/_10sdp"
                 android:src="@drawable/btn_add_meal" />
 
         </LinearLayout>
@@ -82,6 +106,13 @@
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:src="@drawable/barcode_icon"
+                android:text="@string/serving" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:src="@drawable/barcode_icon"
                 android:text="@string/amount" />
@@ -89,13 +120,14 @@
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/mg_layout"
+                android:layout_marginStart="@dimen/_10sdp"
                 android:layout_weight="1"
                 android:text="@string/calories" />
 
             <View
-                android:layout_width="@dimen/btn_add_meal_diary"
-                android:layout_height="@dimen/btn_add_meal_diary" />
+                android:layout_width="@dimen/_25sdp"
+                android:layout_height="@dimen/_25sdp"
+                android:layout_marginStart="@dimen/_10sdp" />
 
         </LinearLayout>
 
