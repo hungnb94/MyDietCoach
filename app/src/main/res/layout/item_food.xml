@@ -16,6 +16,6 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/mg_layout"
+        android:layout_marginStart="@dimen/mg_layout"
         android:text="@string/example_food_name" />
 </LinearLayout>

@@ -1,0 +1,1359 @@
+{
+  "exercises": [
+    {
+      "name": "Aerobics, general",
+      "calories_130lbs": 384,
+      "id": 0
+    },
+    {
+      "name": "Aerobics, high impact",
+      "calories_130lbs": 413,
+      "id": 1
+    },
+    {
+      "name": "Aerobics, low impact",
+      "calories_130lbs": 295,
+      "id": 2
+    },
+    {
+      "name": "Aerobics, step aerobics",
+      "calories_130lbs": 502,
+      "id": 3
+    },
+    {
+      "name": "Baby Stroller - pushing",
+      "calories_130lbs": 154,
+      "id": 294
+    },
+    {
+      "name": "Backpacking, Hiking with pack",
+      "calories_130lbs": 413,
+      "id": 5
+    },
+    {
+      "name": "Ballet Dancing",
+      "calories_130lbs": 283,
+      "id": 295
+    },
+    {
+      "name": "Ballet, twist, jazz, tap",
+      "calories_130lbs": 266,
+      "id": 9
+    },
+    {
+      "name": "Ballroom dancing, fast",
+      "calories_130lbs": 325,
+      "id": 10
+    },
+    {
+      "name": "Ballroom dancing, slow",
+      "calories_130lbs": 177,
+      "id": 11
+    },
+    {
+      "name": "Basketball game, competitive",
+      "calories_130lbs": 472,
+      "id": 12
+    },
+    {
+      "name": "Basketball, playing, non game",
+      "calories_130lbs": 354,
+      "id": 13
+    },
+    {
+      "name": "Basketball, playing, non game",
+      "calories_130lbs": 354,
+      "id": 14
+    },
+    {
+      "name": "Basketball, shooting baskets",
+      "calories_130lbs": 266,
+      "id": 15
+    },
+    {
+      "name": "Boating, power, speed boat",
+      "calories_130lbs": 148,
+      "id": 19
+    },
+    {
+      "name": "Bowling",
+      "calories_130lbs": 177,
+      "id": 21
+    },
+    {
+      "name": "Boxing, in ring",
+      "calories_130lbs": 708,
+      "id": 22
+    },
+    {
+      "name": "Boxing, punching bag",
+      "calories_130lbs": 354,
+      "id": 23
+    },
+    {
+      "name": "Boxing, sparring",
+      "calories_130lbs": 531,
+      "id": 24
+    },
+    {
+      "name": "Calisthenics, moderate",
+      "calories_130lbs": 243,
+      "id": 305
+    },
+    {
+      "name": "Calisthenics, vigorous",
+      "calories_130lbs": 432,
+      "id": 306
+    },
+    {
+      "name": "Canoeing, camping trip",
+      "calories_130lbs": 236,
+      "id": 27
+    },
+    {
+      "name": "Canoeing, rowing, light",
+      "calories_130lbs": 177,
+      "id": 28
+    },
+    {
+      "name": "Canoeing, rowing, moderate",
+      "calories_130lbs": 413,
+      "id": 29
+    },
+    {
+      "name": "Canoeing, rowing, vigorous",
+      "calories_130lbs": 708,
+      "id": 30
+    },
+    {
+      "name": "Circuit training, minimal rest",
+      "calories_130lbs": 472,
+      "id": 39
+    },
+    {
+      "name": "Cleaning gutters",
+      "calories_130lbs": 295,
+      "id": 40
+    },
+    {
+      "name": "Cleaning, dusting",
+      "calories_130lbs": 148,
+      "id": 41
+    },
+    {
+      "name": "Climbing hills, carrying up to 9 lbs",
+      "calories_130lbs": 413,
+      "id": 42
+    },
+    {
+      "name": "Climbing hills, carrying 10 to 20 lb",
+      "calories_130lbs": 443,
+      "id": 43
+    },
+    {
+      "name": "Climbing hills, carrying 21 to 42 lb",
+      "calories_130lbs": 472,
+      "id": 44
+    },
+    {
+      "name": "Climbing hills, carrying over 42 lb",
+      "calories_130lbs": 531,
+      "id": 45
+    },
+    {
+      "name": "Climbing stairs",
+      "calories_130lbs": 465,
+      "id": 308
+    },
+    {
+      "name": "Construction, exterior, remodeling",
+      "calories_130lbs": 325,
+      "id": 48
+    },
+    {
+      "name": "Crew, sculling, rowing, competition",
+      "calories_130lbs": 708,
+      "id": 49
+    },
+    {
+      "name": "Cricket (batting, bowling)",
+      "calories_130lbs": 295,
+      "id": 50
+    },
+    {
+      "name": "Croquet",
+      "calories_130lbs": 148,
+      "id": 51
+    },
+    {
+      "name": "Cross country snow skiing, slow",
+      "calories_130lbs": 413,
+      "id": 52
+    },
+    {
+      "name": "Cross country skiing, moderate",
+      "calories_130lbs": 472,
+      "id": 53
+    },
+    {
+      "name": "Cross country skiing, racing",
+      "calories_130lbs": 826,
+      "id": 54
+    },
+    {
+      "name": "Cross country skiing, uphill",
+      "calories_130lbs": 974,
+      "id": 55
+    },
+    {
+      "name": "Cross country skiing, vigorous",
+      "calories_130lbs": 531,
+      "id": 56
+    },
+    {
+      "name": "Curling",
+      "calories_130lbs": 236,
+      "id": 57
+    },
+    {
+      "name": "Cycling, <10mph, leisure bicycling",
+      "calories_130lbs": 236,
+      "id": 58
+    },
+    {
+      "name": "Cycling, >20mph, racing",
+      "calories_130lbs": 944,
+      "id": 59
+    },
+    {
+      "name": "Cycling, 10-11.9mph, light",
+      "calories_130lbs": 354,
+      "id": 60
+    },
+    {
+      "name": "Cycling, 12-13.9mph, moderate",
+      "calories_130lbs": 472,
+      "id": 61
+    },
+    {
+      "name": "Cycling, 14-15.9mph, vigorous",
+      "calories_130lbs": 590,
+      "id": 62
+    },
+    {
+      "name": "Cycling, 16-19mph, very fast, racing",
+      "calories_130lbs": 708,
+      "id": 63
+    },
+    {
+      "name": "Cycling, mountain bike",
+      "calories_130lbs": 502,
+      "id": 64
+    },
+    {
+      "name": "Dancing - General",
+      "calories_130lbs": 267,
+      "id": 606
+    },
+    {
+      "name": "Diving, springboard or platform",
+      "calories_130lbs": 177,
+      "id": 66
+    },
+    {
+      "name": "Downhill snow skiing, moderate",
+      "calories_130lbs": 354,
+      "id": 67
+    },
+    {
+      "name": "Downhill snow skiing, racing",
+      "calories_130lbs": 472,
+      "id": 68
+    },
+    {
+      "name": "Elliptical trainer",
+      "calories_130lbs": 486,
+      "id": 309
+    },
+    {
+      "name": "Fishing from boat, sitting",
+      "calories_130lbs": 148,
+      "id": 78
+    },
+    {
+      "name": "Fishing",
+      "calories_130lbs": 177,
+      "id": 82
+    },
+    {
+      "name": "Fishing, ice fishing",
+      "calories_130lbs": 118,
+      "id": 83
+    },
+    {
+      "name": "Football or baseball, playing catch",
+      "calories_130lbs": 148,
+      "id": 85
+    },
+    {
+      "name": "Football, competitive",
+      "calories_130lbs": 531,
+      "id": 86
+    },
+    {
+      "name": "Football, touch, flag, general",
+      "calories_130lbs": 472,
+      "id": 87
+    },
+    {
+      "name": "Frisbee playing, general",
+      "calories_130lbs": 177,
+      "id": 93
+    },
+    {
+      "name": "Frisbee, ultimate frisbee",
+      "calories_130lbs": 472,
+      "id": 94
+    },
+    {
+      "name": "Gardening",
+      "calories_130lbs": 236,
+      "id": 95
+    },
+    {
+      "name": "General cleaning",
+      "calories_130lbs": 207,
+      "id": 96
+    },
+    {
+      "name": "Golf",
+      "calories_130lbs": 266,
+      "id": 98
+    },
+    {
+      "name": "Miniature golf",
+      "calories_130lbs": 177,
+      "id": 99
+    },
+    {
+      "name": "Gymnastics",
+      "calories_130lbs": 236,
+      "id": 103
+    },
+    {
+      "name": "Handball",
+      "calories_130lbs": 708,
+      "id": 105
+    },
+    {
+      "name": "Handball, team",
+      "calories_130lbs": 472,
+      "id": 106
+    },
+    {
+      "name": "Health club exercise",
+      "calories_130lbs": 325,
+      "id": 107
+    },
+    {
+      "name": "Hiking, cross country",
+      "calories_130lbs": 354,
+      "id": 108
+    },
+    {
+      "name": "Hockey, ice hockey",
+      "calories_130lbs": 472,
+      "id": 110
+    },
+    {
+      "name": "Horesback riding, saddling horse",
+      "calories_130lbs": 207,
+      "id": 111
+    },
+    {
+      "name": "Housework, light",
+      "calories_130lbs": 148,
+      "id": 121
+    },
+    {
+      "name": "Housework, moderate",
+      "calories_130lbs": 207,
+      "id": 122
+    },
+    {
+      "name": "Housework, vigorous",
+      "calories_130lbs": 236,
+      "id": 123
+    },
+    {
+      "name": "Ice skating, < 9 mph",
+      "calories_130lbs": 325,
+      "id": 127
+    },
+    {
+      "name": "Ice skating, average speed",
+      "calories_130lbs": 413,
+      "id": 128
+    },
+    {
+      "name": "Ice skating, rapidly",
+      "calories_130lbs": 531,
+      "id": 129
+    },
+    {
+      "name": "Jai alai",
+      "calories_130lbs": 708,
+      "id": 131
+    },
+    {
+      "name": "Jazzercise",
+      "calories_130lbs": 354,
+      "id": 132
+    },
+    {
+      "name": "Judo, karate, jujitsu, martial arts",
+      "calories_130lbs": 590,
+      "id": 133
+    },
+    {
+      "name": "Juggling",
+      "calories_130lbs": 236,
+      "id": 134
+    },
+    {
+      "name": "Jumping Jacks",
+      "calories_130lbs": 461,
+      "id": 604
+    },
+    {
+      "name": "Jumping rope, fast",
+      "calories_130lbs": 708,
+      "id": 135
+    },
+    {
+      "name": "Jumping rope, moderate",
+      "calories_130lbs": 590,
+      "id": 136
+    },
+    {
+      "name": "Jumping rope, slow",
+      "calories_130lbs": 472,
+      "id": 137
+    },
+    {
+      "name": "Kayaking",
+      "calories_130lbs": 295,
+      "id": 138
+    },
+    {
+      "name": "Kick boxing",
+      "calories_130lbs": 590,
+      "id": 139
+    },
+    {
+      "name": "Kickball",
+      "calories_130lbs": 413,
+      "id": 140
+    },
+    {
+      "name": "Krav maga class",
+      "calories_130lbs": 590,
+      "id": 141
+    },
+    {
+      "name": "Lacrosse",
+      "calories_130lbs": 472,
+      "id": 142
+    },
+    {
+      "name": "Lunges",
+      "calories_130lbs": 476,
+      "id": 602
+    },
+    {
+      "name": "Mild stretching",
+      "calories_130lbs": 148,
+      "id": 150
+    },
+    {
+      "name": "Mowing lawn, riding mower",
+      "calories_130lbs": 148,
+      "id": 152
+    },
+    {
+      "name": "Mowing lawn, walk, power mower",
+      "calories_130lbs": 325,
+      "id": 153
+    },
+    {
+      "name": "Nordic Walking (with poles), 2.5 mph",
+      "calories_130lbs": 189,
+      "id": 315
+    },
+    {
+      "name": "Paddle boat",
+      "calories_130lbs": 236,
+      "id": 163
+    },
+    {
+      "name": "Paddleball, competitive",
+      "calories_130lbs": 590,
+      "id": 164
+    },
+    {
+      "name": "Paddleball, playing",
+      "calories_130lbs": 354,
+      "id": 165
+    },
+    {
+      "name": "Painting",
+      "calories_130lbs": 266,
+      "id": 166
+    },
+    {
+      "name": "Playing pool, billiards",
+      "calories_130lbs": 148,
+      "id": 167
+    },
+    {
+      "name": "Pilates",
+      "calories_130lbs": 144,
+      "id": 316
+    },
+    {
+      "name": "Pushing stroller, walking with children",
+      "calories_130lbs": 148,
+      "id": 169
+    },
+    {
+      "name": "Push-Ups - Vigorous",
+      "calories_130lbs": 468,
+      "id": 600
+    },
+    {
+      "name": "Race walking",
+      "calories_130lbs": 384,
+      "id": 170
+    },
+    {
+      "name": "Racquetball, competitive",
+      "calories_130lbs": 590,
+      "id": 171
+    },
+    {
+      "name": "Racquetball, playing",
+      "calories_130lbs": 413,
+      "id": 172
+    },
+    {
+      "name": "Raking lawn",
+      "calories_130lbs": 254,
+      "id": 173
+    },
+    {
+      "name": "Rebounding",
+      "calories_130lbs": 279,
+      "id": 330
+    },
+    {
+      "name": "Resistance bands",
+      "calories_130lbs": 243,
+      "id": 331
+    },
+    {
+      "name": "Rock climbing, ascending rock",
+      "calories_130lbs": 648,
+      "id": 175
+    },
+    {
+      "name": "Rock climbing, mountain climbing",
+      "calories_130lbs": 472,
+      "id": 176
+    },
+    {
+      "name": "Rock climbing, rappelling",
+      "calories_130lbs": 472,
+      "id": 177
+    },
+    {
+      "name": "Roller blading, in-line skating",
+      "calories_130lbs": 708,
+      "id": 178
+    },
+    {
+      "name": "Roller skating",
+      "calories_130lbs": 413,
+      "id": 179
+    },
+    {
+      "name": "Rowing machine, light",
+      "calories_130lbs": 207,
+      "id": 180
+    },
+    {
+      "name": "Rowing machine, moderate",
+      "calories_130lbs": 413,
+      "id": 181
+    },
+    {
+      "name": "Rowing machine, very vigorous",
+      "calories_130lbs": 708,
+      "id": 182
+    },
+    {
+      "name": "Rowing machine, vigorous",
+      "calories_130lbs": 502,
+      "id": 183
+    },
+    {
+      "name": "Rugby",
+      "calories_130lbs": 590,
+      "id": 184
+    },
+    {
+      "name": "Running, 5 mph (12 minute mile)",
+      "calories_130lbs": 472,
+      "id": 185
+    },
+    {
+      "name": "Running, 5.2 mph (11.5 minute mile)",
+      "calories_130lbs": 531,
+      "id": 186
+    },
+    {
+      "name": "Running, 6 mph (10 min mile)",
+      "calories_130lbs": 590,
+      "id": 187
+    },
+    {
+      "name": "Running, 6.7 mph (9 min mile)",
+      "calories_130lbs": 649,
+      "id": 188
+    },
+    {
+      "name": "Running, 7 mph (8.5 min mile)",
+      "calories_130lbs": 679,
+      "id": 189
+    },
+    {
+      "name": "Running, 7.5mph (8 min mile)",
+      "calories_130lbs": 738,
+      "id": 190
+    },
+    {
+      "name": "Running, 8 mph (7.5 min mile)",
+      "calories_130lbs": 797,
+      "id": 191
+    },
+    {
+      "name": "Running, 8.6 mph (7 min mile)",
+      "calories_130lbs": 826,
+      "id": 192
+    },
+    {
+      "name": "Running, 9 mph (6.5 min mile)",
+      "calories_130lbs": 885,
+      "id": 193
+    },
+    {
+      "name": "Running, 10 mph (6 min mile)",
+      "calories_130lbs": 944,
+      "id": 194
+    },
+    {
+      "name": "Running, 10.9 mph (5.5 min mile)",
+      "calories_130lbs": 1062,
+      "id": 195
+    },
+    {
+      "name": "Running, cross country",
+      "calories_130lbs": 531,
+      "id": 196
+    },
+    {
+      "name": "Running, general",
+      "calories_130lbs": 472,
+      "id": 197
+    },
+    {
+      "name": "Running, on a track, team practice",
+      "calories_130lbs": 590,
+      "id": 198
+    },
+    {
+      "name": "Running, stairs, up",
+      "calories_130lbs": 885,
+      "id": 199
+    },
+    {
+      "name": "Sailing, yachting, ocean sailing",
+      "calories_130lbs": 177,
+      "id": 202
+    },
+    {
+      "name": "Shuffleboard, lawn bowling",
+      "calories_130lbs": 177,
+      "id": 203
+    },
+    {
+      "name": "Sit-Ups - Vigorous",
+      "calories_130lbs": 468,
+      "id": 601
+    },
+    {
+      "name": "Sitting, light office work",
+      "calories_130lbs": 89,
+      "id": 205
+    },
+    {
+      "name": "Skateboarding",
+      "calories_130lbs": 295,
+      "id": 206
+    },
+    {
+      "name": "Ski machine",
+      "calories_130lbs": 413,
+      "id": 207
+    },
+    {
+      "name": "Ski mobiling",
+      "calories_130lbs": 413,
+      "id": 208
+    },
+    {
+      "name": "Skiing, water skiing",
+      "calories_130lbs": 354,
+      "id": 209
+    },
+    {
+      "name": "Skin diving, fast",
+      "calories_130lbs": 944,
+      "id": 210
+    },
+    {
+      "name": "Skin diving, moderate",
+      "calories_130lbs": 738,
+      "id": 211
+    },
+    {
+      "name": "Skin diving, scuba diving",
+      "calories_130lbs": 413,
+      "id": 212
+    },
+    {
+      "name": "Skindiving or scuba diving",
+      "calories_130lbs": 708,
+      "id": 213
+    },
+    {
+      "name": "Sky diving",
+      "calories_130lbs": 177,
+      "id": 214
+    },
+    {
+      "name": "Sledding, tobagganing, luge",
+      "calories_130lbs": 413,
+      "id": 215
+    },
+    {
+      "name": "Snorkeling",
+      "calories_130lbs": 295,
+      "id": 216
+    },
+    {
+      "name": "Snow skiing, downhill skiing, light",
+      "calories_130lbs": 295,
+      "id": 218
+    },
+    {
+      "name": "Snowboarding",
+      "calories_130lbs": 324,
+      "id": 317
+    },
+    {
+      "name": "Snowmobiling",
+      "calories_130lbs": 207,
+      "id": 219
+    },
+    {
+      "name": "Soccer, competitive",
+      "calories_130lbs": 590,
+      "id": 220
+    },
+    {
+      "name": "Soccer, playing",
+      "calories_130lbs": 413,
+      "id": 221
+    },
+    {
+      "name": "Softball or baseball",
+      "calories_130lbs": 295,
+      "id": 222
+    },
+    {
+      "name": "Softball, officiating",
+      "calories_130lbs": 236,
+      "id": 223
+    },
+    {
+      "name": "Softball, pitching",
+      "calories_130lbs": 354,
+      "id": 224
+    },
+    {
+      "name": "Speed skating, ice, competitive",
+      "calories_130lbs": 85,
+      "id": 225
+    },
+    {
+      "name": "Spinning, light",
+      "calories_130lbs": 325,
+      "id": 318
+    },
+    {
+      "name": "Spinning, moderate",
+      "calories_130lbs": 413,
+      "id": 319
+    },
+    {
+      "name": "Spinning, very light",
+      "calories_130lbs": 177,
+      "id": 320
+    },
+    {
+      "name": "Spinning, very vigorous",
+      "calories_130lbs": 738,
+      "id": 321
+    },
+    {
+      "name": "Spinning, vigorous",
+      "calories_130lbs": 620,
+      "id": 322
+    },
+    {
+      "name": "Squash",
+      "calories_130lbs": 708,
+      "id": 226
+    },
+    {
+      "name": "Stair step machine",
+      "calories_130lbs": 531,
+      "id": 227
+    },
+    {
+      "name": "Standing, playing with children, light",
+      "calories_130lbs": 165,
+      "id": 229
+    },
+    {
+      "name": "Stationary cycling, light",
+      "calories_130lbs": 325,
+      "id": 230
+    },
+    {
+      "name": "Stationary cycling, moderate",
+      "calories_130lbs": 413,
+      "id": 231
+    },
+    {
+      "name": "Stationary cycling, very light",
+      "calories_130lbs": 177,
+      "id": 232
+    },
+    {
+      "name": "Stationary cycling, very vigorous",
+      "calories_130lbs": 738,
+      "id": 233
+    },
+    {
+      "name": "Stationary cycling, vigorous",
+      "calories_130lbs": 620,
+      "id": 234
+    },
+    {
+      "name": "Steel mill, working in general",
+      "calories_130lbs": 472,
+      "id": 235
+    },
+    {
+      "name": "Stretching, hatha yoga",
+      "calories_130lbs": 236,
+      "id": 236
+    },
+    {
+      "name": "Surfing, body surfing or board surfing",
+      "calories_130lbs": 177,
+      "id": 237
+    },
+    {
+      "name": "Swimming backstroke",
+      "calories_130lbs": 413,
+      "id": 238
+    },
+    {
+      "name": "Swimming breaststroke",
+      "calories_130lbs": 590,
+      "id": 239
+    },
+    {
+      "name": "Swimming butterfly",
+      "calories_130lbs": 649,
+      "id": 240
+    },
+    {
+      "name": "Swimming laps, freestyle, fast",
+      "calories_130lbs": 590,
+      "id": 241
+    },
+    {
+      "name": "Swimming laps, freestyle, slow",
+      "calories_130lbs": 413,
+      "id": 242
+    },
+    {
+      "name": "Swimming leisurely, not laps",
+      "calories_130lbs": 354,
+      "id": 243
+    },
+    {
+      "name": "Swimming sidestroke",
+      "calories_130lbs": 472,
+      "id": 244
+    },
+    {
+      "name": "Swimming synchronized",
+      "calories_130lbs": 472,
+      "id": 245
+    },
+    {
+      "name": "Swimming, treading water, fast",
+      "calories_130lbs": 590,
+      "id": 246
+    },
+    {
+      "name": "Swimming, treading water, moderate",
+      "calories_130lbs": 236,
+      "id": 247
+    },
+    {
+      "name": "Table tennis, ping pong",
+      "calories_130lbs": 236,
+      "id": 248
+    },
+    {
+      "name": "Tae kwan do, martial arts",
+      "calories_130lbs": 590,
+      "id": 249
+    },
+    {
+      "name": "Tai chi",
+      "calories_130lbs": 248,
+      "id": 250
+    },
+    {
+      "name": "Tennis playing",
+      "calories_130lbs": 413,
+      "id": 254
+    },
+    {
+      "name": "Tennis, doubles",
+      "calories_130lbs": 354,
+      "id": 255
+    },
+    {
+      "name": "Tennis, singles",
+      "calories_130lbs": 472,
+      "id": 256
+    },
+    {
+      "name": "Track and field (high jump, pole vault)",
+      "calories_130lbs": 354,
+      "id": 257
+    },
+    {
+      "name": "Track and field (hurdles)",
+      "calories_130lbs": 590,
+      "id": 258
+    },
+    {
+      "name": "Track and field (shot, discus)",
+      "calories_130lbs": 236,
+      "id": 259
+    },
+    {
+      "name": "Treadmill 2 mph",
+      "calories_130lbs": 140,
+      "id": 294
+    },
+    {
+      "name": "Treadmill 2.5 mph",
+      "calories_130lbs": 161,
+      "id": 295
+    },
+    {
+      "name": "Treadmill 3 mph",
+      "calories_130lbs": 183,
+      "id": 296
+    },
+    {
+      "name": "Treadmill 3.2 km/h",
+      "calories_130lbs": 140,
+      "id": 294
+    },
+    {
+      "name": "Treadmill 4 km/h",
+      "calories_130lbs": 161,
+      "id": 295
+    },
+    {
+      "name": "Treadmill 4 mph",
+      "calories_130lbs": 243,
+      "id": 297
+    },
+    {
+      "name": "Treadmill 4.8 km/h",
+      "calories_130lbs": 183,
+      "id": 296
+    },
+    {
+      "name": "Treadmill 5% incline, 2 mph",
+      "calories_130lbs": 261,
+      "id": 298
+    },
+    {
+      "name": "Treadmill 5% incline, 2.5 mph",
+      "calories_130lbs": 321,
+      "id": 299
+    },
+    {
+      "name": "Treadmill 5% incline, 3 mph",
+      "calories_130lbs": 390,
+      "id": 300
+    },
+    {
+      "name": "Treadmill 5% incline, 4 mph",
+      "calories_130lbs": 450,
+      "id": 301
+    },
+    {
+      "name": "Treadmill 5% incline, 3.2 km/h",
+      "calories_130lbs": 261,
+      "id": 298
+    },
+    {
+      "name": "Treadmill 5% incline, 4 km/h",
+      "calories_130lbs": 321,
+      "id": 299
+    },
+    {
+      "name": "Treadmill 5% incline, 4.8 km/h",
+      "calories_130lbs": 390,
+      "id": 300
+    },
+    {
+      "name": "Treadmill 5% incline, 6.4 km/h",
+      "calories_130lbs": 450,
+      "id": 301
+    },
+    {
+      "name": "Treadmill 6.4 km/h",
+      "calories_130lbs": 243,
+      "id": 297
+    },
+    {
+      "name": "Treadmill 10% incline, 2 mph",
+      "calories_130lbs": 359,
+      "id": 302
+    },
+    {
+      "name": "Treadmill 10% incline, 2.5 mph",
+      "calories_130lbs": 389,
+      "id": 303
+    },
+    {
+      "name": "Treadmill 10% incline, 3 mph",
+      "calories_130lbs": 450,
+      "id": 304
+    },
+    {
+      "name": "Treadmill 10% incline, 3.2 km/h",
+      "calories_130lbs": 359,
+      "id": 302
+    },
+    {
+      "name": "Treadmill 10% incline, 4 km/h",
+      "calories_130lbs": 389,
+      "id": 303
+    },
+    {
+      "name": "Treadmill 10% incline, 4.8 km/h",
+      "calories_130lbs": 450,
+      "id": 304
+    },
+    {
+      "name": "Truck driving, loading,unloading truck",
+      "calories_130lbs": 384,
+      "id": 261
+    },
+    {
+      "name": "Unicycling",
+      "calories_130lbs": 295,
+      "id": 263
+    },
+    {
+      "name": "Using crutches",
+      "calories_130lbs": 295,
+      "id": 264
+    },
+    {
+      "name": "Volleyball playing",
+      "calories_130lbs": 177,
+      "id": 265
+    },
+    {
+      "name": "Volleyball, beach",
+      "calories_130lbs": 472,
+      "id": 266
+    },
+    {
+      "name": "Volleyball, competitive",
+      "calories_130lbs": 472,
+      "id": 267
+    },
+    {
+      "name": "Walk / run, playing, moderate",
+      "calories_130lbs": 236,
+      "id": 268
+    },
+    {
+      "name": "Walk / run, playing, vigorous",
+      "calories_130lbs": 295,
+      "id": 269
+    },
+    {
+      "name": "Walking 2.0 mph, slow",
+      "calories_130lbs": 148,
+      "id": 270
+    },
+    {
+      "name": "Walking 2.5 mph",
+      "calories_130lbs": 177,
+      "id": 271
+    },
+    {
+      "name": "Walking 3.0 mph, moderate",
+      "calories_130lbs": 195,
+      "id": 272
+    },
+    {
+      "name": "Walking 3.5 mph, brisk pace",
+      "calories_130lbs": 224,
+      "id": 273
+    },
+    {
+      "name": "Walking 3.5 mph, uphill",
+      "calories_130lbs": 354,
+      "id": 274
+    },
+    {
+      "name": "Walking 4.0 mph, very brisk",
+      "calories_130lbs": 295,
+      "id": 275
+    },
+    {
+      "name": "Walking 4.5 mph",
+      "calories_130lbs": 372,
+      "id": 276
+    },
+    {
+      "name": "Walking 5.0 mph",
+      "calories_130lbs": 472,
+      "id": 277
+    },
+    {
+      "name": "Walking downstairs",
+      "calories_130lbs": 177,
+      "id": 278
+    },
+    {
+      "name": "Walking the dog",
+      "calories_130lbs": 177,
+      "id": 279
+    },
+    {
+      "name": "Walking, snow blower",
+      "calories_130lbs": 207,
+      "id": 280
+    },
+    {
+      "name": "Walking, under 2.0 mph, very slow",
+      "calories_130lbs": 118,
+      "id": 281
+    },
+    {
+      "name": "Wallyball",
+      "calories_130lbs": 413,
+      "id": 282
+    },
+    {
+      "name": "Water aerobics",
+      "calories_130lbs": 236,
+      "id": 283
+    },
+    {
+      "name": "Water aerobics, water calisthenics",
+      "calories_130lbs": 236,
+      "id": 284
+    },
+    {
+      "name": "Water jogging",
+      "calories_130lbs": 472,
+      "id": 285
+    },
+    {
+      "name": "Water polo",
+      "calories_130lbs": 590,
+      "id": 286
+    },
+    {
+      "name": "Water volleyball",
+      "calories_130lbs": 177,
+      "id": 287
+    },
+    {
+      "name": "Weeding, cultivating garden",
+      "calories_130lbs": 266,
+      "id": 288
+    },
+    {
+      "name": "Weight lifting, body building, vigorous",
+      "calories_130lbs": 354,
+      "id": 289
+    },
+    {
+      "name": "Weight lifting, light workout",
+      "calories_130lbs": 177,
+      "id": 290
+    },
+    {
+      "name": "Whitewater rafting, kayaking,canoeing",
+      "calories_130lbs": 295,
+      "id": 291
+    },
+    {
+      "name": "Windsurfing, sailing",
+      "calories_130lbs": 177,
+      "id": 292
+    },
+    {
+      "name": "Wrestling",
+      "calories_130lbs": 354,
+      "id": 293
+    },
+    {
+      "name": "Zumba",
+      "calories_130lbs": 512,
+      "id": 323
+    },
+    {
+      "name": "Circuit Training",
+      "calories_130lbs": 495,
+      "id": 607
+    },
+    {
+      "name": "Squats",
+      "calories_130lbs": 750,
+      "id": 608
+    },
+    {
+      "name": "Walking-up Stairs",
+      "calories_130lbs": 470,
+      "id": 609
+    },
+    {
+      "name": "Side Bends",
+      "calories_130lbs": 236,
+      "id": 610
+    },
+    {
+      "name": "Crunches - Moderate",
+      "calories_130lbs": 445,
+      "id": 611
+    },
+    {
+      "name": "Crunches - Vigorous",
+      "calories_130lbs": 461,
+      "id": 612
+    },
+    {
+      "name": "Sit-ups",
+      "calories_130lbs": 295,
+      "id": 613
+    },
+    {
+      "name": "Push-ups",
+      "calories_130lbs": 400,
+      "id": 614
+    },
+    {
+      "name": "Yoga",
+      "calories_130lbs": 154,
+      "id": 615
+    },
+    {
+      "name": "Elliptical Trainer - Moderate",
+      "calories_130lbs": 402,
+      "id": 617
+    },
+    {
+      "name": "Elliptical Trainer - Vigorous",
+      "calories_130lbs": 650,
+      "id": 618
+    },
+    {
+      "name": "Power Yoga",
+      "calories_130lbs": 414,
+      "id": 619
+    },
+    {
+      "name": "Ashtanga Yoga",
+      "calories_130lbs": 304,
+      "id": 620
+    },
+    {
+      "name": "Bikram Yoga",
+      "calories_130lbs": 413,
+      "id": 621
+    },
+    {
+      "name": "Vinyasa Yoga",
+      "calories_130lbs": 514,
+      "id": 622
+    },
+    {
+      "name": "TRX",
+      "calories_130lbs": 390,
+      "id": 623
+    },
+    {
+      "name": "Wii - Low Intensity",
+      "calories_130lbs": 144,
+      "id": 624
+    },
+    {
+      "name": "Wii - Boxing",
+      "calories_130lbs": 294,
+      "id": 625
+    },
+    {
+      "name": "Wii - Tennis",
+      "calories_130lbs": 234,
+      "id": 626
+    },
+    {
+      "name": "Wii - Bowling",
+      "calories_130lbs": 246,
+      "id": 627
+    }
+  ]
+}

@@ -29,7 +29,7 @@
                 android:id="@+id/llTimer"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_marginRight="@dimen/mg_func_add_exercise"
+                android:layout_marginEnd="@dimen/mg_func_add_exercise"
                 android:layout_weight="1"
                 android:gravity="center">
 
@@ -42,10 +42,11 @@
                     android:id="@+id/tvTime"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/mg_func_add_exercise"
+                    android:layout_marginStart="@dimen/mg_func_add_exercise"
                     android:layout_weight="1"
-                    android:text="12:17 PM"
-                    android:textSize="13sp" />
+                    android:text="@string/_09_00_pm"
+                    android:textSize="13sp"
+                    tools:ignore="NestedWeights" />
 
                 <ImageView
                     android:layout_width="@dimen/arrow_down_func_add_exercise"
@@ -71,10 +72,11 @@
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/mg_func_add_exercise"
+                    android:layout_marginStart="@dimen/mg_func_add_exercise"
                     android:layout_weight="1"
                     android:text="@string/repeat"
-                    android:textSize="13sp" />
+                    android:textSize="13sp"
+                    tools:ignore="NestedWeights" />
 
                 <ImageView
                     android:layout_width="@dimen/arrow_down_func_add_exercise"
@@ -87,7 +89,7 @@
                 android:id="@+id/llReminder"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="@dimen/mg_func_add_exercise"
+                android:layout_marginStart="@dimen/mg_func_add_exercise"
                 android:layout_weight="1"
                 android:gravity="center">
 
@@ -99,10 +101,11 @@
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/mg_func_add_exercise"
+                    android:layout_marginStart="@dimen/mg_func_add_exercise"
                     android:layout_weight="1"
                     android:text="@string/reminder"
-                    android:textSize="13sp" />
+                    android:textSize="@dimen/_12ssp"
+                    tools:ignore="NestedWeights" />
 
                 <ImageView
                     android:layout_width="@dimen/arrow_down_func_add_exercise"
@@ -117,7 +120,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <EditText
+            <AutoCompleteTextView
                 android:id="@+id/edtExerciseName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -139,14 +142,16 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:inputType="numberSigned"
-                        android:text="@string/_60" />
+                        android:text="@string/_60"
+                        tools:ignore="LabelFor" />
 
                     <EditText
                         android:inputType="numberSigned"
                         android:id="@+id/edtCalories"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/mg_calories_add_exercise"
-                        android:minWidth="@dimen/edt_calories_add_exercise" />
+                        android:layout_marginStart="@dimen/mg_calories_add_exercise"
+                        android:minWidth="@dimen/edt_calories_add_exercise"
+                        tools:ignore="LabelFor" />
                 </TableRow>
 
                 <TableRow
@@ -177,7 +182,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true">
+                android:layout_alignParentBottom="true"
+                tools:ignore="UselessParent">
 
                 <Button
                     android:id="@+id/btnCancel"
@@ -190,7 +196,8 @@
                     android:gravity="center"
                     android:text="@string/cancel"
                     android:textAllCaps="true"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    tools:ignore="ButtonStyle" />
 
                 <Button
                     style="@style/ButtonBottom"
@@ -201,6 +208,7 @@
                     android:text="@string/save"
                     android:textStyle="bold" />
             </LinearLayout>
+
         </RelativeLayout>
 
     </LinearLayout>

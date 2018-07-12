@@ -2,46 +2,59 @@ package com.hb.mydietcoach.activity.diary;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
 import com.hb.mydietcoach.R;
 import com.hb.mydietcoach.activity.BaseActivity;
+import com.hb.mydietcoach.adapter.diary.SearchingExerciseAdapter;
 import com.hb.mydietcoach.database.MyDatabase;
 import com.hb.mydietcoach.dialog.SettingReminderDialog;
 import com.hb.mydietcoach.model.diary.Exercise;
+import com.hb.mydietcoach.model.diary.ExerciseAssets;
 import com.hb.mydietcoach.notification.NotificationManager;
 import com.hb.mydietcoach.utils.Constants;
+import com.hb.mydietcoach.utils.FileUtils;
 import com.wdullaer.materialdatetimepicker.time.TimePickerDialog;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Objects;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import butterknife.OnTextChanged;
 
 public class AddExerciseActivity extends BaseActivity
         implements SettingReminderDialog.ChangeReminderListener {
 
     private static final String TAG = AddExerciseActivity.class.getSimpleName();
 
-    private EditText edtName, edtDuration, edtCalories;
+    private EditText edtDuration, edtCalories;
+    private AutoCompleteTextView edtName;
     private TextView tvTime;
     private Calendar timer;
+    private List<ExerciseAssets> defaultExercises, searchResults = new ArrayList<>();
 
     //Function reminder
     private boolean isReminder = false;
     private int minutesFromEvent = -15;
 
     private SimpleDateFormat sdfHour, sdfFullTime;
+    private SearchingExerciseAdapter adapter;
 
     @SuppressLint("SimpleDateFormat")
     @Override
@@ -53,7 +66,11 @@ public class AddExerciseActivity extends BaseActivity
         sdfHour = new SimpleDateFormat(Constants.FORMAT_HOUR);
         sdfFullTime = new SimpleDateFormat(Constants.FULL_DATE_FORMAT);
 
+        ReadingAssetTask task = new ReadingAssetTask();
+        task.execute();
+
         initView();
+        addEvent();
     }
 
     private void initView() {
@@ -68,10 +85,34 @@ public class AddExerciseActivity extends BaseActivity
         edtDuration = findViewById(R.id.edtDuration);
         edtCalories = findViewById(R.id.edtCalories);
 
+        //AutoCompleteTextview
+        adapter = new SearchingExerciseAdapter(AddExerciseActivity.this, searchResults);
+        edtName.setAdapter(adapter);
+        edtName.setThreshold(1);
+
         //Set time
         tvTime = findViewById(R.id.tvTime);
         String strTime = sdfHour.format(timer.getTime());
         tvTime.setText(strTime);
+    }
+
+    @OnTextChanged(R.id.edtExerciseName)
+    void textChange(CharSequence text) {
+        searchResults.clear();
+        for (ExerciseAssets assets : defaultExercises) {
+            if (assets.getName().contains(text)) searchResults.add(assets);
+        }
+        adapter.notifyDataSetChanged();
+    }
+
+    private void addEvent() {
+        edtName.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                ExerciseAssets assets = defaultExercises.get(position);
+                edtCalories.setText(String.valueOf(assets.getCalories_130lbs()));
+            }
+        });
     }
 
     @Override
@@ -177,7 +218,8 @@ public class AddExerciseActivity extends BaseActivity
 
     /**
      * Change reminder setting
-     * @param isReminder: Is set reminder
+     *
+     * @param isReminder:       Is set reminder
      * @param minutesFromEvent: minute from exercise event
      */
     @Override
@@ -186,5 +228,24 @@ public class AddExerciseActivity extends BaseActivity
         this.minutesFromEvent = minutesFromEvent;
         Log.e(TAG, "Change reminder setting");
         Log.e(TAG, "isReminder " + isReminder + " minutes " + minutesFromEvent);
+    }
+
+    @SuppressLint("StaticFieldLeak")
+    class ReadingAssetTask extends AsyncTask<Void, Void, Void> {
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            defaultExercises = new ArrayList<>();
+        }
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            String content = FileUtils.readFileFromAssets(AddExerciseActivity.this, "exercise_db.json");
+
+            Gson gson = new Gson();
+            defaultExercises = gson.fromJson(content, ExerciseAssets.RootExercise.class).getExercises();
+            return null;
+        }
     }
 }
