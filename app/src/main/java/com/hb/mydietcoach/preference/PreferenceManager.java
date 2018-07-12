@@ -30,6 +30,8 @@ public class PreferenceManager {
 
     //Profile of user
     public static final String DAILY_CALORIES_GOAL = "daily_calories_goal";
+    public static final String CALORIES_LEFT = "calories_left";
+    public static final String LAST_USING_DAY = "last_using_day";
     public static final String USER_BIRTH_YEAR = "birth_year";
     public static final String USER_HEIGHT = "user_height";
     public static final String ACTIVITY_LEVEL = "activity_level";

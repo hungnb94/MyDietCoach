@@ -104,7 +104,7 @@ public class Constants {
     public static final int POINT_FOR_SHARE_GOOGLE_PLUS = 60;
     public static final int POINT_FOR_FOLLOW_TWITTER = 60;
     public static final int POINT_FOR_ADD_PHOTO = 10;
-    public static final int LENGTH_SHOW_SCORE = 1000;
+    public static final int LENGTH_SHOW_SCORE = 1500;
     public static final int POINT_FOR_ADD_EXERCISE = 60;
     public static final int POINT_FOR_CHANGE_WEIGHT = 50;
 }

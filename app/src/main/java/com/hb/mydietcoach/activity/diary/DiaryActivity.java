@@ -251,12 +251,28 @@ public class DiaryActivity extends ScoreActivity
                 Object object = listItems.get(position);
                 if (object instanceof Exercise) {
                     Exercise exercise = (Exercise) object;
+
+                    //Update calories left
+                    float calo = parseFloats(exercise.getCalories());
+                    caloriesLeft -= calo;
+                    caloriesBurned -= calo;
+
+                    //Cancel alarm
                     if (exercise.isReminder()) {
                         NotificationManager manager = new NotificationManager(DiaryActivity.this);
                         manager.cancelAlarm(exercise.getId());
-                    }
-                }
 
+                    }
+                } else if (object instanceof Food) {
+                    Food food = (Food) object;
+                    //Update calories left
+                    float calo = parseFloats(food.getCalories());
+                    caloriesLeft += calo;
+                    caloriesConsumed -= calo;
+                }
+                updateUICalories();
+
+                //Delete from database
                 database.deleteItem(listItems.get(position).getId());
                 listItems.remove(position);
                 adapter.notifyDataSetChanged();
@@ -300,9 +316,22 @@ public class DiaryActivity extends ScoreActivity
             }
         }
 
+        updateUICalories();
+    }
+
+    private void updateUICalories() {
         ((TextView) findViewById(R.id.tvCaloriesLeft)).setText(String.valueOf(Math.round(caloriesLeft)));
         ((TextView) findViewById(R.id.tvCaloresBurned)).setText(String.valueOf(Math.round(caloriesBurned)));
         ((TextView) findViewById(R.id.tvCaloriesConsumed)).setText(String.valueOf(Math.round(caloriesConsumed)));
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        //Update calories left back to MainActivity
+        MainActivity.nCaloriesLeft = Math.round(caloriesLeft);
+        pre.putInt(PreferenceManager.CALORIES_LEFT, Math.round(caloriesLeft));
     }
 
     /**

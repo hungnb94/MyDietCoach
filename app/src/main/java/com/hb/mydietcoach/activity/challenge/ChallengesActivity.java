@@ -6,6 +6,7 @@ import android.graphics.Paint;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
@@ -32,12 +33,12 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.hb.mydietcoach.R;
-import com.hb.mydietcoach.activity.BaseActivity;
-import com.hb.mydietcoach.activity.RewardActivity;
-import com.hb.mydietcoach.activity.contact_faq.ContactFAQActivity;
 import com.hb.mydietcoach.activity.MainActivity;
+import com.hb.mydietcoach.activity.RewardActivity;
+import com.hb.mydietcoach.activity.ScoreActivity;
 import com.hb.mydietcoach.activity.SettingsActivity;
 import com.hb.mydietcoach.activity.WeightLoggingActivity;
+import com.hb.mydietcoach.activity.contact_faq.ContactFAQActivity;
 import com.hb.mydietcoach.activity.diary.DiaryActivity;
 import com.hb.mydietcoach.activity.photo.PhotosActivity;
 import com.hb.mydietcoach.activity.reminder.ReminderActivity;
@@ -57,14 +58,16 @@ import com.tomergoldst.tooltips.ToolTipsManager;
 
 import java.text.NumberFormat;
 import java.util.Calendar;
+import java.util.Objects;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 import static com.hb.mydietcoach.utils.Constants.RC_EDITTING_CHALLENGE;
 
-public class ChallengesActivity extends BaseActivity
-        implements NavigationView.OnNavigationItemSelectedListener, ChallengesAdapter.ItemEventListener,
+public class ChallengesActivity extends ScoreActivity
+        implements NavigationView.OnNavigationItemSelectedListener,
+        ChallengesAdapter.ItemEventListener,
         SeekBar.OnSeekBarChangeListener {
 
     private static final String TAG = ChallengesActivity.class.getSimpleName();
@@ -115,6 +118,10 @@ public class ChallengesActivity extends BaseActivity
     private boolean isShowToolTip;
     private RelativeLayout rootLayout;
 
+    //Earned points
+    private LinearLayout llEarnedPoint;
+    private TextView tvEarnedPoint;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -129,7 +136,7 @@ public class ChallengesActivity extends BaseActivity
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
@@ -235,10 +242,11 @@ public class ChallengesActivity extends BaseActivity
     /**
      * Init view
      */
+    @SuppressLint("ClickableViewAccessibility")
     private void initView() {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle(R.string.track_challenges);
+        Objects.requireNonNull(getSupportActionBar()).setTitle(R.string.track_challenges);
 
         drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -267,11 +275,14 @@ public class ChallengesActivity extends BaseActivity
         //Guide tooltip
         rootLayout = findViewById(R.id.rootLayout);
 
-
         btnUndo = findViewById(R.id.btnUndo);
         tvPoint = findViewById(R.id.tvPoint);
         llPoint = findViewById(R.id.llPoint);
         tvTitleChallenge = findViewById(R.id.tvTitleChallenge);
+
+        //Earned points
+        llEarnedPoint = findViewById(R.id.llEarnedPoint);
+        tvEarnedPoint = findViewById(R.id.tvEarnedPoint);
 
         //Funcion for Normal Challenge
         recyclerView = findViewById(R.id.recyclerView);
@@ -486,7 +497,6 @@ public class ChallengesActivity extends BaseActivity
                     flGuide.clearAnimation();
                     flGuide.setVisibility(View.GONE);
                     showToolTip();
-
                 }
             }, ANIMATION_CHALLENGE_LENGTH);
         }
@@ -532,7 +542,9 @@ public class ChallengesActivity extends BaseActivity
         if (requestCode == RC_EDITTING_CHALLENGE) {
             if (resultCode == RESULT_OK) {
                 Bundle bundle = data.getExtras();
+                assert bundle != null;
                 challenge = (Challenge) bundle.getSerializable(Constants.DATA_SERIALIZABLE);
+                assert challenge != null;
                 if (challenge.isNewDay()) challenge.setCurrentPosition(0);
                 updateChallengeUI();
             }
@@ -603,7 +615,20 @@ public class ChallengesActivity extends BaseActivity
         }
     }
 
-    /**
+    private void showEarnedPoint(int points) {
+        llEarnedPoint.setVisibility(View.VISIBLE);
+        String text = getString(R.string.you_earned) + " " + points + " " + getString(R.string.hh_points);
+        tvEarnedPoint.setText(text);
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                llEarnedPoint.setVisibility(View.GONE);
+            }
+        }, Constants.LENGTH_SHOW_SCORE);
+    }
+
+    /*
      * Normal challenge
      */
 
@@ -645,6 +670,9 @@ public class ChallengesActivity extends BaseActivity
     @Override
     public void allItemDone() {
         setStrikeTextTitle();
+
+        addPoints(challenge.getStars());
+        showEarnedPoint(challenge.getStars());
     }
 
     /**
@@ -666,7 +694,7 @@ public class ChallengesActivity extends BaseActivity
         }
     }
 
-    /**
+    /*
      * RunChallenge
      */
 
@@ -682,6 +710,7 @@ public class ChallengesActivity extends BaseActivity
      */
     View.OnTouchListener seekbarListener = new View.OnTouchListener() {
 
+        @SuppressLint("ClickableViewAccessibility")
         @Override
         public boolean onTouch(View view, MotionEvent motionEvent) {
 
@@ -783,8 +812,13 @@ public class ChallengesActivity extends BaseActivity
         else updatePoint(false);
 
         //Set strike text if necessary
-        if (Constants.SELF_CONTROL_CHALLENGE_TOTAL_ITEMS == challenge.getCurrentPosition())
+        if (Constants.SELF_CONTROL_CHALLENGE_TOTAL_ITEMS == challenge.getCurrentPosition()) {
             setStrikeTextTitle();
+
+            //Add points
+            addPoints(challenge.getStars());
+            showEarnedPoint(challenge.getStars());
+        }
         else clearStrikeTextTitle();
     }
 
@@ -809,8 +843,6 @@ public class ChallengesActivity extends BaseActivity
         });
         return animation;
     }
-
-    ;
 
     /**
      * Click on Avoid Human

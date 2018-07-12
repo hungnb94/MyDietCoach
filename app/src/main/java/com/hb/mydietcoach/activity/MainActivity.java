@@ -2,14 +2,15 @@ package com.hb.mydietcoach.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.hb.mydietcoach.R;
 import com.hb.mydietcoach.activity.challenge.ChallengesActivity;
@@ -19,6 +20,8 @@ import com.hb.mydietcoach.activity.photo.PhotosActivity;
 import com.hb.mydietcoach.activity.reminder.ReminderActivity;
 import com.hb.mydietcoach.activity.tip.TipsActivity;
 import com.hb.mydietcoach.preference.PreferenceManager;
+
+import java.util.Calendar;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -32,6 +35,9 @@ public class MainActivity extends BaseActivity
     private ImageView ivFatPerson, ivSlimPerson;
 
     private PreferenceManager pre;
+
+    public static int nCaloriesLeft = -1;
+    private TextView tvCaloriesLeft;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,19 +66,41 @@ public class MainActivity extends BaseActivity
         ivFatPerson = findViewById(R.id.ivFatPerson);
         ivSlimPerson = findViewById(R.id.ivSlimPerson);
 
+        tvCaloriesLeft = findViewById(R.id.tvCaloriesLeft);
+
+        //Get data to update by onResume
+        int nDay = pre.getInt(PreferenceManager.LAST_USING_DAY, -1);
+        if (nDay > 0) {
+            if (nDay == Calendar.getInstance().get(Calendar.DAY_OF_YEAR)) {
+                nCaloriesLeft = pre.getInt(PreferenceManager.CALORIES_LEFT, -1);
+                if (nCaloriesLeft < 0)
+                    nCaloriesLeft = pre.getInt(PreferenceManager.DAILY_CALORIES_GOAL, -1);
+            } else {
+                nCaloriesLeft = pre.getInt(PreferenceManager.DAILY_CALORIES_GOAL, -1);
+            }
+        }
+
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         navigationView.setCheckedItem(R.id.nav_home);
+
         boolean isFemale = pre.getBoolean(PreferenceManager.IS_GENDER_FEMALE, true);
-        if (isFemale){
+        if (isFemale) {
             ivFatPerson.setImageResource(R.drawable.fat_avatar_default);
             ivSlimPerson.setImageResource(R.drawable.img_slim_avatar);
         } else {
             ivFatPerson.setImageResource(R.drawable.fat_man_avatar_default);
             ivSlimPerson.setImageResource(R.drawable.slim_man_avatar_default);
+        }
+
+        //Calories left
+        if (nCaloriesLeft > 0) {
+            tvCaloriesLeft.setText(String.valueOf(nCaloriesLeft));
+        } else if (!tvCaloriesLeft.getText().toString().equalsIgnoreCase(getString(R.string.calories))) {
+            tvCaloriesLeft.setText(String.valueOf(nCaloriesLeft));
         }
     }
 
@@ -102,7 +130,7 @@ public class MainActivity extends BaseActivity
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
@@ -132,6 +160,11 @@ public class MainActivity extends BaseActivity
         return true;
     }
 
+    @OnClick(R.id.ivCaloriesLeft)
+    void clickCaloriesLeft() {
+        openDiaryActivity();
+    }
+
     //Click diary layout
     @OnClick(R.id.llDiary)
     void clickDiary() {
@@ -149,7 +182,7 @@ public class MainActivity extends BaseActivity
     /**
      * Open WeightLoggingActivity
      */
-    private void openWeightLoggingActivity(){
+    private void openWeightLoggingActivity() {
         Intent intent = new Intent(this, WeightLoggingActivity.class);
         startActivity(intent);
     }
@@ -175,7 +208,7 @@ public class MainActivity extends BaseActivity
     /**
      * Open ChallengesActivity
      */
-    private void openChallengesActivity(){
+    private void openChallengesActivity() {
         Intent intent = new Intent(this, ChallengesActivity.class);
         startActivity(intent);
     }
@@ -193,20 +226,20 @@ public class MainActivity extends BaseActivity
     /**
      * Open PhotosActivity
      */
-    private void openPhotosActivity(){
+    private void openPhotosActivity() {
         Intent intent = new Intent(this, PhotosActivity.class);
         startActivity(intent);
     }
 
     @OnClick(R.id.llTips)
-    void clickTips(View view){
+    void clickTips() {
         openTipsActivity();
     }
 
     /**
      * Open TipsActivity
      */
-    private void openTipsActivity(){
+    private void openTipsActivity() {
         Intent intent = new Intent(this, TipsActivity.class);
         startActivity(intent);
     }
@@ -219,7 +252,7 @@ public class MainActivity extends BaseActivity
     /**
      * Open SettingsActivity
      */
-    private void openSettingsActivity(){
+    private void openSettingsActivity() {
         Intent intent = new Intent(this, SettingsActivity.class);
         startActivity(intent);
     }
@@ -227,8 +260,8 @@ public class MainActivity extends BaseActivity
     /**
      * Open ContacFAQActivity
      */
-    private void openContactFAQActivity(){
-        Intent intent =  new Intent(this, ContactFAQActivity.class);
+    private void openContactFAQActivity() {
+        Intent intent = new Intent(this, ContactFAQActivity.class);
         startActivity(intent);
     }
 }

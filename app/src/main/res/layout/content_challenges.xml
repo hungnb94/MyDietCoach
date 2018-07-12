@@ -251,4 +251,19 @@
 
     </FrameLayout>
 
+    <LinearLayout
+        android:id="@+id/llEarnedPoint"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_65sdp"
+        android:gravity="center"
+        android:visibility="gone">
+
+        <include
+            layout="@layout/include_points"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
 </RelativeLayout>
