@@ -64,6 +64,8 @@ import com.tomergoldst.tooltips.ToolTipsManager;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 import java.util.StringTokenizer;
@@ -443,12 +445,21 @@ public class DiaryActivity extends ScoreActivity
             llDetailInput.setVisibility(View.VISIBLE);
 
         listSearchingFood.clear();
-        Log.d(TAG, "Find food for auto text view:");
+        String key = " " + charSequence.toString().toLowerCase().trim();
         for (FoodAssets food : foodAssets) {
-            if (food.getFn().contains(charSequence.toString().toLowerCase())) {
+            String foodName = " " + food.getFn().toLowerCase();
+            if (foodName.contains(key)) {
                 listSearchingFood.add(food);
             }
         }
+
+        Collections.sort(listSearchingFood, new Comparator<FoodAssets>() {
+            @Override
+            public int compare(FoodAssets f1, FoodAssets f2) {
+                return f1.getFn().compareTo(f2.getFn());
+            }
+        });
+
         searchingAdapter.notifyDataSetChanged();
     }
 

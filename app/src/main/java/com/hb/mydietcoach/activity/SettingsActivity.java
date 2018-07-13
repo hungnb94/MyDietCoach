@@ -1,6 +1,7 @@
 package com.hb.mydietcoach.activity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -24,6 +25,7 @@ import com.hb.mydietcoach.activity.photo.PhotosActivity;
 import com.hb.mydietcoach.activity.reminder.ReminderActivity;
 import com.hb.mydietcoach.activity.tip.TipsActivity;
 import com.hb.mydietcoach.preference.PreferenceManager;
+import com.hb.mydietcoach.utils.Constants;
 
 import java.util.Objects;
 
@@ -109,6 +111,12 @@ public class SettingsActivity extends BaseActivity
         pre.putBoolean(PreferenceManager.SETTING_IS_SHOW_CUSTOMIZED_AVATAR, swCustomizedAvatar.isChecked());
 
         finish();
+    }
+
+    @OnClick(R.id.llPrivacyPolicy)
+    void clickPrivacyPolicy() {
+        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(Constants.URL_PRIVACY_POLICY));
+        startActivity(intent);
     }
 
     /**

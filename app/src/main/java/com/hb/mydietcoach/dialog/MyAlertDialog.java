@@ -12,13 +12,21 @@ import com.hb.mydietcoach.R;
 import com.hb.mydietcoach.utils.Constants;
 
 public class MyAlertDialog extends Dialog {
-    String content;
-    TextView textView;
+    private String content;
+    private TextView textView;
+
+    private boolean isDismiss = true;
 
 
     public MyAlertDialog(@NonNull Context context, String content) {
         super(context);
         this.content = content;
+    }
+
+    public MyAlertDialog(@NonNull Context context, String content, boolean isAutoDismiss) {
+        super(context);
+        this.content = content;
+        this.isDismiss = isAutoDismiss;
     }
 
     @Override
@@ -30,11 +38,13 @@ public class MyAlertDialog extends Dialog {
         textView = findViewById(R.id.tvAlert);
         textView.setText(content);
 
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                dismiss();
-            }
-        }, Constants.ALERT_DIALOG_LENGTH);
+        if (isDismiss) {
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    dismiss();
+                }
+            }, Constants.ALERT_DIALOG_LENGTH);
+        }
     }
 }

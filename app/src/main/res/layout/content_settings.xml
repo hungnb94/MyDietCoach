@@ -18,9 +18,9 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingTop="@dimen/_15sdp"
+            android:orientation="vertical"
             android:paddingBottom="@dimen/_15sdp"
-            android:orientation="vertical">
+            android:paddingTop="@dimen/_15sdp">
 
             <TextView
                 style="@style/SettingsActivityHeader"
@@ -214,30 +214,31 @@
                 android:layout_height="@dimen/line_lv_1"
                 android:background="@color/colorGrey" />
 
+            <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:gravity="center_vertical"-->
+            <!--android:paddingEnd="@dimen/_10sdp"-->
+            <!--android:paddingStart="@dimen/_10sdp">-->
+
+            <!--<TextView-->
+            <!--style="@style/SettingsActivityNormal"-->
+            <!--android:text="@string/acknowledgements" />-->
+
+            <!--<ImageView-->
+            <!--android:layout_width="@dimen/_15sdp"-->
+            <!--android:layout_height="@dimen/_15sdp"-->
+            <!--android:src="@drawable/widget_arrow" />-->
+
+            <!--</LinearLayout>-->
+
+            <!--<View-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="@dimen/line_lv_1"-->
+            <!--android:background="@color/colorGrey" />-->
+
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:paddingEnd="@dimen/_10sdp"
-                android:paddingStart="@dimen/_10sdp">
-
-                <TextView
-                    style="@style/SettingsActivityNormal"
-                    android:text="@string/acknowledgements" />
-
-                <ImageView
-                    android:layout_width="@dimen/_15sdp"
-                    android:layout_height="@dimen/_15sdp"
-                    android:src="@drawable/widget_arrow" />
-
-            </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/line_lv_1"
-                android:background="@color/colorGrey" />
-
-            <LinearLayout
+                android:id="@+id/llPrivacyPolicy"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"

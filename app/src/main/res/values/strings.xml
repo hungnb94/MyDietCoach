@@ -302,4 +302,9 @@
     <string name="follow_twitter">Follow us on twitter</string>
     <string name="add_photo">Add motivation photo</string>
     <string name="_09_00_pm">09:00 PM</string>
+    <string name="not_valid">Not valid</string>
+    <string name="age_not_valid">Your age is not valid</string>
+    <string name="goal_weight_not_good">Your goal weight is not good for your health</string>
+    <string name="goal_weight_from">Please fill your weight from</string>
+    <string name="to">to</string>
 </resources>

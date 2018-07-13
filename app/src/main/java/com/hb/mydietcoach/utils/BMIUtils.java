@@ -15,6 +15,8 @@ public class BMIUtils {
      * @return: BMI index
      */
     public static double getBMI(double weight, double height) {
+        if (height == 0) return -1;
+
         return weight / (height * height);
     }
 

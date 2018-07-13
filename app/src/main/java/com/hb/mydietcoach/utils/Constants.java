@@ -97,6 +97,7 @@ public class Constants {
 
     public static final long TRACKING_HANDLE_ANIM_LENGTH = 1500;
     public static final String URL_CHANGE_SUBCRIPTION = "https://support.google.com/googleplay/answer/7018481";
+    public static final String URL_PRIVACY_POLICY = "https://www.mydietcoachapp.com/privacy-policy";
 
     //Point on reward
     public static final int TARGET_DISTANT = 26;

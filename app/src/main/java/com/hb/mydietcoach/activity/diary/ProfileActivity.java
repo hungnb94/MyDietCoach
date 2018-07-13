@@ -18,21 +18,23 @@ import android.widget.TextView;
 
 import com.hb.mydietcoach.R;
 import com.hb.mydietcoach.activity.BaseActivity;
-import com.hb.mydietcoach.activity.contact_faq.ContactFAQActivity;
 import com.hb.mydietcoach.activity.MainActivity;
 import com.hb.mydietcoach.activity.SettingsActivity;
 import com.hb.mydietcoach.activity.WeightLoggingActivity;
 import com.hb.mydietcoach.activity.challenge.ChallengesActivity;
+import com.hb.mydietcoach.activity.contact_faq.ContactFAQActivity;
 import com.hb.mydietcoach.activity.photo.PhotosActivity;
 import com.hb.mydietcoach.activity.reminder.ReminderActivity;
 import com.hb.mydietcoach.activity.tip.TipsActivity;
 import com.hb.mydietcoach.adapter.diary.ActivityLevelAdapter;
+import com.hb.mydietcoach.dialog.MyAlertDialog;
 import com.hb.mydietcoach.preference.PreferenceManager;
 import com.hb.mydietcoach.utils.BMIUtils;
 import com.hb.mydietcoach.utils.Constants;
 
 import java.text.NumberFormat;
 import java.util.Calendar;
+import java.util.Objects;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -70,6 +72,7 @@ public class ProfileActivity extends BaseActivity
     private void initView() {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        Objects.requireNonNull(getSupportActionBar()).setTitle(R.string.profile);
 
         drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -86,12 +89,12 @@ public class ProfileActivity extends BaseActivity
         tvBmi = findViewById(R.id.tvBMI);
 
         spWeightHeightUnit = findViewById(R.id.spWeightHeightUnit);
-        spWeightHeightUnit.setAdapter(new ArrayAdapter<String>(this,
+        spWeightHeightUnit.setAdapter(new ArrayAdapter<>(this,
                 android.R.layout.simple_list_item_1,
                 getResources().getStringArray(R.array.weight_height_units)));
 
         spGender = findViewById(R.id.spGender);
-        spGender.setAdapter(new ArrayAdapter<String>(this,
+        spGender.setAdapter(new ArrayAdapter<>(this,
                 android.R.layout.simple_list_item_1,
                 getResources().getStringArray(R.array.gender_types)));
 
@@ -255,6 +258,10 @@ public class ProfileActivity extends BaseActivity
     @Override
     protected void onPause() {
         super.onPause();
+        saveData();
+    }
+
+    private void saveData() {
         PreferenceManager pre = new PreferenceManager(this);
 
         //Save all field to preferences
@@ -340,6 +347,32 @@ public class ProfileActivity extends BaseActivity
 
     @OnClick(R.id.button)
     void clickContinue() {
+        if (!ageIsValid((int) getFloatFromEdittext(edtAge))) {
+            MyAlertDialog dialog = new MyAlertDialog(this, getString(R.string.age_not_valid), false);
+            dialog.show();
+            return;
+        }
+        float weight, height;
+        if (spWeightHeightUnit.getSelectedItemPosition() == 0) {
+            height = getFloatFromEdittext(edtHeight);
+            weight = getFloatFromEdittext(edtTargetWeight);
+        } else {
+            height = (float) (getFloatFromEdittext(edtHeightFt) * Constants.FT_TO_CM
+                    + getFloatFromEdittext(edtHeightIn) * Constants.IN_TO_CM);
+            weight = (float) (getFloatFromEdittext(edtTargetWeight) * Constants.LB_TO_KG);
+        }
+        if (!weightGoalIsValild(weight, height)) {
+            float minWeight = BMIUtils.NORMAL_WEIGHT_LOWER * height * height / 10000;
+            float maxWeight = BMIUtils.NORMAL_WEIGHT_UPPER * height * height / 10000;
+
+            String content = getString(R.string.goal_weight_not_good) + "\n"
+                    + getString(R.string.goal_weight_from) + " " + numberFormat.format(minWeight)
+                    + " " + getString(R.string.to) + " " + numberFormat.format(maxWeight);
+
+            MyAlertDialog dialog = new MyAlertDialog(this, content, false);
+            dialog.show();
+            return;
+        }
         finish();
     }
 
