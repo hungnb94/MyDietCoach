@@ -1,0 +1,962 @@
+{
+  "category_name": "Thinking Patterns",
+  "tips": [
+    {
+      "priority": 0,
+      "id": 1,
+      "content": "Yes, you can do it! You have enough willpower to avoid that food.",
+      "image_id": "women_success",
+      "action_tip": {
+        "type": {},
+        "date": {},
+        "text": {}
+      }
+    },
+    {
+      "priority": 0,
+      "id": 2,
+      "content": "Just think that you'll need to run at least one hour in order to burn the calories in that food.",
+      "image_id": "39673655",
+      "action_tip": {
+        "type": {},
+        "date": {},
+        "text": {}
+      }
+    },
+    {
+      "priority": 0,
+      "id": 3,
+      "content": "You want to feel even more sexy and attractive so badly - you want it much more than that food.",
+      "image_id": "8122223",
+      "action_tip": {
+        "type": {},
+        "date": {},
+        "text": {}
+      }
+    },
+    {
+      "priority": 0,
+      "id": 4,
+      "content": "Think about all the weight you have already lost - you definitely want your weight chart to keep going down!",
+      "image_id": "3491589",
+      "action_tip": {
+        "type": {},
+        "date": {},
+        "text": {}
+      }
+    },
+    {
+      "priority": 0,
+      "id": 5,
+      "content": "Anything is possible once you set your mind to it - and when you want to lose weight, this is twice as right!",
+      "image_id": "goal",
+      "action_tip": {
+        "type": {},
+        "date": {},
+        "text": {}
+      }
+    },
+    {
+      "priority": 0,
+      "id": 6,
+      "content": "Just imagine that you're a movie star or a supermodel. You have to look your best and avoid temptations!",
+      "image_id": "120064483",
+      "action_tip": {
+        "type": {},
+        "date": {},
+        "text": {}
+      }
+    },
+    {
+      "priority": 0,
+      "id": 7,
+      "content": "Do you really need that food? Eat only what you need and only when you are hungry.",
+      "image_id": "834510934",
+      "action_tip": {
+        "type": {},
+        "date": {},
+        "text": {}
+      }
+    },
+    {
+      "priority": 0,
+      "id": 8,
+      "content": "Just hold yourself back for a couple of minutes - the craving will go away.",
+      "image_id": "42866173",
+      "action_tip": {
+        "type": {},
+        "date": {},
+        "text": {}
+      }
+    },
+    {
+      "priority": 0,
+      "id": 9,
+      "content": "Even if the food in front of me is delicious and terribly tempting, I can say 'no' and it won't kill me.",
+      "image_id": "22337765",
+      "action_tip": {
+        "type": {},
+        "date": {},
+        "text": {}
+      }
+    },
+    {
+      "priority": 0,
+      "id": 10,
+      "content": "You've got nothing to lose by staying away from that piece of cake, except added pounds.",
+      "image_id": "266451099",
+      "action_tip": {
+        "type": {},
+        "date": {},
+        "text": {}
+      }
+    },
+    {
+      "priority": 0,
+      "id": 11,
+      "content": "It's your choice whether to stay on track - make the right decision!",
+      "image_id": "8247444",
+      "action_tip": {
+        "type": {},
+        "date": {},
+        "text": {}
+      }
+    },
+    {
+      "priority": 0,
+      "id": 12,
+      "content": "Start eating and thinking like a thin person - that's nothing but some uninteresting food.",
+      "image_id": "559746508",
+      "action_tip": {
+        "type": {},
+        "date": {},
+        "text": {}
+      }
+    },
+    {
+      "priority": 0,
+      "id": 13,
+      "content": "Sorry food, you are not the center of my life! I can and I will live better without eating you.",
+      "image_id": "663420988",
+      "action_tip": {
+        "type": {},
+        "date": {},
+        "text": {}
+      }
+    },
+    {
+      "priority": 0,
+      "id": 14,
+      "content": "You've been getting slimmer every day, and you want things to continue that way!",
+      "image_id": "3491589",
+      "action_tip": {
+        "type": {},
+        "date": {},
+        "text": {}
+      }
+    },
+    {
+      "priority": 0,
+      "id": 15,
+      "content": "Just think how good you feel when the number on the scale is lower - it's worth avoiding temptations!",
+      "image_id": "diet_success_party",
+      "action_tip": {
+        "type": {},
+        "date": {},
+        "text": {}
+      }
+    },
+    {
+      "priority": 0,
+      "id": 16,
+      "content": "You'll feel so bad after eating - now, you can still make the choice to avoid that feeling!",
+      "image_id": "1904566",
+      "action_tip": {
+        "type": {},
+        "date": {},
+        "text": {}
+      }
+    },
+    {
+      "priority": 0,
+      "id": 17,
+      "content": "Your body is beautiful, and it will become more beautiful each day.",
+      "image_id": "903644",
+      "action_tip": {
+        "type": {},
+        "date": {},
+        "text": {}
+      }
+    },
+    {
+      "priority": 0,
+      "id": 18,
+      "content": "You only need to have self control a couple of times - it will become easier and more natural. Practice it this time.",
+      "image_id": "15630924",
+      "action_tip": {
+        "type": {},
+        "date": {},
+        "text": {}
+      }
+    },
+    {
+      "priority": 0,
+      "id": 19,
+      "content": "Just go away from the temptation, go to another room or farther, leave your house or wherever you are.",
+      "image_id": "28456334",
+      "action_tip": {
+        "type": {},
+        "date": {},
+        "text": {}
+      }
+    },
+    {
+      "priority": 0,
+      "id": 20,
+      "content": "Your weight loss group will be so disappointed if you haven't lost weight this week.",
+      "image_id": "70654315",
+      "action_tip": {
+        "type": {},
+        "date": {},
+        "text": {}
+      }
+    },
+    {
+      "priority": 0,
+      "id": 21,
+      "content": "Think about all the proud people who became so confident when they lost weight. Do you want to be one of them?",
+      "image_id": "8122223",
+      "action_tip": {
+        "type": {},
+        "date": {},
+        "text": {}
+      }
+    },
+    {
+      "priority": 0,
+      "id": 22,
+      "content": "Imagine the \"Wow!\", the surprised faces of people who have not seen you for a long time - so control that craving!",
+      "image_id": "103821200",
+      "action_tip": {
+        "type": {},
+        "date": {},
+        "text": {}
+      }
+    },
+    {
+      "priority": 0,
+      "id": 23,
+      "content": "Imagine that the food you're craving is just so unhealthy and dangerous for your body that you should avoid it for medical reasons.",
+      "image_id": "healthy_life_sign",
+      "action_tip": {
+        "type": {},
+        "date": {},
+        "text": {}
+      }
+    },
+    {
+      "priority": 0,
+      "id": 24,
+      "content": "How do you want to look on the day when you surprisingly meet the man of your dreams?",
+      "image_id": "couple_with_swimsuite",
+      "action_tip": {
+        "type": {},
+        "date": {},
+        "text": {}
+      }
+    },
+    {
+      "priority": 0,
+      "id": 25,
+      "content": "Imagine you are invited to the Oscar ceremony. How do you want to look when you walk down the red carpet?",
+      "image_id": "100926724",
+      "action_tip": {
+        "type": {},
+        "date": {},
+        "text": {}
+      }
+    },
+    {
+      "priority": 0,
+      "id": 26,
+      "content": "Would you eat that if you were Scarlett Johansson or Megan Fox? Probably not!",
+      "image_id": "903547374",
+      "action_tip": {
+        "type": {},
+        "date": {},
+        "text": {}
+      }
+    },
+    {
+      "priority": 0,
+      "id": 27,
+      "content": "You'll be so satisfied and proud after controlling yourself!",
+      "image_id": "131566703",
+      "action_tip": {
+        "type": {},
+        "date": {},
+        "text": {}
+      }
+    },
+    {
+      "priority": 0,
+      "id": 28,
+      "content": "It's so easy to avoid temptations - just don't reach over for that food!",
+      "image_id": "women_dieting",
+      "action_tip": {
+        "type": {},
+        "date": {},
+        "text": {}
+      }
+    },
+    {
+      "priority": 0,
+      "id": 29,
+      "content": "When you look in the mirror, what will you see? Will it be a stronger and slimmer woman?",
+      "image_id": "101952877",
+      "action_tip": {
+        "type": {},
+        "date": {},
+        "text": {}
+      }
+    },
+    {
+      "priority": 0,
+      "id": 30,
+      "content": "Quickly try to find something healthy and low calorie to eat. Fill yourself up with vegetables.",
+      "image_id": "fruits_market",
+      "action_tip": {
+        "type": {},
+        "date": {},
+        "text": {}
+      }
+    },
+    {
+      "priority": 0,
+      "id": 31,
+      "content": "Make a commitment to wait 15 minutes. It's easier. During those 15 minutes, eat tons of veggies and drink 3 glasses of water.",
+      "image_id": "fruits_market",
+      "action_tip": {
+        "type": {},
+        "date": {},
+        "text": {}
+      }
+    },
+    {
+      "priority": 0,
+      "id": 32,
+      "content": "Think how easy and fun it will be to buy new clothes, any clothes you like - they will all look great on you!",
+      "image_id": "94974817",
+      "action_tip": {
+        "type": {},
+        "date": {},
+        "text": {}
+      }
+    },
+    {
+      "priority": 0,
+      "id": 33,
+      "content": "No more black outfits - you will even be able to wear those tight, white clothes! So - control yourself.",
+      "image_id": "559746508",
+      "action_tip": {
+        "type": {},
+        "date": {},
+        "text": {}
+      }
+    },
+    {
+      "priority": 0,
+      "id": 34,
+      "content": "Can you keep your hands busy with something? Knitting, playing computer games?",
+      "image_id": "painting_pallete",
+      "action_tip": {
+        "type": {},
+        "date": {},
+        "text": {}
+      }
+    },
+    {
+      "priority": 0,
+      "id": 35,
+      "content": "Take a bubble bath - it's a win-win!",
+      "image_id": "161523947",
+      "action_tip": {
+        "type": {},
+        "date": {},
+        "text": {}
+      }
+    },
+    {
+      "priority": 0,
+      "id": 37,
+      "content": "Take a deep breath and go for a 5 minute walk (only 5 minutes - it's not that hard).",
+      "image_id": "92436103",
+      "action_tip": {
+        "type": {},
+        "date": {},
+        "text": {}
+      }
+    },
+    {
+      "priority": 0,
+      "id": 38,
+      "content": "Everyone deserves to look and feel their best - you also deserve to!",
+      "image_id": "62738659",
+      "action_tip": {
+        "type": {},
+        "date": {},
+        "text": {}
+      }
+    },
+    {
+      "priority": 0,
+      "id": 39,
+      "content": "It's your turn to win! Just continue playing by the rules of the weight loss game!",
+      "image_id": "131566703",
+      "action_tip": {
+        "type": {},
+        "date": {},
+        "text": {}
+      }
+    },
+    {
+      "priority": 0,
+      "id": 40,
+      "content": "You'll do whatever it takes to achieve your goal, and yes - that means avoiding unhealthy foods!",
+      "image_id": "133383131",
+      "action_tip": {
+        "type": {},
+        "date": {},
+        "text": {}
+      }
+    },
+    {
+      "priority": 0,
+      "id": 41,
+      "content": "Just let loose the winner inside you. Don't shut yourself down with negative talk!",
+      "image_id": "87466464",
+      "action_tip": {
+        "type": {},
+        "date": {},
+        "text": {}
+      }
+    },
+    {
+      "priority": 0,
+      "id": 42,
+      "content": "Make other people believe losing weight is easy by making it easy for you - eat only what you need.",
+      "image_id": "82969660",
+      "action_tip": {
+        "type": {},
+        "date": {},
+        "text": {}
+      }
+    },
+    {
+      "priority": 0,
+      "id": 43,
+      "content": "Eating unhealthy foods, and even binge-eating may cause stress",
+      "image_id": "stressed_girl",
+      "action_tip": {
+        "type": {},
+        "date": {},
+        "text": {}
+      }
+    },
+    {
+      "priority": 0,
+      "id": 44,
+      "content": "Commit to giving yourself the best life that you can. Do it for YOU and your body!",
+      "image_id": "rainbow_success",
+      "action_tip": {
+        "type": {},
+        "date": {},
+        "text": {}
+      }
+    },
+    {
+      "priority": 0,
+      "id": 45,
+      "content": "You simply must do it for your body.",
+      "image_id": "112539836",
+      "action_tip": {
+        "type": {},
+        "date": {},
+        "text": {}
+      }
+    },
+    {
+      "priority": 0,
+      "id": 46,
+      "content": "Envision your future. What would you ultimately like your life to be like?",
+      "image_id": "15630924",
+      "action_tip": {
+        "type": {},
+        "date": {},
+        "text": {}
+      }
+    },
+    {
+      "priority": 0,
+      "id": 47,
+      "content": "Imagine every detail of your body and how it will look when you're thin.",
+      "image_id": "8374553",
+      "action_tip": {
+        "type": {},
+        "date": {},
+        "text": {}
+      }
+    },
+    {
+      "priority": 0,
+      "id": 48,
+      "content": "Life goes where you choose to take it. What direction do you choose?",
+      "image_id": "834510934",
+      "action_tip": {
+        "type": {},
+        "date": {},
+        "text": {}
+      }
+    },
+    {
+      "priority": 0,
+      "id": 50,
+      "content": "You can do this. It's not easy, but the reward will be well worth it.",
+      "image_id": "89714503",
+      "action_tip": {
+        "type": {},
+        "date": {},
+        "text": {}
+      }
+    },
+    {
+      "priority": 0,
+      "id": 51,
+      "content": "Focus on how you can avoid that food instead of how you can't.",
+      "image_id": "success_sign",
+      "action_tip": {
+        "type": {},
+        "date": {},
+        "text": {}
+      }
+    },
+    {
+      "priority": 0,
+      "id": 52,
+      "content": "Those fried potatoes will clog your arteries and make you fat. But those fruits and veggies look delicious and refreshing, and will help you lose that weight!",
+      "image_id": "fresh_apples",
+      "action_tip": {
+        "type": {},
+        "date": {},
+        "text": {}
+      }
+    },
+    {
+      "priority": 0,
+      "id": 53,
+      "content": "Everybody has will power, and the more you exercise it, the stronger it gets!",
+      "image_id": "women_success",
+      "action_tip": {
+        "type": {},
+        "date": {},
+        "text": {}
+      }
+    },
+    {
+      "priority": 0,
+      "id": 54,
+      "content": "That cake is just a lot of sugar, flour and eggs - that's all. What's so good about it?",
+      "image_id": "22337765",
+      "action_tip": {
+        "type": {},
+        "date": {},
+        "text": {}
+      }
+    },
+    {
+      "priority": 0,
+      "id": 55,
+      "content": "Look at some photos of fit people.",
+      "image_id": "41097958",
+      "action_tip": {
+        "type": {},
+        "date": {},
+        "text": {}
+      }
+    },
+    {
+      "priority": 0,
+      "id": 56,
+      "content": "You'll feel younger when you're slimmer.",
+      "image_id": "rainbow_success",
+      "action_tip": {
+        "type": {},
+        "date": {},
+        "text": {}
+      }
+    },
+    {
+      "priority": 0,
+      "id": 57,
+      "content": "Read some weight loss success stories!",
+      "image_id": "42076618",
+      "action_tip": {
+        "type": {},
+        "date": {},
+        "text": {}
+      }
+    },
+    {
+      "priority": 0,
+      "id": 58,
+      "content": "Watch the 'Biggest Loser'!",
+      "image_id": "success",
+      "action_tip": {
+        "type": {},
+        "date": {},
+        "text": {}
+      }
+    },
+    {
+      "priority": 0,
+      "id": 59,
+      "content": "Don't settle for less than you deserve.",
+      "image_id": "couple_with_swimsuite",
+      "action_tip": {
+        "type": {},
+        "date": {},
+        "text": {}
+      }
+    },
+    {
+      "priority": 0,
+      "id": 60,
+      "content": "Do you have emergency foods at hand? Cut veggies? Low-cal soup and popcorn? A delicious salad?",
+      "image_id": "130836818",
+      "action_tip": {
+        "type": {},
+        "date": {},
+        "text": {}
+      }
+    },
+    {
+      "priority": 0,
+      "id": 61,
+      "content": "It's never too late to lose weight - you can do it!",
+      "image_id": "87466464",
+      "action_tip": {
+        "type": {},
+        "date": {},
+        "text": {}
+      }
+    },
+    {
+      "priority": 0,
+      "id": 62,
+      "content": "Don't think \"I can never resist\" - resist this time and break the vicious cycle of \"never.\"",
+      "image_id": "663420988",
+      "action_tip": {
+        "type": {},
+        "date": {},
+        "text": {}
+      }
+    },
+    {
+      "priority": 0,
+      "id": 63,
+      "content": "Avoiding foods like these will make your life longer!",
+      "image_id": "health_on_sand",
+      "action_tip": {
+        "type": {},
+        "date": {},
+        "text": {}
+      }
+    },
+    {
+      "priority": 0,
+      "id": 64,
+      "content": "You have the power inside you - learn what works best for you to help stay away from bad foods.",
+      "image_id": "903644",
+      "action_tip": {
+        "type": {},
+        "date": {},
+        "text": {}
+      }
+    },
+    {
+      "priority": 0,
+      "id": 65,
+      "content": "Think of all the models with the tailored clothes that fit them perfectly. You want clothes to look like that on you, too.",
+      "image_id": "8122223",
+      "action_tip": {
+        "type": {},
+        "date": {},
+        "text": {}
+      }
+    },
+    {
+      "priority": 0,
+      "id": 68,
+      "content": "Imagine yourself running airily through a field.",
+      "image_id": "4750556",
+      "action_tip": {
+        "type": {},
+        "date": {},
+        "text": {}
+      }
+    },
+    {
+      "priority": 0,
+      "id": 69,
+      "content": "Remember how you want to look - look at your motivational photos.",
+      "image_id": "8374553",
+      "action_tip": {
+        "type": {},
+        "date": {},
+        "text": {}
+      }
+    },
+    {
+      "priority": 0,
+      "id": 70,
+      "content": "Which parts of your body do you least like? Imagine how they will look after you lose weight.",
+      "image_id": "99918125",
+      "action_tip": {
+        "type": {},
+        "date": {},
+        "text": {}
+      }
+    },
+    {
+      "priority": 0,
+      "id": 71,
+      "content": "Think of the slender people you know, with the toned bodies - the ones that make you feel jealous. You can be one of them, too.",
+      "image_id": "couple_with_swimsuite",
+      "action_tip": {
+        "type": {},
+        "date": {},
+        "text": {}
+      }
+    },
+    {
+      "priority": 0,
+      "id": 72,
+      "content": "After you lose weight, people will turn their heads to look at you in the street - it'll be so much fun.",
+      "image_id": "120064483",
+      "action_tip": {
+        "type": {},
+        "date": {},
+        "text": {}
+      }
+    },
+    {
+      "priority": 0,
+      "id": 73,
+      "content": "Your self-confidence will improve so much when you're slimmer.",
+      "image_id": "8122223",
+      "action_tip": {
+        "type": {},
+        "date": {},
+        "text": {}
+      }
+    },
+    {
+      "priority": 0,
+      "id": 74,
+      "content": "There are so many good reasons not to eat that food, but there's not even one good reason to eat it.",
+      "image_id": "8247444",
+      "action_tip": {
+        "type": {},
+        "date": {},
+        "text": {}
+      }
+    },
+    {
+      "priority": 0,
+      "id": 75,
+      "content": "Happiness is achieving long-term, significant goals. Eating this food will hurt your happiness.",
+      "image_id": "happiness_jumping",
+      "action_tip": {
+        "type": {},
+        "date": {},
+        "text": {}
+      }
+    },
+    {
+      "priority": 0,
+      "id": 76,
+      "content": "This food will give you slight enjoyment for a very short period of time, and much frustration in the long run.",
+      "image_id": "1701238",
+      "action_tip": {
+        "type": {},
+        "date": {},
+        "text": {}
+      }
+    },
+    {
+      "priority": 0,
+      "id": 77,
+      "content": "Think about a flat belly, firm buttocks and toned arms.",
+      "image_id": "62738659",
+      "action_tip": {
+        "type": {},
+        "date": {},
+        "text": {}
+      }
+    },
+    {
+      "priority": 0,
+      "id": 78,
+      "content": "Just a little self-discipline... remember your goal - you're totally on the right path.",
+      "image_id": "diet_success_party",
+      "action_tip": {
+        "type": {},
+        "date": {},
+        "text": {}
+      }
+    },
+    {
+      "priority": 0,
+      "id": 79,
+      "content": "Your friends who've lost weight are now walking proudly, holding their heads high. You surely want to feel that way, too.",
+      "image_id": "83084425",
+      "action_tip": {
+        "type": {},
+        "date": {},
+        "text": {}
+      }
+    },
+    {
+      "priority": 0,
+      "id": 80,
+      "content": "You won't miss  anything by avoiding sweets - your  life will be much better without them.",
+      "image_id": "healthy_life_sign",
+      "action_tip": {
+        "type": {},
+        "date": {},
+        "text": {}
+      }
+    },
+    {
+      "priority": 0,
+      "id": 81,
+      "content": "Imagine getting rid of all the fat in your thighs. It'll be worth it!",
+      "image_id": "645771733",
+      "action_tip": {
+        "type": {},
+        "date": {},
+        "text": {}
+      }
+    },
+    {
+      "priority": 0,
+      "id": 82,
+      "content": "Engage yourself with your preferred hobby, it will help remove your thoughts from the cravings",
+      "image_id": "painting_pallete",
+      "action_tip": {
+        "type": {},
+        "date": {},
+        "text": {}
+      }
+    },
+    {
+      "priority": 0,
+      "id": 83,
+      "content": "Imagine everyone at the party is staring at you because you look so great after losing all that weight!",
+      "image_id": "two_men_figthing",
+      "action_tip": {
+        "type": {},
+        "date": {},
+        "text": {}
+      }
+    },
+    {
+      "priority": 0,
+      "id": 84,
+      "content": "Eating may be temporarily satisfying, but ultimately, will leave you with the unpleasant feelings you started out with.",
+      "image_id": "1701238",
+      "action_tip": {
+        "type": {},
+        "date": {},
+        "text": {}
+      }
+    },
+    {
+      "priority": 0,
+      "id": 85,
+      "content": "Promise to yourself to eat that food only after you drink two full glasses of water.",
+      "image_id": "9043671",
+      "action_tip": {
+        "type": {},
+        "date": {},
+        "text": {}
+      }
+    },
+    {
+      "priority": 0,
+      "id": 86,
+      "content": "Prove to yourself that you can do it! You can control yourself - it is all in your mind!",
+      "image_id": "success",
+      "action_tip": {
+        "type": {},
+        "date": {},
+        "text": {}
+      }
+    },
+    {
+      "priority": 0,
+      "id": 87,
+      "content": "Remember that eating healthy is your new lifestyle.",
+      "image_id": "healthy_life_sign",
+      "action_tip": {
+        "type": {},
+        "date": {},
+        "text": {}
+      }
+    },
+    {
+      "priority": 0,
+      "id": 88,
+      "content": "You can eat whatever you want or you can be thin - you can't have both!",
+      "image_id": "1904566",
+      "action_tip": {
+        "type": {},
+        "date": {},
+        "text": {}
+      }
+    },
+    {
+      "priority": 0,
+      "id": 89,
+      "content": "Obesity is not just about the way you look - it is a life threatening condition!",
+      "image_id": "health_on_sand",
+      "action_tip": {
+        "type": {},
+        "date": {},
+        "text": {}
+      }
+    },
+    {
+      "priority": 0,
+      "id": 90,
+      "content": "You did not fail yet! Go back to your routine.",
+      "image_id": "559746508",
+      "action_tip": {
+        "type": {},
+        "date": {},
+        "text": {}
+      }
+    },
+    {
+      "priority": 0,
+      "id": 91,
+      "content": "Track your weight again - don't regain weight you already lost!",
+      "image_id": "3491589",
+      "action_tip": {
+        "type": {},
+        "date": {},
+        "text": {}
+      }
+    }
+  ]
+}

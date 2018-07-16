@@ -7,12 +7,12 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
-import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import com.google.gson.Gson;
 import com.hb.mydietcoach.R;
 import com.hb.mydietcoach.database.MyDatabase;
 import com.hb.mydietcoach.dialog.MyAlertDialog;
@@ -21,6 +21,7 @@ import com.hb.mydietcoach.model.challenge.Challenge;
 import com.hb.mydietcoach.model.challenge.NormalChallenge;
 import com.hb.mydietcoach.model.challenge.RunChallenge;
 import com.hb.mydietcoach.model.challenge.SelfControlChallenge;
+import com.hb.mydietcoach.model.diary.asset.FoodAssets;
 import com.hb.mydietcoach.model.tip.TipCategory;
 import com.hb.mydietcoach.model.tip.TipDetail;
 import com.hb.mydietcoach.preference.PreferenceManager;
@@ -33,6 +34,8 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+import java.util.StringTokenizer;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -63,8 +66,7 @@ public class TermConditionActivity extends BaseActivity {
         //First time run app, insert default challenges to sqlite
 
         if (isFirstInsertDatabase) {
-            DatabaseTask task = new DatabaseTask();
-            task.execute();
+            insertDefaultData();
             pre.putBoolean(PreferenceManager.IS_FIRST_TIME_INSERT_SQLITE, false);
         }
 
@@ -74,7 +76,7 @@ public class TermConditionActivity extends BaseActivity {
     private void initView() {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle(getString(R.string.app_name));
+        Objects.requireNonNull(getSupportActionBar()).setTitle(getString(R.string.app_name));
 
         ButterKnife.bind(this);
         edtWeight = findViewById(R.id.edtWeight);
@@ -93,13 +95,13 @@ public class TermConditionActivity extends BaseActivity {
 
     //Click cancel
     @OnClick(R.id.btnCancel)
-    void clickCancel(View view) {
+    void clickCancel() {
         finish();
     }
 
     //Click agree with terms and conditions
     @OnClick(R.id.btnAgree)
-    void clickAgree(View view) {
+    void clickAgree() {
         if (allParametersAvailable()) {
             int position = spinnerGender.getSelectedItemPosition();
             boolean isFemale = (position == 0);
@@ -151,38 +153,87 @@ public class TermConditionActivity extends BaseActivity {
         return (float) (lbWeight * Constants.LB_TO_KG);
     }
 
+    private void insertDefaultData() {
+        DatabaseTask task = new DatabaseTask();
+        task.execute();
+    }
 
     @SuppressLint("StaticFieldLeak")
     private class DatabaseTask extends AsyncTask<Void, Void, Void> {
-        private MyDatabase database;
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            database = new MyDatabase(getApplicationContext());
-        }
+        Realm realm;
 
         @Override
         protected Void doInBackground(Void... voids) {
+            realm = Realm.getDefaultInstance();
+
+            insertDefaultChallenges();
+
+            insertDefaultTips();
+
+            insertDefaultFoods();
+
+            realm.close();
+
+            return null;
+        }
+
+        private void insertDefaultChallenges() {
+            MyDatabase database = new MyDatabase(getApplicationContext());
+
+            //Default challenges
             List<Challenge> list = generateExerciseChallenges();
             list.addAll(generateEatingHabitChallenges());
             list.addAll(generateSelfControlChallenges());
+
             for (Challenge challenge : list) {
                 long id = database.insertChallenge(challenge);
                 challenge.setId(id);
             }
+        }
 
+        private void insertDefaultTips() {
             List<TipCategory> categories = getDefaultCategories();
 
             //Insert to realm database
-            Realm realm = Realm.getDefaultInstance();
             realm.beginTransaction();
             for (TipCategory tipCategory : categories) {
                 realm.insertOrUpdate(tipCategory.getAdvices());
             }
             realm.insertOrUpdate(categories);
             realm.commitTransaction();
-            return null;
+        }
+
+        private void insertDefaultFoods() {
+            ArrayList<FoodAssets> foodAssets = getDefaultFoods();
+
+            realm.beginTransaction();
+            for (FoodAssets asset : foodAssets) {
+                realm.insertOrUpdate(asset);
+            }
+            realm.commitTransaction();
+        }
+
+        private ArrayList<FoodAssets> getDefaultFoods() {
+            ArrayList<FoodAssets> foodAssets = new ArrayList<>();
+            String content = FileUtils.readFileFromAssets(TermConditionActivity.this, "new_food_db_1.txt");
+            StringTokenizer tokenizer = new StringTokenizer(content, "\n");
+            while (tokenizer.hasMoreTokens()) {
+                try {
+                    String mLine = tokenizer.nextToken();
+                    mLine = mLine.substring(8, mLine.length() - 1);
+
+                    //Convert text to object
+                    Gson gson = new Gson();
+                    FoodAssets food = gson.fromJson(mLine, FoodAssets.class);
+
+                    //Add to list
+                    foodAssets.add(food);
+                } catch (Exception e) {
+                    Log.e(TAG, "Exception");
+                    e.printStackTrace();
+                }
+            }
+            return foodAssets;
         }
 
         /**

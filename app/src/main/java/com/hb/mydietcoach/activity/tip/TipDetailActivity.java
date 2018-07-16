@@ -64,7 +64,7 @@ public class TipDetailActivity extends BaseActivity
                 .findFirst();
 
         list = new RealmList<>();
-        list.addAll(Objects.requireNonNull(results).getAdvices());
+        if (results != null) list.addAll(results.getAdvices());
         sort(list);
 
         initView();
@@ -153,7 +153,7 @@ public class TipDetailActivity extends BaseActivity
     }
 
 //    private void setReminder() {
-        //TODO: SET REMINDER
+    //TODO: SET REMINDER
 //    }
 
     //Using for hide/show next/back icon

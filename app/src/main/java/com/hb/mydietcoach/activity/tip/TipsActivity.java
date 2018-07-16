@@ -13,6 +13,7 @@ import android.view.MenuItem;
 
 import com.hb.mydietcoach.R;
 import com.hb.mydietcoach.activity.BaseActivity;
+import com.hb.mydietcoach.activity.RewardActivity;
 import com.hb.mydietcoach.activity.contact_faq.ContactFAQActivity;
 import com.hb.mydietcoach.activity.MainActivity;
 import com.hb.mydietcoach.activity.SettingsActivity;
@@ -150,14 +151,14 @@ public class TipsActivity extends BaseActivity
             Intent intent = new Intent(this, PhotosActivity.class);
             startActivity(intent);
             finish();
-        } else if (id == R.id.nav_tips) {
-            //Blank
         } else if (id == R.id.nav_challenges) {
             Intent intent = new Intent(this, ChallengesActivity.class);
             startActivity(intent);
             finish();
         } else if (id == R.id.nav_rewards) {
-
+            Intent intent = new Intent(this, RewardActivity.class);
+            startActivity(intent);
+            finish();
         } else if (id == R.id.nav_settings) {
             Intent intent = new Intent(this, SettingsActivity.class);
             startActivity(intent);

@@ -11,7 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.hb.mydietcoach.R;
-import com.hb.mydietcoach.model.diary.FoodAssets;
+import com.hb.mydietcoach.model.diary.asset.FoodAssets;
 
 import java.util.List;
 

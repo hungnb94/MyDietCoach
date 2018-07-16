@@ -23,9 +23,8 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
 
-        <!--TODO: CHANGE TO SPLASH ACTIVITY-->
         <activity
-            android:name=".activity.MainActivity"
+            android:name=".activity.SplashActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -38,11 +37,11 @@
         <activity android:name=".activity.BaseActivity" />
         <activity android:name=".activity.ScoreActivity" />
 
-        <!--<activity-->
-        <!--android:name=".activity.MainActivity"-->
-        <!--android:label="@string/title_activity_main"-->
-        <!--android:screenOrientation="portrait"-->
-        <!--android:theme="@style/AppTheme.NoActionBar" />-->
+        <activity
+            android:name=".activity.MainActivity"
+            android:label="@string/title_activity_main"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activity.diary.DiaryActivity"
             android:label="@string/title_activity_diary"

@@ -35,7 +35,6 @@ import com.baoyz.swipemenulistview.SwipeMenu;
 import com.baoyz.swipemenulistview.SwipeMenuCreator;
 import com.baoyz.swipemenulistview.SwipeMenuItem;
 import com.baoyz.swipemenulistview.SwipeMenuListView;
-import com.google.gson.Gson;
 import com.hb.mydietcoach.R;
 import com.hb.mydietcoach.activity.MainActivity;
 import com.hb.mydietcoach.activity.RewardActivity;
@@ -52,28 +51,28 @@ import com.hb.mydietcoach.adapter.diary.SearchingFoodAdapter;
 import com.hb.mydietcoach.database.MyDatabase;
 import com.hb.mydietcoach.model.diary.Exercise;
 import com.hb.mydietcoach.model.diary.Food;
-import com.hb.mydietcoach.model.diary.FoodAssets;
 import com.hb.mydietcoach.model.diary.IItemDiary;
+import com.hb.mydietcoach.model.diary.asset.FoodAssets;
+import com.hb.mydietcoach.model.diary.asset.Srv;
 import com.hb.mydietcoach.notification.NotificationManager;
 import com.hb.mydietcoach.preference.PreferenceManager;
 import com.hb.mydietcoach.utils.Constants;
-import com.hb.mydietcoach.utils.FileUtils;
 import com.tomergoldst.tooltips.ToolTip;
 import com.tomergoldst.tooltips.ToolTipsManager;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
-import java.util.StringTokenizer;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.OnFocusChange;
 import butterknife.OnTextChanged;
+import io.realm.Case;
+import io.realm.Realm;
+import io.realm.RealmResults;
 
 import static com.hb.mydietcoach.utils.Constants.RC_ADD_EXERCISE;
 import static com.hb.mydietcoach.utils.Constants.RC_EDIT_MEAL_HISTORY;
@@ -102,7 +101,6 @@ public class DiaryActivity extends ScoreActivity
     private ImageView ivBarcode;
     private AutoCompleteTextView autoFoodName;
     private Animation rotationAnimation;
-    private ArrayList<FoodAssets> foodAssets;
     private List<FoodAssets> listSearchingFood;
     private Spinner spServing;
     private SearchingFoodAdapter searchingAdapter;
@@ -333,7 +331,7 @@ public class DiaryActivity extends ScoreActivity
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                 //Get selected item
-                selectedFoodAsset = foodAssets.get(position);
+                selectedFoodAsset = listSearchingFood.get(position);
                 //Update view
                 updateUIAddFood();
             }
@@ -352,7 +350,7 @@ public class DiaryActivity extends ScoreActivity
         spServing.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int pos, long l) {
-                FoodAssets.Srv srv = selectedFoodAsset.getSrvs().getSrv().get(pos);
+                Srv srv = selectedFoodAsset.getSrvs().getSrv().get(pos);
 
                 edtAmount.setText(srv.getNou());
                 edtCalories.setText(srv.getCal());
@@ -386,43 +384,10 @@ public class DiaryActivity extends ScoreActivity
      * Init AutoCompleteTextView
      */
     private void initAutoCompleteTextView() {
-        getFoodFromAssets();
         listSearchingFood = new ArrayList<>();
         searchingAdapter = new SearchingFoodAdapter(this, listSearchingFood);
         autoFoodName.setAdapter(searchingAdapter);
         autoFoodName.setThreshold(1);
-    }
-
-    /**
-     * Get all food from assets file
-     */
-    @SuppressLint("StaticFieldLeak")
-    private void getFoodFromAssets() {
-        new AsyncTask<Void, Void, Void>() {
-            @Override
-            protected Void doInBackground(Void... voids) {
-                foodAssets = new ArrayList<>();
-                String content = FileUtils.readFileFromAssets(DiaryActivity.this, "new_food_db_1.txt");
-                StringTokenizer tokenizer = new StringTokenizer(content, "\n");
-                while (tokenizer.hasMoreTokens()) {
-                    try {
-                        String mLine = tokenizer.nextToken();
-                        mLine = mLine.substring(8, mLine.length() - 1);
-
-                        //Convert text to object
-                        Gson gson = new Gson();
-                        FoodAssets food = gson.fromJson(mLine, FoodAssets.class);
-
-                        //Add to list
-                        foodAssets.add(food);
-                    } catch (Exception e) {
-                        Log.e(TAG, "Exception");
-                        e.printStackTrace();
-                    }
-                }
-                return null;
-            }
-        }.execute();
     }
 
     //State focus on auto text view in first time
@@ -445,20 +410,27 @@ public class DiaryActivity extends ScoreActivity
             llDetailInput.setVisibility(View.VISIBLE);
 
         listSearchingFood.clear();
-        String key = " " + charSequence.toString().toLowerCase().trim();
-        for (FoodAssets food : foodAssets) {
-            String foodName = " " + food.getFn().toLowerCase();
-            if (foodName.contains(key)) {
-                listSearchingFood.add(food);
-            }
-        }
 
-        Collections.sort(listSearchingFood, new Comparator<FoodAssets>() {
-            @Override
-            public int compare(FoodAssets f1, FoodAssets f2) {
-                return f1.getFn().compareTo(f2.getFn());
-            }
-        });
+        if (charSequence.toString().length() == 0) return;
+
+        Realm realm = Realm.getDefaultInstance();
+        String key = charSequence.toString().trim();
+
+        String key1 = key + "*";
+        String key2 = "* " + key + "*";
+        RealmResults<FoodAssets> results = realm.where(FoodAssets.class)
+                .like(FoodAssets.FN, key1, Case.INSENSITIVE)
+                .or()
+                .like(FoodAssets.FN, key2, Case.INSENSITIVE)
+                .findAll()
+                .sort(FoodAssets.FN);
+
+        listSearchingFood.addAll(realm.copyFromRealm(results));
+
+        Log.e(TAG, "All food with key " + key);
+        for (int i = 0; i < listSearchingFood.size(); i++) {
+            Log.e(TAG, listSearchingFood.get(i).getFn());
+        }
 
         searchingAdapter.notifyDataSetChanged();
     }
@@ -466,7 +438,7 @@ public class DiaryActivity extends ScoreActivity
     @OnTextChanged(R.id.edtAmount)
     void changeTextAmount(CharSequence text) {
         if (text.length() > 0) {
-            FoodAssets.Srv srv = selectedFoodAsset.getSrvs().getSrv().get(spServing.getSelectedItemPosition());
+            Srv srv = selectedFoodAsset.getSrvs().getSrv().get(spServing.getSelectedItemPosition());
             float amount = parseFloats(text.toString());
             float calo = amount * parseFloats(srv.getCal());
 
