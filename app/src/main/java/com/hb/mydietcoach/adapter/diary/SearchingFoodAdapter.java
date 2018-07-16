@@ -39,12 +39,14 @@ public class SearchingFoodAdapter extends ArrayAdapter<FoodAssets> {
     @NonNull
     @SuppressLint("ViewHolder")
     @Override
-    public View getView(int position, View view, @NonNull ViewGroup viewGroup) {
+    public View getView(final int position, View view, @NonNull ViewGroup viewGroup) {
         view = layoutInflater.inflate(R.layout.item_food, viewGroup, false);
-        TextView textView  = view.findViewById(R.id.textView);
+        TextView textView = view.findViewById(R.id.textView);
 
         FoodAssets food = this.list.get(position);
         textView.setText(food.getFn());
+
+        view.setTag(getItem(position));
 
         return view;
     }

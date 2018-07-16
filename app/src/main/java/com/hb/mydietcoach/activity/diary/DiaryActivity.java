@@ -324,19 +324,18 @@ public class DiaryActivity extends ScoreActivity
         updateUICalories();
     }
 
-    FoodAssets selectedFoodAsset;
-
     private void addEvent() {
         autoFoodName.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                //Get selected item
-                selectedFoodAsset = listSearchingFood.get(position);
+                selectedFoodAsset = (FoodAssets) view.getTag();
                 //Update view
                 updateUIAddFood();
             }
         });
     }
+
+    FoodAssets selectedFoodAsset;
 
     private void updateUIAddFood() {
         String[] arr = new String[selectedFoodAsset.getSrvs().getSrv().size()];
@@ -409,9 +408,9 @@ public class DiaryActivity extends ScoreActivity
         if (llDetailInput.getVisibility() != View.VISIBLE)
             llDetailInput.setVisibility(View.VISIBLE);
 
-        listSearchingFood.clear();
-
         if (charSequence.toString().length() == 0) return;
+
+        listSearchingFood.clear();
 
         Realm realm = Realm.getDefaultInstance();
         String key = charSequence.toString().trim();
@@ -426,11 +425,6 @@ public class DiaryActivity extends ScoreActivity
                 .sort(FoodAssets.FN);
 
         listSearchingFood.addAll(realm.copyFromRealm(results));
-
-        Log.e(TAG, "All food with key " + key);
-        for (int i = 0; i < listSearchingFood.size(); i++) {
-            Log.e(TAG, listSearchingFood.get(i).getFn());
-        }
 
         searchingAdapter.notifyDataSetChanged();
     }
