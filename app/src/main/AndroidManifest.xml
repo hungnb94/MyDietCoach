@@ -7,6 +7,7 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.VIBRATE" />
 
     <uses-permission-sdk-23 android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission-sdk-23 android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -23,7 +24,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-
         <activity
             android:name=".activity.SplashActivity"
             android:screenOrientation="portrait">
@@ -34,10 +34,9 @@
             </intent-filter>
         </activity>
 
-        <!--Activity for extend-->
+        <!-- Activity for extend -->
         <activity android:name=".activity.BaseActivity" />
         <activity android:name=".activity.ScoreActivity" />
-
         <activity
             android:name=".activity.MainActivity"
             android:label="@string/title_activity_main"
@@ -110,7 +109,7 @@
             android:name=".activity.WeightLoggingActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.SettingsActivity"
+            android:name=".activity.setting.SettingsActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".activity.contact_faq.ContactFAQActivity"
@@ -118,9 +117,11 @@
         <activity
             android:name=".activity.contact_faq.FrequentAskQuestionActivity"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".activity.RewardActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.setting.SettingSleepingHourActivity"
             android:screenOrientation="portrait" />
     </application>
 

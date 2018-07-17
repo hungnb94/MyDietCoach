@@ -77,6 +77,7 @@ public class Constants {
     public static final int RC_EDIT_MEAL_HISTORY = 10;
     public static final int RC_ADD_REMINDER = 11;
     public static final int RC_EDIT_REMINDER = 12;
+    public static final int RC_CHOOSE_NOTIFICATION_SOUND = 13;
 
     //Change unit
     public static final double LB_TO_KG = 0.45359237;

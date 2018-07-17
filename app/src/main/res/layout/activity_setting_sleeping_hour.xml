@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorCream"
+    android:orientation="vertical"
+    tools:context=".activity.setting.SettingSleepingHourActivity">
+
+    <include
+        layout="@layout/app_bar_main"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_10sdp"
+        android:fontFamily="@font/museo_sans_rounded_300"
+        android:text="@string/common_to_all_reminders"
+        android:textSize="@dimen/_13ssp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_1sdp"
+        android:background="@color/colorGrey" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:fontFamily="@font/museo_sans_rounded_300"
+        android:text="@string/start_time"
+        android:textSize="@dimen/_13ssp" />
+
+    <LinearLayout
+        android:id="@+id/llStartTime"
+        android:layout_width="@dimen/_100sdp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:gravity="center_vertical"
+        tools:ignore="UseCompoundDrawables">
+
+        <TextView
+            android:id="@+id/tvStartHour"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/museo_sans_rounded_300"
+            android:paddingBottom="@dimen/_5sdp"
+            android:paddingTop="@dimen/_5sdp"
+            android:text="@string/_22_00"
+            android:textSize="@dimen/_13ssp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:layout_width="@dimen/_10sdp"
+            android:layout_height="@dimen/_10sdp"
+            android:src="@drawable/down_arrow" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="@dimen/_100sdp"
+        android:layout_height="@dimen/line_lv_1"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:background="@color/colorGrey" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:fontFamily="@font/museo_sans_rounded_300"
+        android:text="@string/end_time"
+        android:textSize="@dimen/_13ssp" />
+
+    <LinearLayout
+        android:id="@+id/llEndTime"
+        android:layout_width="@dimen/_100sdp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:gravity="center_vertical"
+        tools:ignore="UseCompoundDrawables">
+
+        <TextView
+            android:id="@+id/tvEndHour"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/museo_sans_rounded_300"
+            android:paddingBottom="@dimen/_5sdp"
+            android:paddingTop="@dimen/_5sdp"
+            android:text="@string/_06_00"
+            android:textSize="@dimen/_13ssp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:layout_width="@dimen/_10sdp"
+            android:layout_height="@dimen/_10sdp"
+            android:src="@drawable/down_arrow" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="@dimen/_100sdp"
+        android:layout_height="@dimen/line_lv_1"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:background="@color/colorGrey" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/_10sdp"
+        android:gravity="bottom">
+
+        <TextView
+            android:id="@+id/tvCancel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/museo_sans_rounded_300"
+            android:gravity="center"
+            android:padding="@dimen/_5sdp"
+            android:text="@string/cancel"
+            android:textAllCaps="true"
+            android:textColor="@color/colorAccent"
+            android:textSize="@dimen/_13ssp" />
+
+        <TextView
+            android:id="@+id/tvContinue"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/border_button"
+            android:fontFamily="@font/museo_sans_rounded_300"
+            android:gravity="center"
+            android:padding="@dimen/_5sdp"
+            android:text="@string/continue_"
+            android:textAllCaps="true"
+            android:textColor="@color/colorWhite"
+            android:textSize="@dimen/_13ssp" />
+    </LinearLayout>
+
+</LinearLayout>

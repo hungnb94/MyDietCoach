@@ -209,7 +209,7 @@ public class EdittingReminderActivity extends BaseActivity {
         TimePickerDialog dialog = TimePickerDialog.newInstance(timeSetListener,
                 calendar.get(Calendar.HOUR_OF_DAY),
                 calendar.get(Calendar.MINUTE),
-                false);
+                true);
         dialog.show(getFragmentManager(), null);
     }
 

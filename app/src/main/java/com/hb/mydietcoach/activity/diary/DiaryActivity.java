@@ -39,7 +39,7 @@ import com.hb.mydietcoach.R;
 import com.hb.mydietcoach.activity.MainActivity;
 import com.hb.mydietcoach.activity.RewardActivity;
 import com.hb.mydietcoach.activity.ScoreActivity;
-import com.hb.mydietcoach.activity.SettingsActivity;
+import com.hb.mydietcoach.activity.setting.SettingsActivity;
 import com.hb.mydietcoach.activity.WeightLoggingActivity;
 import com.hb.mydietcoach.activity.challenge.ChallengesActivity;
 import com.hb.mydietcoach.activity.contact_faq.ContactFAQActivity;
@@ -447,17 +447,11 @@ public class DiaryActivity extends ScoreActivity
                 listSearchingFood.addAll(set);
                 set.clear();
 
-                Log.e(TAG, "Final result:");
-                for (FoodAssets assets : listSearchingFood) {
-                    Log.e(TAG, assets.getFn());
-                }
-
                 return null;
             }
 
             @Override
             protected void onPostExecute(Void aVoid) {
-                Log.e(TAG, "Update ACTV");
                 updateAutoCompleteTextView();
             }
         }.execute();

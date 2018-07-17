@@ -38,6 +38,7 @@ import com.hb.mydietcoach.activity.contact_faq.ContactFAQActivity;
 import com.hb.mydietcoach.activity.diary.DiaryActivity;
 import com.hb.mydietcoach.activity.photo.PhotosActivity;
 import com.hb.mydietcoach.activity.reminder.ReminderActivity;
+import com.hb.mydietcoach.activity.setting.SettingsActivity;
 import com.hb.mydietcoach.activity.tip.TipsActivity;
 import com.hb.mydietcoach.adapter.WeightHistoryAdapter;
 import com.hb.mydietcoach.model.WeightChangeHistory;

@@ -43,6 +43,11 @@ public class PreferenceManager {
     public static final String SETTING_IS_PLAY_SOUND = "play_sound";
     public static final String SETTING_IS_MAKE_VIBRATE = "make_vibrate";
     public static final String SETTING_IS_SHOW_CUSTOMIZED_AVATAR = "customized_avatar";
+    public static final String SETTING_URI_NOTIFICATION_SOUND = "uri_sound";
+    public static final String SETTING_START_SLEEPING_HOUR = "start_sleeping_hour";
+    public static final String SETTING_END_SLEEPING_HOUR = "end_sleeping_hour";
+    public static final String SETTING_START_SLEEPING_MINUTE = "start_sleeping_minute";
+    public static final String SETTING_END_SLEEPING_MINUTE = "end_sleeping_minute";
 
     public static final String START_WEIGHT = "weight";
     public static final String TARGET_WEIGHT = "target_weight";

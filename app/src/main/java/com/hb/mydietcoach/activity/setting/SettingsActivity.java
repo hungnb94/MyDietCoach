@@ -1,6 +1,8 @@
-package com.hb.mydietcoach.activity;
+package com.hb.mydietcoach.activity.setting;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -18,6 +20,10 @@ import android.widget.Spinner;
 import android.widget.Switch;
 
 import com.hb.mydietcoach.R;
+import com.hb.mydietcoach.activity.BaseActivity;
+import com.hb.mydietcoach.activity.MainActivity;
+import com.hb.mydietcoach.activity.RewardActivity;
+import com.hb.mydietcoach.activity.WeightLoggingActivity;
 import com.hb.mydietcoach.activity.challenge.ChallengesActivity;
 import com.hb.mydietcoach.activity.contact_faq.ContactFAQActivity;
 import com.hb.mydietcoach.activity.diary.DiaryActivity;
@@ -31,6 +37,8 @@ import java.util.Objects;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+
+import static com.hb.mydietcoach.utils.Constants.RC_CHOOSE_NOTIFICATION_SOUND;
 
 public class SettingsActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -101,14 +109,50 @@ public class SettingsActivity extends BaseActivity
         swCustomizedAvatar.setChecked(isCustomizedAvatar);
     }
 
+    @OnClick(R.id.llSetSleepingHour)
+    void clickSetSleepingHour() {
+        Intent intent = new Intent(this, SettingSleepingHourActivity.class);
+        startActivity(intent);
+    }
+
+    @OnClick(R.id.llChooseNotificationSound)
+    void clickChooseNotificationSound() {
+        Intent intent = new Intent(RingtoneManager.ACTION_RINGTONE_PICKER);
+        intent.putExtra(RingtoneManager.EXTRA_RINGTONE_TYPE, RingtoneManager.TYPE_NOTIFICATION);
+        intent.putExtra(RingtoneManager.EXTRA_RINGTONE_TITLE, getString(R.string.choose_notification_sound));
+        intent.putExtra(RingtoneManager.EXTRA_RINGTONE_EXISTING_URI, (Uri) null);
+        this.startActivityForResult(intent, RC_CHOOSE_NOTIFICATION_SOUND);
+    }
+
+    private String chosenRingtone;
+    private boolean isChangeRingtone;
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == Activity.RESULT_OK && requestCode == RC_CHOOSE_NOTIFICATION_SOUND) {
+            Uri uri = data.getParcelableExtra(RingtoneManager.EXTRA_RINGTONE_PICKED_URI);
+
+            if (uri != null) {
+                isChangeRingtone = true;
+                this.chosenRingtone = uri.toString();
+            } else {
+                this.chosenRingtone = null;
+            }
+        }
+    }
+
     @OnClick(R.id.btnSave)
-    void clickSave(){
+    void clickSave() {
         saveGender();
         saveWeight();
 
         pre.putBoolean(PreferenceManager.SETTING_IS_PLAY_SOUND, swPlaySound.isChecked());
         pre.putBoolean(PreferenceManager.SETTING_IS_MAKE_VIBRATE, swMakeVibrate.isChecked());
         pre.putBoolean(PreferenceManager.SETTING_IS_SHOW_CUSTOMIZED_AVATAR, swCustomizedAvatar.isChecked());
+        if (isChangeRingtone) {
+            pre.putString(PreferenceManager.SETTING_URI_NOTIFICATION_SOUND, chosenRingtone);
+        }
 
         finish();
     }
@@ -123,20 +167,20 @@ public class SettingsActivity extends BaseActivity
      * Save gender to SharedPreference
      */
     private void saveGender() {
-        boolean isFemale = (spinnerGender.getSelectedItemPosition()==0);
+        boolean isFemale = (spinnerGender.getSelectedItemPosition() == 0);
         pre.putBoolean(PreferenceManager.IS_GENDER_FEMALE, isFemale);
     }
 
     /**
      * Save user's weight to SharedPreference
      */
-    private void saveWeight(){
+    private void saveWeight() {
         String strWeight = edtStartWeight.getText().toString();
-        if (!TextUtils.isEmpty(strWeight)){
+        if (!TextUtils.isEmpty(strWeight)) {
             try {
                 float weight = Float.parseFloat(strWeight);
                 if (weight > 0) pre.putFloat(PreferenceManager.START_WEIGHT, weight);
-            } catch (Exception e){
+            } catch (Exception e) {
                 Log.e(TAG, "Weight not valid: " + strWeight);
                 e.printStackTrace();
             }

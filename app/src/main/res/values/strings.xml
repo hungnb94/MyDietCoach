@@ -309,4 +309,9 @@
     <string name="to">to</string>
     <string name="draw_overlay_granted">Draw Overlays is granted</string>
     <string name="draw_overlay_denied">Draw Overlays is denied</string>
+    <string name="common_to_all_reminders">Common to all reminders!!!</string>
+    <string name="start_time">Start Time</string>
+    <string name="end_time">End Time</string>
+    <string name="_22_00">22:00</string>
+    <string name="_06_00">06:00</string>
 </resources>

@@ -14,7 +14,7 @@ import com.hb.mydietcoach.R;
 import com.hb.mydietcoach.activity.BaseActivity;
 import com.hb.mydietcoach.activity.MainActivity;
 import com.hb.mydietcoach.activity.RewardActivity;
-import com.hb.mydietcoach.activity.SettingsActivity;
+import com.hb.mydietcoach.activity.setting.SettingsActivity;
 import com.hb.mydietcoach.activity.WeightLoggingActivity;
 import com.hb.mydietcoach.activity.challenge.ChallengesActivity;
 import com.hb.mydietcoach.activity.diary.DiaryActivity;

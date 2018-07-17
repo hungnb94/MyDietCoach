@@ -203,7 +203,7 @@ public class AddExerciseActivity extends BaseActivity
     @OnClick(R.id.llTimer)
     public void changeTime(View view) {
         TimePickerDialog tpd = TimePickerDialog.newInstance(timeSetListener,
-                timer.get(Calendar.HOUR_OF_DAY), timer.get(Calendar.MINUTE), false);
+                timer.get(Calendar.HOUR_OF_DAY), timer.get(Calendar.MINUTE), true);
         tpd.setVersion(TimePickerDialog.Version.VERSION_2);
         tpd.show(getFragmentManager(), "set hour");
     }
