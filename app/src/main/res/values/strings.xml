@@ -307,4 +307,6 @@
     <string name="goal_weight_not_good">Your goal weight is not good for your health</string>
     <string name="goal_weight_from">Please fill your weight from</string>
     <string name="to">to</string>
+    <string name="draw_overlay_granted">Draw Overlays is granted</string>
+    <string name="draw_overlay_denied">Draw Overlays is denied</string>
 </resources>

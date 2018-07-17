@@ -63,8 +63,10 @@ import com.tomergoldst.tooltips.ToolTipsManager;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -412,20 +414,58 @@ public class DiaryActivity extends ScoreActivity
 
         listSearchingFood.clear();
 
-        Realm realm = Realm.getDefaultInstance();
         String key = charSequence.toString().trim();
 
-        String key1 = key + "*";
-        String key2 = "* " + key + "*";
-        RealmResults<FoodAssets> results = realm.where(FoodAssets.class)
-                .like(FoodAssets.FN, key1, Case.INSENSITIVE)
-                .or()
-                .like(FoodAssets.FN, key2, Case.INSENSITIVE)
-                .findAll()
-                .sort(FoodAssets.FN);
+        findFoodInRealm(key);
+    }
 
-        listSearchingFood.addAll(realm.copyFromRealm(results));
+    @SuppressLint("StaticFieldLeak")
+    private void findFoodInRealm(final String key) {
+        new AsyncTask<Void, Void, Void>() {
+            @Override
+            protected Void doInBackground(Void... voids) {
+                Realm realm = Realm.getDefaultInstance();
 
+                //Query food name start with key
+                String key1 = key + "*";
+                RealmResults<FoodAssets> results = realm.where(FoodAssets.class)
+                        .like(FoodAssets.FN, key1, Case.INSENSITIVE)
+                        .findAll()
+                        .sort(FoodAssets.FN);
+
+                Set<FoodAssets> set = new LinkedHashSet<>(realm.copyFromRealm(results));
+
+                //Query food name contain key
+                String key2 = "* " + key + "*";
+                results = realm.where(FoodAssets.class)
+                        .like(FoodAssets.FN, key2, Case.INSENSITIVE)
+                        .findAll()
+                        .sort(FoodAssets.FN);
+
+                set.addAll(realm.copyFromRealm(results));
+
+                listSearchingFood.addAll(set);
+                set.clear();
+
+                Log.e(TAG, "Final result:");
+                for (FoodAssets assets : listSearchingFood) {
+                    Log.e(TAG, assets.getFn());
+                }
+
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(Void aVoid) {
+                Log.e(TAG, "Update ACTV");
+                updateAutoCompleteTextView();
+            }
+        }.execute();
+    }
+
+    private void updateAutoCompleteTextView() {
+//        searchingAdapter = new SearchingFoodAdapter(this, listSearchingFood);
+//        autoFoodName.setAdapter(searchingAdapter);
         searchingAdapter.notifyDataSetChanged();
     }
 

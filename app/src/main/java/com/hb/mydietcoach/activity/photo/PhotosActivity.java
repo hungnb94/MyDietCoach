@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.provider.MediaStore;
+import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.NavigationView;
@@ -39,6 +40,7 @@ import android.widget.Toast;
 
 import com.hb.mydietcoach.R;
 import com.hb.mydietcoach.activity.MainActivity;
+import com.hb.mydietcoach.activity.RewardActivity;
 import com.hb.mydietcoach.activity.ScoreActivity;
 import com.hb.mydietcoach.activity.SettingsActivity;
 import com.hb.mydietcoach.activity.WeightLoggingActivity;
@@ -54,6 +56,7 @@ import com.hb.mydietcoach.adapter.photo.MiniPhotoAdapter;
 import com.hb.mydietcoach.model.Reminder;
 import com.hb.mydietcoach.preference.PreferenceManager;
 import com.hb.mydietcoach.utils.Constants;
+import com.hb.mydietcoach.utils.MyUtils;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -77,6 +80,8 @@ import static com.hb.mydietcoach.utils.Constants.RC_TAKE_PHOTO;
 public class PhotosActivity extends ScoreActivity
         implements MiniPhotoAdapter.OnItemClickListener,
         NavigationView.OnNavigationItemSelectedListener {
+
+    private static final int RC_DRAW_OVERLAYS = 100;
 
     private static String[] PERMISSIONS_STORAGE = {
             Manifest.permission.READ_EXTERNAL_STORAGE,
@@ -108,7 +113,16 @@ public class PhotosActivity extends ScoreActivity
 
         initView();
         addEvent();
+
         verifyStoragePermissions();
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            Log.v(TAG, "Build Version Greater than or equal to M: " + Build.VERSION_CODES.M);
+            checkDrawOverlayPermission();
+        } else {
+            Log.v(TAG, "OS Version Less than M");
+            //No need for Permission as less then M OS.
+        }
     }
 
     private void initView() {
@@ -161,6 +175,25 @@ public class PhotosActivity extends ScoreActivity
             public void onPageScrollStateChanged(int state) {
             }
         });
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    public void checkDrawOverlayPermission() {
+        Log.v(TAG, "Package Name: " + getApplicationContext().getPackageName());
+
+        /* check if we already  have permission to draw over other apps**/
+        if (!Settings.canDrawOverlays(this)) {
+            Log.v(TAG, "Requesting Permission" + Settings.canDrawOverlays(this));
+            /* if not construct intent to request permission**/
+            Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
+                    Uri.parse("package:" + getApplicationContext().getPackageName()));
+            /* request permission via start activity for result */
+            startActivityForResult(intent, RC_DRAW_OVERLAYS);
+            //It will call onActivityResult Function After you press Yes/No and go Back after giving permission
+        } else {
+            Log.v(TAG, "We already have permission for it.");
+            //Do your stuff, we got permission captain
+        }
     }
 
     @Override
@@ -258,6 +291,16 @@ public class PhotosActivity extends ScoreActivity
 
                 //Check new level
                 checkLevel();
+            }
+        } else if (requestCode == RC_DRAW_OVERLAYS) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                Log.e(TAG, "Result can draw overlays: " + Settings.canDrawOverlays(this));
+
+                if (Settings.canDrawOverlays(this)) {
+                    MyUtils.showToast(this, getString(R.string.draw_overlay_granted));
+                } else {
+                    MyUtils.showToast(this, getString(R.string.draw_overlay_denied));
+                }
             }
         }
     }
@@ -400,7 +443,9 @@ public class PhotosActivity extends ScoreActivity
             startActivity(intent);
             finish();
         } else if (id == R.id.nav_rewards) {
-
+            Intent intent = new Intent(this, RewardActivity.class);
+            startActivity(intent);
+            finish();
         } else if (id == R.id.nav_settings) {
             Intent intent = new Intent(this, SettingsActivity.class);
             startActivity(intent);
