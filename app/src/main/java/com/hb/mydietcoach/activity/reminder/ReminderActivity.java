@@ -20,12 +20,12 @@ import com.hb.mydietcoach.R;
 import com.hb.mydietcoach.activity.BaseActivity;
 import com.hb.mydietcoach.activity.MainActivity;
 import com.hb.mydietcoach.activity.RewardActivity;
-import com.hb.mydietcoach.activity.setting.SettingsActivity;
 import com.hb.mydietcoach.activity.WeightLoggingActivity;
 import com.hb.mydietcoach.activity.challenge.ChallengesActivity;
 import com.hb.mydietcoach.activity.contact_faq.ContactFAQActivity;
 import com.hb.mydietcoach.activity.diary.DiaryActivity;
 import com.hb.mydietcoach.activity.photo.PhotosActivity;
+import com.hb.mydietcoach.activity.setting.SettingsActivity;
 import com.hb.mydietcoach.activity.tip.TipsActivity;
 import com.hb.mydietcoach.adapter.MyReminderAdapter;
 import com.hb.mydietcoach.database.MyDatabase;
@@ -118,7 +118,7 @@ public class ReminderActivity extends BaseActivity
 
                 database.deleteReminder(myReminders.get(position).getId());
                 myReminders.remove(position);
-                myReminderAdapter.notifyDataSetChanged();
+                updateUI();
                 // false : close the menu; true : not close the menu
                 return false;
             }
@@ -225,20 +225,28 @@ public class ReminderActivity extends BaseActivity
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == RC_ADD_REMINDER) {
-            if (resultCode == RESULT_OK && data != null) {
+            if (resultCode == RESULT_OK && data.getExtras() != null) {
                 Reminder reminder = (Reminder) data.getExtras().getSerializable(Constants.DATA_SERIALIZABLE);
-                myReminders.add(reminder);
-                myReminderAdapter.notifyDataSetChanged();
+                if (reminder != null) myReminders.add(reminder);
+
+                updateUI();
             }
         } else if (requestCode == RC_EDIT_REMINDER) {
             if (resultCode == Constants.RESULT_DELETE_REMINDER) {
                 myReminders.remove(clickPosition);
-                myReminderAdapter.notifyDataSetChanged();
-            } else if (resultCode == RESULT_OK && data != null) {
+
+                updateUI();
+            } else if (resultCode == RESULT_OK && data.getExtras() != null) {
                 Reminder reminder = (Reminder) data.getExtras().getSerializable(Constants.DATA_SERIALIZABLE);
                 myReminders.set(clickPosition, reminder);
-                myReminderAdapter.notifyDataSetChanged();
+
+                updateUI();
             }
         }
+    }
+
+    private void updateUI() {
+        myReminderAdapter = new MyReminderAdapter(this, myReminders);
+        listMyReminders.setAdapter(myReminderAdapter);
     }
 }

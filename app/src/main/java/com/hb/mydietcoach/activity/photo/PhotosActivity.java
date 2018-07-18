@@ -116,13 +116,13 @@ public class PhotosActivity extends ScoreActivity
 
         verifyStoragePermissions();
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            Log.v(TAG, "Build Version Greater than or equal to M: " + Build.VERSION_CODES.M);
-            checkDrawOverlayPermission();
-        } else {
-            Log.v(TAG, "OS Version Less than M");
-            //No need for Permission as less then M OS.
-        }
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+//            Log.v(TAG, "Build Version Greater than or equal to M: " + Build.VERSION_CODES.M);
+//            checkDrawOverlayPermission();
+//        } else {
+//            Log.v(TAG, "OS Version Less than M");
+////            No need for Permission as less then M OS.
+//        }
     }
 
     private void initView() {

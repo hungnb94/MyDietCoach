@@ -185,7 +185,10 @@ public class AddExerciseActivity extends BaseActivity
         alertTime.add(Calendar.MINUTE, minutesFromEvent);
 
         NotificationManager manager = new NotificationManager(this);
-        manager.setAlarm((int) exercise.getId(), exercise.getName(), alertTime.getTimeInMillis());
+        manager.setAlarm((int) exercise.getId(),
+                exercise.getName(),
+                Constants.NOTIFI_TYPE_EXERCISE,
+                alertTime.getTimeInMillis());
     }
 
     //Listener for change hour

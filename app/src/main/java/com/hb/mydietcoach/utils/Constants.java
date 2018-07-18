@@ -11,11 +11,19 @@ public class Constants {
     public static final String FORMAT_HOUR = "hh:mm a";
     public static final String DATA_SERIALIZABLE = "data_serializable";
 
+    //Notification
     public static final String NOTIFICATION_CONTENT_TEXT = "content_notification";
     public static final long ALERT_DIALOG_LENGTH = 1000;
     public static final int RESULT_DELETE_REMINDER = 94;
     public static final String IS_REPEAT_NOTIFICATION = "repeate_nofification";
     public static final String NOTIFICATION_REPEATE_TIME_INTERVAL = "interval_time";
+    public static final String NOTIFICATION_TYPE = "notification_type";
+
+    //Notification type
+    public static final int NOTIFI_TYPE_REMINDER = 1;
+    public static final int NOTIFI_TYPE_MOTIVATIONAL_PHOTO = 2;
+    public static final int NOTIFI_TYPE_EXERCISE = 3;
+
     public static final int COLUMN_GLASSES_COUNT = 4;
 
     //Challenge type
@@ -86,8 +94,6 @@ public class Constants {
     public static final double FT_TO_CM = 30.48;
     public static final double CM_TO_IN = 0.3937007874;
     public static final double IN_TO_CM = 2.54;
-
-    public static final String IS_MOTIVATIONAL_NOTIFICATION = "motivational";
 
     //TIPS CATEGORY ID
     public static final int ID_FOOD_CRAVINGS = 1;

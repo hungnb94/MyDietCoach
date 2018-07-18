@@ -1,5 +1,6 @@
 package com.hb.mydietcoach.activity.reminder;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -59,6 +60,7 @@ public class EdittingReminderActivity extends BaseActivity {
         initView();
     }
 
+    @SuppressLint("SimpleDateFormat")
     private void initView() {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -188,11 +190,9 @@ public class EdittingReminderActivity extends BaseActivity {
     /**
      * Click on tvDate
      * Show DatePickerDialog
-     *
-     * @param view
      */
     @OnClick(R.id.tvDate)
-    public void setDate(View view) {
+    public void setDate() {
         DatePickerDialog dialog = DatePickerDialog.newInstance(dateSetListener, reminder.getStartDate());
         dialog.show(getFragmentManager(), null);
     }
@@ -225,6 +225,7 @@ public class EdittingReminderActivity extends BaseActivity {
             return;
         }
         reminder.setContent(strContent);
+
         if (isEdit) {
             database.updateReminder(reminder);
         } else {
@@ -234,9 +235,13 @@ public class EdittingReminderActivity extends BaseActivity {
                 pre.putBoolean(PreferenceManager.IS_HAS_MOTIVATIONAL_PHOTO, true);
             }
         }
+
         if (reminder.getRepeatMilisecond() > 0) {
+            setRepeatNotification();
+        } else {
             setNotification();
         }
+
         Intent intent = new Intent();
         Bundle bundle = new Bundle();
         bundle.putSerializable(Constants.DATA_SERIALIZABLE, reminder);
@@ -246,20 +251,40 @@ public class EdittingReminderActivity extends BaseActivity {
     }
 
     /**
-     * Setting new notification
+     * Setting new repeat notification
      */
-    private void setNotification() {
+    private void setRepeatNotification() {
         NotificationManager manager = new NotificationManager(this);
         if (isMotivational) {
-            manager.setRepeatAlarmMotivational(reminder.getContent(),
+            manager.setRepeatAlarm((int) reminder.getId(),
+                    reminder.getContent(),
+                    Constants.NOTIFI_TYPE_MOTIVATIONAL_PHOTO,
                     reminder.getStartDate().getTimeInMillis(),
                     reminder.getRepeatMilisecond());
         } else {
             manager.setRepeatAlarm((int) reminder.getId(),
                     reminder.getContent(),
+                    Constants.NOTIFI_TYPE_REMINDER,
                     reminder.getStartDate().getTimeInMillis(),
                     reminder.getRepeatMilisecond());
         }
+    }
+
+    /**
+     * Setting new notification
+     */
+    private void setNotification() {
+        if (!isNotificationTimeValid()) return;
+
+        NotificationManager manager = new NotificationManager(this);
+        manager.setAlarm((int) reminder.getId(),
+                reminder.getContent(),
+                Constants.NOTIFI_TYPE_REMINDER,
+                reminder.getStartDate().getTimeInMillis());
+    }
+
+    private boolean isNotificationTimeValid() {
+        return (reminder.getStartDate().getTimeInMillis() > Calendar.getInstance().getTimeInMillis());
     }
 
     /**
