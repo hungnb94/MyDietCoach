@@ -67,13 +67,7 @@
         <receiver
             android:name=".notification.NotificationReceiver"
             android:enabled="true"
-            android:exported="true">
-
-            <intent-filter>
-                <action android:name="com.hb.mydietcoach.action" />
-            </intent-filter>
-
-        </receiver>
+            android:exported="true" />
 
         <service
             android:name=".notification.NotificationIntentService"

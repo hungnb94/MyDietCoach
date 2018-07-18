@@ -21,7 +21,8 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_25sdp">
+            android:layout_height="@dimen/_25sdp"
+            tools:ignore="UseCompoundDrawables">
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -42,7 +43,8 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_40sdp">
+            android:layout_height="@dimen/_40sdp"
+            tools:ignore="UseCompoundDrawables">
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -114,7 +116,7 @@
 
     <HorizontalScrollView
         android:layout_width="match_parent"
-        android:layout_height="@dimen/bottom_main_act_height">
+        android:layout_height="@dimen/_60sdp">
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -125,15 +127,15 @@
 
             <LinearLayout
                 android:id="@+id/llDiary"
-                android:layout_width="@dimen/item_btm_main_width"
+                android:layout_width="@dimen/_58sdp"
                 android:layout_height="match_parent"
                 android:gravity="center_horizontal"
                 android:orientation="vertical"
                 tools:ignore="UseCompoundDrawables">
 
                 <ImageView
-                    android:layout_width="@dimen/ic_btm_main"
-                    android:layout_height="@dimen/ic_btm_main"
+                    android:layout_width="@dimen/_30sdp"
+                    android:layout_height="@dimen/_30sdp"
                     android:src="@drawable/ic_diary" />
 
                 <TextView
@@ -150,15 +152,15 @@
 
             <LinearLayout
                 android:id="@+id/llReminder"
-                android:layout_width="@dimen/item_btm_main_width"
+                android:layout_width="@dimen/_58sdp"
                 android:layout_height="match_parent"
                 android:gravity="center_horizontal"
                 android:orientation="vertical"
                 tools:ignore="UseCompoundDrawables">
 
                 <ImageView
-                    android:layout_width="@dimen/ic_btm_main"
-                    android:layout_height="@dimen/ic_btm_main"
+                    android:layout_width="@dimen/_30sdp"
+                    android:layout_height="@dimen/_30sdp"
                     android:src="@drawable/ic_reminders" />
 
                 <TextView
@@ -175,15 +177,15 @@
 
             <LinearLayout
                 android:id="@+id/llChallenges"
-                android:layout_width="@dimen/item_btm_main_width"
+                android:layout_width="@dimen/_58sdp"
                 android:layout_height="match_parent"
                 android:gravity="center_horizontal"
                 android:orientation="vertical"
                 tools:ignore="UseCompoundDrawables">
 
                 <ImageView
-                    android:layout_width="@dimen/ic_btm_main"
-                    android:layout_height="@dimen/ic_btm_main"
+                    android:layout_width="@dimen/_30sdp"
+                    android:layout_height="@dimen/_30sdp"
                     android:src="@drawable/ic_challenges" />
 
                 <TextView
@@ -200,14 +202,15 @@
 
             <LinearLayout
                 android:id="@+id/llRewards"
-                android:layout_width="@dimen/item_btm_main_width"
+                android:layout_width="@dimen/_58sdp"
                 android:layout_height="match_parent"
                 android:gravity="center_horizontal"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                tools:ignore="UseCompoundDrawables">
 
                 <ImageView
-                    android:layout_width="@dimen/ic_btm_main"
-                    android:layout_height="@dimen/ic_btm_main"
+                    android:layout_width="@dimen/_30sdp"
+                    android:layout_height="@dimen/_30sdp"
                     android:src="@drawable/ic_rewards" />
 
                 <TextView
@@ -224,15 +227,15 @@
 
             <LinearLayout
                 android:id="@+id/llPhotos"
-                android:layout_width="@dimen/item_btm_main_width"
+                android:layout_width="@dimen/_58sdp"
                 android:layout_height="match_parent"
                 android:gravity="center_horizontal"
                 android:orientation="vertical"
                 tools:ignore="UseCompoundDrawables">
 
                 <ImageView
-                    android:layout_width="@dimen/ic_btm_main"
-                    android:layout_height="@dimen/ic_btm_main"
+                    android:layout_width="@dimen/_30sdp"
+                    android:layout_height="@dimen/_30sdp"
                     android:src="@drawable/ic_photo" />
 
                 <TextView
@@ -249,15 +252,15 @@
 
             <LinearLayout
                 android:id="@+id/llTips"
-                android:layout_width="@dimen/item_btm_main_width"
+                android:layout_width="@dimen/_58sdp"
                 android:layout_height="match_parent"
                 android:gravity="center_horizontal"
                 android:orientation="vertical"
                 tools:ignore="UseCompoundDrawables">
 
                 <ImageView
-                    android:layout_width="@dimen/ic_btm_main"
-                    android:layout_height="@dimen/ic_btm_main"
+                    android:layout_width="@dimen/_30sdp"
+                    android:layout_height="@dimen/_30sdp"
                     android:src="@drawable/ic_tips" />
 
                 <TextView

@@ -117,10 +117,15 @@ public class SettingsActivity extends BaseActivity
 
     @OnClick(R.id.llChooseNotificationSound)
     void clickChooseNotificationSound() {
+        PreferenceManager pre = new PreferenceManager(this);
+        String strSound = pre.getString(PreferenceManager.SETTING_URI_NOTIFICATION_SOUND, null);
+
         Intent intent = new Intent(RingtoneManager.ACTION_RINGTONE_PICKER);
         intent.putExtra(RingtoneManager.EXTRA_RINGTONE_TYPE, RingtoneManager.TYPE_NOTIFICATION);
         intent.putExtra(RingtoneManager.EXTRA_RINGTONE_TITLE, getString(R.string.choose_notification_sound));
-        intent.putExtra(RingtoneManager.EXTRA_RINGTONE_EXISTING_URI, (Uri) null);
+        if (strSound != null) {
+            intent.putExtra(RingtoneManager.EXTRA_RINGTONE_EXISTING_URI, Uri.parse(strSound));
+        }
         this.startActivityForResult(intent, RC_CHOOSE_NOTIFICATION_SOUND);
     }
 
