@@ -8,11 +8,14 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.media.Ringtone;
+import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.NotificationManagerCompat;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 
 import com.hb.mydietcoach.R;
 import com.hb.mydietcoach.activity.MainActivity;
@@ -58,9 +61,15 @@ public class NotificationIntentService extends IntentService {
         //To be able to launch your activity from the notification
         builder.setContentIntent(pendingIntent);
 
-        setSoundVibrate(builder);
+        PreferenceManager pre = new PreferenceManager(getApplicationContext());
+        boolean isPlaySound = pre.getBoolean(PreferenceManager.SETTING_IS_PLAY_SOUND, false);
+        boolean isMakeVibrate = pre.getBoolean(PreferenceManager.SETTING_IS_MAKE_VIBRATE, false);
+
+        if (isMakeVibrate) setVibrate(builder);
 
         Notification notificationCompat = builder.build();
+        if (isPlaySound) setSound(notificationCompat);
+
         NotificationManagerCompat managerCompat = NotificationManagerCompat.from(this);
         managerCompat.notify(NOTIFICATION_ID, notificationCompat);
     }
@@ -115,33 +124,40 @@ public class NotificationIntentService extends IntentService {
         }
     }
 
-    private void setSoundVibrate(Notification.Builder builder) {
-        PreferenceManager pre = new PreferenceManager(getApplicationContext());
-        boolean isPlaySound = pre.getBoolean(PreferenceManager.SETTING_IS_PLAY_SOUND, false);
-        boolean isMakeVibrate = pre.getBoolean(PreferenceManager.SETTING_IS_MAKE_VIBRATE, false);
-        if (isMakeVibrate) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                if (ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.VIBRATE)
-                        == PackageManager.PERMISSION_GRANTED) {
-                    builder.setVibrate(new long[]{1000, 1000});
-                }
+    private void setVibrate(Notification.Builder builder) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.VIBRATE)
+                    == PackageManager.PERMISSION_GRANTED) {
+                builder.setVibrate(new long[]{1000, 1000});
             }
         } else {
             builder.setVibrate(new long[]{1000, 1000});
         }
+    }
 
-        if (isPlaySound) {
-            String soundUri = pre.getString(PreferenceManager.SETTING_URI_NOTIFICATION_SOUND, null);
-            if (soundUri != null) {
-                try {
-                    builder.setSound(Uri.parse(soundUri));
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            } else {
-                builder.setSound(Uri.parse("android.resource://"
-                        + getApplicationContext().getPackageName() + "/" + R.raw.nice_alarm));
+
+    private void setSound(Notification notification) {
+        PreferenceManager pre = new PreferenceManager(getApplicationContext());
+        String soundUri = pre.getString(PreferenceManager.SETTING_URI_NOTIFICATION_SOUND, null);
+        Log.e(TAG, "Notification sound uri: " + soundUri);
+        if (soundUri != null) {
+            try {
+                Ringtone ringtone = RingtoneManager.getRingtone(getApplicationContext(), Uri.parse(soundUri));
+                ringtone.play();
+            } catch (Exception e) {
+                Log.e(TAG, "Cannot get notification sound from uri: " + soundUri);
+                e.printStackTrace();
+                setDefaultSound();
             }
+        } else {
+            setDefaultSound();
         }
+    }
+
+    private void setDefaultSound() {
+        Uri soundUri = Uri.parse("android.resource://"
+                + getApplicationContext().getPackageName() + "/" + R.raw.nice_alarm);
+        Ringtone ringtone = RingtoneManager.getRingtone(getApplicationContext(), soundUri);
+        ringtone.play();
     }
 }
